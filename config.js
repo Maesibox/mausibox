@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 3,
+  appVersion: 4,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -27,7 +27,7 @@ var APP_CONFIG = {
   server: {
     supabaseUrl: "https://xqobznuioioblymvrxpl.supabase.co",  // z. B. "https://abcdefgh.supabase.co"
     supabaseAnonKey: "sb_publishable_Z9hPYqSrft4kTLYVGSEilw_6ryb1Ci_",  // langer Text, beginnt mit "eyJ…" oder "sb_publishable_…"
-    publicUrl: ""             // Adresse der App für Einladungslinks, z. B. "https://name.github.io/goldclub-map/"
+    publicUrl: "https://maesibox.github.io/mausibox/",  // Adresse der App für Einladungslinks, z. B. "https://name.github.io/goldclub-map/"
                               // (leer = aktuelle Adresse)
   },
 
