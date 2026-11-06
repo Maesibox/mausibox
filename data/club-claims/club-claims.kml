@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  BEISPIEL-DATEI / EXAMPLE FILE
+  Diese Fläche ist erfunden und nur ein Platzhalter.
+  Ersetze diese Datei durch die echte KML-Datei mit euren Club-Claims
+  (gleicher Name: club-claims.kml) oder trage weitere Dateien in config.js ein.
+-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Club claims</name>
+  <Placemark>
+    <name>EXAMPLE – replace with real club claim</name>
+    <description>Placeholder polygon. Not a real claim.</description>
+    <Polygon>
+      <outerBoundaryIs><LinearRing><coordinates>
+        -114.4200,34.8000 -114.4100,34.8000 -114.4100,34.7920 -114.4200,34.7920 -114.4200,34.8000
+      </coordinates></LinearRing></outerBoundaryIs>
+    </Polygon>
+  </Placemark>
+</Document>
+</kml>
