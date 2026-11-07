@@ -50,6 +50,24 @@ var App = (function () {
     return lat.toFixed(5) + ", " + lon.toFixed(5);
   }
 
+  // Entfernung in Metern und Himmelsrichtung zwischen zwei Punkten
+  function distance(lat1, lon1, lat2, lon2) {
+    var r = Math.PI / 180, a = Math.sin((lat2 - lat1) * r / 2), b = Math.sin((lon2 - lon1) * r / 2);
+    var h = a * a + Math.cos(lat1 * r) * Math.cos(lat2 * r) * b * b;
+    return 12742000 * Math.asin(Math.min(1, Math.sqrt(h)));
+  }
+  function direction(lat1, lon1, lat2, lon2) {
+    var r = Math.PI / 180;
+    var y = Math.sin((lon2 - lon1) * r) * Math.cos(lat2 * r);
+    var x = Math.cos(lat1 * r) * Math.sin(lat2 * r) - Math.sin(lat1 * r) * Math.cos(lat2 * r) * Math.cos((lon2 - lon1) * r);
+    var deg = (Math.atan2(y, x) / r + 360) % 360;
+    return t("dirs").split(",")[Math.round(deg / 45) % 8];
+  }
+  function formatDistance(m) {
+    if (m < 1000) return Math.round(m) + " m (" + Math.round(m * 3.28084) + " ft)";
+    return (m / 1000).toFixed(m < 10000 ? 2 : 1) + " km (" + (m / 1609.34).toFixed(m < 16000 ? 2 : 1) + " mi)";
+  }
+
   var toastTimer = null;
   function toast(msg) {
     var box = document.getElementById("toast");
@@ -127,16 +145,17 @@ var App = (function () {
     };
   }
 
-  function cellsFor(bounds) {
-    var r = tileRange(bounds, CELL_Z), out = [];
+  function cellsFor(bounds, z) {
+    var r = tileRange(bounds, z || CELL_Z), out = [];
     for (var x = r.x0; x <= r.x1; x++) for (var y = r.y0; y <= r.y1; y++) out.push({ x: x, y: y });
     return out;
   }
 
-  function cellBox(x, y) {
+  function cellBox(x, y, z) {
+    z = z || CELL_Z;
     return {
-      w: x2lon(x, CELL_Z).toFixed(6), e: x2lon(x + 1, CELL_Z).toFixed(6),
-      n: y2lat(y, CELL_Z).toFixed(6), s: y2lat(y + 1, CELL_Z).toFixed(6)
+      w: x2lon(x, z).toFixed(6), e: x2lon(x + 1, z).toFixed(6),
+      n: y2lat(y, z).toFixed(6), s: y2lat(y + 1, z).toFixed(6)
     };
   }
 
@@ -197,17 +216,73 @@ var App = (function () {
     return cachedFetch(wfsUrl(cfg, cellBox(x, y)), "text").then(parseGmlPoints);
   }
 
+  // ---------- Daten laden: Schutzgebiete (Flächen von einem ArcGIS-Server) ----------
+
+  function fetchAreaCell(cfg, x, y) {
+    var b = cellBox(x, y, cfg.cellZ), all = [];
+    function page(offset) {
+      var url = cfg.url + "?where=" + encodeURIComponent(cfg.where || "1=1") +
+        "&geometry=" + b.w + "," + b.s + "," + b.e + "," + b.n +
+        "&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326" +
+        "&outFields=OBJECTID,Unit_Nm,Des_Tp,Mang_Name,GAP_Sts&maxAllowableOffset=" + (cfg.simplify || 0.0005) +
+        "&geometryPrecision=5&orderByFields=OBJECTID&resultOffset=" + offset + "&f=geojson";
+      return cachedFetch(url, "json").then(function (data) {
+        var feats = data.features || [];
+        all = all.concat(feats);
+        var more = data.exceededTransferLimit || (data.properties && data.properties.exceededTransferLimit);
+        if (more && feats.length && offset < 10000) return page(offset + feats.length);
+        return all;
+      });
+    }
+    return page(0);
+  }
+
   // Wird auch vom Offline-Modus benutzt
   function fetchCell(cfg, x, y) {
     if (cfg.type === "blmClaims") return fetchBlmCell(cfg, x, y);
     if (cfg.type === "wfsPoints") return fetchWfsCell(cfg, x, y);
+    if (cfg.type === "areaPolygons") return fetchAreaCell(cfg, x, y);
     return Promise.resolve([]);
   }
 
   // ---------- Karte ----------
 
   var map, currentBase = null, baseLayers = {}, overlayState = {}, overlayObjs = {};
-  var blmFeatures = [], clubFeatures = [];
+  var hitFeatures = {};          // Ebenen-ID -> Flächen, die beim Antippen gefunden werden (BLM, Schutzgebiete)
+  var clubFiles = [];            // [{ clubId, club, name, layer, features }]
+
+  // ---------- Club-Umschalter ----------
+
+  function myClubs() { return Auth.enabled() && Auth.account ? Auth.account.clubs : []; }
+  function activeClub() {
+    var id = pref("activeClub", "all");
+    return id !== "all" && myClubs().some(function (c) { return c.id === id; }) ? id : "all";
+  }
+  function clubVisible(clubId) {
+    var a = activeClub();
+    return !clubId || a === "all" || a === clubId;
+  }
+  function setActiveClub(id) {
+    setPref("activeClub", id);
+    applyClubFilter();
+    Claims.redrawAll();
+    updateTitle();
+  }
+  function applyClubFilter() {
+    var group = overlayObjs.club;
+    clubFiles.forEach(function (f) {
+      var show = clubVisible(f.clubId);
+      if (group) { if (show) group.addLayer(f.layer); else group.removeLayer(f.layer); }
+    });
+  }
+  function clubFeatures() {
+    return clubFiles.filter(function (f) { return clubVisible(f.clubId); })
+      .reduce(function (all, f) { return all.concat(f.features); }, []);
+  }
+  function updateTitle() {
+    var a = activeClub(), club = myClubs().filter(function (c) { return c.id === a; })[0];
+    document.getElementById("app-title").textContent = C.clubName + (club ? " · " + club.name : "");
+  }
 
   function makeTileLayer(cfg, extra) {
     return L.tileLayer(cfg.url, Object.assign({
@@ -228,7 +303,7 @@ var App = (function () {
       if (!map.hasLayer(group)) return;
       if (map.getZoom() < cfg.minZoom) { setLayerNote(cfg.id, t("zoomInFor") + " (≥ " + cfg.minZoom + ")"); return; }
       if (pending === 0) setLayerNote(cfg.id, "");
-      var cells = cellsFor(map.getBounds());
+      var cells = cellsFor(map.getBounds(), cfg.cellZ);
       if (cells.length > 40) return;
       cells.forEach(function (c) {
         var key = c.x + "/" + c.y;
@@ -238,7 +313,7 @@ var App = (function () {
         setLayerNote(cfg.id, t("loading"));
         fetchCell(cfg, c.x, c.y).then(function (items) {
           items.forEach(function (it) {
-            var id = it.properties ? (it.properties.CSE_NR || it.id) : it.props._id;
+            var id = it.properties ? (it.properties.CSE_NR || it.properties.OBJECTID || it.id) : it.props._id;
             if (id && seen[id]) return;
             if (id) seen[id] = true;
             render(group, it);
@@ -264,13 +339,26 @@ var App = (function () {
     if (cfg.type === "userClaims") return Claims.layer;
 
     if (cfg.type === "blmClaims") {
+      hitFeatures[cfg.id] = [];
       return makeCellLayer(cfg, function (group, f) {
         var layer = L.geoJSON(f, {
           interactive: false,
-          style: { color: cfg.color, weight: 2, fillColor: cfg.color, fillOpacity: cfg.fillOpacity }
+          style: { color: cfg.color, weight: 2, dashArray: cfg.dashArray || null, fillColor: cfg.color, fillOpacity: cfg.fillOpacity }
         });
         group.addLayer(layer);
-        blmFeatures.push(f);
+        hitFeatures[cfg.id].push(f);
+      });
+    }
+
+    if (cfg.type === "areaPolygons") {
+      hitFeatures[cfg.id] = [];
+      return makeCellLayer(cfg, function (group, f) {
+        var col = areaClass(cfg, f.properties) === "closed" ? cfg.closedColor : cfg.limitedColor;
+        group.addLayer(L.geoJSON(f, {
+          interactive: false,
+          style: { color: col, weight: 2, fillColor: col, fillOpacity: 0.18 }
+        }));
+        hitFeatures[cfg.id].push(f);
       });
     }
 
@@ -290,8 +378,9 @@ var App = (function () {
 
     if (cfg.type === "file") {
       var group = L.featureGroup();
-      var addGeoJSON = function (gj, clubName) {
-        L.geoJSON(gj, {
+      var addGeoJSON = function (gj, file) {
+        var features = [];
+        var layer = L.geoJSON(gj, {
           style: { color: cfg.color, weight: 2, fillColor: cfg.color, fillOpacity: cfg.fillOpacity },
           interactive: false,
           pointToLayer: function (f, ll) {
@@ -299,15 +388,18 @@ var App = (function () {
           },
           onEachFeature: function (f) {
             f.properties = f.properties || {};
-            if (clubName) f.properties._club = clubName;
-            clubFeatures.push(f);
+            if (file.club) f.properties._club = file.club;
+            features.push(f);
           }
-        }).addTo(group);
+        });
+        var entry = { clubId: file.clubId || null, club: file.club || "", name: file.name || "", layer: layer, features: features };
+        clubFiles.push(entry);
+        if (clubVisible(entry.clubId)) group.addLayer(layer);
       };
       if (Auth.enabled()) {
         // Mit Login: Club-Claims kommen vom Server, nur für Mitglieder
         Auth.clubFiles().then(function (files) {
-          files.forEach(function (f) { addGeoJSON(f.geojson, f.club); });
+          files.forEach(function (f) { addGeoJSON(f.geojson, f); });
         });
         return group;
       }
@@ -316,7 +408,7 @@ var App = (function () {
           if (!r.ok) throw new Error(r.status);
           return r.text();
         }).then(function (txt) {
-          addGeoJSON(/\.kml$/i.test(path) ? Formats.kmlToGeoJSON(txt) : JSON.parse(txt));
+          addGeoJSON(/\.kml$/i.test(path) ? Formats.kmlToGeoJSON(txt) : JSON.parse(txt), { name: path.split("/").pop() });
         }).catch(function () {
           console.warn("Club file not loaded:", path);
         });
@@ -378,18 +470,50 @@ var App = (function () {
     return false;
   }
 
-  function claimHtml(f) {
-    var a = f.properties, cfg = overlayCfg("blm");
+  function claimHtml(f, cfg) {
+    var a = f.properties;
+    var active = a.CSE_DISP === "Active";
     var date = a.LOC_DT ? new Date(a.LOC_DT).toISOString().slice(0, 10) : "";
     var link = a.SF_ID ? cfg.detailsLink.replace("{SF_ID}", encodeURIComponent(a.SF_ID)) : "";
-    return "<div class='pop-sec claim'><h3>" + esc(a.CSE_NAME || a.CSE_NR) + "</h3><div class='pop-sub'>" + esc(t("claim")) + "</div><table>" +
+    return "<div class='pop-sec claim' style='border-left-color:" + esc(cfg.color) + "'><h3>" + esc(a.CSE_NAME || a.CSE_NR) + "</h3>" +
+      "<div class='pop-sub'>" + esc(t("claim")) + " · " + esc(a.CSE_DISP || "") + "</div><table>" +
       row(t("serial"), a.CSE_NR) + row(t("legacySerial"), a.LEG_CSE_NR) + row(t("status"), a.CSE_DISP) +
       row(t("claimType"), a.BLM_PROD) + row(t("acres"), a.RCRD_ACRS) + row("Location date", date) + "</table>" +
       (link ? "<a href='" + esc(link) + "' target='_blank' rel='noopener'>" + esc(t("ownerLink")) + " ↗</a>" : "") +
+      (active ? "" : "<p class='hint'>" + esc(t("closedClaimHint")) + "</p>") +
       "<p class='hint'>" + esc(t("claimApprox")) + "</p>" +
-      "<button class='mini-btn' data-newclaim='" + esc(JSON.stringify({ serial: a.CSE_NR, name: a.CSE_NAME || "",
+      (active ? "<button class='mini-btn' data-newclaim='" + esc(JSON.stringify({ serial: a.CSE_NR, name: a.CSE_NAME || "", folder: "foreign",
         kind: /placer/i.test(a.BLM_PROD) ? "placer" : /mill/i.test(a.BLM_PROD) ? "millsite" : /lode/i.test(a.BLM_PROD) ? "lode" : "other" })) + "'>" +
-        esc(t("fromBlm")) + "</button></div>";
+        esc(t("fromBlm")) + "</button>" : "") + "</div>";
+  }
+
+  // Schutzgebiete: "closed" = meist verboten, sonst eingeschränkt
+  function areaClass(cfg, p) {
+    if ((cfg.closedManagers || []).indexOf(p.Mang_Name) >= 0) return "closed";
+    if ((cfg.closedDesignations || []).indexOf(p.Des_Tp) >= 0) return "closed";
+    return p.GAP_Sts === "1" ? "closed" : "limited";
+  }
+  function landName(code) { return C.landNames[code] ? tr(C.landNames[code]) : (code || ""); }
+
+  function areaHtml(f, cfg) {
+    var p = f.properties, closed = areaClass(cfg, p) === "closed";
+    return "<div class='pop-sec' style='border-left:4px solid " + esc(closed ? cfg.closedColor : cfg.limitedColor) + ";padding-left:8px'>" +
+      "<h3>" + esc(p.Unit_Nm || t("protectedArea")) + "</h3><div class='pop-sub'>" + esc(t("protectedArea")) + "</div>" +
+      "<p class='verdict " + (closed ? "closed" : "limited") + "'>" + esc(closed ? t("levelClosed") : t("levelLimited")) + "</p><table>" +
+      row(t("designation"), landName(p.Des_Tp)) + row(t("manager"), landName(p.Mang_Name)) + "</table>" +
+      "<p class='hint'>" + esc(t("landHint")) + "</p></div>";
+  }
+
+  function landHtml(attrs) {
+    if (!attrs) return "<div class='pop-sec'><p class='hint'>" + esc(t("landUnknown")) + "</p></div>";
+    var code = attrs.ADMIN_AGENCY_CODE, info = C.landAgencies[code] || C.landAgencies[attrs.ADMIN_DEPT_CODE];
+    var level = info ? info.level : "limited";
+    var name = info ? tr(info.name) : (attrs.ADMIN_UNIT_NAME || code);
+    return "<div class='pop-sec land'><h3>" + esc(name) + "</h3><div class='pop-sub'>" + esc(t("landManager")) + "</div>" +
+      "<p class='verdict " + level + "'>" + esc(t(level === "open" ? "levelOpen" : level === "closed" ? "levelClosed" : "levelLimited")) + "</p>" +
+      (info ? "<p>" + esc(tr(info.rule)) + "</p>" : "") +
+      (attrs.ADMIN_UNIT_NAME && info ? "<div class='src'>" + esc(attrs.ADMIN_UNIT_NAME) + "</div>" : "") +
+      "<p class='hint'>" + esc(t("landHint")) + "</p></div>";
   }
 
   function clubHtml(f) {
@@ -423,28 +547,44 @@ var App = (function () {
   function onMapClick(e) {
     var lat = e.latlng.lat, lon = e.latlng.lng;
     var parts = [];
-    if (overlayState.blm) blmFeatures.filter(function (f) { return hit(f, lon, lat); }).forEach(function (f) { parts.push(claimHtml(f)); });
-    if (overlayState.club) clubFeatures.filter(function (f) { return hit(f, lon, lat); }).forEach(function (f) { parts.push(clubHtml(f)); });
     C.overlays.forEach(function (o) {
-      if (o.type === "userClaims" && overlayState[o.id]) parts = parts.concat(Claims.hitHtml(lon, lat));
+      if (!overlayState[o.id]) return;
+      var hits = (hitFeatures[o.id] || []).filter(function (f) { return hit(f, lon, lat); });
+      if (o.type === "blmClaims") hits.forEach(function (f) { parts.push(claimHtml(f, o)); });
+      if (o.type === "areaPolygons") hits.forEach(function (f) { parts.push(areaHtml(f, o)); });
+      if (o.type === "file") clubFeatures().filter(function (f) { return hit(f, lon, lat); }).forEach(function (f) { parts.push(clubHtml(f)); });
+      if (o.type === "userClaims") parts = parts.concat(Claims.hitHtml(lon, lat));
     });
 
-    var wantGeo = C.overlays.some(function (o) { return o.geologyInfo && overlayState[o.id]; });
-    var head = "<div class='pop'><div class='coords'>" + esc(formatCoord(lat, lon)) + "</div>";
-    var popup = L.popup({ maxWidth: 300, maxHeight: 360 }).setLatLng(e.latlng)
-      .setContent(head + parts.join("") + (wantGeo ? "<div class='pop-sec geo-slot'><p class='hint'>" + esc(t("loading")) + "</p></div>" : "") + "</div>")
-      .openOn(map);
-
-    if (wantGeo) {
-      var url = C.geologyInfoUrl + "?lat=" + lat.toFixed(5) + "&lng=" + lon.toFixed(5) + "&z=" + Math.min(map.getZoom(), 16);
-      cachedFetch(url, "json").then(function (res) {
-        return geologyHtml(res.success.data);
-      }).catch(function () {
-        return "<div class='pop-sec'><p class='hint'>" + esc(navigator.onLine ? t("loadError") : t("geologyOffline")) + "</p></div>";
-      }).then(function (html) {
-        popup.setContent(head + parts.join("") + html + "</div>");
-      });
+    // Angaben, die erst vom Server geholt werden (Landbesitz, Geologie)
+    var slow = [];
+    var landCfg = C.overlays.filter(function (o) { return o.landInfoUrl && overlayState[o.id]; })[0];
+    if (landCfg) {
+      slow.push(cachedFetch(landCfg.landInfoUrl + "?geometry=" + lon.toFixed(5) + "," + lat.toFixed(5) +
+        "&geometryType=esriGeometryPoint&inSR=4326&outFields=ADMIN_AGENCY_CODE,ADMIN_DEPT_CODE,ADMIN_UNIT_NAME&returnGeometry=false&f=json", "json")
+        .then(function (res) { return landHtml(res.features && res.features[0] ? res.features[0].attributes : null); }));
     }
+    if (C.overlays.some(function (o) { return o.geologyInfo && overlayState[o.id]; })) {
+      var url = C.geologyInfoUrl + "?lat=" + lat.toFixed(5) + "&lng=" + lon.toFixed(5) + "&z=" + Math.min(map.getZoom(), 16);
+      slow.push(cachedFetch(url, "json").then(function (res) { return geologyHtml(res.success.data); }, function (err) {
+        err.geology = true; throw err;
+      }));
+    }
+
+    var head = "<div class='pop'><div class='coords'>" + esc(formatCoord(lat, lon)) + "</div>";
+    var results = slow.map(function () { return "<div class='pop-sec'><p class='hint'>" + esc(t("loading")) + "</p></div>"; });
+    function render() { return head + parts.join("") + results.join("") + "</div>"; }
+    var popup = L.popup({ maxWidth: 300, maxHeight: 360 }).setLatLng(e.latlng).setContent(render()).openOn(map);
+
+    slow.forEach(function (p, i) {
+      p.catch(function (err) {
+        var msg = !navigator.onLine ? (err && err.geology ? t("geologyOffline") : t("offlineNow")) : t("loadError");
+        return "<div class='pop-sec'><p class='hint'>" + esc(msg) + "</p></div>";
+      }).then(function (html) {
+        results[i] = html;
+        popup.setContent(render());
+      });
+    });
   }
 
   // ---------- Ebenen-Menü ----------
@@ -490,9 +630,19 @@ var App = (function () {
     return !(o.type === "file" && Auth.enabled() && Auth.account && !Auth.account.clubs.length);
   }
 
+  function clubSelectHtml() {
+    var clubs = myClubs();
+    if (!clubs.length) return "";
+    var a = activeClub();
+    return "<label class='club-switch'>" + esc(t("activeClub")) + "<select data-club-switch>" +
+      "<option value='all'>" + esc(t("allClubs")) + "</option>" + clubs.map(function (c) {
+        return "<option value='" + esc(c.id) + "'" + (c.id === a ? " selected" : "") + ">" + esc(c.name) + "</option>";
+      }).join("") + "</select></label>";
+  }
+
   function openLayersPanel() {
     var baseId = pref("base", null);
-    var html = "<div class='layers'><h4>" + esc(t("basemap")) + "</h4>";
+    var html = "<div class='layers'>" + clubSelectHtml() + "<h4>" + esc(t("basemap")) + "</h4>";
     C.basemaps.forEach(function (b) {
       html += "<label class='opt'><input type='radio' name='base' value='" + esc(b.id) + "'" + (b.id === baseId ? " checked" : "") + "> " + esc(tr(b.name)) + "</label>";
     });
@@ -505,13 +655,21 @@ var App = (function () {
         var op = savedOpacity[o.id] != null ? savedOpacity[o.id] : o.opacity;
         html += "<input class='opacity' type='range' min='0.1' max='1' step='0.1' data-op='" + esc(o.id) + "' value='" + op + "'>";
       }
+      if (o.legend) {
+        html += "<div class='legend'>" + o.legend.map(function (l) {
+          return "<span><i style='background:" + esc(l.color) + "'></i>" + esc(tr(l.text)) + "</span>";
+        }).join("") + "</div>";
+      }
       html += "</div>";
     });
-    html += "<label class='opt'><input type='checkbox' value='__points'" + (pointsVisible ? " checked" : "") + "> " + esc(t("points")) + "</label></div>";
+    html += "<label class='opt'><input type='checkbox' value='__points'" + (pointsVisible ? " checked" : "") + "> " + esc(t("points")) + "</label>" +
+      "<label class='opt'><input type='checkbox' value='__tracks'" + (Tracks.visible ? " checked" : "") + "> " + esc(t("tracks")) + "</label></div>";
 
     var body = el(html);
     body.addEventListener("change", function (e) {
       var inp = e.target;
+      if (inp.hasAttribute("data-club-switch")) { setActiveClub(inp.value); return; }
+      if (inp.value === "__tracks") { Tracks.setVisible(inp.checked); return; }
       if (inp.name === "base") setBase(inp.value);
       else if (inp.value === "__points") setPointsVisible(inp.checked);
       else if (inp.type === "checkbox") setOverlay(inp.value, inp.checked);
@@ -575,10 +733,13 @@ var App = (function () {
     var body = el(
       "<div class='menu'>" +
       (Auth.enabled() && Auth.account ? "<button data-a='account'>👤 " + esc(Auth.account.username) + "</button>" : "") +
-      "<button data-a='points'>" + esc(t("points")) + "</button>" +
-      "<button data-a='claims'>" + esc(t("claims")) + "</button>" +
-      "<button data-a='export'>" + esc(t("exportImport")) + "</button>" +
-      "<button data-a='offline'>" + esc(t("offline")) + "</button>" +
+      "<button data-a='points'>📍 " + esc(t("points")) + "</button>" +
+      "<button data-a='tracks'>〰 " + esc(t("tracks")) + "</button>" +
+      "<button data-a='claims'>▣ " + esc(t("claims")) + "</button>" +
+      "<button data-a='parking'>🅿 " + esc(t("parking")) + "</button>" +
+      "<button data-a='export'>⇅ " + esc(t("exportImport")) + "</button>" +
+      "<button data-a='offline'>⬇ " + esc(t("offline")) + "</button>" +
+      "<button data-a='help'>❓ " + esc(t("help")) + "</button>" +
       "<div class='lang'>" + esc(t("language")) + ": " +
         "<button data-lang='en'" + (lang === "en" ? " class='on'" : "") + ">English</button>" +
         "<button data-lang='de'" + (lang === "de" ? " class='on'" : "") + ">Deutsch</button></div>" +
@@ -588,6 +749,9 @@ var App = (function () {
       var b = e.target.closest("button");
       if (!b) return;
       if (b.dataset.lang) { setPref("lang", b.dataset.lang); location.reload(); return; }
+      if (b.dataset.a === "tracks") Tracks.openList();
+      if (b.dataset.a === "parking") Parking.show();
+      if (b.dataset.a === "help") Help.open();
       if (b.dataset.a === "points") Points.openList();
       if (b.dataset.a === "export") ExportImport.openPanel();
       if (b.dataset.a === "offline") Offline.openPanel();
@@ -636,8 +800,8 @@ var App = (function () {
 
   function init() {
     document.title = C.clubName;
-    document.getElementById("app-title").textContent = C.clubName;
-    ["layers", "gps", "addPoint", "points", "menu"].forEach(function (k) {
+    updateTitle();
+    ["layers", "gps", "addPoint", "track", "parking", "points", "menu"].forEach(function (k) {
       var b = document.querySelector("[data-label='" + k + "']");
       if (b) { b.title = t(k); b.setAttribute("aria-label", t(k)); }
     });
@@ -660,6 +824,8 @@ var App = (function () {
       if (savedOpacity[o.id] != null) o.opacity = savedOpacity[o.id];
       var on = savedOverlays[o.id] != null ? savedOverlays[o.id] : !!o.visible;
       if (on) setOverlay(o.id, true); else overlayState[o.id] = false;
+      // Club-Claims immer laden (auch ausgeblendet), damit die Claims-Liste sie zeigen kann
+      if (o.type === "file" && !overlayObjs[o.id]) overlayObjs[o.id] = buildOverlay(o);
     });
 
     map.on("moveend", function () {
@@ -688,6 +854,8 @@ var App = (function () {
     Points.init(map);
     if (pointsVisible) Points.layer.addTo(map);
     Claims.init(map);
+    Tracks.init(map);
+    Parking.init(map);
 
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js").catch(function (e) { console.warn("SW", e); });
@@ -699,6 +867,9 @@ var App = (function () {
     init: init, t: t, tr: tr, esc: esc, el: el, toast: toast, formatCoord: formatCoord,
     openSheet: openSheet, closeSheet: closeSheet, onSheetClose: onSheetClose, pref: pref, setPref: setPref,
     get map() { return map; }, get gps() { return gps.last; }, get lang() { return lang; },
+    startGps: startGps, distance: distance, direction: direction, formatDistance: formatDistance,
+    activeClub: activeClub, clubVisible: clubVisible, setActiveClub: setActiveClub, clubSelectHtml: clubSelectHtml,
+    clubFiles: function () { return clubFiles; },
     tileRange: tileRange, cellsFor: cellsFor, fetchCell: fetchCell,
     TILE_CACHE: TILE_CACHE, DATA_CACHE: DATA_CACHE, CELL_Z: CELL_Z
   };

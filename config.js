@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 4,
+  appVersion: 5,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -92,6 +92,7 @@ var APP_CONFIG = {
   //    "blmClaims" = BLM Mining Claims live vom BLM-Server
   //    "wfsPoints" = Punkte (Minen) live vom USGS-Server
   //    "file"      = eigene Dateien (KML oder GeoJSON) aus dem Projektordner
+  //    "areaPolygons" = Flächen (Schutzgebiete) live von einem ArcGIS-Server
   // ----------------------------------------------------------
   overlays: [
     {
@@ -130,6 +131,51 @@ var APP_CONFIG = {
       offline: true
     },
     {
+      id: "landStatus",
+      type: "tiles",
+      name: { en: "Land manager (BLM, state, private …)", de: "Landbesitz (BLM, Staat, privat …)" },
+      url: "https://gis.blm.gov/arcgis/rest/services/lands/BLM_Natl_SMA_Cached_without_PriUnk/MapServer/tile/{z}/{y}/{x}",
+      attribution: "Surface management agency: BLM",
+      maxNativeZoom: 16,
+      opacity: 0.4,
+      visible: false,
+      offline: true,
+      // beim Antippen: wem gehört das Land, was ist erlaubt (Texte unten bei landAgencies)
+      landInfoUrl: "https://gis.blm.gov/arcgis/rest/services/lands/BLM_Natl_SMA_Cached_without_PriUnk/MapServer/1/query",
+      legend: [
+        { color: "#fee679", text: { en: "BLM", de: "BLM" } },
+        { color: "#ccebc5", text: { en: "Forest Service", de: "Forest Service" } },
+        { color: "#b3e3ee", text: { en: "State trust land", de: "Staatsland (State Trust)" } },
+        { color: "#cabddc", text: { en: "National Park", de: "Nationalpark" } },
+        { color: "#7fcca7", text: { en: "Wildlife refuge", de: "Wildschutzgebiet" } },
+        { color: "#fdb46c", text: { en: "Tribal", de: "Reservat" } },
+        { color: "#fbb4ce", text: { en: "Military", de: "Militär" } },
+        { color: "#ffffff", text: { en: "Private / other (no color)", de: "Privat / andere (ohne Farbe)" } }
+      ]
+    },
+    {
+      id: "restricted",
+      type: "areaPolygons",
+      name: { en: "Protected & closed areas (PAD-US)", de: "Schutzgebiete & Sperrzonen (PAD-US)" },
+      url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name/FeatureServer/0/query",
+      // nur Gebiete mit Einschränkungen laden (normales BLM-Land wird weggelassen)
+      where: "Mang_Name IN ('NPS','FWS','TRIB','DOD','DOE','SPR') OR Des_Tp IN ('WA','WSA','NM','NCA','NRA','NP','ACEC') OR GAP_Sts IN ('1','2')",
+      attribution: "Protected areas: USGS PAD-US",
+      minZoom: 9,
+      cellZ: 10,                   // grössere Kacheln, weil Schutzgebiete gross sind
+      simplify: 0.0005,            // Grenzen auf ca. 50 m vereinfacht (spart Daten)
+      closedColor: "#d0021b",      // meist verboten
+      limitedColor: "#f5a623",     // eingeschränkt / Regeln prüfen
+      closedManagers: ["NPS", "FWS", "TRIB", "DOD", "DOE"],
+      closedDesignations: ["WA", "NP", "NM", "NWR", "TRIBL", "MIL"],
+      visible: false,
+      offline: true,
+      legend: [
+        { color: "#d0021b", text: { en: "Usually closed (park, refuge, wilderness, tribal, military)", de: "Meist verboten (Park, Schutzgebiet, Wilderness, Reservat, Militär)" } },
+        { color: "#f5a623", text: { en: "Restricted – check rules", de: "Eingeschränkt – Regeln prüfen" } }
+      ]
+    },
+    {
       id: "blm",
       type: "blmClaims",
       name: { en: "BLM mining claims (active)", de: "BLM Mining Claims (aktiv)" },
@@ -142,6 +188,20 @@ var APP_CONFIG = {
       detailsLink: "https://mlrs.blm.gov/s/blm-case/{SF_ID}",
       visible: true,
       offline: true
+    },
+    {
+      id: "blmClosed",
+      type: "blmClaims",
+      name: { en: "BLM mining claims (closed)", de: "BLM Mining Claims (geschlossen)" },
+      url: "https://nlsdbpubgis.blm.gov/arcgis/rest/services/Mining_Claims/MiningClaims/MapServer/2/query",
+      attribution: "Mining claims: BLM MLRS",
+      minZoom: 12,
+      color: "#8c8c8c",
+      fillOpacity: 0.06,
+      dashArray: "4 4",            // gestrichelt
+      detailsLink: "https://mlrs.blm.gov/s/blm-case/{SF_ID}",
+      visible: false,
+      offline: false
     },
     {
       id: "club",
@@ -160,6 +220,7 @@ var APP_CONFIG = {
       type: "userClaims",
       name: { en: "Claims & posts (own / club)", de: "Claims & Pfosten (eigene / Club)" },
       privateColor: "#ff8c00",     // eigene, private Claims
+      foreignColor: "#c03cc0",     // fremde Claims, die man für sich festhält
       clubColor: "#00c8e0",        // mit dem Club geteilte Claims
       postsMinZoom: 15,            // Pfosten erst ab dieser Zoomstufe zeigen
       visible: true
@@ -222,6 +283,66 @@ var APP_CONFIG = {
     { id: "camp",    name: { en: "Camp / access", de: "Lager / Zufahrt" }, color: "#27ae60", symbol: "⛺" },
     { id: "other",   name: { en: "Other", de: "Sonstiges" },          color: "#9b51e0", symbol: "•" }
   ],
+
+  // ----------------------------------------------------------
+  //  WEGE AUFZEICHNEN (Tracking-Knopf)
+  //  minDistance: neuer Punkt erst nach so vielen Metern
+  //  maxAccuracy: GPS-Punkte ungenauer als so viele Meter werden ignoriert
+  // ----------------------------------------------------------
+  tracks: {
+    types: [
+      { id: "drive",  icon: "🚙", name: { en: "Drive", de: "Fahrt" },           color: "#2f80ed", minDistance: 15, maxAccuracy: 60 },
+      { id: "walk",   icon: "🚶", name: { en: "Walk / hike", de: "Gehen / Laufen" }, color: "#9b51e0", minDistance: 4,  maxAccuracy: 30 },
+      { id: "detect", icon: "🔍", name: { en: "Metal detecting", de: "Metalldetektor" }, color: "#ffc400", minDistance: 1,  maxAccuracy: 25 }
+    ],
+    coilWidth: 1.0                 // Suchbreite beim Detektor in Metern (wie breit man schwenkt) – zeigt die abgesuchte Fläche
+  },
+
+  // Parkplatz: Link zur Navigation ({lat}, {lon} werden ersetzt)
+  parking: {
+    navigateUrl: "https://maps.apple.com/?daddr={lat},{lon}"
+  },
+
+  // ----------------------------------------------------------
+  //  LANDBESITZ: was bedeutet das fürs Goldsuchen? (Antippen der Ebene "Landbesitz")
+  //  level: "open" = meist erlaubt, "limited" = Regeln/Genehmigung, "closed" = meist verboten
+  // ----------------------------------------------------------
+  landAgencies: {
+    BLM:  { level: "open",    name: { en: "Bureau of Land Management (BLM)", de: "Bureau of Land Management (BLM)" },
+            rule: { en: "Public land – prospecting usually allowed, but not on active claims (check the claim layer).", de: "Öffentliches Land – Suchen meist erlaubt, aber nicht auf aktiven Claims (Claim-Ebene prüfen)." } },
+    USFS: { level: "open",    name: { en: "US Forest Service", de: "US Forest Service" },
+            rule: { en: "Usually allowed with rules; not on active claims. Check with the ranger district.", de: "Meist erlaubt mit Regeln; nicht auf aktiven Claims. Beim Ranger District nachfragen." } },
+    ST:   { level: "limited", name: { en: "State trust land", de: "Staatsland (State Trust Land)" },
+            rule: { en: "Arizona State Trust land: a state permit is needed. No claims under federal law.", de: "Arizona State Trust Land: Es braucht eine Genehmigung des Staates. Keine Claims nach Bundesrecht." } },
+    PVT:  { level: "closed",  name: { en: "Private land", de: "Privatland" },
+            rule: { en: "Only with the owner's permission.", de: "Nur mit Erlaubnis des Besitzers." } },
+    NPS:  { level: "closed",  name: { en: "National Park Service", de: "National Park Service" },
+            rule: { en: "Prospecting and collecting are forbidden.", de: "Goldsuchen und Sammeln verboten." } },
+    FWS:  { level: "closed",  name: { en: "US Fish & Wildlife (refuge)", de: "US Fish & Wildlife (Schutzgebiet)" },
+            rule: { en: "Wildlife refuge – prospecting forbidden.", de: "Wildschutzgebiet – Goldsuchen verboten." } },
+    BIA:  { level: "closed",  name: { en: "Tribal land", de: "Reservat (Tribal Land)" },
+            rule: { en: "Forbidden without tribal permission.", de: "Ohne Erlaubnis des Stammes verboten." } },
+    DOD:  { level: "closed",  name: { en: "Military", de: "Militär" },
+            rule: { en: "No access.", de: "Kein Zutritt." } },
+    BOR:  { level: "limited", name: { en: "Bureau of Reclamation", de: "Bureau of Reclamation" },
+            rule: { en: "Depends on the area – ask the local office.", de: "Je nach Gebiet – bei der Behörde nachfragen." } },
+    LG:   { level: "limited", name: { en: "City / county", de: "Stadt / County" },
+            rule: { en: "Usually not allowed in parks; ask the city/county.", de: "In Parks meist nicht erlaubt; bei Stadt/County nachfragen." } }
+  },
+
+  // Abkürzungen in den Schutzgebieten (PAD-US) in Klartext
+  landNames: {
+    WA: { en: "Wilderness area", de: "Wilderness (Wildnisgebiet)" }, WSA: { en: "Wilderness study area", de: "Wilderness-Studiengebiet" },
+    NP: { en: "National park", de: "Nationalpark" }, NM: { en: "National monument", de: "National Monument" },
+    NWR: { en: "National wildlife refuge", de: "Nationales Wildschutzgebiet" }, NRA: { en: "National recreation area", de: "National Recreation Area" },
+    NCA: { en: "Conservation area", de: "Schutzgebiet (Conservation Area)" }, ACEC: { en: "Area of critical environmental concern", de: "Besonders schützenswertes Gebiet (ACEC)" },
+    TRIBL: { en: "Tribal land", de: "Reservat" }, SP: { en: "State park", de: "State Park" }, MIL: { en: "Military land", de: "Militärgebiet" },
+    NPS: { en: "National Park Service", de: "National Park Service" }, FWS: { en: "US Fish & Wildlife", de: "US Fish & Wildlife" },
+    BLM: { en: "BLM", de: "BLM" }, USFS: { en: "US Forest Service", de: "US Forest Service" }, TRIB: { en: "Tribe", de: "Stamm" },
+    DOD: { en: "Military", de: "Militär" }, DOE: { en: "Dept. of Energy", de: "Energieministerium" }, SPR: { en: "State parks", de: "State Parks" },
+    SFW: { en: "State fish & wildlife", de: "Staatliche Wildbehörde" }, SDOL: { en: "State land department", de: "Staatliche Landbehörde" },
+    CITY: { en: "City", de: "Stadt" }, CNTY: { en: "County", de: "County" }, USBR: { en: "Bureau of Reclamation", de: "Bureau of Reclamation" }
+  },
 
   // Fotos werden vor dem Speichern verkleinert (spart Speicher auf dem Handy)
   photos: { maxSize: 1600, quality: 0.8 },
@@ -322,11 +443,41 @@ var APP_CONFIG = {
       coordsInvalid: "Could not read these coordinates.", assumedWest: "longitude taken as West",
       nad27Hint: "Coordinates on old notices are often NAD27 – they can be off by up to ~100 m. Check in the field.",
       notSet: "not set", area: "Area", needThree: "At least 3 boundary posts are needed to draw the claim.",
-      confirmDeleteClaim: "Delete this claim?", noClaims: "No own claims yet.",
-      fromBlm: "＋ Record as own claim (posts)", createdBy: "Recorded by", exportClaimsKml: "Export claims (KML)",
+      confirmDeleteClaim: "Delete this claim?", noClaims: "None yet.",
+      fromBlm: "＋ Record this claim with posts", createdBy: "Recorded by", exportClaimsKml: "Export claims (KML)",
       importClaims: "Import claims (KML)", photosLocalOnly: "Photos stay on this device.",
       syncing: "Syncing claims…", lastSync: "Synced", readOnly: "Read only (recorded by someone else)",
-      goTo: "Show on map", acresShort: "acres"
+      goTo: "Show on map", acresShort: "acres",
+      folderMine: "My claims", folderForeign: "Others' claims (for me)", entryKind: "Whose claim?",
+      kindMine: "My claim", kindForeign: "Someone else's claim", showFolder: "show on map",
+      clubFileClaims: "Club claim files",
+
+      // BLM, Land, Schutzgebiete
+      closedClaimHint: "Closed claim – the land may be open again. Check the current status at BLM before you dig.",
+      landManager: "Land manager", landUnknown: "No land manager data here.", landHint: "Guide only – rules can change. Check with the agency.",
+      protectedArea: "Protected / restricted area", designation: "Type", manager: "Managed by",
+      levelOpen: "Usually allowed", levelLimited: "Restricted – check rules / permit", levelClosed: "Usually forbidden",
+
+      // Wege
+      track: "Record route", tracks: "Routes", chooseTrack: "What do you want to record?",
+      recording: "Recording", paused: "Paused", pause: "Pause", resume: "Continue", stopSave: "Stop & save",
+      discard: "Discard", confirmDiscard: "Throw this recording away?", trackName: "Name", distance: "Distance",
+      duration: "Duration", noTracks: "No routes yet.", trackSaved: "Route saved", trackResumeFound: "Unfinished recording found – tap the route button to continue or save it.",
+      screenOnHint: "Keep the screen on and the app open while recording. iPhone stops GPS when the screen is off.",
+      coilWidth: "Search width (m) – how wide you swing", areaCovered: "Area searched", started: "Started", pointsCount: "GPS points",
+      confirmDeleteTrack: "Delete this route?", weakGps: "GPS too inaccurate – waiting…", exportTypeGpx: "Export these routes (GPX)",
+      allRoutes: "All routes", trackDetails: "Route",
+
+      // Parkplatz
+      parking: "Parking spot", parkSaved: "Parking spot saved", parkHint: "Long-press the P button to save where you are as parking spot.",
+      parkNoGps: "No current GPS position yet – please wait a moment and try again.", parkFromYou: "from you",
+      parkSavedAt: "Saved", navigate: "Navigate (Apple Maps)", deletePark: "Delete parking spot", parkDeleted: "Parking spot deleted",
+
+      // Club-Umschalter, Hilfe, Verwaltung
+      activeClub: "Show club", allClubs: "All my clubs", help: "Help – how it works",
+      addMember: "Add person", addMemberHint: "Username of an existing account", userNotFound: "No account with this username.",
+      memberAdded: "Added to club", userClubs: "Clubs", assignClub: "Add to club",
+      dirs: "N,NE,E,SE,S,SW,W,NW"
     },
     de: {
       layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen",
@@ -405,11 +556,41 @@ var APP_CONFIG = {
       coordsInvalid: "Diese Koordinaten konnte ich nicht lesen.", assumedWest: "Länge als West verstanden",
       nad27Hint: "Koordinaten auf alten Notices sind oft NAD27 – sie können bis ca. 100 m abweichen. Im Feld prüfen.",
       notSet: "nicht gesetzt", area: "Fläche", needThree: "Für die Claim-Fläche braucht es mindestens 3 Grenzpfosten.",
-      confirmDeleteClaim: "Diesen Claim löschen?", noClaims: "Noch keine eigenen Claims.",
-      fromBlm: "＋ Als eigenen Claim erfassen (Pfosten)", createdBy: "Erfasst von", exportClaimsKml: "Claims exportieren (KML)",
+      confirmDeleteClaim: "Diesen Claim löschen?", noClaims: "Noch keine.",
+      fromBlm: "＋ Diesen Claim mit Pfosten erfassen", createdBy: "Erfasst von", exportClaimsKml: "Claims exportieren (KML)",
       importClaims: "Claims importieren (KML)", photosLocalOnly: "Fotos bleiben auf diesem Gerät.",
       syncing: "Claims werden abgeglichen…", lastSync: "Abgeglichen", readOnly: "Nur lesen (von jemand anderem erfasst)",
-      goTo: "Auf Karte zeigen", acresShort: "Acres"
+      goTo: "Auf Karte zeigen", acresShort: "Acres",
+      folderMine: "Meine Claims", folderForeign: "Fremde Claims (für mich)", entryKind: "Wessen Claim?",
+      kindMine: "Mein Claim", kindForeign: "Fremder Claim", showFolder: "auf Karte zeigen",
+      clubFileClaims: "Club-Claim-Dateien",
+
+      // BLM, Land, Schutzgebiete
+      closedClaimHint: "Geschlossener Claim – das Land ist vielleicht wieder frei. Vor dem Graben den aktuellen Stand beim BLM prüfen.",
+      landManager: "Landbesitz", landUnknown: "Keine Angaben zum Landbesitz hier.", landHint: "Nur zur Orientierung – Regeln können ändern. Bei der Behörde nachfragen.",
+      protectedArea: "Schutzgebiet / Sperrzone", designation: "Art", manager: "Verwaltet von",
+      levelOpen: "Meist erlaubt", levelLimited: "Eingeschränkt – Regeln / Genehmigung prüfen", levelClosed: "Meist verboten",
+
+      // Wege
+      track: "Weg aufzeichnen", tracks: "Strecken", chooseTrack: "Was möchtest du aufzeichnen?",
+      recording: "Aufnahme läuft", paused: "Pausiert", pause: "Pause", resume: "Weiter", stopSave: "Beenden & speichern",
+      discard: "Verwerfen", confirmDiscard: "Diese Aufnahme wegwerfen?", trackName: "Name", distance: "Strecke",
+      duration: "Dauer", noTracks: "Noch keine Strecken.", trackSaved: "Strecke gespeichert", trackResumeFound: "Unfertige Aufnahme gefunden – Weg-Knopf antippen, um weiterzumachen oder zu speichern.",
+      screenOnHint: "Während der Aufnahme Bildschirm an und App offen lassen. Das iPhone stoppt GPS, wenn der Bildschirm aus ist.",
+      coilWidth: "Suchbreite (m) – wie breit du schwenkst", areaCovered: "Abgesuchte Fläche", started: "Start", pointsCount: "GPS-Punkte",
+      confirmDeleteTrack: "Diese Strecke löschen?", weakGps: "GPS zu ungenau – warte…", exportTypeGpx: "Diese Strecken exportieren (GPX)",
+      allRoutes: "Alle Strecken", trackDetails: "Strecke",
+
+      // Parkplatz
+      parking: "Parkplatz", parkSaved: "Parkplatz gespeichert", parkHint: "P-Knopf lange drücken, um den jetzigen Standort als Parkplatz zu speichern.",
+      parkNoGps: "Noch keine aktuelle GPS-Position – bitte kurz warten und nochmals versuchen.", parkFromYou: "von dir",
+      parkSavedAt: "Gespeichert", navigate: "Hinführen (Apple Karten)", deletePark: "Parkplatz löschen", parkDeleted: "Parkplatz gelöscht",
+
+      // Club-Umschalter, Hilfe, Verwaltung
+      activeClub: "Club anzeigen", allClubs: "Alle meine Clubs", help: "Hilfe – so funktioniert's",
+      addMember: "Person hinzufügen", addMemberHint: "Benutzername eines bestehenden Kontos", userNotFound: "Kein Konto mit diesem Benutzernamen.",
+      memberAdded: "Zum Club hinzugefügt", userClubs: "Clubs", assignClub: "Zu Club hinzufügen",
+      dirs: "N,NO,O,SO,S,SW,W,NW"
     }
   }
 };

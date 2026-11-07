@@ -188,7 +188,7 @@ var ExportImport = (function () {
       }));
     }).then(function (photos) {
       var data = { format: "goldclub-backup", version: 1, exportedAt: new Date().toISOString(), points: pts, photos: photos,
-        claims: Claims.all() };
+        claims: Claims.all(), tracks: Tracks.all() };
       download("goldclub-backup-" + stamp() + ".json", JSON.stringify(data), "application/json");
       App.setPref("lastBackup", new Date().toISOString());
     });
@@ -227,9 +227,13 @@ var ExportImport = (function () {
         return Promise.all(photos.map(function (ph) {
           return Store.putPhoto({ id: ph.id, pointId: ph.pointId, mime: ph.mime, createdAt: ph.createdAt, blob: base64ToBlob(ph.data, ph.mime) });
         })).then(function () { return merge(data.points || []); })
-          .then(function (n) { return Claims.mergeMany(data.claims || []).then(function (m) { return n + m; }); });
+          .then(function (n) { return Claims.mergeMany(data.claims || []).then(function (m) { return n + m; }); })
+          .then(function (n) { return Tracks.mergeMany(data.tracks || []).then(function (m) { return n + m; }); });
       }
-      return merge(Formats.parsePoints(txt));
+      // GPX/KML: Punkte, und aus GPX zusätzlich die Strecken
+      var points = Formats.parsePoints(txt);
+      var tracks = /<trk[\s>]/.test(txt) ? Tracks.parseGpx(txt) : [];
+      return merge(points).then(function (n) { return Tracks.mergeMany(tracks).then(function (m) { return n + m; }); });
     });
   }
 

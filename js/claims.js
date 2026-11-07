@@ -4,7 +4,7 @@
  */
 var Claims = (function () {
   var C = APP_CONFIG;
-  var cfg = C.overlays.filter(function (o) { return o.type === "userClaims"; })[0] || { privateColor: "#ff8c00", clubColor: "#00c8e0", postsMinZoom: 15 };
+  var cfg = C.overlays.filter(function (o) { return o.type === "userClaims"; })[0] || { privateColor: "#ff8c00", foreignColor: "#c03cc0", clubColor: "#00c8e0", postsMinZoom: 15 };
   var layer = L.featureGroup();
   var postsLayer = L.featureGroup();
   var cache = {};       // id -> Claim
@@ -38,6 +38,7 @@ var Claims = (function () {
     return Object.assign({
       id: Store.uuid(), schema: 1,
       name: "", serial: "", kind: "lode", locationDate: "", note: "",
+      folder: "mine",        // "mine" = mein Claim, "foreign" = fremder Claim, den ich festhalte
       visibility: "private", clubId: null,
       monument: null,        // { lat, lon, accuracy }
       posts: [],             // [{ id, type, lat, lon, accuracy }]
@@ -82,7 +83,25 @@ var Claims = (function () {
     return inside;
   }
 
-  function color(c) { return c.visibility === "club" ? cfg.clubColor : cfg.privateColor; }
+  function color(c) {
+    if (c.visibility === "club") return cfg.clubColor;
+    return c.folder === "foreign" ? (cfg.foreignColor || cfg.privateColor) : cfg.privateColor;
+  }
+
+  // Ordner in der Liste: Meine, Fremde oder ein Club
+  function folderOf(c) {
+    if (c.visibility === "club") return "club:" + c.clubId;
+    return c.folder === "foreign" ? "foreign" : "mine";
+  }
+  function kindLabel(c) { return c.folder === "foreign" ? t("kindForeign") : t("kindMine"); }
+
+  // Auf der Karte zeigen? (Ordner ausgeblendet oder anderer Club gewählt -> nein)
+  function hiddenFolders() { return App.pref("claimFoldersHidden", {}); }
+  function shown(c) {
+    if (hiddenFolders()[folderOf(c)]) return false;
+    return c.visibility !== "club" || App.clubVisible(c.clubId);
+  }
+  function redrawAll() { Object.keys(cache).forEach(function (id) { draw(cache[id]); }); }
 
   function visibilityText(c) {
     if (c.visibility !== "club") return t("onlyMe");
@@ -115,7 +134,7 @@ var Claims = (function () {
 
   function draw(c) {
     undraw(c.id);
-    if (c.deleted) return;
+    if (c.deleted || !shown(c)) return;
     var col = color(c), r = ring(c), all = [];
     if (r) {
       var poly = L.polygon(r, { color: col, weight: 3, dashArray: "8 6", fillColor: col, fillOpacity: 0.12, interactive: false });
@@ -130,7 +149,7 @@ var Claims = (function () {
     (c.posts || []).forEach(function (p) {
       var pt = postType(p.type);
       var mk = L.marker([p.lat, p.lon], { icon: boxIcon(pt.short, col, false) });
-      mk.bindPopup("<div class='pop'><h3>" + esc(App.tr(pt.name)) + "</h3><div class='pop-sub'>" + esc(c.name || t("ownClaim")) + "</div>" +
+      mk.bindPopup("<div class='pop'><h3>" + esc(App.tr(pt.name)) + "</h3><div class='pop-sub'>" + esc(c.name || kindLabel(c)) + "</div>" +
         "<div class='coords'>" + esc(coordText(p)) + "<br>" + esc(Coords.utmText(p.lat, p.lon)) + "</div>" +
         (canEdit(c) ? "<div class='pop-actions'><button data-claim-edit='" + esc(c.id) + "'>" + esc(t("edit")) + "</button></div>" : "") + "</div>");
       postsLayer.addLayer(mk); all.push(mk);
@@ -148,8 +167,8 @@ var Claims = (function () {
   function popupHtml(c, withPhotos) {
     var r = ring(c), a = acres(r);
     return "<div class='pop'><div class='pop-sec own' style='border-left-color:" + esc(color(c)) + "'>" +
-      "<h3>" + esc(c.name || t("ownClaim")) + "</h3>" +
-      "<div class='pop-sub'>" + esc(t("ownClaim")) + " · " + esc(visibilityText(c)) + "</div><table>" +
+      "<h3>" + esc(c.name || kindLabel(c)) + "</h3>" +
+      "<div class='pop-sub'>" + esc(kindLabel(c)) + " · " + esc(visibilityText(c)) + "</div><table>" +
       row(t("blmSerial"), c.serial) + row(t("claimKind"), kindText(c.kind)) + row(t("locationDate"), c.locationDate) +
       row(t("area"), a ? "≈ " + a.toFixed(2) + " " + t("acresShort") : "") +
       row(t("monument"), c.monument ? coordText(c.monument) : t("notSet")) +
@@ -214,6 +233,8 @@ var Claims = (function () {
 
     var form = App.el(
       "<form class='editor claim-editor'>" +
+      "<label>" + esc(t("entryKind")) + "<select name='folder'><option value='mine'>" + esc(t("kindMine")) + "</option>" +
+        "<option value='foreign'" + (w.folder === "foreign" ? " selected" : "") + ">" + esc(t("kindForeign")) + "</option></select></label>" +
       "<label>" + esc(t("claimNameField")) + "<input name='name' value='" + esc(w.name) + "' autocomplete='off'></label>" +
       "<div class='row two'><label>" + esc(t("blmSerial")) + "<input name='serial' value='" + esc(w.serial) + "' placeholder='AZ101…' autocapitalize='characters'></label>" +
         "<label>" + esc(t("claimKind")) + "<select name='kind'>" + kinds + "</select></label></div>" +
@@ -338,6 +359,7 @@ var Claims = (function () {
     form.onsubmit = function (e) {
       e.preventDefault();
       var f = form.elements;
+      w.folder = f["folder"].value;
       w.name = f["name"].value.trim();
       w.serial = f["serial"].value.trim().toUpperCase();
       w.kind = f["kind"].value;
@@ -378,28 +400,70 @@ var Claims = (function () {
 
   // ---------- Liste ----------
 
+  function itemHtml(c) {
+    var r = ring(c), a = acres(r);
+    return "<button class='item' data-id='" + esc(c.id) + "'><span class='post small' style='border-color:" + esc(color(c)) + "'>LM</span>" +
+      "<span class='item-text'><b>" + esc(c.name || kindLabel(c)) + "</b><small>" + esc(kindText(c.kind)) +
+      (c.serial ? " · " + esc(c.serial) : "") + (c.visibility === "club" ? " · " + esc(kindLabel(c)) : "") +
+      " · " + (c.posts || []).length + " " + esc(t("postType")) +
+      (a ? " · ≈ " + a.toFixed(1) + " ac" : "") + "</small></span></button>";
+  }
+
+  function folderHtml(key, title, col, list, extra, newBtn) {
+    var hidden = hiddenFolders()[key];
+    return "<section class='folder'><h4 style='border-left-color:" + esc(col) + "'>" + esc(title) + " <small>" + list.length + "</small>" +
+      "<label class='fold-eye'><input type='checkbox' data-folder='" + esc(key) + "'" + (hidden ? "" : " checked") + "> " + esc(t("showFolder")) + "</label></h4>" +
+      (list.length ? list.map(itemHtml).join("") : (extra ? "" : "<p class='hint'>" + esc(t("noClaims")) + "</p>")) + (extra || "") +
+      (newBtn ? "<button class='mini' data-new='" + esc(newBtn) + "'>＋ " + esc(t("newClaim")) + "</button>" : "") + "</section>";
+  }
+
   function openList() {
     var items = Object.keys(cache).map(function (k) { return cache[k]; })
       .filter(function (c) { return !c.deleted; })
       .sort(function (a, b) { return (a.name || "").localeCompare(b.name || ""); });
-    var body = App.el("<div class='plist'>" +
-      "<button class='primary wide' data-a='new'>＋ " + esc(t("newClaim")) + "</button>" +
-      "<div class='items'>" + (items.length ? items.map(function (c) {
-        var r = ring(c), a = acres(r);
-        return "<button class='item' data-id='" + esc(c.id) + "'><span class='post small' style='border-color:" + esc(color(c)) + "'>LM</span>" +
-          "<span class='item-text'><b>" + esc(c.name || t("ownClaim")) + "</b><small>" + esc(kindText(c.kind)) +
-          (c.serial ? " · " + esc(c.serial) : "") + " · " + esc(visibilityText(c)) + " · " + (c.posts || []).length + " " + esc(t("postType")) +
-          (a ? " · ≈ " + a.toFixed(1) + " ac" : "") + "</small></span></button>";
-      }).join("") : "<p class='hint'>" + esc(t("noClaims")) + "</p>") + "</div>" +
+    var clubs = window.Auth && Auth.enabled() && Auth.account ? Auth.account.clubs : [];
+    var active = App.activeClub();
+    var html = "<div class='plist claims-list'>" + App.clubSelectHtml() +
+      folderHtml("mine", t("folderMine"), cfg.privateColor, items.filter(function (c) { return folderOf(c) === "mine"; }), "", "mine") +
+      folderHtml("foreign", t("folderForeign"), cfg.foreignColor, items.filter(function (c) { return folderOf(c) === "foreign"; }), "", "foreign");
+    clubs.filter(function (cl) { return active === "all" || active === cl.id; }).forEach(function (cl) {
+      // Club-Claims aus den hochgeladenen Dateien des Clubs
+      var fileClaims = App.clubFiles().filter(function (f) { return f.clubId === cl.id; })
+        .reduce(function (all, f) { return all.concat(f.features); }, []);
+      var extra = fileClaims.length ? "<div class='sub'>" + esc(t("clubFileClaims")) + "</div>" + fileClaims.map(function (f, i) {
+        return "<button class='item' data-clubfeat='" + esc(cl.id) + ":" + i + "'><span class='post small' style='border-color:" +
+          esc((C.overlays.filter(function (o) { return o.type === "file"; })[0] || {}).color || "#18c018") + "'>C</span>" +
+          "<span class='item-text'><b>" + esc((f.properties && f.properties.name) || t("clubClaim")) + "</b>" +
+          (f.properties && f.properties.description ? "<small>" + esc(f.properties.description.slice(0, 80)) + "</small>" : "") + "</span></button>";
+      }).join("") : "";
+      html += folderHtml("club:" + cl.id, t("clubPrefix") + ": " + cl.name, cfg.clubColor,
+        items.filter(function (c) { return folderOf(c) === "club:" + cl.id; }), extra, null);
+    });
+    var body = App.el(html +
       "<div class='row'><button data-a='export'>" + esc(t("exportClaimsKml")) + "</button>" +
       "<label class='btn-like'>" + esc(t("importClaims")) + "<input type='file' accept='.kml' hidden></label></div>" +
       "<p class='hint sync-state'></p></div>");
     body.addEventListener("click", function (e) {
       var b = e.target.closest("button");
       if (!b) return;
-      if (b.dataset.a === "new") openEditor(null);
+      if (b.dataset.new) openEditor(null, { folder: b.dataset.new });
       if (b.dataset.a === "export") exportKml();
       if (b.dataset.id) { App.closeSheet(); goTo(cache[b.dataset.id]); }
+      if (b.dataset.clubfeat) {
+        var parts = b.dataset.clubfeat.split(":");
+        var feats = App.clubFiles().filter(function (f) { return f.clubId === parts[0]; })
+          .reduce(function (all, f) { return all.concat(f.features); }, []);
+        App.closeSheet();
+        goToFeature(feats[parseInt(parts[1], 10)]);
+      }
+    });
+    body.addEventListener("change", function (e) {
+      if (e.target.hasAttribute("data-club-switch")) { App.setActiveClub(e.target.value); openList(); return; }
+      if (!e.target.dataset.folder) return;
+      var h = hiddenFolders();
+      h[e.target.dataset.folder] = !e.target.checked;
+      App.setPref("claimFoldersHidden", h);
+      redrawAll();
     });
     body.querySelector("input[type=file]").onchange = function (e) {
       var f = e.target.files[0];
@@ -412,10 +476,26 @@ var Claims = (function () {
     App.openSheet(t("claims"), body);
   }
 
+  // Club-Claim aus einer hochgeladenen Datei auf der Karte zeigen
+  function goToFeature(f) {
+    if (!f || !f.geometry) return;
+    var b = L.geoJSON(f).getBounds();
+    if (!b.isValid()) return;
+    map.fitBounds(b, { padding: [40, 40], maxZoom: 17 });
+    var p = f.properties || {};
+    setTimeout(function () {
+      L.popup({ maxWidth: 300 }).setLatLng(b.getCenter()).setContent("<div class='pop'><div class='pop-sec club'><h3>" + esc(p.name || t("clubClaim")) +
+        "</h3><div class='pop-sub'>" + esc(t("clubClaim")) + (p._club ? " · " + esc(p._club) : "") + "</div>" +
+        (p.description ? "<p class='note-text'>" + esc(p.description) + "</p>" : "") + "</div></div>").openOn(map);
+    }, 400);
+  }
+
   function goTo(c) {
     var pts = (c.posts || []).map(function (p) { return [p.lat, p.lon]; });
     if (c.monument) pts.push([c.monument.lat, c.monument.lon]);
     if (!map.hasLayer(layer)) layer.addTo(map);
+    var h = hiddenFolders();
+    if (h[folderOf(c)]) { h[folderOf(c)] = false; App.setPref("claimFoldersHidden", h); draw(c); }
     if (!pts.length) { openEditor(c.id); return; }
     if (pts.length === 1) map.setView(pts[0], 17); else map.fitBounds(pts, { padding: [40, 40], maxZoom: 18 });
     setTimeout(function () {
@@ -593,6 +673,6 @@ var Claims = (function () {
   return {
     layer: layer, init: init, openEditor: openEditor, openList: openList, hitHtml: hitHtml,
     all: function () { return Object.keys(cache).map(function (k) { return cache[k]; }); },
-    mergeMany: mergeMany, sync: sync, ring: ring, acres: acres
+    mergeMany: mergeMany, sync: sync, ring: ring, acres: acres, redrawAll: redrawAll
   };
 })();

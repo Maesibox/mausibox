@@ -40,6 +40,17 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - Die **vollständige Sicherung** enthält auch alle Claims. Fotos von Claims bleiben auf dem Gerät.
 - ⚠️ Koordinaten auf alten Notices sind oft im Datum **NAD27** und können bis ca. 100 m abweichen.
 
+## Neu in Version 5
+- **BLM-Claims aktiv / geschlossen:** zwei Schalter im Ebenen-Fenster (rot / grau gestrichelt).
+- **Landbesitz** (BLM, Staat, Forest Service, privat …) und **Schutzgebiete & Sperrzonen** (USGS PAD-US) als Ebenen;
+  Antippen zeigt, was dort meistens gilt. Nur Orientierung, keine Rechtsauskunft.
+- **Wege aufzeichnen** (Weg-Knopf): Fahrt, Gehen, Metalldetektor. Liste unter Menü → Strecken, GPX-Export.
+  Auf dem iPhone muss der Bildschirm dabei an bleiben. Suchbreite des Detektors: `tracks.coilWidth` in `config.js`.
+- **Parkplatz-Knopf (P):** lange drücken = speichern, kurz tippen = anzeigen mit Entfernung und Navigation.
+- **Claims-Ordner:** Meine Claims, Fremde Claims, und pro Club.
+- **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
+- **Hilfe** im Menü.
+
 ## Club-Claims eintragen (nur ohne Server)
 
 1. Die KML-Datei der Club-Claims in den Ordner `data/club-claims/` kopieren.

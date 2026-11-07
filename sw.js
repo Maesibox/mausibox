@@ -12,7 +12,7 @@ var TILE_CACHE = "gc-tiles";
 var APP_FILES = [
   "./", "index.html", "style.css", "config.js", "manifest.webmanifest",
   "js/storage.js", "js/app.js", "js/points.js", "js/exportimport.js", "js/offline.js",
-  "js/auth.js", "js/admin.js", "js/coords.js", "js/claims.js",
+  "js/auth.js", "js/admin.js", "js/coords.js", "js/claims.js", "js/tracks.js", "js/parking.js", "js/help.js",
   "lib/leaflet.js", "lib/leaflet.css", "lib/supabase.js", "lib/qrcode.js",
   "lib/images/marker-icon.png", "lib/images/marker-icon-2x.png", "lib/images/marker-shadow.png",
   "lib/images/layers.png", "lib/images/layers-2x.png",

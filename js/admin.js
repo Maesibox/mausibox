@@ -67,7 +67,10 @@ var Admin = (function () {
         "<button data-a='start'>📍 " + esc(t("startHere")) + "</button>" +
         (su ? " <button class='danger' data-a='delclub'>" + esc(t("deleteClub")) + "</button>" : "") + "</section>" : "") +
       "<section class='codes'><h4>" + esc(t("codes")) + "</h4><div class='list'>" + esc(t("loading")) + "</div>" + codeForm(club) + "</section>" +
-      (club ? "<section class='members'><h4>" + esc(t("members")) + "</h4><div class='list'>" + esc(t("loading")) + "</div></section>" +
+      (club ? "<section class='members'><h4>" + esc(t("members")) + "</h4><div class='list'>" + esc(t("loading")) + "</div>" +
+        "<form class='row addmember'><input name='user' placeholder='" + esc(t("addMemberHint")) + "' autocapitalize='none' autocomplete='off' required>" +
+        "<select name='role' class='role-select'><option value='member'>" + esc(t("role_member")) + "</option><option value='admin'>" + esc(t("role_admin")) + "</option></select>" +
+        "<button>＋ " + esc(t("addMember")) + "</button></form></section>" +
         "<section class='files'><h4>" + esc(t("claimFiles")) + "</h4><div class='list'>" + esc(t("loading")) + "</div>" +
         "<label class='btn-like'>⬆ " + esc(t("uploadClaims")) + "<input type='file' accept='.kml,.geojson,.json' hidden></label></section>" : "") +
       (su ? "<section class='users'><h4>" + esc(t("users")) + "</h4><button data-a='users'>" + esc(t("users")) + " …</button><div class='list'></div></section>" : "") +
@@ -86,6 +89,15 @@ var Admin = (function () {
       codeF.elements["max"].disabled = codeF.elements["kind"].value === "single";
     };
     codeF.onsubmit = function (e) { e.preventDefault(); createCode(codeF, club); };
+
+    var am = body.querySelector(".addmember");
+    if (am) am.onsubmit = function (e) {
+      e.preventDefault();
+      addMember(club.id, am.elements["user"].value, am.elements["role"].value).then(function () {
+        am.reset();
+        loadMembers(body.querySelector(".members .list"), club);
+      });
+    };
 
     var up = body.querySelector(".files input[type=file]");
     if (up) up.onchange = function (e) { uploadFile(e.target.files[0], club); e.target.value = ""; };
@@ -114,13 +126,24 @@ var Admin = (function () {
     }
   }
 
+  // Eingabefeld statt prompt(), weil manche Browser prompt() sperren
   function newClub() {
-    var name = prompt(t("clubName"));
-    if (!name || !name.trim()) return;
-    db().from("clubs").insert({ name: name.trim() }).select().then(check).then(function (rows) {
-      state.clubId = rows[0].id;
-      open();
-    }).catch(fail);
+    var body = App.el("<form class='editor'><label>" + esc(t("clubName")) + "<input name='name' required autocomplete='off'></label>" +
+      "<div class='row actions'><button type='button' data-a='back'>" + esc(t("cancel")) + "</button>" +
+      "<button class='primary'>" + esc(t("newClub")) + "</button></div></form>");
+    body.querySelector("[data-a=back]").onclick = render;
+    body.onsubmit = function (e) {
+      e.preventDefault();
+      var name = body.elements["name"].value.trim();
+      if (!name) return;
+      db().from("clubs").insert({ name: name }).select().then(check).then(function (rows) {
+        state.clubId = rows[0].id;
+        // wer den Club anlegt, wird gleich Admin-Mitglied (damit er die Club-Claims sieht)
+        return addMember(rows[0].id, acc().username, "admin").catch(function () {});
+      }).then(function () { return Auth.reloadAccount(); }).then(open).catch(fail);
+    };
+    App.openSheet(t("newClub"), body);
+    body.elements["name"].focus();
   }
 
   // ---------- Codes ----------
@@ -234,6 +257,18 @@ var Admin = (function () {
     }).catch(function (err) { box.textContent = t("error") + ": " + err.message; });
   }
 
+  // Bestehendes Konto (per Benutzername) einem Club zuteilen
+  function addMember(clubId, username, role) {
+    return db().rpc("add_member", { p_club: clubId, p_username: username.trim(), p_role: role || "member" }).then(function (res) {
+      if (res.error) throw res.error;
+      App.toast(t("memberAdded"));
+      if (res.data === acc().id) Auth.reloadAccount();
+    }).catch(function (err) {
+      alert(/USER_NOT_FOUND/.test(err.message) ? t("userNotFound") : t("error") + ": " + err.message);
+      throw err;
+    });
+  }
+
   // ---------- Club-Claim-Dateien ----------
 
   function loadFiles(box, club) {
@@ -267,20 +302,32 @@ var Admin = (function () {
   // ---------- Alle Benutzer (nur Superadmin) ----------
 
   function loadUsers(box) {
-    db().from("profiles").select("id, username, is_superadmin, disabled, created_at").order("username").then(check).then(function (rows) {
-      box.innerHTML = rows.map(function (u) {
-        return "<div class='arow" + (u.disabled ? " off" : "") + "'><div><b>" + esc(u.username) + "</b><small>" +
-          (u.is_superadmin ? esc(t("superadmin")) + " · " : "") + esc(u.created_at.slice(0, 10)) + "</small></div>" +
-          (u.id === acc().id ? "" : "<div class='abtn'><button data-user='" + esc(u.id) + "' data-dis='" + (u.disabled ? 0 : 1) + "'>" +
-            esc(u.disabled ? t("enable") : t("disable")) + "</button></div>") + "</div>";
-      }).join("");
-      box.onclick = function (e) {
-        var b = e.target.closest("button[data-user]");
-        if (!b) return;
-        db().from("profiles").update({ disabled: b.dataset.dis === "1" }).eq("id", b.dataset.user)
-          .then(check).then(function () { loadUsers(box); }).catch(fail);
-      };
-    }).catch(function (err) { box.textContent = t("error") + ": " + err.message; });
+    db().from("profiles").select("id, username, is_superadmin, disabled, created_at, memberships(role, clubs(id, name))").order("username")
+      .then(check).then(function (rows) {
+        var clubOpts = state.clubs.map(function (c) { return "<option value='" + esc(c.id) + "'>" + esc(c.name) + "</option>"; }).join("");
+        box.innerHTML = rows.map(function (u) {
+          var clubs = (u.memberships || []).filter(function (m) { return m.clubs; }).map(function (m) {
+            return m.clubs.name + (m.role === "admin" ? " (" + t("role_admin") + ")" : "");
+          });
+          return "<div class='arow user" + (u.disabled ? " off" : "") + "'><div><b>" + esc(u.username) + "</b><small>" +
+            (u.is_superadmin ? esc(t("superadmin")) + " · " : "") + esc(u.created_at.slice(0, 10)) + "</small>" +
+            "<small>" + esc(t("userClubs")) + ": " + esc(clubs.length ? clubs.join(", ") : "–") + "</small></div>" +
+            "<div class='abtn'>" + (clubOpts ? "<select data-assign='" + esc(u.username) + "'><option value=''>＋ " + esc(t("assignClub")) + "</option>" + clubOpts + "</select>" : "") +
+            (u.id === acc().id ? "" : "<button data-user='" + esc(u.id) + "' data-dis='" + (u.disabled ? 0 : 1) + "'>" +
+              esc(u.disabled ? t("enable") : t("disable")) + "</button>") + "</div></div>";
+        }).join("");
+        box.onclick = function (e) {
+          var b = e.target.closest("button[data-user]");
+          if (!b) return;
+          db().from("profiles").update({ disabled: b.dataset.dis === "1" }).eq("id", b.dataset.user)
+            .then(check).then(function () { loadUsers(box); }).catch(fail);
+        };
+        box.onchange = function (e) {
+          var sel = e.target.closest("select[data-assign]");
+          if (!sel || !sel.value) return;
+          addMember(sel.value, sel.dataset.assign, "member").then(function () { loadUsers(box); }, function () { sel.value = ""; });
+        };
+      }).catch(function (err) { box.textContent = t("error") + ": " + err.message; });
   }
 
   return { open: open };

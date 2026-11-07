@@ -310,6 +310,26 @@ drop policy if exists claims_delete on public.claims;
 create policy claims_delete on public.claims for delete using (
   owner = auth.uid() or (visibility = 'club' and is_club_admin(club_id)));
 
+-- =====================================================================
+--  Bestehendes Konto einem (weiteren) Club zuteilen – ohne neuen Code.
+--  Darf: Superadmin für alle Clubs, Club-Admin für seinen Club.
+-- =====================================================================
+
+create or replace function public.add_member(p_club uuid, p_username text, p_role text default 'member') returns uuid
+language plpgsql security definer set search_path = public as $$
+declare uid uuid;
+begin
+  if not (is_club_admin(p_club) or is_superadmin()) then raise exception 'NOT_ALLOWED'; end if;
+  if p_role not in ('member', 'admin') then raise exception 'BAD_ROLE'; end if;
+  select id into uid from profiles where lower(username) = lower(trim(p_username));
+  if uid is null then raise exception 'USER_NOT_FOUND'; end if;
+  insert into memberships (user_id, club_id, role) values (uid, p_club, p_role)
+  on conflict (user_id, club_id) do update set role = excluded.role;
+  return uid;
+end $$;
+revoke all on function public.add_member(uuid, text, text) from public, anon;
+grant execute on function public.add_member(uuid, text, text) to authenticated;
+
 -- ---------- Erster Code für dein eigenes Konto ----------
 -- Wer sich als ERSTER registriert, wird automatisch Superadmin (= du).
 

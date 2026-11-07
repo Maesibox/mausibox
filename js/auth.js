@@ -115,7 +115,7 @@ var Auth = (function () {
       .in("club_id", account.clubs.map(function (c) { return c.id; }))
       .then(function (res) {
         if (res.error) throw res.error;
-        var files = res.data.map(function (f) { return { club: names[f.club_id], name: f.name, geojson: f.geojson }; });
+        var files = res.data.map(function (f) { return { clubId: f.club_id, club: names[f.club_id], name: f.name, geojson: f.geojson }; });
         Store.setKV("clubFiles", files);
         return files;
       })

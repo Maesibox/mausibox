@@ -15,7 +15,7 @@ var Offline = (function () {
     return C.basemaps.concat(C.overlays).filter(function (s) { return s.offline && (s.type === "tiles" || !s.type); });
   }
   function dataSources() {
-    return C.overlays.filter(function (s) { return s.offline && (s.type === "blmClaims" || s.type === "wfsPoints"); });
+    return C.overlays.filter(function (s) { return s.offline && (s.type === "blmClaims" || s.type === "wfsPoints" || s.type === "areaPolygons"); });
   }
 
   function plan(bounds, maxZoom, chosen) {
@@ -28,9 +28,8 @@ var Offline = (function () {
         for (var x = r.x0; x <= r.x1; x++) for (var y = r.y0; y <= r.y1; y++) jobs.push({ url: tileUrl(s.url, z, x, y) });
       }
     });
-    var cells = App.cellsFor(bounds);
     dataSources().filter(function (s) { return chosen[s.id]; }).forEach(function (s) {
-      cells.forEach(function (c) { jobs.push({ cell: c, cfg: s }); });
+      App.cellsFor(bounds, s.cellZ).forEach(function (c) { jobs.push({ cell: c, cfg: s }); });
     });
     return jobs;
   }

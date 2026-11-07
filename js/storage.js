@@ -2,11 +2,12 @@
  * Speicher auf dem Gerät (IndexedDB).
  * Tabellen: "points" (Punkte), "photos" (Fotos als Bilddateien),
  * "kv" (Zwischenspeicher, z. B. Club-Claims vom Server für offline),
- * "claims" (eigene Claims mit Location Monument und Pfosten).
+ * "claims" (eigene Claims mit Location Monument und Pfosten),
+ * "tracks" (aufgezeichnete Wege).
  */
 var Store = (function () {
   var DB_NAME = "goldclub";
-  var DB_VERSION = 3;
+  var DB_VERSION = 4;
   var dbPromise = null;
 
   function open() {
@@ -27,6 +28,9 @@ var Store = (function () {
         }
         if (!db.objectStoreNames.contains("claims")) {
           db.createObjectStore("claims", { keyPath: "id" });
+        }
+        if (!db.objectStoreNames.contains("tracks")) {
+          db.createObjectStore("tracks", { keyPath: "id" });
         }
       };
       req.onsuccess = function () { resolve(req.result); };
@@ -122,6 +126,16 @@ var Store = (function () {
     },
     removeClaim: function (id) {
       return run("claims", "readwrite", function (s) { s.delete(id); });
+    },
+
+    allTracks: function () {
+      return run("tracks", "readonly", function (s) { return s.getAll(); });
+    },
+    putTrack: function (tr) {
+      return run("tracks", "readwrite", function (s) { s.put(tr); }).then(function () { return tr; });
+    },
+    removeTrack: function (id) {
+      return run("tracks", "readwrite", function (s) { s.delete(id); });
     },
 
     getKV: function (key) {
