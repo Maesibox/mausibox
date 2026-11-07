@@ -518,8 +518,12 @@ var App = (function () {
 
   function clubHtml(f) {
     var p = f.properties || {};
-    return "<div class='pop-sec club'><h3>" + esc(p.name || t("clubClaim")) + "</h3><div class='pop-sub'>" + esc(t("clubClaim")) + "</div>" +
-      (p.description ? "<p>" + esc(p.description) + "</p>" : "") + "</div>";
+    var long = p.description && p.description.length > 400;
+    return "<div class='pop-sec club'><h3>" + esc(p.name || t("clubClaim")) + "</h3><div class='pop-sub'>" + esc(t("clubClaim")) +
+      (p._club ? " · " + esc(p._club) : "") + "</div>" +
+      (p.description ? (long ? "<details><summary>" + esc(p.description.slice(0, 160)) + "…</summary><p class='note-text'>" + esc(p.description) + "</p></details>"
+        : "<p class='note-text'>" + esc(p.description) + "</p>") : "") +
+      (p.url ? "<a href='" + esc(p.url) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") + "</div>";
   }
 
   function geologyHtml(d) {
