@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 8,
+  appVersion: 9,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -469,7 +469,7 @@ var APP_CONFIG = {
       duration: "Duration", noTracks: "No routes yet.", trackSaved: "Route saved", trackResumeFound: "Unfinished recording found – tap the route button to continue or save it.",
       screenOnHint: "Keep the screen on and the app open while recording. iPhone stops GPS when the screen is off.",
       coilWidth: "Search width (m) – how wide you swing", areaCovered: "Area searched", started: "Started", pointsCount: "GPS points",
-      confirmDeleteTrack: "Delete this route?", weakGps: "GPS too inaccurate – waiting…", gpsGap: "No GPS – keep screen on!", exportTypeGpx: "Export these routes (GPX)",
+      confirmDeleteTrack: "Delete this route?", weakGps: "GPS too inaccurate – waiting…", gpsGap: "No GPS – keep screen on!", syncGot: "Synced from your other devices", exportTypeGpx: "Export these routes (GPX)",
       allRoutes: "All routes", trackDetails: "Route",
 
       // Parkplatz
@@ -582,7 +582,7 @@ var APP_CONFIG = {
       duration: "Dauer", noTracks: "Noch keine Strecken.", trackSaved: "Strecke gespeichert", trackResumeFound: "Unfertige Aufnahme gefunden – Weg-Knopf antippen, um weiterzumachen oder zu speichern.",
       screenOnHint: "Während der Aufnahme Bildschirm an und App offen lassen. Das iPhone stoppt GPS, wenn der Bildschirm aus ist.",
       coilWidth: "Suchbreite (m) – wie breit du schwenkst", areaCovered: "Abgesuchte Fläche", started: "Start", pointsCount: "GPS-Punkte",
-      confirmDeleteTrack: "Diese Strecke löschen?", weakGps: "GPS zu ungenau – warte…", gpsGap: "Kein GPS – Bildschirm an lassen!", exportTypeGpx: "Diese Strecken exportieren (GPX)",
+      confirmDeleteTrack: "Diese Strecke löschen?", weakGps: "GPS zu ungenau – warte…", gpsGap: "Kein GPS – Bildschirm an lassen!", syncGot: "Von deinen anderen Geräten geholt", exportTypeGpx: "Diese Strecken exportieren (GPX)",
       allRoutes: "Alle Strecken", trackDetails: "Strecke",
 
       // Parkplatz

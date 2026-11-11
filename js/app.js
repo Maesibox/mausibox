@@ -865,6 +865,7 @@ var App = (function () {
     Claims.init(map);
     Tracks.init(map);
     Parking.init(map);
+    Sync.init();
 
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js").catch(function (e) { console.warn("SW", e); });

@@ -39,7 +39,9 @@ var Help = (function () {
         "(Mitglieder → Person hinzufügen, oder bei „Alle Benutzer“)."],
       ["Offline im Gelände", "Menü → <b>Offline-Karten</b>: Gebiet auf der Karte einstellen, Zoomstufe wählen, herunterladen – am besten zu Hause im WLAN. " +
         "Offline gehen USGS-Satellit, USGS-Topo, Geologie, Claims, Minen, Landbesitz und Schutzgebiete. Esri-Satellit und OSM brauchen Internet."],
-      ["Sichern", "Punkte, Claims und Strecken liegen auf dem Handy. Ab und zu Menü → Export / Import → <b>vollständige Sicherung</b> machen. " +
+      ["Sichern & Abgleich", "Mit Login werden deine Punkte, Strecken, Claims und Fotos automatisch über den Server abgeglichen (privat, nur für dich): " +
+        "was du im Gelände mit dem Handy erfasst, siehst du zu Hause am Computer – sobald beide Geräte online sind und die App offen ist. " +
+        "Eine laufende Aufnahme kommt erst nach dem Speichern dazu. Trotzdem ab und zu Menü → Export / Import → <b>vollständige Sicherung</b> machen. " +
         "GPX-Dateien anderer Geräte (Punkte und Strecken) lassen sich dort importieren."],
       ["Konto & Einladungen", "Menü → dein Name: Clubs, weiteren Code einlösen, Verwaltung (für Admins), Abmelden. " +
         "In der Verwaltung: Clubs, Einladungscodes mit QR-Code, Mitglieder und Club-Claim-Dateien (KML/GeoJSON)."]
@@ -74,7 +76,9 @@ var Help = (function () {
         "The chosen club appears next to the app name.<br>Admins add existing accounts to a club in Administration (Members → Add person, or under All users)."],
       ["Offline in the field", "Menu → <b>Offline maps</b>: set the area on the map, choose the zoom level, download – best at home on Wi-Fi. " +
         "Offline works for USGS satellite, USGS topo, geology, claims, mines, land manager and protected areas. Esri satellite and OSM need internet."],
-      ["Backup", "Points, claims and routes are stored on the phone. Now and then: menu → Export / Import → <b>full backup</b>. " +
+      ["Backup & sync", "When signed in, your points, routes, claims and photos sync automatically through the server (private, only you): " +
+        "what you record in the field on the phone shows up at home on the computer once both are online with the app open. " +
+        "A running recording is added after you save it. Still make a <b>full backup</b> now and then (menu → Export / Import). " +
         "GPX files from other devices (points and routes) can be imported there."],
       ["Account & invitations", "Menu → your name: clubs, redeem another code, administration (admins), sign out. " +
         "Administration: clubs, invitation codes with QR code, members and club claim files (KML/GeoJSON)."]

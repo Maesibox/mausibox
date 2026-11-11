@@ -516,7 +516,7 @@ var Claims = (function () {
 
   function portable(c) {
     var copy = JSON.parse(JSON.stringify(c));
-    delete copy.photos; delete copy.sync;
+    delete copy.sync;
     return copy;
   }
 
@@ -625,7 +625,7 @@ var Claims = (function () {
           id: r.id, visibility: r.visibility, clubId: r.club_id, deleted: r.deleted,
           updatedAt: r.data.updatedAt || r.updated_at,
           owner: r.data.owner && r.data.owner.userId ? r.data.owner : { userId: r.owner, name: "" },
-          photos: local ? local.photos : [],
+          photos: (r.data.photos && r.data.photos.length) ? r.data.photos : (local ? local.photos : []),
           sync: { status: "synced", syncedAt: now }
         });
         return Store.putClaim(c).then(function () { cache[c.id] = c; draw(c); });

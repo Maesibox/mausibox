@@ -51,6 +51,11 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 9
+- **Abgleich zwischen Geräten** (mit Login): Punkte, Strecken, Claims und Fotos erscheinen automatisch auf allen Geräten,
+  auf denen du angemeldet bist – privat, nur für dich. Server-Einrichtung: `server/sync-setup.sql` (einmalig im Supabase SQL Editor).
+  Fotos liegen im Supabase-Speicher (gratis bis 1 GB, reicht für einige tausend Fotos).
+
 ## Neu in Version 7
 - **Genauere Wege:** GPS-Zittern wird geglättet, Sprünge werden herausgefiltert, und wo lange kein GPS kam (Bildschirm aus),
   wird die Linie unterbrochen statt quer verbunden. Oben erscheint dann schwarz „Kein GPS – Bildschirm an lassen!“.
