@@ -22,7 +22,9 @@ var Help = (function () {
       ["Wege aufzeichnen", "Weg-Knopf antippen und wählen: <b>Fahrt</b>, <b>Gehen</b> oder <b>Metalldetektor</b>. Oben läuft die Anzeige mit Strecke und Zeit. " +
         "Nochmals antippen: Pause, Weiter oder <b>Beenden & speichern</b>.<br>Metalldetektor-Wege werden als breites Band in Suchbreite (Schwenkbreite) gezeichnet – " +
         "so siehst du, welche Fläche schon abgesucht ist (Suchbreite im Speichern-Fenster einstellbar, Standard 1 m).<br>" +
-        "<b>Wichtig:</b> Bildschirm an und App offen lassen – das iPhone stoppt GPS, wenn der Bildschirm aus ist. Powerbank mitnehmen.<br>" +
+        "<b>Wichtig:</b> Bildschirm an und App offen lassen – das iPhone stoppt GPS, wenn der Bildschirm aus ist. Powerbank mitnehmen. " +
+        "Kommt kein GPS mehr, wird die Anzeige oben schwarz („Kein GPS“); die Linie wird dann unterbrochen statt quer verbunden. " +
+        "GPS-Zittern und Sprünge werden herausgefiltert; Handy-GPS ist trotzdem nur auf ca. 2–5 m genau.<br>" +
         "Alle Strecken: Menü → <b>Strecken</b>, getrennt nach Art; ein-/ausblenden (👁), umbenennen (⋯), als GPX exportieren."],
       ["Parkplatz", "Beim Auto den <b>P-Knopf lange drücken</b> – der jetzige GPS-Standort wird gespeichert (ein neuer ersetzt den alten). " +
         "<b>Kurz tippen</b> zeigt den Parkplatz mit Entfernung und Richtung und einem Knopf zur Navigation mit Apple Karten."],
@@ -57,7 +59,9 @@ var Help = (function () {
         "This is guidance, not legal advice. When in doubt, ask the agency."],
       ["Record routes", "Tap the route button and choose <b>Drive</b>, <b>Walk</b> or <b>Metal detecting</b>. A badge at the top shows distance and time. " +
         "Tap again for pause, continue or <b>Stop & save</b>.<br>Metal-detecting routes are drawn as a band as wide as your swing, so you see which ground is covered " +
-        "(search width can be set when saving, default 1 m).<br><b>Important:</b> keep the screen on and the app open – iPhone stops GPS when the screen is off. Bring a power bank.<br>" +
+        "(search width can be set when saving, default 1 m).<br><b>Important:</b> keep the screen on and the app open – iPhone stops GPS when the screen is off. Bring a power bank. " +
+        "If GPS stops, the badge turns black (“No GPS”) and the line is broken instead of joined straight across. " +
+        "GPS jitter and jumps are filtered out; phone GPS is still only good to about 2–5 m.<br>" +
         "All routes: menu → <b>Routes</b>, grouped by type; show/hide (👁), rename (⋯), export as GPX."],
       ["Parking spot", "At the car, <b>long-press the P button</b> – your current GPS position is saved (a new one replaces the old). " +
         "<b>Tap</b> to see it with distance, direction and a button to navigate with Apple Maps."],

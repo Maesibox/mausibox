@@ -35,9 +35,23 @@ var Tracks = (function () {
     };
   }
 
+  // Abschnitte zum Zeichnen: wo lange kein GPS kam (Bildschirm aus), wird die Linie unterbrochen
+  function pieces(tr) {
+    var gap = (typeCfg(tr.type).gapSeconds || 60) * 1000, out = [];
+    tr.segments.forEach(function (seg) {
+      var cur = [];
+      seg.forEach(function (p, i) {
+        if (i && p[3] - seg[i - 1][3] > gap && cur.length) { out.push(cur); cur = []; }
+        cur.push(p);
+      });
+      if (cur.length) out.push(cur);
+    });
+    return out;
+  }
+
   function stats(tr) {
     var dist = 0, dur = 0, n = 0;
-    tr.segments.forEach(function (seg) {
+    pieces(tr).forEach(function (seg) {
       n += seg.length;
       for (var i = 1; i < seg.length; i++) dist += App.distance(seg[i - 1][0], seg[i - 1][1], seg[i][0], seg[i][1]);
       if (seg.length > 1) dur += seg[seg.length - 1][3] - seg[0][3];
@@ -75,7 +89,7 @@ var Tracks = (function () {
     undraw(tr.id);
     if (tr.deleted || (tr.hidden && !tr.recording)) return;
     var tc = typeCfg(tr.type), sh = { all: [], bands: [], line: null, band: null };
-    tr.segments.forEach(function (seg) {
+    pieces(tr).forEach(function (seg) {
       var ll = seg.map(function (p) { return [p[0], p[1]]; });
       if (tr.type === "detect") {
         var band = L.polyline(ll, { renderer: renderer, color: tc.color, weight: bandWeight(tr, ll.length ? ll[0][0] : 35),
@@ -162,24 +176,53 @@ var Tracks = (function () {
 
   function beginWatch() {
     keepAwake(true);
+    rec.lastFix = Date.now();
+    rec.kf = null;
     rec.watch = navigator.geolocation.watchPosition(onPosition, function (err) {
       if (err.code === 1) { App.toast(t("gpsError")); pause(); }
     }, { enableHighAccuracy: true, maximumAge: 0, timeout: 30000 });
     startTick();
   }
 
+  // Glättung (einfacher Kalman-Filter): jeder GPS-Punkt zählt je nach Genauigkeit mehr oder weniger
+  function smooth(c, ts, tc) {
+    var acc = Math.max(c.accuracy, 1), k = rec.kf;
+    if (!tc.smooth || !k || ts - k.t > (tc.gapSeconds || 60) * 1000) {
+      rec.kf = { lat: c.latitude, lon: c.longitude, v: acc * acc, t: ts };
+      return rec.kf;
+    }
+    var dt = Math.max(0, (ts - k.t) / 1000);
+    k.v += dt * tc.smooth * tc.smooth;
+    var g = k.v / (k.v + acc * acc);
+    k.lat += g * (c.latitude - k.lat);
+    k.lon += g * (c.longitude - k.lon);
+    k.v *= 1 - g;
+    k.t = ts;
+    return k;
+  }
+
   function onPosition(pos) {
     if (!rec || rec.paused) return;
     var c = pos.coords, tr = rec.track, tc = typeCfg(tr.type);
+    rec.lastFix = Date.now();
     rec.weak = c.accuracy > tc.maxAccuracy;
     if (rec.weak) { updateBadge(); return; }
     var seg = tr.segments[tr.segments.length - 1];
     var last = seg[seg.length - 1];
-    var p = [+c.latitude.toFixed(7), +c.longitude.toFixed(7), c.altitude != null ? +c.altitude.toFixed(1) : null, pos.timestamp, Math.round(c.accuracy)];
-    if (last && App.distance(last[0], last[1], p[0], p[1]) < Math.max(tc.minDistance, c.accuracy * 0.4)) return;
+    // Sprung schneller als man gehen/fahren kann = GPS-Fehler (nach 3 solchen Punkten doch annehmen)
+    if (last && tc.maxSpeed) {
+      var dt = (pos.timestamp - last[3]) / 1000;
+      var gap = dt > (tc.gapSeconds || 60);
+      if (!gap && dt > 0 && App.distance(last[0], last[1], c.latitude, c.longitude) / dt > tc.maxSpeed && (rec.jumps = (rec.jumps || 0) + 1) < 3) return;
+    }
+    rec.jumps = 0;
+    var f = smooth(c, pos.timestamp, tc);
+    var p = [+f.lat.toFixed(7), +f.lon.toFixed(7), c.altitude != null ? +c.altitude.toFixed(1) : null, pos.timestamp, Math.round(c.accuracy)];
+    var newPiece = last && p[3] - last[3] > (tc.gapSeconds || 60) * 1000;
+    if (last && !newPiece && App.distance(last[0], last[1], p[0], p[1]) < Math.max(tc.minDistance, c.accuracy * 0.4)) return;
     seg.push(p);
     var sh = shapes[tr.id];
-    if (sh && sh.line && seg.length > 1) {
+    if (sh && sh.line && seg.length > 1 && !newPiece) {
       sh.line.addLatLng([p[0], p[1]]);
       if (sh.band) sh.band.addLatLng([p[0], p[1]]);
     } else {
@@ -237,14 +280,17 @@ var Tracks = (function () {
     if (!rec) { box.classList.remove("show"); btn.classList.remove("recording", "paused"); return; }
     var s = stats(rec.track);
     var since = Date.now() - Date.parse(rec.track.startedAt);
+    var noGps = !rec.paused && rec.lastFix && Date.now() - rec.lastFix > (typeCfg(rec.track.type).gapSeconds || 60) * 1000;
     box.textContent = (rec.paused ? "❚❚ " + t("paused") : "● " + typeCfg(rec.track.type).icon) + "  " +
-      App.formatDistance(s.distance).split(" (")[0] + "  " + durationText(since) + (rec.weak && !rec.paused ? "  · " + t("weakGps") : "");
+      App.formatDistance(s.distance).split(" (")[0] + "  " + durationText(since) +
+      (noGps ? "  · " + t("gpsGap") : rec.weak && !rec.paused ? "  · " + t("weakGps") : "");
+    box.classList.toggle("warn", !!noGps);
     box.classList.add("show");
     box.classList.toggle("paused", rec.paused);
     btn.classList.toggle("recording", !rec.paused);
     btn.classList.toggle("paused", rec.paused);
   }
-  function startTick() { stopTick(); tick = setInterval(updateBadge, 15000); }
+  function startTick() { stopTick(); tick = setInterval(updateBadge, 5000); }
   function stopTick() { if (tick) clearInterval(tick); tick = null; }
 
   // ---------- Fenster ----------

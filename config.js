@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 6,
+  appVersion: 7,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -289,12 +289,15 @@ var APP_CONFIG = {
   //  WEGE AUFZEICHNEN (Tracking-Knopf)
   //  minDistance: neuer Punkt erst nach so vielen Metern
   //  maxAccuracy: GPS-Punkte ungenauer als so viele Meter werden ignoriert
+  //  maxSpeed:    schnellere Sprünge (m/s) sind GPS-Fehler und werden ignoriert
+  //  gapSeconds:  kam so lange kein GPS-Punkt (z. B. Bildschirm aus), wird die Linie unterbrochen statt quer verbunden
+  //  smooth:      Glättung (Kalman-Filter): Zittern des GPS wird herausgerechnet; Zahl = erwartete Gehgeschwindigkeit in m/s
   // ----------------------------------------------------------
   tracks: {
     types: [
-      { id: "drive",  icon: "🚙", name: { en: "Drive", de: "Fahrt" },           color: "#2f80ed", minDistance: 15, maxAccuracy: 60 },
-      { id: "walk",   icon: "🚶", name: { en: "Walk / hike", de: "Gehen / Laufen" }, color: "#9b51e0", minDistance: 4,  maxAccuracy: 30 },
-      { id: "detect", icon: "🔍", name: { en: "Metal detecting", de: "Metalldetektor" }, color: "#ffc400", minDistance: 1,  maxAccuracy: 25 }
+      { id: "drive",  icon: "🚙", name: { en: "Drive", de: "Fahrt" },           color: "#2f80ed", minDistance: 15, maxAccuracy: 60, maxSpeed: 60,  gapSeconds: 120, smooth: 0 },
+      { id: "walk",   icon: "🚶", name: { en: "Walk / hike", de: "Gehen / Laufen" }, color: "#9b51e0", minDistance: 4,  maxAccuracy: 30, maxSpeed: 4,   gapSeconds: 45,  smooth: 1.5 },
+      { id: "detect", icon: "🔍", name: { en: "Metal detecting", de: "Metalldetektor" }, color: "#ffc400", minDistance: 1,  maxAccuracy: 12, maxSpeed: 2.5, gapSeconds: 20,  smooth: 0.7 }
     ],
     coilWidth: 1.0                 // Suchbreite beim Detektor in Metern (wie breit man schwenkt) – zeigt die abgesuchte Fläche
   },
@@ -466,7 +469,7 @@ var APP_CONFIG = {
       duration: "Duration", noTracks: "No routes yet.", trackSaved: "Route saved", trackResumeFound: "Unfinished recording found – tap the route button to continue or save it.",
       screenOnHint: "Keep the screen on and the app open while recording. iPhone stops GPS when the screen is off.",
       coilWidth: "Search width (m) – how wide you swing", areaCovered: "Area searched", started: "Started", pointsCount: "GPS points",
-      confirmDeleteTrack: "Delete this route?", weakGps: "GPS too inaccurate – waiting…", exportTypeGpx: "Export these routes (GPX)",
+      confirmDeleteTrack: "Delete this route?", weakGps: "GPS too inaccurate – waiting…", gpsGap: "No GPS – keep screen on!", exportTypeGpx: "Export these routes (GPX)",
       allRoutes: "All routes", trackDetails: "Route",
 
       // Parkplatz
@@ -579,7 +582,7 @@ var APP_CONFIG = {
       duration: "Dauer", noTracks: "Noch keine Strecken.", trackSaved: "Strecke gespeichert", trackResumeFound: "Unfertige Aufnahme gefunden – Weg-Knopf antippen, um weiterzumachen oder zu speichern.",
       screenOnHint: "Während der Aufnahme Bildschirm an und App offen lassen. Das iPhone stoppt GPS, wenn der Bildschirm aus ist.",
       coilWidth: "Suchbreite (m) – wie breit du schwenkst", areaCovered: "Abgesuchte Fläche", started: "Start", pointsCount: "GPS-Punkte",
-      confirmDeleteTrack: "Diese Strecke löschen?", weakGps: "GPS zu ungenau – warte…", exportTypeGpx: "Diese Strecken exportieren (GPX)",
+      confirmDeleteTrack: "Diese Strecke löschen?", weakGps: "GPS zu ungenau – warte…", gpsGap: "Kein GPS – Bildschirm an lassen!", exportTypeGpx: "Diese Strecken exportieren (GPX)",
       allRoutes: "Alle Strecken", trackDetails: "Strecke",
 
       // Parkplatz
