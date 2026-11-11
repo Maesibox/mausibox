@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 7,
+  appVersion: 8,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims

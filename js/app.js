@@ -467,6 +467,11 @@ var App = (function () {
     if (!g) return false;
     if (g.type === "Polygon") return inPolygon(lon, lat, g.coordinates);
     if (g.type === "MultiPolygon") return g.coordinates.some(function (p) { return inPolygon(lon, lat, p); });
+    if (g.type === "Point") {
+      // Punkt gilt als getroffen, wenn man ihn auf ca. 20 Bildschirmpunkte genau antippt
+      var mpp = 156543.03392 * Math.cos(lat * Math.PI / 180) / Math.pow(2, map.getZoom());
+      return distance(lat, lon, g.coordinates[1], g.coordinates[0]) < 20 * mpp;
+    }
     return false;
   }
 
