@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 5,
+  appVersion: 6,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -222,6 +222,7 @@ var APP_CONFIG = {
       privateColor: "#ff8c00",     // eigene, private Claims
       foreignColor: "#c03cc0",     // fremde Claims, die man für sich festhält
       clubColor: "#00c8e0",        // mit dem Club geteilte Claims
+      clubForeignColor: "#ff4fa0", // fremde Claims, die mit dem Club geteilt sind
       postsMinZoom: 15,            // Pfosten erst ab dieser Zoomstufe zeigen
       visible: true
     },
@@ -450,7 +451,7 @@ var APP_CONFIG = {
       goTo: "Show on map", acresShort: "acres",
       folderMine: "My claims", folderForeign: "Others' claims (for me)", entryKind: "Whose claim?",
       kindMine: "My claim", kindForeign: "Someone else's claim", showFolder: "show on map",
-      clubFileClaims: "Club claim files",
+      clubFileClaims: "Club claim files", clubOthers: "other claims",
 
       // BLM, Land, Schutzgebiete
       closedClaimHint: "Closed claim – the land may be open again. Check the current status at BLM before you dig.",
@@ -563,7 +564,7 @@ var APP_CONFIG = {
       goTo: "Auf Karte zeigen", acresShort: "Acres",
       folderMine: "Meine Claims", folderForeign: "Fremde Claims (für mich)", entryKind: "Wessen Claim?",
       kindMine: "Mein Claim", kindForeign: "Fremder Claim", showFolder: "auf Karte zeigen",
-      clubFileClaims: "Club-Claim-Dateien",
+      clubFileClaims: "Club-Claim-Dateien", clubOthers: "andere Claims",
 
       // BLM, Land, Schutzgebiete
       closedClaimHint: "Geschlossener Claim – das Land ist vielleicht wieder frei. Vor dem Graben den aktuellen Stand beim BLM prüfen.",

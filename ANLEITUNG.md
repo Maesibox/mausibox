@@ -51,6 +51,10 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 6
+- Fremde Claims können mit einem Club geteilt werden (Claim bearbeiten → „Wessen Claim?“ = Fremder Claim, „Sichtbar für“ = Club).
+  Sie stehen beim Club in einem eigenen Ordner **„andere Claims“** und sind rosa; die Club-Claims bleiben türkis.
+
 ## Club-Claims eintragen (nur ohne Server)
 
 1. Die KML-Datei der Club-Claims in den Ordner `data/club-claims/` kopieren.

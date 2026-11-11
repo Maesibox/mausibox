@@ -84,13 +84,13 @@ var Claims = (function () {
   }
 
   function color(c) {
-    if (c.visibility === "club") return cfg.clubColor;
+    if (c.visibility === "club") return c.folder === "foreign" ? (cfg.clubForeignColor || cfg.clubColor) : cfg.clubColor;
     return c.folder === "foreign" ? (cfg.foreignColor || cfg.privateColor) : cfg.privateColor;
   }
 
-  // Ordner in der Liste: Meine, Fremde oder ein Club
+  // Ordner in der Liste: Meine, Fremde oder ein Club (Club-Claims bzw. andere, mit dem Club geteilte Claims)
   function folderOf(c) {
-    if (c.visibility === "club") return "club:" + c.clubId;
+    if (c.visibility === "club") return "club:" + c.clubId + (c.folder === "foreign" ? ":foreign" : "");
     return c.folder === "foreign" ? "foreign" : "mine";
   }
   function kindLabel(c) { return c.folder === "foreign" ? t("kindForeign") : t("kindMine"); }
@@ -438,6 +438,9 @@ var Claims = (function () {
       }).join("") : "";
       html += folderHtml("club:" + cl.id, t("clubPrefix") + ": " + cl.name, cfg.clubColor,
         items.filter(function (c) { return folderOf(c) === "club:" + cl.id; }), extra, null);
+      var others = items.filter(function (c) { return folderOf(c) === "club:" + cl.id + ":foreign"; });
+      if (others.length) html += folderHtml("club:" + cl.id + ":foreign", t("clubPrefix") + ": " + cl.name + " – " + t("clubOthers"),
+        cfg.clubForeignColor || cfg.clubColor, others, "", null);
     });
     var body = App.el(html +
       "<div class='row'><button data-a='export'>" + esc(t("exportClaimsKml")) + "</button>" +

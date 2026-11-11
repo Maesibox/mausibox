@@ -28,7 +28,7 @@ var Help = (function () {
         "<b>Kurz tippen</b> zeigt den Parkplatz mit Entfernung und Richtung und einem Knopf zur Navigation mit Apple Karten."],
       ["Eigene Punkte", "Gelber ＋-Knopf oder lange auf die Karte drücken. Name, Notiz, Kategorie und Fotos. Liste mit dem Stecknadel-Knopf."],
       ["Claims & Pfosten", "Menü → <b>Claims & Pfosten</b>. Drei Ordner: <b>Meine Claims</b>, <b>Fremde Claims</b> (andere Claims, die du für dich festhältst) " +
-        "und pro Club die geteilten Claims und Claim-Dateien. Mit „auf Karte zeigen“ blendest du einen Ordner ein oder aus.<br>" +
+        "und pro Club die Club-Claims und Claim-Dateien – fremde Claims, die mit dem Club geteilt sind, stehen dort in einem eigenen Ordner „andere Claims“ (rosa). Mit „auf Karte zeigen“ blendest du einen Ordner ein oder aus.<br>" +
         "Im Popup eines roten BLM-Claims: „Diesen Claim mit Pfosten erfassen“. Location Monument und Pfosten per GPS, Kartenmitte oder " +
         "eingetippten Koordinaten (auch UTM). Ab 3 Eckpfosten wird die Fläche gezeichnet und in Acres berechnet.<br>" +
         "„Sichtbar für“: nur ich oder ein Club. Koordinaten alter Notices sind oft NAD27 (bis ca. 100 m daneben)."],
@@ -63,7 +63,7 @@ var Help = (function () {
         "<b>Tap</b> to see it with distance, direction and a button to navigate with Apple Maps."],
       ["Own points", "Gold ＋ button or long-press the map. Name, note, category and photos. List via the pin button."],
       ["Claims & posts", "Menu → <b>Claims & posts</b>. Folders: <b>My claims</b>, <b>Others' claims</b> (claims of others you keep for yourself) and, per club, " +
-        "shared claims and claim files. “show on map” switches a folder on or off.<br>In the popup of a red BLM claim: “Record this claim with posts”. " +
+        "club claims and claim files – others' claims shared with the club have their own folder “other claims” (pink). “show on map” switches a folder on or off.<br>In the popup of a red BLM claim: “Record this claim with posts”. " +
         "Set the location monument and posts by GPS, map center or typed coordinates (also UTM). With 3 corner posts the shape is drawn and acres are computed.<br>" +
         "“Visible for”: only me or a club. Coordinates on old notices are often NAD27 (up to ~100 m off)."],
       ["Several clubs", "If you are in several clubs, choose at the top of the layers panel (or in the claims list) which club's claims to show – or all. " +
