@@ -218,8 +218,45 @@ var App = (function () {
 
   // ---------- Daten laden: Schutzgebiete (Flächen von einem ArcGIS-Server) ----------
 
+  // Für Server ohne CORS (z. B. Neuseeland): Daten per JSONP holen (ArcGIS kennt den Parameter callback)
+  var jsonpCount = 0;
+  function jsonp(url) {
+    return new Promise(function (resolve, reject) {
+      var name = "__gcJsonp" + (++jsonpCount), sc = document.createElement("script");
+      var timer = setTimeout(function () { done(); reject(new Error("timeout")); }, 20000);
+      function done() { clearTimeout(timer); delete window[name]; sc.remove(); }
+      window[name] = function (data) { done(); resolve(data); };
+      sc.onerror = function () { done(); reject(new Error("load")); };
+      sc.src = url + "&callback=" + name;
+      document.head.appendChild(sc);
+    });
+  }
+  // ArcGIS-JSON (rings) in GeoJSON umwandeln
+  function esriToGeoJSON(data) {
+    return (data.features || []).filter(function (f) { return f.geometry && f.geometry.rings; }).map(function (f) {
+      return { type: "Feature", properties: f.attributes, geometry: { type: "Polygon", coordinates: f.geometry.rings } };
+    });
+  }
+
   function fetchAreaCell(cfg, x, y) {
     var b = cellBox(x, y, cfg.cellZ), all = [];
+    if (cfg.jsonp) {
+      var pageJ = function (offset) {
+        var url = cfg.url + "?where=" + encodeURIComponent(cfg.where || "1=1") +
+          "&geometry=" + b.w + "," + b.s + "," + b.e + "," + b.n +
+          "&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326" +
+          "&outFields=" + encodeURIComponent(cfg.outFields || "*") + "&maxAllowableOffset=" + (cfg.simplify || 0.0005) +
+          "&geometryPrecision=5&resultOffset=" + offset + "&f=json";
+        return jsonp(url).then(function (data) {
+          if (data.error) throw new Error(data.error.message || "server");
+          var feats = esriToGeoJSON(data);
+          all = all.concat(feats);
+          if (data.exceededTransferLimit && feats.length && offset < 10000) return pageJ(offset + feats.length);
+          return all;
+        });
+      };
+      return pageJ(0);
+    }
     function page(offset) {
       var url = cfg.url + "?where=" + encodeURIComponent(cfg.where || "1=1") +
         "&geometry=" + b.w + "," + b.s + "," + b.e + "," + b.n +

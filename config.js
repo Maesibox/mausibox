@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 15,
+  appVersion: 16,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -207,6 +207,7 @@ var APP_CONFIG = {
     {
       id: "nzFossick",
       type: "areaPolygons",
+      jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
       name: { en: "NZ – Gold fossicking areas (public)", de: "NZ – Gold-Fossicking-Gebiete (öffentlich)" },
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/1/query",
       where: "Permit_Type_Code='Gold Fossicking Area'",
@@ -215,7 +216,7 @@ var APP_CONFIG = {
       minZoom: 5, cellZ: 6, simplify: 0.00005,
       color: "#00e676", fillOpacity: 0.3,
       centerDot: true,             // die Gebiete sind klein: zusätzlich ein Punkt, damit man sie findet
-      visible: false, offline: true,
+      visible: false, offline: false,
       popup: {
         title: "Operation_Name", level: "open",
         verdict: { en: "Public: gold fossicking without a permit (hand tools, pans, sluice boxes – check the rules)", de: "Öffentlich: Gold suchen ohne Genehmigung (Handwerkzeug, Pfanne, Sluice – Regeln beachten)" },
@@ -231,6 +232,7 @@ var APP_CONFIG = {
     {
       id: "nzPermits",
       type: "areaPolygons",
+      jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
       name: { en: "NZ – Mining permits (\"claims\")", de: "NZ – Bergbau-Genehmigungen („Claims“)" },
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/1/query",
       where: "Permit_Type_Code<>'Gold Fossicking Area'",
@@ -238,7 +240,7 @@ var APP_CONFIG = {
       attribution: "NZ Petroleum & Minerals",
       minZoom: 8, cellZ: 9, simplify: 0.0002,
       color: "#e02020", fillOpacity: 0.15,
-      visible: false, offline: true,
+      visible: false, offline: false,
       popup: {
         title: "Operation_Name", level: "closed",
         verdict: { en: "Permit area – no fossicking without the permit holder's OK", de: "Genehmigungsgebiet – nicht suchen ohne Erlaubnis des Inhabers" },
@@ -258,6 +260,7 @@ var APP_CONFIG = {
     {
       id: "nzApplications",
       type: "areaPolygons",
+      jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
       name: { en: "NZ – Permit applications", de: "NZ – Anträge für Genehmigungen" },
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/0/query",
       outFields: "*",
@@ -280,13 +283,14 @@ var APP_CONFIG = {
     {
       id: "nzSchedule4",
       type: "areaPolygons",
+      jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
       name: { en: "NZ – Schedule 4 land (mining restricted)", de: "NZ – Schedule-4-Land (Bergbau eingeschränkt)" },
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/CMA_Schedule_4_Land/MapServer/0/query",
       outFields: "OBJECTID,name",
       attribution: "NZ Petroleum & Minerals",
       minZoom: 6, cellZ: 7, simplify: 0.001,
       color: "#8e24aa", fillOpacity: 0.15,
-      visible: false, offline: true,
+      visible: false, offline: false,
       popup: {
         title: "name", level: "closed",
         verdict: { en: "National parks, reserves, sanctuaries …: mining access restricted – fossicking usually not allowed", de: "Nationalparks, Reservate, Schutzgebiete …: Bergbau-Zugang eingeschränkt – Gold suchen meist nicht erlaubt" },
