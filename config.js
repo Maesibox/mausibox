@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 20,
+  appVersion: 21,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -376,9 +376,9 @@ var APP_CONFIG = {
     {
       id: "nzLidar",
       group: "nz",
-      type: "arcgisExport",
-      name: { en: "NZ – LiDAR shaded relief (GNS, 8 m)", de: "NZ – LiDAR-Schummerung (GNS, 8 m)" },
-      url: "https://gis.gns.cri.nz/server/rest/services/LidarShadeModels/CombinedLidar8m_HS_315/MapServer",
+      type: "exportImage",           // Schummerung des 8-m-Höhenmodells, ganz Neuseeland
+      name: { en: "NZ – Terrain shaded relief (GNS, 8 m)", de: "NZ – Gelände-Schummerung (GNS, 8 m)" },
+      url: "https://gis.gns.cri.nz/server/rest/services/topography/nz_dtm_shade/ImageServer/exportImage",
       attribution: "GNS Science, LINZ",
       opacity: 0.7, visible: false, offline: false
     },

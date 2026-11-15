@@ -413,9 +413,10 @@ var App = (function () {
         return this.options.baseUrl + "/export?bbox=" + bbox + "&bboxSR=3857&imageSR=3857&size=256,256&dpi=96&format=png32&transparent=true" +
           (this.options.show ? "&layers=show:" + this.options.show : "") + "&f=image";
       }
-      return this.options.baseUrl + "?bbox=" + bbox +
+      var rule = mode.rule !== undefined ? mode.rule : mode.id;
+      return (mode.url || this.options.baseUrl) + "?bbox=" + bbox +
         "&bboxSR=3857&imageSR=3857&size=256,256&format=" + (mode.format || "jpgpng") +
-        "&renderingRule=" + encodeURIComponent(JSON.stringify({ rasterFunction: mode.id })) + "&f=image";
+        (rule ? "&renderingRule=" + encodeURIComponent(JSON.stringify({ rasterFunction: rule })) : "") + "&f=image";
     }
   });
   // gewählte Ansicht einer Ebene mit mehreren Darstellungen (modes in config.js)
@@ -475,7 +476,7 @@ var App = (function () {
         attribution: cfg.attribution, maxZoom: 20, zIndex: 10, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
     }
     if (cfg.type === "exportImage") {
-      return new ExportImageLayer("", { baseUrl: cfg.url, mode: lidarMode(cfg), attribution: cfg.attribution, maxZoom: 20, maxNativeZoom: 18,
+      return new ExportImageLayer("", { baseUrl: cfg.url, mode: cfg.modes ? lidarMode(cfg) : { rule: "" }, attribution: cfg.attribution, maxZoom: 20, maxNativeZoom: 18,
         crossOrigin: true, zIndex: 9, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
     }
     if (cfg.type === "userClaims") return Claims.layer;

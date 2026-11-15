@@ -52,7 +52,7 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Hilfe** im Menü.
 
 ## Neu in Version 20
-- **Neuseeland:** Goldvorkommen (GNS, über 1400 Fundstellen), LiDAR-Schummerung 8 m, aktive Störungen, geologische Karte 1:250 000.
+- **Neuseeland:** Goldvorkommen (GNS, über 1400 Fundstellen), Gelände-Schummerung 8 m (ganz NZ), aktive Störungen, geologische Karte 1:250 000.
 - **Schweiz:** LiDAR-Relief swissALTI3D (3 Ansichten), Geologie (GeoCover 1:25 000, 1:500 000, Tektonik, Störungen), Aeromagnetik.
 - Die USGS-Ebenen (LiDAR, Aeromagnetik, Störungen) gelten nur für die USA und stehen deshalb in der Gruppe USA.
 
