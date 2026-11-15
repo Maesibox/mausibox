@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 19,
+  appVersion: 20,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -355,7 +355,97 @@ var APP_CONFIG = {
         fields: []
       }
     },
+    {
+      id: "nzGold",
+      group: "nz",
+      type: "arcgisExport",          // Kartenbild direkt vom ArcGIS-Server (GNS erlaubt den Abruf)
+      name: { en: "NZ – Gold occurrences (GNS, 1400+ sites)", de: "NZ – Goldvorkommen (GNS, über 1400 Fundstellen)" },
+      url: "https://gis.gns.cri.nz/server/rest/services/NZL_CriticalMinerals/Critical_minerals_in_Geological_Resource_Map_of_NZ__GERM_/MapServer",
+      show: "9",
+      attribution: "GNS Science (GERM)",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: {
+        layers: "visible:9", tolerance: 10, title: "site_name",
+        fields: [
+          { field: "site_type_name", label: { en: "Type", de: "Art" } },
+          { field: "commodities", label: { en: "Minerals", de: "Rohstoffe" } },
+          { field: "e_number", label: { en: "Map ref.", de: "Kartenblatt" } }
+        ]
+      }
+    },
+    {
+      id: "nzLidar",
+      group: "nz",
+      type: "arcgisExport",
+      name: { en: "NZ – LiDAR shaded relief (GNS, 8 m)", de: "NZ – LiDAR-Schummerung (GNS, 8 m)" },
+      url: "https://gis.gns.cri.nz/server/rest/services/LidarShadeModels/CombinedLidar8m_HS_315/MapServer",
+      attribution: "GNS Science, LINZ",
+      opacity: 0.7, visible: false, offline: false
+    },
+    {
+      id: "nzFaults",
+      group: "nz",
+      type: "arcgisExport",
+      name: { en: "NZ – Active faults (GNS)", de: "NZ – Aktive Störungen (GNS)" },
+      url: "https://gis.gns.cri.nz/server/rest/services/Active_Faults/WebNZActiveFaultsDatasets/MapServer",
+      show: "0,6",
+      attribution: "GNS Science – NZ Active Faults Database",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:0,6", tolerance: 6, max: 2 }
+    },
+    {
+      id: "nzGeology",
+      group: "nz",
+      type: "arcgisExport",
+      name: { en: "NZ – Geological map 1:250 000 (GNS)", de: "NZ – Geologische Karte 1:250 000 (GNS)" },
+      url: "https://gis.gns.cri.nz/server/rest/services/NZL_GNS_250K_Geology_2023/NZL_GNS_250K_geology_WMS/MapServer",
+      attribution: "GNS Science – QMAP",
+      opacity: 0.55, visible: false, offline: false,
+      arcIdentify: { layers: "top", tolerance: 2, max: 2 }
+    },
     // ---------- SCHWEIZ (Bundesdaten geo.admin.ch – live) ----------
+    {
+      id: "chRelief",
+      group: "ch",
+      type: "wms",
+      name: { en: "LiDAR relief swissALTI3D (swisstopo)", de: "LiDAR-Relief swissALTI3D (swisstopo)" },
+      url: "https://wms.geo.admin.ch/",
+      attribution: "© swisstopo",
+      opacity: 0.7, visible: false, offline: false,
+      modes: [
+        { id: "multi", layers: "ch.swisstopo.swissalti3d-reliefschattierung", name: { en: "Ground, light from all directions – best for old workings", de: "Boden, Licht von allen Seiten – am besten für alte Schürfungen" } },
+        { id: "mono", layers: "ch.swisstopo.swissalti3d-reliefschattierung_monodirektional", name: { en: "Ground, light from NW", de: "Boden, Licht von Nordwest" } },
+        { id: "surface", layers: "ch.swisstopo.swisssurface3d-reliefschattierung-multidirektional", name: { en: "Surface with trees and buildings", de: "Oberfläche mit Bäumen und Gebäuden" } }
+      ]
+    },
+    {
+      id: "chGeology",
+      group: "ch",
+      type: "wms",
+      name: { en: "Geology (swisstopo)", de: "Geologie (swisstopo)" },
+      url: "https://wms.geo.admin.ch/",
+      attribution: "© swisstopo",
+      opacity: 0.6, visible: false, offline: false,
+      modes: [
+        { id: "geocover", layers: "ch.swisstopo.geologie-geocover", name: { en: "Detailed geology 1:25 000 (GeoCover)", de: "Geologie genau 1:25 000 (GeoCover)" },
+          identify: { layers: "all:ch.swisstopo.geologie-geocover", tolerance: 0, title: "litho_de", sub: { en: "Geology (GeoCover)", de: "Geologie (GeoCover)" },
+            fields: [ { field: "chrono_de", label: { en: "Age", de: "Alter" } }, { field: "orig_description_de", label: { en: "Description", de: "Beschreibung" } } ],
+            link: { field: "erl_num", text: { en: "Explanations (PDF)", de: "Erläuterungen (PDF)" } } } },
+        { id: "gk500", layers: "ch.swisstopo.geologie-geologische_karte", name: { en: "Geological map 1:500 000", de: "Geologische Karte 1:500 000" } },
+        { id: "tecto", layers: "ch.swisstopo.geologie-tektonische_karte", name: { en: "Tectonics 1:500 000", de: "Tektonik 1:500 000" } },
+        { id: "tectolines", layers: "ch.swisstopo.geologie-swissgeocover2d_tecto_lines", name: { en: "Faults & tectonic lines (detailed)", de: "Störungen & tektonische Linien (genau)" } }
+      ]
+    },
+    {
+      id: "chAeromag",
+      group: "ch",
+      type: "wms",
+      name: { en: "Aeromagnetics Switzerland (swisstopo)", de: "Aeromagnetik Schweiz (swisstopo)" },
+      url: "https://wms.geo.admin.ch/",
+      layers: "ch.swisstopo.geologie-geophysik-aeromagnetische_karte_schweiz,ch.swisstopo.geologie-geophysik-aeromagnetische_karte_jura",
+      attribution: "© swisstopo",
+      opacity: 0.6, visible: false, offline: false
+    },
     {
       id: "chGold",
       group: "ch",

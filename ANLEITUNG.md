@@ -51,6 +51,11 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 20
+- **Neuseeland:** Goldvorkommen (GNS, über 1400 Fundstellen), LiDAR-Schummerung 8 m, aktive Störungen, geologische Karte 1:250 000.
+- **Schweiz:** LiDAR-Relief swissALTI3D (3 Ansichten), Geologie (GeoCover 1:25 000, 1:500 000, Tektonik, Störungen), Aeromagnetik.
+- Die USGS-Ebenen (LiDAR, Aeromagnetik, Störungen) gelten nur für die USA und stehen deshalb in der Gruppe USA.
+
 ## Neu in Version 17
 - **Ebenen-Gruppen** im Ebenen-Fenster (Allgemein, USA, Neuseeland, Schweiz) zum Aufklappen – `overlayGroups` in `config.js`.
 - **Schweiz:** Landeskarte (swisstopo), Gold- & Erzvorkommen, Schutzgebiete, Goldwasch-Regeln pro Kanton beim Antippen

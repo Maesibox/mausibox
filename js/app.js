@@ -408,11 +408,17 @@ var App = (function () {
       var b = this._tileCoordsToBounds(coords);
       var sw = L.CRS.EPSG3857.project(b.getSouthWest()), ne = L.CRS.EPSG3857.project(b.getNorthEast());
       var mode = this.options.mode || {};
-      return this.options.baseUrl + "?bbox=" + [sw.x, sw.y, ne.x, ne.y].map(function (v) { return v.toFixed(2); }).join(",") +
+      var bbox = [sw.x, sw.y, ne.x, ne.y].map(function (v) { return v.toFixed(2); }).join(",");
+      if (this.options.mapServer) {
+        return this.options.baseUrl + "/export?bbox=" + bbox + "&bboxSR=3857&imageSR=3857&size=256,256&dpi=96&format=png32&transparent=true" +
+          (this.options.show ? "&layers=show:" + this.options.show : "") + "&f=image";
+      }
+      return this.options.baseUrl + "?bbox=" + bbox +
         "&bboxSR=3857&imageSR=3857&size=256,256&format=" + (mode.format || "jpgpng") +
         "&renderingRule=" + encodeURIComponent(JSON.stringify({ rasterFunction: mode.id })) + "&f=image";
     }
   });
+  // gewählte Ansicht einer Ebene mit mehreren Darstellungen (modes in config.js)
   function lidarMode(cfg) {
     var id = pref("mode." + cfg.id, null);
     return cfg.modes.filter(function (m) { return m.id === id; })[0] || cfg.modes[0];
@@ -460,8 +466,12 @@ var App = (function () {
 
   function buildOverlay(cfg) {
     if (cfg.type === "tiles") return makeTileLayer(cfg, { zIndex: 10 });
+    if (cfg.type === "arcgisExport") {
+      return new ExportImageLayer("", { mapServer: true, baseUrl: cfg.url, show: cfg.show, attribution: cfg.attribution, maxZoom: 20,
+        crossOrigin: true, zIndex: 10, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
+    }
     if (cfg.type === "wms") {
-      return L.tileLayer.wms(cfg.url, { layers: cfg.layers, format: "image/png", transparent: true, version: "1.3.0",
+      return L.tileLayer.wms(cfg.url, { layers: cfg.modes ? lidarMode(cfg).layers : cfg.layers, format: "image/png", transparent: true, version: "1.3.0",
         attribution: cfg.attribution, maxZoom: 20, zIndex: 10, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
     }
     if (cfg.type === "exportImage") {
@@ -675,6 +685,20 @@ var App = (function () {
       "<p class='hint'>" + esc(tr(pc.hint || { en: t("landHint"), de: t("landHint") })) + "</p></div>";
   }
 
+  // Ergebnis einer ArcGIS-MapServer-Abfrage (z. B. GNS Neuseeland)
+  function arcIdentifyHtml(cfg, results) {
+    var ai = cfg.arcIdentify, skip = /^(OBJECTID|Shape|SHAPE.*|FID|EAST_|NORTH_|.*_NZTM|ACN|RL_DEM.*|Literature references)$/i;
+    return results.slice(0, ai.max || 3).map(function (res) {
+      var a = res.attributes || {};
+      var title = (ai.title && a[ai.title]) || a.Name || a.NAME || a.name || res.layerName;
+      var rows = ai.fields ? ai.fields.map(function (fd) { return row(tr(fd.label), a[fd.field]); }).join("")
+        : Object.keys(a).filter(function (k) { return !skip.test(k) && a[k] !== "" && a[k] !== "Null" && a[k] != null && k !== ai.title; })
+          .slice(0, 8).map(function (k) { return row(k, a[k]); }).join("");
+      return "<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(title) + "</h3>" +
+        "<div class='pop-sub'>" + esc(res.layerName || tr(cfg.name)) + "</div><table>" + rows + "</table></div>";
+    }).join("");
+  }
+
   // Ergebnis einer geo.admin-Abfrage (Schweiz) als Popup-Abschnitt
   function identifyHtml(cfg, results) {
     var id = cfg.identify;
@@ -783,7 +807,18 @@ var App = (function () {
     }
 
     C.overlays.forEach(function (o) {
-      if (!o.identify || !overlayState[o.id]) return;
+      if (!o.arcIdentify || !overlayState[o.id]) return;
+      var b = map.getBounds(), sz = map.getSize(), ai = o.arcIdentify;
+      var url = o.url + "/identify?geometry=" + lon.toFixed(6) + "," + lat.toFixed(6) + "&geometryType=esriGeometryPoint&sr=4326" +
+        "&layers=" + encodeURIComponent(ai.layers || "visible") + "&tolerance=" + (ai.tolerance || 0) +
+        "&mapExtent=" + [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map(function (v) { return v.toFixed(5); }).join(",") +
+        "&imageDisplay=" + sz.x + "," + sz.y + ",96&returnGeometry=false&f=json";
+      slow.push(cachedFetch(url, "json").then(function (res) { return arcIdentifyHtml(o, res.results || []); }));
+    });
+    C.overlays.forEach(function (o) {
+      var oid = o.modes && lidarMode(o).identify ? lidarMode(o).identify : o.identify;
+      if (!oid || !overlayState[o.id]) return;
+      o = Object.assign({}, o, { identify: oid });
       var b = map.getBounds(), sz = map.getSize();
       var url = "https://api3.geo.admin.ch/rest/services/api/MapServer/identify?geometry=" + lon.toFixed(6) + "," + lat.toFixed(6) +
         "&geometryType=esriGeometryPoint&sr=4326&imageDisplay=" + sz.x + "," + sz.y + ",96&mapExtent=" +
@@ -914,7 +949,7 @@ var App = (function () {
           "<option value='recent'" + (fv === "recent" ? " selected" : "") + ">" + esc(t(o.recentFilter === "new" ? "blmFilterNew" : "blmFilterClosed")) + "</option>" +
           "</select></label>";
       }
-      if (o.type === "exportImage" && o.modes) {
+      if (o.modes) {
         var cur = lidarMode(o);
         html += "<label class='mode'>" + esc(t("lidarMode")) + " <select data-mode='" + esc(o.id) + "'>" + o.modes.map(function (m) {
           return "<option value='" + esc(m.id) + "'" + (m.id === cur.id ? " selected" : "") + ">" + esc(tr(m.name)) + "</option>";
@@ -929,7 +964,7 @@ var App = (function () {
         var op = savedOpacity[o.id] != null ? savedOpacity[o.id] : o.opacity;
         html += "<input class='opacity' type='range' min='0.1' max='1' step='0.1' data-op='" + esc(o.id) + "' value='" + op + "'>";
       }
-      if (o.type === "wms") {
+      if (o.type === "wms" || o.type === "arcgisExport") {
         var op2 = savedOpacity[o.id] != null ? savedOpacity[o.id] : o.opacity;
         html += "<input class='opacity' type='range' min='0.1' max='1' step='0.1' data-op='" + esc(o.id) + "' value='" + op2 + "'>";
       }
@@ -965,7 +1000,10 @@ var App = (function () {
       if (inp.dataset.mode) {
         var oc = overlayCfg(inp.dataset.mode);
         setPref("mode." + oc.id, inp.value);
-        if (overlayObjs[oc.id]) { overlayObjs[oc.id].options.mode = lidarMode(oc); overlayObjs[oc.id].redraw(); }
+        if (overlayObjs[oc.id]) {
+          if (oc.type === "wms") overlayObjs[oc.id].setParams({ layers: lidarMode(oc).layers });
+          else { overlayObjs[oc.id].options.mode = lidarMode(oc); overlayObjs[oc.id].redraw(); }
+        }
         if (!overlayState[oc.id]) { setOverlay(oc.id, true); var cb = body.querySelector("input[type=checkbox][value='" + oc.id + "']"); if (cb) cb.checked = true; }
         return;
       }
