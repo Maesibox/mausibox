@@ -253,3 +253,8 @@ body.has-chat-news .menu .badge-chat::after, body.has-blm-news .menu .badge-blm:
 .msg-body { white-space: pre-wrap; word-break: break-word; }
 .chat-form { display: flex; gap: 6px; align-items: flex-end; }
 .chat-form textarea { flex: 1; font-size: 16px; }
+
+/* Ebenen-Gruppen (Allgemein, USA, Neuseeland, Schweiz) */
+.layer-group { border: 1px solid rgba(0,0,0,.12); border-radius: 8px; margin: 6px 0; padding: 2px 8px; }
+.layer-group > summary { font-weight: 700; padding: 8px 0; cursor: pointer; }
+.layer-group > summary small { font-weight: 400; color: #2e7d32; margin-left: 6px; }

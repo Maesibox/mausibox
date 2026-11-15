@@ -51,6 +51,11 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 17
+- **Ebenen-Gruppen** im Ebenen-Fenster (Allgemein, USA, Neuseeland, Schweiz) zum Aufklappen – `overlayGroups` in `config.js`.
+- **Schweiz:** Landeskarte (swisstopo), Gold- & Erzvorkommen, Schutzgebiete, Goldwasch-Regeln pro Kanton beim Antippen
+  (Texte in `config.js` → `chCantonRules`, Quelle: Schweizerische Goldwäschervereinigung, Stand Nov. 2026).
+
 ## Neu in Version 15
 - **Neuseeland:** Gold-Fossicking-Gebiete (öffentlich), Bergbau-Genehmigungen („Claims“), Anträge und Schedule-4-Land als Ebenen –
   live vom Server von NZ Petroleum & Minerals, Änderungen erscheinen automatisch.

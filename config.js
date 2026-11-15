@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 16,
+  appVersion: 17,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -83,6 +83,14 @@ var APP_CONFIG = {
       offline: true
     },
     {
+      id: "swisstopo",
+      name: { en: "Swiss national map (swisstopo, Switzerland only)", de: "Landeskarte Schweiz (swisstopo, nur Schweiz)" },
+      url: "https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg",
+      attribution: "© swisstopo",
+      maxNativeZoom: 18,
+      offline: true
+    },
+    {
       id: "osm",
       name: { en: "Street map (OSM, online only)", de: "Strassenkarte (OSM, nur online)" },
       url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -103,9 +111,50 @@ var APP_CONFIG = {
   //    "file"      = eigene Dateien (KML oder GeoJSON) aus dem Projektordner
   //    "areaPolygons" = Flächen (Schutzgebiete) live von einem ArcGIS-Server
   // ----------------------------------------------------------
+  // Goldwasch-Regeln pro Kanton (Kürzel wie bei swisstopo). closed = Fisch-Schonzeit (dann meist nicht waschen)
+  chCantonRules: {
+    source: "Schweizerische Goldwäschervereinigung, Übersicht kantonale Bestimmungen (Stand Nov. 2026)",
+    link: "https://www.goldwaschen.ch/gold-in-der-schweiz/kantonale-bestimmungen/",
+    AG: { rule: "Ohne Bewilligung nur von Hand mit Schaufel und Pfanne, kleine mobile Rinnen ohne feste Installation. Grössere Geräte und Gruppenanlässe nur mit Bewilligung.", closed: "1. Okt. – 30. April" },
+    AI: { rule: "Pfanne und Schaufel, bis 4 Personen erlaubt (Merkblatt des Kantons).", closed: "Ende Sept. – 1. März und an Ruhe-/Feiertagen" },
+    AR: { rule: "Keine besonderen Vorgaben bekannt. Keine Motorgeräte.", closed: "16. Sept. – 31. März" },
+    BE: { rule: "Pfanne und Schaufel, max. 3 Personen, 1. Mai – 30. Sept. bewilligungsfrei. Rinnen, Schleusen, Handpumpen oder Gruppen ab 6 Personen: fischereirechtliche Bewilligung. Natur- und Wildruhegebiete beachten.", closed: "siehe Merkblatt" },
+    BL: { rule: "Gemeingebrauch: nur mit Pfanne, keine Rinne, keine Gruppen, nicht gewerblich. Wegen Fisch-/Krebskrankheiten Ausrüstung nicht zwischen Gewässern wechseln.", closed: "§ 8 Fischereiverordnung" },
+    BS: { rule: "Meldepflichtig, je nach Nutzung bewilligungspflichtig (Amt für Umwelt und Energie).", closed: "1. Okt. – 31. Mai (je nach Gewässer)" },
+    FR: { rule: "Ohne Bewilligung 1. Juni – 30. Sept. mit Schaufel, Pfanne und Rinne bis 1 m × 20 cm, nur kleine Gruppen (Familie).", closed: "" },
+    GE: { rule: "Bewilligungspflichtig (Règlement L 4 05.01, Art. 21).", closed: "1. Okt. – 25. Mai" },
+    GL: { rule: "Keine Vorgaben bekannt. Keine Motorgeräte.", closed: "1. Okt. – 30. April" },
+    GR: { rule: "Bergregal bei den Gemeinden: vorher bei der Gemeinde fragen. Bewilligung u. a. in Medel/Lucmagn, Disentis/Mustér, Tujetsch, Obersaxen Mundaun, Sumvitg. Gemeinde Rheinwald: Goldwaschen verboten. Werkzeuge/Maschinen: fischereirechtliche Bewilligung.", closed: "16. Sept. – 30. April" },
+    JU: { rule: "Bewilligungspflichtig.", closed: "" },
+    LU: { rule: "Keine besonderen Vorgaben bekannt. Keine Motorgeräte.", closed: "§ 12 Fischereiverordnung (Forellen-Laichzeit gilt auch für die Fontanne)" },
+    NE: { rule: "Im ganzen Kanton verboten.", closed: "" },
+    NW: { rule: "Einzelpersonen mit Schaufel und Pfanne, Anfang Mai – Ende Sept. ohne Bewilligung. Rinnen, Schleusen, Gruppen über 4 Personen: Bewilligung.", closed: "1. Okt. – 30. April" },
+    OW: { rule: "Keine Vorgaben bekannt. Keine Motorgeräte.", closed: "1. Okt. – 30. April" },
+    SH: { rule: "Je nach Intensität kantonale Bewilligung/Konzession nötig (Tiefbauamt).", closed: "1. Okt. – 30. April" },
+    SO: { rule: "Ohne Bewilligung mit Pfanne, Schüssel, Schaufel 1. Juni – 30. Sept., in der Aare ganzjährig. Rinnen, Schleusen, Pumpen oder 1. Okt. – 31. Mai: fischereirechtliche Bewilligung. Professionell: nicht bewilligt.", closed: "" },
+    SZ: { rule: "Einzelpersonen mit Pfanne und Rinne ohne Bewilligung. Werkzeug/Maschinen: fischereirechtliche Bewilligung.", closed: "1. Okt. – 30. April" },
+    SG: { rule: "Nur Pfanne und Schaufel. Rinnen, Schleusen, Pumpen, Gruppenanlässe: Bewilligung.", closed: "1. Okt. – 30. April" },
+    TI: { rule: "Bewilligungspflichtig (Museo cantonale di storia naturale).", closed: "" },
+    TG: { rule: "Mit einfachen Handgeräten ohne Bewilligung (wenn kein örtliches/zeitliches Verbot). Gruppen, Rinnen, Schleusen, Pumpen: Bewilligung.", closed: "1. Okt. – 30. April" },
+    UR: { rule: "In Kantonsgewässern privat mit Pfanne und Schaufel erlaubt, Rinne bewilligungspflichtig. Auf Gebiet der Korporationen Uri und Urseren: deren Bewilligung nötig.", closed: "1. Okt. – 14. April" },
+    VD: { rule: "Bewilligungspflichtig. Freizeit in Kleingruppen 1. Juni – 30. Sept. mit Schaufel, Pfanne, Sieb und Rinne bis 1 m × 20 cm; Löcher wieder füllen.", closed: "" },
+    VS: { rule: "Hobbymässig erlaubt. Detektoren an Gewässern bewilligungspflichtig. Natur- und Fischschutz beachten.", closed: "Art. 21–23 Fischereiverordnung" },
+    ZG: { rule: "Nur Handarbeit, max. 2 Personen pro Ort (ab 3: Bewilligung). Keine Motorgeräte, keine Ufer abgraben. In Naturschutzgebieten und im Moosrusenbach verboten. Ausrüstung vorher waschen.", closed: "1. Okt. – 30. April" },
+    ZH: { rule: "Nur in freigegebenen Gewässerabschnitten (kantonales Merkblatt, Übersicht Region Winterthur). Pfanne und Schaufel erlaubt; Schleusen und Pumpen nur mit Bewilligung (Amt für Landschaft und Natur).", closed: "1. Okt. – 30. April; Thur und Rhein bis 15. Juni" },
+  },
+
+  // Gruppen im Ebenen-Fenster (aufklappbar), damit es nicht zu viele Ebenen auf einmal sind
+  overlayGroups: [
+    { id: "general", name: { en: "General", de: "Allgemein" }, open: true },
+    { id: "us", name: { en: "🇺🇸 USA (BLM, USGS …)", de: "🇺🇸 USA (BLM, USGS …)" }, open: true },
+    { id: "nz", name: { en: "🇳🇿 New Zealand", de: "🇳🇿 Neuseeland" } },
+    { id: "ch", name: { en: "🇨🇭 Switzerland", de: "🇨🇭 Schweiz" } }
+  ],
+
   overlays: [
     {
       id: "geology",
+      group: "general",
       type: "tiles",
       name: { en: "Geology (rock units)", de: "Geologie (Gesteinseinheiten)" },
       url: "https://tiles.macrostrat.org/carto/{z}/{x}/{y}.png",
@@ -118,6 +167,7 @@ var APP_CONFIG = {
     },
     {
       id: "faults",
+      group: "us",
       type: "tiles",
       name: { en: "Faults & contacts (USGS)", de: "Störungen & Kontakte (USGS)" },
       url: "https://mrdata.usgs.gov/mapcache/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=sgmc2structure&style=default&tilematrixset=GoogleMapsCompatible&tilematrix={z}&tilerow={y}&tilecol={x}&format=image/png",
@@ -130,6 +180,7 @@ var APP_CONFIG = {
     },
     {
       id: "aeromag",
+      group: "us",
       type: "tiles",
       name: { en: "Aeromagnetics (USGS)", de: "Aeromagnetik (USGS)" },
       url: "https://mrdata.usgs.gov/mapcache/wmts?service=WMTS&request=GetTile&version=1.0.0&layer=magnetic&style=default&tilematrixset=GoogleMapsCompatible&tilematrix={z}&tilerow={y}&tilecol={x}&format=image/png",
@@ -141,6 +192,7 @@ var APP_CONFIG = {
     },
     {
       id: "lidar",
+      group: "us",
       type: "exportImage",           // Bild wird für jede Kachel vom ArcGIS-Bildserver berechnet
       name: { en: "LiDAR / terrain (USGS 3DEP)", de: "LiDAR / Gelände (USGS 3DEP)" },
       url: "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage",
@@ -160,6 +212,7 @@ var APP_CONFIG = {
     },
     {
       id: "landStatus",
+      group: "us",
       type: "tiles",
       name: { en: "Land manager (BLM, state, private …)", de: "Landbesitz (BLM, Staat, privat …)" },
       url: "https://gis.blm.gov/arcgis/rest/services/lands/BLM_Natl_SMA_Cached_without_PriUnk/MapServer/tile/{z}/{y}/{x}",
@@ -183,6 +236,7 @@ var APP_CONFIG = {
     },
     {
       id: "restricted",
+      group: "us",
       type: "areaPolygons",
       name: { en: "Protected & closed areas (PAD-US)", de: "Schutzgebiete & Sperrzonen (PAD-US)" },
       url: "https://services.arcgis.com/v01gqwM5QqNysAAi/arcgis/rest/services/Manager_Name/FeatureServer/0/query",
@@ -206,6 +260,7 @@ var APP_CONFIG = {
     // ---------- NEUSEELAND (live von NZ Petroleum & Minerals – Änderungen erscheinen automatisch) ----------
     {
       id: "nzFossick",
+      group: "nz",
       type: "areaPolygons",
       jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
       name: { en: "NZ – Gold fossicking areas (public)", de: "NZ – Gold-Fossicking-Gebiete (öffentlich)" },
@@ -231,6 +286,7 @@ var APP_CONFIG = {
     },
     {
       id: "nzPermits",
+      group: "nz",
       type: "areaPolygons",
       jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
       name: { en: "NZ – Mining permits (\"claims\")", de: "NZ – Bergbau-Genehmigungen („Claims“)" },
@@ -259,6 +315,7 @@ var APP_CONFIG = {
     },
     {
       id: "nzApplications",
+      group: "nz",
       type: "areaPolygons",
       jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
       name: { en: "NZ – Permit applications", de: "NZ – Anträge für Genehmigungen" },
@@ -282,6 +339,7 @@ var APP_CONFIG = {
     },
     {
       id: "nzSchedule4",
+      group: "nz",
       type: "areaPolygons",
       jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
       name: { en: "NZ – Schedule 4 land (mining restricted)", de: "NZ – Schedule-4-Land (Bergbau eingeschränkt)" },
@@ -297,8 +355,55 @@ var APP_CONFIG = {
         fields: []
       }
     },
+    // ---------- SCHWEIZ (Bundesdaten geo.admin.ch – live) ----------
+    {
+      id: "chGold",
+      group: "ch",
+      type: "wms",
+      name: { en: "Gold & ore occurrences (swisstopo)", de: "Gold- & Erzvorkommen (swisstopo)" },
+      url: "https://wms.geo.admin.ch/",
+      layers: "ch.swisstopo.geologie-rohstoffe-vererzungen",
+      attribution: "© swisstopo / ETH Georessourcen",
+      opacity: 1,
+      visible: false, offline: false,
+      identify: {
+        layers: "all:ch.swisstopo.geologie-rohstoffe-vererzungen", tolerance: 12,
+        title: "label", sub: { en: "Ore occurrence", de: "Erzvorkommen" },
+        fields: [ { field: "grkind_de", label: { en: "Raw material", de: "Rohstoff" } } ],
+        link: { field: "purl", text: { en: "Details (ETH georesources)", de: "Details (ETH Georessourcen)" } }
+      }
+    },
+    {
+      id: "chProtected",
+      group: "ch",
+      type: "wms",
+      name: { en: "Protected areas (floodplains, nature reserves, national park …)", de: "Schutzgebiete (Auen, Naturschutz, Nationalpark …)" },
+      url: "https://wms.geo.admin.ch/",
+      layers: "ch.bafu.bundesinventare-auen,ch.pronatura.naturschutzgebiete,ch.bafu.bundesinventare-jagdbanngebiete,ch.bafu.bundesinventare-vogelreservate,ch.bafu.schutzgebiete-schweizerischer_nationalpark",
+      attribution: "© BAFU, Pro Natura",
+      opacity: 0.6,
+      visible: false, offline: false,
+      identify: {
+        layers: "all:ch.bafu.bundesinventare-auen,ch.pronatura.naturschutzgebiete,ch.bafu.bundesinventare-jagdbanngebiete,ch.bafu.bundesinventare-vogelreservate,ch.bafu.schutzgebiete-schweizerischer_nationalpark",
+        tolerance: 0, title: "label", subField: "layerName", level: "closed",
+        verdict: { en: "Protected area – gold panning usually not allowed", de: "Schutzgebiet – Goldwaschen meist nicht erlaubt" }
+      }
+    },
+    {
+      id: "chCantons",
+      group: "ch",
+      type: "wms",
+      name: { en: "Gold panning rules per canton (tap the map)", de: "Goldwasch-Regeln pro Kanton (Karte antippen)" },
+      url: "https://wms.geo.admin.ch/",
+      layers: "ch.swisstopo.swissboundaries3d-kanton-flaeche.fill",
+      attribution: "© swisstopo",
+      opacity: 0.35,
+      visible: false, offline: false,
+      identify: { layers: "all:ch.swisstopo.swissboundaries3d-kanton-flaeche.fill", tolerance: 0, cantonRules: true }
+    },
     {
       id: "blm",
+      group: "us",
       type: "blmClaims",
       name: { en: "BLM mining claims (active)", de: "BLM Mining Claims (aktiv)" },
       url: "https://nlsdbpubgis.blm.gov/arcgis/rest/services/Mining_Claims/MiningClaims/MapServer/1/query",
@@ -314,6 +419,7 @@ var APP_CONFIG = {
     },
     {
       id: "blmClosed",
+      group: "us",
       type: "blmClaims",
       name: { en: "BLM mining claims (closed)", de: "BLM Mining Claims (geschlossen)" },
       url: "https://nlsdbpubgis.blm.gov/arcgis/rest/services/Mining_Claims/MiningClaims/MapServer/2/query",
@@ -329,6 +435,7 @@ var APP_CONFIG = {
     },
     {
       id: "club",
+      group: "general",
       type: "file",
       name: { en: "Club claims", de: "Club-Claims" },
       // Dateien im Ordner data/club-claims – KML (.kml) oder GeoJSON (.geojson)
@@ -341,6 +448,7 @@ var APP_CONFIG = {
     },
     {
       id: "myclaims",
+      group: "general",
       type: "userClaims",
       name: { en: "Claims & posts (own / club)", de: "Claims & Pfosten (eigene / Club)" },
       privateColor: "#ff8c00",     // eigene, private Claims
@@ -352,6 +460,7 @@ var APP_CONFIG = {
     },
     {
       id: "mrds",
+      group: "us",
       type: "wfsPoints",
       name: { en: "Old mines & deposits (USGS MRDS)", de: "Alte Minen & Fundstellen (USGS MRDS)" },
       url: "https://mrdata.usgs.gov/services/mrds",
@@ -364,6 +473,7 @@ var APP_CONFIG = {
     },
     {
       id: "usmin",
+      group: "us",
       type: "wfsPoints",
       name: { en: "Mine symbols from topo maps (USGS USMIN)", de: "Minensymbole aus Topokarten (USGS USMIN)" },
       url: "https://mrdata.usgs.gov/services/usmin",
@@ -602,7 +712,7 @@ var APP_CONFIG = {
       parkSavedAt: "Saved", navigate: "Navigate (Apple Maps)", deletePark: "Delete parking spot", parkDeleted: "Parking spot deleted",
 
       // Club-Umschalter, Hilfe, Verwaltung
-      activeClub: "Show club", allClubs: "All my clubs", chat: "Club chat", chatEmpty: "No messages yet – write the first one!", chatPlaceholder: "Message to all club members…", chatSend: "Send", blmChanges: "BLM changes (new / closed)", blmNews: "{n} BLM change(s) in your area – menu → BLM changes", blmNew: "New claims", blmClosedRecent: "Closed claims", blmSeen: "noticed", blmChangesIntro: "Changes of the last {days} days in: {areas}. The app compares the active BLM claims once a day.", blmFilterAll: "show all", blmFilterNew: "only new (last 30 days)", blmFilterClosed: "only closed in the last 30 days", extraClubs: "Also join these clubs", clubDotHint: "Tap to zoom in", clubDotClaims: "claims", lidarMode: "View", help: "Help – how it works",
+      activeClub: "Show club", allClubs: "All my clubs", chat: "Club chat", chatEmpty: "No messages yet – write the first one!", chatPlaceholder: "Message to all club members…", chatSend: "Send", blmChanges: "BLM changes (new / closed)", blmNews: "{n} BLM change(s) in your area – menu → BLM changes", blmNew: "New claims", blmClosedRecent: "Closed claims", blmSeen: "noticed", blmChangesIntro: "Changes of the last {days} days in: {areas}. The app compares the active BLM claims once a day.", blmFilterAll: "show all", blmFilterNew: "only new (last 30 days)", blmFilterClosed: "only closed in the last 30 days", extraClubs: "Also join these clubs", layerGroupActive: "on", cantonRules: "Gold panning rules", fishClosed: "Fish closed season", rulesSource: "Source", clubDotHint: "Tap to zoom in", clubDotClaims: "claims", lidarMode: "View", help: "Help – how it works",
       addMember: "Add person", addMemberHint: "Username of an existing account", userNotFound: "No account with this username.",
       memberAdded: "Added to club", userClubs: "Clubs", assignClub: "Add to club",
       dirs: "N,NE,E,SE,S,SW,W,NW"
@@ -715,7 +825,7 @@ var APP_CONFIG = {
       parkSavedAt: "Gespeichert", navigate: "Hinführen (Apple Karten)", deletePark: "Parkplatz löschen", parkDeleted: "Parkplatz gelöscht",
 
       // Club-Umschalter, Hilfe, Verwaltung
-      activeClub: "Club anzeigen", allClubs: "Alle meine Clubs", chat: "Club-Chat", chatEmpty: "Noch keine Nachrichten – schreib die erste!", chatPlaceholder: "Nachricht an alle Club-Mitglieder…", chatSend: "Senden", blmChanges: "BLM-Änderungen (neu / abgelaufen)", blmNews: "{n} BLM-Änderung(en) in deinem Gebiet – Menü → BLM-Änderungen", blmNew: "Neue Claims", blmClosedRecent: "Abgelaufene Claims", blmSeen: "bemerkt", blmChangesIntro: "Änderungen der letzten {days} Tage in: {areas}. Die App vergleicht einmal täglich die aktiven BLM-Claims.", blmFilterAll: "alle zeigen", blmFilterNew: "nur neue (letzte 30 Tage)", blmFilterClosed: "nur in den letzten 30 Tagen abgelaufene", extraClubs: "Zusätzlich diesen Clubs beitreten", clubDotHint: "Antippen zum Hineinzoomen", clubDotClaims: "Claims", lidarMode: "Ansicht", help: "Hilfe – so funktioniert's",
+      activeClub: "Club anzeigen", allClubs: "Alle meine Clubs", chat: "Club-Chat", chatEmpty: "Noch keine Nachrichten – schreib die erste!", chatPlaceholder: "Nachricht an alle Club-Mitglieder…", chatSend: "Senden", blmChanges: "BLM-Änderungen (neu / abgelaufen)", blmNews: "{n} BLM-Änderung(en) in deinem Gebiet – Menü → BLM-Änderungen", blmNew: "Neue Claims", blmClosedRecent: "Abgelaufene Claims", blmSeen: "bemerkt", blmChangesIntro: "Änderungen der letzten {days} Tage in: {areas}. Die App vergleicht einmal täglich die aktiven BLM-Claims.", blmFilterAll: "alle zeigen", blmFilterNew: "nur neue (letzte 30 Tage)", blmFilterClosed: "nur in den letzten 30 Tagen abgelaufene", extraClubs: "Zusätzlich diesen Clubs beitreten", layerGroupActive: "an", cantonRules: "Goldwasch-Regeln", fishClosed: "Fisch-Schonzeit", rulesSource: "Quelle", clubDotHint: "Antippen zum Hineinzoomen", clubDotClaims: "Claims", lidarMode: "Ansicht", help: "Hilfe – so funktioniert's",
       addMember: "Person hinzufügen", addMemberHint: "Benutzername eines bestehenden Kontos", userNotFound: "Kein Konto mit diesem Benutzernamen.",
       memberAdded: "Zum Club hinzugefügt", userClubs: "Clubs", assignClub: "Zu Club hinzufügen",
       dirs: "N,NO,O,SO,S,SW,W,NW"

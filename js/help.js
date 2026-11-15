@@ -37,6 +37,9 @@ var Help = (function () {
       ["Mehrere Clubs", "Bist du in mehreren Clubs, wählst du oben im Ebenen-Fenster (oder in der Claims-Liste) den Club, dessen Claims du sehen willst – " +
         "oder alle. Der gewählte Club steht oben links neben dem App-Namen.<br>Admins teilen in der Verwaltung bestehende Konten einem Club zu " +
         "(Mitglieder → Person hinzufügen, oder bei „Alle Benutzer“)."],
+      ["Schweiz", "Im Ebenen-Fenster unter <b>🇨🇭 Schweiz</b>: Gold- & Erzvorkommen (swisstopo), Schutzgebiete (Auen, Naturschutz, Jagdbann, Vogelreservate, Nationalpark – meist kein Goldwaschen) " +
+        "und <b>Goldwasch-Regeln pro Kanton</b>: einschalten und irgendwo in der Schweiz auf die Karte tippen – die App zeigt die Regeln und die Fisch-Schonzeit dieses Kantons. " +
+        "Als Grundkarte gibt es die <b>Landeskarte (swisstopo)</b>. Die Ebenen sind in Gruppen (Allgemein, USA, Neuseeland, Schweiz) zum Aufklappen."],
       ["Neuseeland", "Im Ebenen-Fenster gibt es vier NZ-Ebenen, live von der Behörde NZ Petroleum & Minerals (Änderungen erscheinen automatisch): " +
         "<b>Gold-Fossicking-Gebiete</b> (grün, öffentlich, ohne Genehmigung – mit Link zum offiziellen PDF), <b>Bergbau-Genehmigungen</b> (rot, die „Claims“ – nicht betreten zum Suchen), " +
         "<b>Anträge</b> (orange) und <b>Schedule-4-Land</b> (lila, Nationalparks usw. – meist verboten). Antippen zeigt Details und „Hinführen“."],
@@ -79,6 +82,9 @@ var Help = (function () {
         "“Visible for”: only me or a club. Coordinates on old notices are often NAD27 (up to ~100 m off)."],
       ["Several clubs", "If you are in several clubs, choose at the top of the layers panel (or in the claims list) which club's claims to show – or all. " +
         "The chosen club appears next to the app name.<br>Admins add existing accounts to a club in Administration (Members → Add person, or under All users)."],
+      ["Switzerland", "In the layers panel under <b>🇨🇭 Switzerland</b>: gold & ore occurrences (swisstopo), protected areas (floodplains, reserves, national park – usually no panning) " +
+        "and <b>gold panning rules per canton</b>: switch it on and tap the map anywhere in Switzerland to see that canton's rules and fish closed season. " +
+        "Base map: <b>Swiss national map (swisstopo)</b>. Layers are grouped (General, USA, New Zealand, Switzerland) and fold open."],
       ["New Zealand", "Four NZ layers in the layers panel, live from NZ Petroleum & Minerals (changes appear automatically): " +
         "<b>gold fossicking areas</b> (green, public, no permit needed – with link to the official PDF), <b>mining permits</b> (red, the “claims” – keep out), " +
         "<b>applications</b> (orange) and <b>Schedule 4 land</b> (purple, national parks etc. – usually closed). Tap for details and “Navigate”."],

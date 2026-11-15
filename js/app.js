@@ -460,6 +460,10 @@ var App = (function () {
 
   function buildOverlay(cfg) {
     if (cfg.type === "tiles") return makeTileLayer(cfg, { zIndex: 10 });
+    if (cfg.type === "wms") {
+      return L.tileLayer.wms(cfg.url, { layers: cfg.layers, format: "image/png", transparent: true, version: "1.3.0",
+        attribution: cfg.attribution, maxZoom: 20, zIndex: 10, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
+    }
     if (cfg.type === "exportImage") {
       return new ExportImageLayer("", { baseUrl: cfg.url, mode: lidarMode(cfg), attribution: cfg.attribution, maxZoom: 20, maxNativeZoom: 18,
         crossOrigin: true, zIndex: 9, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
@@ -671,6 +675,32 @@ var App = (function () {
       "<p class='hint'>" + esc(tr(pc.hint || { en: t("landHint"), de: t("landHint") })) + "</p></div>";
   }
 
+  // Ergebnis einer geo.admin-Abfrage (Schweiz) als Popup-Abschnitt
+  function identifyHtml(cfg, results) {
+    var id = cfg.identify;
+    if (!results.length) return "";
+    if (id.cantonRules) {
+      var a = results[0].attributes || {}, r = (C.chCantonRules || {})[a.ak];
+      if (!r) return "";
+      var closed = /verboten/i.test(r.rule) ? "closed" : /bewilligungspflichtig/i.test(r.rule) && !/ohne bewilligung/i.test(r.rule) ? "limited" : "open";
+      return "<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(t("cantonRules")) + " · " + esc(a.name || a.ak) + "</h3>" +
+        "<p class='verdict " + closed + "'>" + esc(r.rule) + "</p>" +
+        (r.closed ? "<table>" + row(t("fishClosed"), r.closed) + "</table>" : "") +
+        "<div class='src'>" + esc(t("rulesSource")) + ": " + esc(C.chCantonRules.source) + "</div>" +
+        "<a href='" + esc(C.chCantonRules.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" +
+        "<p class='hint'>" + esc(t("landHint")) + "</p></div>";
+    }
+    return results.slice(0, 5).map(function (res) {
+      var a = res.attributes || {};
+      return "<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(a[id.title] || res.layerName || "") + "</h3>" +
+        "<div class='pop-sub'>" + esc(id.subField ? res[id.subField] : tr(id.sub)) + "</div>" +
+        (id.verdict ? "<p class='verdict " + esc(id.level || "limited") + "'>" + esc(tr(id.verdict)) + "</p>" : "") +
+        "<table>" + (id.fields || []).map(function (fd) { return row(tr(fd.label), a[fd.field]); }).join("") + "</table>" +
+        (id.link && a[id.link.field] && a[id.link.field] !== "-" ? "<a href='" + esc(a[id.link.field]) + "' target='_blank' rel='noopener'>" + esc(tr(id.link.text)) + " ↗</a>" : "") +
+        "</div>";
+    }).join("");
+  }
+
   function landHtml(attrs) {
     if (!attrs) return "<div class='pop-sec'><p class='hint'>" + esc(t("landUnknown")) + "</p></div>";
     var code = attrs.ADMIN_AGENCY_CODE, info = C.landAgencies[code] || C.landAgencies[attrs.ADMIN_DEPT_CODE];
@@ -751,6 +781,17 @@ var App = (function () {
         err.geology = true; throw err;
       }));
     }
+
+    C.overlays.forEach(function (o) {
+      if (!o.identify || !overlayState[o.id]) return;
+      var b = map.getBounds(), sz = map.getSize();
+      var url = "https://api3.geo.admin.ch/rest/services/api/MapServer/identify?geometry=" + lon.toFixed(6) + "," + lat.toFixed(6) +
+        "&geometryType=esriGeometryPoint&sr=4326&imageDisplay=" + sz.x + "," + sz.y + ",96&mapExtent=" +
+        [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map(function (v) { return v.toFixed(5); }).join(",") +
+        "&tolerance=" + (o.identify.tolerance || 0) + "&layers=" + encodeURIComponent(o.identify.layers) +
+        "&returnGeometry=false&lang=" + (lang === "de" ? "de" : "en");
+      slow.push(cachedFetch(url, "json").then(function (res) { return identifyHtml(o, res.results || []); }));
+    });
 
     var head = "<div class='pop'><div class='coords'>" + esc(formatCoord(lat, lon)) + "</div>";
     var results = slow.map(function () { return "<div class='pop-sec'><p class='hint'>" + esc(t("loading")) + "</p></div>"; });
@@ -843,7 +884,26 @@ var App = (function () {
       html += "<label class='opt'><input type='radio' name='base' value='" + esc(b.id) + "'" + (b.id === baseId ? " checked" : "") + "> " + esc(tr(b.name)) + "</label>";
     });
     html += "<h4>" + esc(t("overlays")) + "</h4>";
+    var groups = C.overlayGroups || [{ id: "general", name: "" }];
+    var openGroups = pref("layerGroupsOpen", {});
+    var rows = {};
     C.overlays.filter(visibleInPanel).forEach(function (o) {
+      var g = o.group || groups[0].id;
+      rows[g] = rows[g] || [];
+      rows[g].push(o);
+    });
+    groups.forEach(function (g) {
+      var list = rows[g.id] || [];
+      if (!list.length) return;
+      var on = list.filter(function (o) { return overlayState[o.id]; }).length;
+      var isOpen = openGroups[g.id] != null ? openGroups[g.id] : !!g.open;
+      html += "<details class='layer-group' data-group='" + esc(g.id) + "'" + (isOpen ? " open" : "") + "><summary>" + esc(tr(g.name)) +
+        " <small>" + (on ? on + " " + esc(t("layerGroupActive")) : "") + "</small></summary>";
+      list.forEach(function (o) { html += overlayRowHtml(o); });
+      html += "</details>";
+    });
+    function overlayRowHtml(o) {
+      var html = "";
       html += "<div class='opt-row'><label class='opt'><input type='checkbox' value='" + esc(o.id) + "'" + (overlayState[o.id] ? " checked" : "") + "> " +
         (o.color ? "<span class='swatch' style='background:" + esc(o.color) + "'></span>" : "") + esc(tr(o.name)) + "</label>" +
         "<div class='note' data-note='" + esc(o.id) + "'></div>";
@@ -869,17 +929,30 @@ var App = (function () {
         var op = savedOpacity[o.id] != null ? savedOpacity[o.id] : o.opacity;
         html += "<input class='opacity' type='range' min='0.1' max='1' step='0.1' data-op='" + esc(o.id) + "' value='" + op + "'>";
       }
+      if (o.type === "wms") {
+        var op2 = savedOpacity[o.id] != null ? savedOpacity[o.id] : o.opacity;
+        html += "<input class='opacity' type='range' min='0.1' max='1' step='0.1' data-op='" + esc(o.id) + "' value='" + op2 + "'>";
+      }
       if (o.legend) {
         html += "<div class='legend'>" + o.legend.map(function (l) {
           return "<span><i style='background:" + esc(l.color) + "'></i>" + esc(tr(l.text)) + "</span>";
         }).join("") + "</div>";
       }
       html += "</div>";
-    });
+      return html;
+    }
     html += "<label class='opt'><input type='checkbox' value='__points'" + (pointsVisible ? " checked" : "") + "> " + esc(t("points")) + "</label>" +
       "<label class='opt'><input type='checkbox' value='__tracks'" + (Tracks.visible ? " checked" : "") + "> " + esc(t("tracks")) + "</label></div>";
 
     var body = el(html);
+    // aufgeklappte Gruppen merken
+    body.addEventListener("toggle", function (e) {
+      var d = e.target;
+      if (!d.dataset || !d.dataset.group) return;
+      var og = pref("layerGroupsOpen", {});
+      og[d.dataset.group] = d.open;
+      setPref("layerGroupsOpen", og);
+    }, true);
     body.addEventListener("change", function (e) {
       var inp = e.target;
       if (inp.hasAttribute("data-club-switch")) { setActiveClub(inp.value); return; }
