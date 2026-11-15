@@ -540,9 +540,11 @@ var App = (function () {
         Promise.all([cachedFetch(cfg.file, "json"), cfg.metaFile ? cachedFetch(cfg.metaFile, "json").catch(function () { return {}; }) : {}])
           .then(function (r) {
             cfg._updated = r[1] && r[1].updated;
-            (r[0].features || []).forEach(function (f) { renderArea(fg, f); });
-            setLayerNote(cfg.id, "");
-          }).catch(function () { setLayerNote(cfg.id, t("loadError")); });
+            var feats = r[0].features || [];
+            feats.forEach(function (f) { renderArea(fg, f); });
+            cfg._note = "✓ " + feats.length + (cfg._updated ? " · " + t("dataDate") + " " + cfg._updated : "");
+            setLayerNote(cfg.id, cfg._note);
+          }).catch(function (err) { cfg._note = t("loadError") + " (" + (err && err.message || err) + ")"; setLayerNote(cfg.id, cfg._note); });
         return fg;
       }
       return makeCellLayer(cfg, renderArea);
@@ -975,7 +977,7 @@ var App = (function () {
       var html = "";
       html += "<div class='opt-row'><label class='opt'><input type='checkbox' value='" + esc(o.id) + "'" + (overlayState[o.id] ? " checked" : "") + "> " +
         (o.color ? "<span class='swatch' style='background:" + esc(o.color) + "'></span>" : "") + esc(tr(o.name)) + "</label>" +
-        "<div class='note' data-note='" + esc(o.id) + "'></div>";
+        "<div class='note' data-note='" + esc(o.id) + "'>" + esc(o._note || "") + "</div>";
       if (o.recentFilter) {
         var fv = pref("blmFilter." + o.id, "all");
         html += "<label class='mode'><select data-blmfilter='" + esc(o.id) + "'>" +
@@ -1011,7 +1013,8 @@ var App = (function () {
       return html;
     }
     html += "<label class='opt'><input type='checkbox' value='__points'" + (pointsVisible ? " checked" : "") + "> " + esc(t("points")) + "</label>" +
-      "<label class='opt'><input type='checkbox' value='__tracks'" + (Tracks.visible ? " checked" : "") + "> " + esc(t("tracks")) + "</label></div>";
+      "<label class='opt'><input type='checkbox' value='__tracks'" + (Tracks.visible ? " checked" : "") + "> " + esc(t("tracks")) + "</label>" +
+      "<p class='hint'>Version " + esc(C.appVersion) + "</p></div>";
 
     var body = el(html);
     // aufgeklappte Gruppen merken
