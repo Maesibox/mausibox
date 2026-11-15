@@ -1244,8 +1244,28 @@ var App = (function () {
 
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js").catch(function (e) { console.warn("SW", e); });
+      checkForUpdate();
     }
     startGps(false);
+  }
+
+  // Gibt es auf dem Server eine neuere Version? Dann alten Speicher leeren und neu laden (höchstens einmal pro Sitzung)
+  function checkForUpdate() {
+    if (!navigator.onLine) return;
+    fetch("config.js?check=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.text(); }).then(function (txt) {
+      var m = txt.match(/appVersion:\s*(\d+)/), latest = m ? parseInt(m[1], 10) : 0;
+      if (latest <= C.appVersion) return;
+      var key = "gc.updatedTo";
+      try { if (sessionStorage.getItem(key) === String(latest)) return; sessionStorage.setItem(key, String(latest)); } catch (e) {}
+      var clear = window.caches ? caches.keys().then(function (keys) {
+        return Promise.all(keys.filter(function (k) { return k.indexOf("gc-app-") === 0; }).map(function (k) { return caches.delete(k); }));
+      }) : Promise.resolve();
+      clear.then(function () {
+        return navigator.serviceWorker ? navigator.serviceWorker.getRegistrations().then(function (regs) {
+          return Promise.all(regs.map(function (r) { return r.update().catch(function () {}); }));
+        }) : null;
+      }).then(function () { toast(t("updating")); setTimeout(function () { location.reload(); }, 800); });
+    }).catch(function () {});
   }
 
   return {

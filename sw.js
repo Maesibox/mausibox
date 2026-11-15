@@ -34,7 +34,8 @@ var TILE_PREFIXES = APP_CONFIG.basemaps.concat(APP_CONFIG.overlays)
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(APP_CACHE).then(function (c) {
     // einzeln, damit eine fehlende Datei nicht alles verhindert
-    return Promise.all(APP_FILES.map(function (f) { return c.add(f).catch(function () {}); }));
+    // cache: "reload" = am Browser-Zwischenspeicher vorbei, damit sicher die neue Version gespeichert wird
+    return Promise.all(APP_FILES.map(function (f) { return c.add(new Request(f, { cache: "reload" })).catch(function () {}); }));
   }).then(function () { return self.skipWaiting(); }));
 });
 
@@ -49,12 +50,13 @@ function startsWithAny(url, list) {
   return list.some(function (p) { return url.indexOf(p) === 0; });
 }
 
-// Zuerst Netz; bei schlechtem Empfang nach 4 Sekunden auf die gespeicherte Version ausweichen
+// Zuerst Netz (beim Server nachfragen, ob es eine neuere Datei gibt);
+// bei schlechtem Empfang nach 8 Sekunden auf die gespeicherte Version ausweichen
 function networkFirst(req, cacheName) {
   var fromCache = function () {
     return caches.open(cacheName).then(function (c) { return c.match(req, { ignoreVary: true }); });
   };
-  var net = fetch(req).then(function (res) {
+  var net = fetch(req, { cache: "no-cache" }).then(function (res) {
     if (res.ok) {
       var copy = res.clone();
       caches.open(cacheName).then(function (c) { c.put(req, copy); });
@@ -62,7 +64,7 @@ function networkFirst(req, cacheName) {
     return res;
   });
   var slow = new Promise(function (resolve) {
-    setTimeout(function () { fromCache().then(function (hit) { if (hit) resolve(hit); }); }, 4000);
+    setTimeout(function () { fromCache().then(function (hit) { if (hit) resolve(hit); }); }, 8000);
   });
   return Promise.race([net, slow]).catch(function () {
     return fromCache().then(function (hit) { return hit || Response.error(); });
