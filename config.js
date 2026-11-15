@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 22,
+  appVersion: 23,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -262,7 +262,8 @@ var APP_CONFIG = {
       id: "nzFossick",
       group: "nz",
       type: "areaPolygons",
-      jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
+      // tägliche Kopie der NZP&M-Daten (tools/update_nz.py) – lädt auf jedem Gerät und offline
+      file: "data/nz/fossick.geojson", metaFile: "data/nz/meta.json",
       name: { en: "NZ – Gold fossicking areas (public)", de: "NZ – Gold-Fossicking-Gebiete (öffentlich)" },
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/1/query",
       where: "Permit_Type_Code='Gold Fossicking Area'",
@@ -288,7 +289,8 @@ var APP_CONFIG = {
       id: "nzPermits",
       group: "nz",
       type: "areaPolygons",
-      jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
+      // tägliche Kopie der NZP&M-Daten (tools/update_nz.py) – lädt auf jedem Gerät und offline
+      file: "data/nz/permits.geojson", metaFile: "data/nz/meta.json",
       name: { en: "NZ – Mining permits (\"claims\")", de: "NZ – Bergbau-Genehmigungen („Claims“)" },
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/1/query",
       where: "Permit_Type_Code<>'Gold Fossicking Area'",
@@ -317,7 +319,8 @@ var APP_CONFIG = {
       id: "nzApplications",
       group: "nz",
       type: "areaPolygons",
-      jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
+      // tägliche Kopie der NZP&M-Daten (tools/update_nz.py) – lädt auf jedem Gerät und offline
+      file: "data/nz/applications.geojson", metaFile: "data/nz/meta.json",
       name: { en: "NZ – Permit applications", de: "NZ – Anträge für Genehmigungen" },
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/0/query",
       outFields: "*",
@@ -341,7 +344,8 @@ var APP_CONFIG = {
       id: "nzSchedule4",
       group: "nz",
       type: "areaPolygons",
-      jsonp: true,                 // der NZ-Server erlaubt keinen direkten Abruf (CORS) – darum JSONP, nur online
+      // tägliche Kopie der NZP&M-Daten (tools/update_nz.py) – lädt auf jedem Gerät und offline
+      file: "data/nz/schedule4.geojson", metaFile: "data/nz/meta.json",
       name: { en: "NZ – Schedule 4 land (mining restricted)", de: "NZ – Schedule-4-Land (Bergbau eingeschränkt)" },
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/CMA_Schedule_4_Land/MapServer/0/query",
       outFields: "OBJECTID,name",
@@ -704,7 +708,7 @@ var APP_CONFIG = {
     en: {
       layers: "Layers", basemap: "Base map", overlays: "Layers",
       gps: "My location", addPoint: "Add point", points: "My points", menu: "Menu",
-      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", loading: "Loading…", loadError: "Could not load",
+      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", loading: "Loading…", loadError: "Could not load",
       gpsWaiting: "Waiting for GPS…", gpsError: "GPS not available", accuracy: "accuracy",
       name: "Name", note: "Note", category: "Category", photos: "Photos", addPhoto: "Add photo",
       position: "Position", useGps: "Use GPS", useCenter: "Use map center",
@@ -817,7 +821,7 @@ var APP_CONFIG = {
     de: {
       layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen",
       gps: "Mein Standort", addPoint: "Punkt setzen", points: "Meine Punkte", menu: "Menü",
-      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", loading: "Lade…", loadError: "Laden fehlgeschlagen",
+      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", loading: "Lade…", loadError: "Laden fehlgeschlagen",
       gpsWaiting: "Warte auf GPS…", gpsError: "GPS nicht verfügbar", accuracy: "Genauigkeit",
       name: "Name", note: "Notiz", category: "Kategorie", photos: "Fotos", addPhoto: "Foto hinzufügen",
       position: "Position", useGps: "GPS verwenden", useCenter: "Kartenmitte verwenden",

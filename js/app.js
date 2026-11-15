@@ -429,7 +429,7 @@ var App = (function () {
   function makeCellLayer(cfg, render) {
     var group = L.featureGroup();
     var loaded = {}, seen = {};
-    var pending = 0;
+    var pending = 0, failed = 0;
     function update() {
       if (!map.hasLayer(group)) return;
       if (map.getZoom() < cfg.minZoom) { setLayerNote(cfg.id, t("zoomInFor") + " (≥ " + cfg.minZoom + ")"); return; }
@@ -452,11 +452,11 @@ var App = (function () {
         }).catch(function () {
           // Server hatte einen Aussetzer: Bereich später nochmals versuchen
           loaded[key] = false;
-          setLayerNote(cfg.id, t("loadError"));
+          failed++;
           setTimeout(update, 8000);
         }).then(function () {
           pending--;
-          if (pending === 0) setLayerNote(cfg.id, "");
+          if (pending === 0) { setLayerNote(cfg.id, failed ? t("loadError") : ""); failed = 0; }
         });
       });
     }
@@ -517,7 +517,7 @@ var App = (function () {
 
     if (cfg.type === "areaPolygons") {
       hitFeatures[cfg.id] = [];
-      return makeCellLayer(cfg, function (group, f) {
+      var renderArea = function (group, f) {
         var col = cfg.color || (areaClass(cfg, f.properties) === "closed" ? cfg.closedColor : cfg.limitedColor);
         group.addLayer(L.geoJSON(f, {
           interactive: false,
@@ -533,7 +533,19 @@ var App = (function () {
           }
         }
         hitFeatures[cfg.id].push(f);
-      });
+      };
+      if (cfg.file) {
+        var fg = L.featureGroup();
+        setLayerNote(cfg.id, t("loading"));
+        Promise.all([cachedFetch(cfg.file, "json"), cfg.metaFile ? cachedFetch(cfg.metaFile, "json").catch(function () { return {}; }) : {}])
+          .then(function (r) {
+            cfg._updated = r[1] && r[1].updated;
+            (r[0].features || []).forEach(function (f) { renderArea(fg, f); });
+            setLayerNote(cfg.id, "");
+          }).catch(function () { setLayerNote(cfg.id, t("loadError")); });
+        return fg;
+      }
+      return makeCellLayer(cfg, renderArea);
     }
 
     if (cfg.type === "wfsPoints") {
@@ -703,7 +715,8 @@ var App = (function () {
       "<table>" + (pc.fields || []).map(function (fd) { return row(tr(fd.label), val(fd)); }).join("") + "</table>" +
       (pc.link ? "<a href='" + esc(fill(pc.link.url)) + "' target='_blank' rel='noopener'>" + esc(tr(pc.link.text)) + " ↗</a>" : "") +
       (function () { var c = centerOf(f); return c ? navLink(c[0], c[1]) : ""; })() +
-      "<p class='hint'>" + esc(tr(pc.hint || { en: t("landHint"), de: t("landHint") })) + "</p></div>";
+      "<p class='hint'>" + esc(tr(pc.hint || { en: t("landHint"), de: t("landHint") })) +
+      (cfg._updated ? " " + esc(t("dataDate")) + ": " + esc(cfg._updated) : "") + "</p></div>";
   }
 
   // Ergebnis einer ArcGIS-MapServer-Abfrage (z. B. GNS Neuseeland)
