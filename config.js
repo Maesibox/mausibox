@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 9,
+  appVersion: 10,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -31,7 +31,11 @@ var APP_CONFIG = {
                               // (leer = aktuelle Adresse)
   },
 
-  clubName: "MAUSIBOX App",          // Name der App (oben links, im Browser-Tab, in Exporten)
+  clubName: "MAUSIBOX App",
+  // Farbe pro Club (Club-Claims und Club-Dateien). Clubs ohne Eintrag bekommen eine Farbe aus clubPalette.
+  clubColors: { "Havasu Gold Seekers": "#00c8e0", "AMRA": "#3d5afe", "GPAA": "#2ecc40", "49ers": "#ffd600" },
+  clubPalette: ["#00bfa5", "#ff6d00", "#aa00ff", "#c6ff00", "#ff1744", "#795548"],
+  clubDotsMaxZoom: 13,               // weiter herausgezoomt: Club-Claims als Sammelpunkte mit Anzahl          // Name der App (oben links, im Browser-Tab, in Exporten)
 
   // Sprache beim ersten Start: "en" oder "de" (umschaltbar im Menü)
   defaultLanguage: "en",
@@ -131,6 +135,25 @@ var APP_CONFIG = {
       offline: true
     },
     {
+      id: "lidar",
+      type: "exportImage",           // Bild wird für jede Kachel vom ArcGIS-Bildserver berechnet
+      name: { en: "LiDAR / terrain (USGS 3DEP)", de: "LiDAR / Gelände (USGS 3DEP)" },
+      url: "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer/exportImage",
+      attribution: "Elevation: USGS 3DEP",
+      opacity: 0.7,
+      visible: false,
+      offline: false,
+      // Ansichten (Auswahl im Ebenen-Fenster); id = Name der Darstellung auf dem USGS-Server
+      modes: [
+        { id: "Hillshade Multidirectional", name: { en: "Shaded relief (all directions) – best for old workings", de: "Schummerung (alle Richtungen) – am besten für alte Schürfungen" } },
+        { id: "Hillshade Gray", name: { en: "Shaded relief (light from NW)", de: "Schummerung (Licht von Nordwest)" } },
+        { id: "Hillshade Elevation Tinted", name: { en: "Shaded relief with height colors", de: "Schummerung mit Höhenfarben" } },
+        { id: "Slope Map", name: { en: "Slope (steepness)", de: "Hangneigung (Steilheit)" } },
+        { id: "Aspect Map", name: { en: "Aspect (facing direction)", de: "Hangrichtung" } },
+        { id: "Contour Smoothed 25", name: { en: "Contour lines (25 ft)", de: "Höhenlinien (25 ft)" }, format: "png32" }
+      ]
+    },
+    {
       id: "landStatus",
       type: "tiles",
       name: { en: "Land manager (BLM, state, private …)", de: "Landbesitz (BLM, Staat, privat …)" },
@@ -221,7 +244,7 @@ var APP_CONFIG = {
       name: { en: "Claims & posts (own / club)", de: "Claims & Pfosten (eigene / Club)" },
       privateColor: "#ff8c00",     // eigene, private Claims
       foreignColor: "#c03cc0",     // fremde Claims, die man für sich festhält
-      clubColor: "#00c8e0",        // mit dem Club geteilte Claims
+      clubColor: "#00c8e0",        // mit dem Club geteilte Claims (wenn der Club unten keine eigene Farbe hat)
       clubForeignColor: "#ff4fa0", // fremde Claims, die mit dem Club geteilt sind
       postsMinZoom: 15,            // Pfosten erst ab dieser Zoomstufe zeigen
       visible: true
@@ -478,7 +501,7 @@ var APP_CONFIG = {
       parkSavedAt: "Saved", navigate: "Navigate (Apple Maps)", deletePark: "Delete parking spot", parkDeleted: "Parking spot deleted",
 
       // Club-Umschalter, Hilfe, Verwaltung
-      activeClub: "Show club", allClubs: "All my clubs", help: "Help – how it works",
+      activeClub: "Show club", allClubs: "All my clubs", clubDotHint: "Tap to zoom in", lidarMode: "View", help: "Help – how it works",
       addMember: "Add person", addMemberHint: "Username of an existing account", userNotFound: "No account with this username.",
       memberAdded: "Added to club", userClubs: "Clubs", assignClub: "Add to club",
       dirs: "N,NE,E,SE,S,SW,W,NW"
@@ -591,7 +614,7 @@ var APP_CONFIG = {
       parkSavedAt: "Gespeichert", navigate: "Hinführen (Apple Karten)", deletePark: "Parkplatz löschen", parkDeleted: "Parkplatz gelöscht",
 
       // Club-Umschalter, Hilfe, Verwaltung
-      activeClub: "Club anzeigen", allClubs: "Alle meine Clubs", help: "Hilfe – so funktioniert's",
+      activeClub: "Club anzeigen", allClubs: "Alle meine Clubs", clubDotHint: "Antippen zum Hineinzoomen", lidarMode: "Ansicht", help: "Hilfe – so funktioniert's",
       addMember: "Person hinzufügen", addMemberHint: "Benutzername eines bestehenden Kontos", userNotFound: "Kein Konto mit diesem Benutzernamen.",
       memberAdded: "Zum Club hinzugefügt", userClubs: "Clubs", assignClub: "Zu Club hinzufügen",
       dirs: "N,NO,O,SO,S,SW,W,NW"

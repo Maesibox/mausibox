@@ -84,7 +84,7 @@ var Claims = (function () {
   }
 
   function color(c) {
-    if (c.visibility === "club") return c.folder === "foreign" ? (cfg.clubForeignColor || cfg.clubColor) : cfg.clubColor;
+    if (c.visibility === "club") return c.folder === "foreign" ? (cfg.clubForeignColor || cfg.clubColor) : App.clubColor(c.clubId);
     return c.folder === "foreign" ? (cfg.foreignColor || cfg.privateColor) : cfg.privateColor;
   }
 
@@ -436,7 +436,7 @@ var Claims = (function () {
           "<span class='item-text'><b>" + esc((f.properties && f.properties.name) || t("clubClaim")) + "</b>" +
           (f.properties && f.properties.description ? "<small>" + esc(f.properties.description.slice(0, 80)) + "</small>" : "") + "</span></button>";
       }).join("") : "";
-      html += folderHtml("club:" + cl.id, t("clubPrefix") + ": " + cl.name, cfg.clubColor,
+      html += folderHtml("club:" + cl.id, t("clubPrefix") + ": " + cl.name, App.clubColor(cl.id),
         items.filter(function (c) { return folderOf(c) === "club:" + cl.id; }), extra, null);
       var others = items.filter(function (c) { return folderOf(c) === "club:" + cl.id + ":foreign"; });
       if (others.length) html += folderHtml("club:" + cl.id + ":foreign", t("clubPrefix") + ": " + cl.name + " – " + t("clubOthers"),

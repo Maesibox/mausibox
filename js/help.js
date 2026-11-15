@@ -37,6 +37,8 @@ var Help = (function () {
       ["Mehrere Clubs", "Bist du in mehreren Clubs, wählst du oben im Ebenen-Fenster (oder in der Claims-Liste) den Club, dessen Claims du sehen willst – " +
         "oder alle. Der gewählte Club steht oben links neben dem App-Namen.<br>Admins teilen in der Verwaltung bestehende Konten einem Club zu " +
         "(Mitglieder → Person hinzufügen, oder bei „Alle Benutzer“)."],
+      ["LiDAR / Gelände", "Im Ebenen-Fenster <b>LiDAR / Gelände</b> einschalten und bei „Ansicht“ wählen: Schummerung (zeigt alte Schürfungen, Gräben, Terrassen), " +
+        "Hangneigung, Hangrichtung oder Höhenlinien. Mit dem Regler die Transparenz einstellen. Braucht Internet; das erste Laden dauert ein paar Sekunden."],
       ["Offline im Gelände", "Menü → <b>Offline-Karten</b>: Gebiet auf der Karte einstellen, Zoomstufe wählen, herunterladen – am besten zu Hause im WLAN. " +
         "Offline gehen USGS-Satellit, USGS-Topo, Geologie, Claims, Minen, Landbesitz und Schutzgebiete. Esri-Satellit und OSM brauchen Internet."],
       ["Sichern & Abgleich", "Mit Login werden deine Punkte, Strecken, Claims und Fotos automatisch über den Server abgeglichen (privat, nur für dich): " +
@@ -74,6 +76,8 @@ var Help = (function () {
         "“Visible for”: only me or a club. Coordinates on old notices are often NAD27 (up to ~100 m off)."],
       ["Several clubs", "If you are in several clubs, choose at the top of the layers panel (or in the claims list) which club's claims to show – or all. " +
         "The chosen club appears next to the app name.<br>Admins add existing accounts to a club in Administration (Members → Add person, or under All users)."],
+      ["LiDAR / terrain", "Switch on <b>LiDAR / terrain</b> in the layers panel and choose a view: shaded relief (shows old workings, trenches, terraces), " +
+        "slope, aspect or contour lines. Use the slider for transparency. Needs internet; the first load takes a few seconds."],
       ["Offline in the field", "Menu → <b>Offline maps</b>: set the area on the map, choose the zoom level, download – best at home on Wi-Fi. " +
         "Offline works for USGS satellite, USGS topo, geology, claims, mines, land manager and protected areas. Esri satellite and OSM need internet."],
       ["Backup & sync", "When signed in, your points, routes, claims and photos sync automatically through the server (private, only you): " +

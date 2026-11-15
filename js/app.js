@@ -267,6 +267,7 @@ var App = (function () {
     applyClubFilter();
     Claims.redrawAll();
     updateTitle();
+    updateClubDots();
   }
   function applyClubFilter() {
     var group = overlayObjs.club;
@@ -275,6 +276,69 @@ var App = (function () {
       if (group) { if (show) group.addLayer(f.layer); else group.removeLayer(f.layer); }
     });
   }
+  // Farbe eines Clubs: aus config.js (clubColors nach Name), sonst fest aus der Palette
+  function clubColor(clubId) {
+    var club = myClubs().filter(function (c) { return c.id === clubId; })[0];
+    if (club && C.clubColors && C.clubColors[club.name]) return C.clubColors[club.name];
+    var pal = C.clubPalette || ["#18c018"], h = 0, key = String(clubId || "");
+    for (var i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) >>> 0;
+    return clubId ? pal[h % pal.length] : (overlayCfg("club") || {}).color || "#18c018";
+  }
+
+  // ---------- Sammelpunkte: beim Herauszoomen sieht man, wo Club-Claims liegen ----------
+
+  var clubDots = L.layerGroup();
+  function centerOf(f) {
+    var g = f.geometry;
+    if (!g) return null;
+    if (g.type === "Point") return [g.coordinates[1], g.coordinates[0]];
+    var b = L.geoJSON(f).getBounds();
+    return b.isValid() ? [b.getCenter().lat, b.getCenter().lng] : null;
+  }
+  function updateClubDots() {
+    clubDots.clearLayers();
+    if (!map || !overlayState.club || map.getZoom() > (C.clubDotsMaxZoom || 13)) return;
+    var items = [];
+    clubFiles.forEach(function (file) {
+      if (!clubVisible(file.clubId)) return;
+      file.features.forEach(function (f) {
+        if (f.geometry && f.geometry.type === "Point") return;   // Zusatzpunkte (Zufahrt, Basecamp) nicht mitzählen
+        var c = centerOf(f);
+        if (c) items.push({ ll: c, clubId: file.clubId, club: file.club });
+      });
+    });
+    Claims.all().forEach(function (c) {
+      if (c.deleted || c.visibility !== "club" || !clubVisible(c.clubId) || !(c.posts || []).length) return;
+      var lat = 0, lon = 0;
+      c.posts.forEach(function (p) { lat += p.lat; lon += p.lon; });
+      var club = myClubs().filter(function (x) { return x.id === c.clubId; })[0];
+      items.push({ ll: [lat / c.posts.length, lon / c.posts.length], clubId: c.clubId, club: club ? club.name : "" });
+    });
+    // pro Club in ein Raster von 60 Bildschirmpunkten zusammenfassen
+    var cells = {};
+    items.forEach(function (it) {
+      var pt = map.project(it.ll);
+      var key = it.clubId + ":" + Math.floor(pt.x / 60) + ":" + Math.floor(pt.y / 60);
+      (cells[key] = cells[key] || { clubId: it.clubId, club: it.club, pts: [] }).pts.push(it.ll);
+    });
+    Object.keys(cells).forEach(function (k) {
+      var cell = cells[k], n = cell.pts.length, lat = 0, lon = 0;
+      cell.pts.forEach(function (p) { lat += p[0]; lon += p[1]; });
+      var s = n > 9 ? 34 : 28;
+      var m = L.marker([lat / n, lon / n], {
+        icon: L.divIcon({ className: "club-dot-icon", iconSize: [s, s], iconAnchor: [s / 2, s / 2],
+          html: "<div class='club-dot' style='background:" + esc(clubColor(cell.clubId)) + "'>" + n + "</div>" }),
+        zIndexOffset: 800
+      });
+      m.bindTooltip(esc(cell.club) + " · " + n + " " + t("claims") + " – " + t("clubDotHint"));
+      m.on("click", function () {
+        if (n === 1) map.setView(cell.pts[0], (C.clubDotsMaxZoom || 13) + 2);
+        else map.fitBounds(cell.pts, { padding: [60, 60], maxZoom: (C.clubDotsMaxZoom || 13) + 2 });
+      });
+      clubDots.addLayer(m);
+    });
+  }
+
   function clubFeatures() {
     return clubFiles.filter(function (f) { return clubVisible(f.clubId); })
       .reduce(function (all, f) { return all.concat(f.features); }, []);
@@ -292,6 +356,22 @@ var App = (function () {
       crossOrigin: true,
       opacity: cfg.opacity == null ? 1 : cfg.opacity
     }, extra || {}));
+  }
+
+  // Kacheln, die ein ArcGIS-Bildserver für jeden Ausschnitt berechnet (z. B. LiDAR-Schummerung)
+  var ExportImageLayer = L.TileLayer.extend({
+    getTileUrl: function (coords) {
+      var b = this._tileCoordsToBounds(coords);
+      var sw = L.CRS.EPSG3857.project(b.getSouthWest()), ne = L.CRS.EPSG3857.project(b.getNorthEast());
+      var mode = this.options.mode || {};
+      return this.options.baseUrl + "?bbox=" + [sw.x, sw.y, ne.x, ne.y].map(function (v) { return v.toFixed(2); }).join(",") +
+        "&bboxSR=3857&imageSR=3857&size=256,256&format=" + (mode.format || "jpgpng") +
+        "&renderingRule=" + encodeURIComponent(JSON.stringify({ rasterFunction: mode.id })) + "&f=image";
+    }
+  });
+  function lidarMode(cfg) {
+    var id = pref("mode." + cfg.id, null);
+    return cfg.modes.filter(function (m) { return m.id === id; })[0] || cfg.modes[0];
   }
 
   // Ebene, die Daten zellenweise beim Verschieben der Karte nachlädt
@@ -336,6 +416,10 @@ var App = (function () {
 
   function buildOverlay(cfg) {
     if (cfg.type === "tiles") return makeTileLayer(cfg, { zIndex: 10 });
+    if (cfg.type === "exportImage") {
+      return new ExportImageLayer("", { baseUrl: cfg.url, mode: lidarMode(cfg), attribution: cfg.attribution, maxZoom: 20, maxNativeZoom: 18,
+        crossOrigin: true, zIndex: 9, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
+    }
     if (cfg.type === "userClaims") return Claims.layer;
 
     if (cfg.type === "blmClaims") {
@@ -380,11 +464,12 @@ var App = (function () {
       var group = L.featureGroup();
       var addGeoJSON = function (gj, file) {
         var features = [];
+        var col = file.clubId ? clubColor(file.clubId) : cfg.color;
         var layer = L.geoJSON(gj, {
-          style: { color: cfg.color, weight: 2, fillColor: cfg.color, fillOpacity: cfg.fillOpacity },
+          style: { color: col, weight: 2, fillColor: col, fillOpacity: cfg.fillOpacity },
           interactive: false,
           pointToLayer: function (f, ll) {
-            return L.circleMarker(ll, { radius: 6, color: "#000", weight: 1, fillColor: cfg.color, fillOpacity: 1, interactive: false });
+            return L.circleMarker(ll, { radius: 6, color: "#000", weight: 1, fillColor: col, fillOpacity: 1, interactive: false });
           },
           onEachFeature: function (f) {
             f.properties = f.properties || {};
@@ -400,6 +485,7 @@ var App = (function () {
         // Mit Login: Club-Claims kommen vom Server, nur für Mitglieder
         Auth.clubFiles().then(function (files) {
           files.forEach(function (f) { addGeoJSON(f.geojson, f); });
+          updateClubDots();
         });
         return group;
       }
@@ -623,6 +709,7 @@ var App = (function () {
     var layer = overlayObjs[id];
     overlayState[id] = on;
     if (on) layer.addTo(map); else { map.removeLayer(layer); setLayerNote(id, ""); }
+    if (id === "club") updateClubDots();
     savedOverlays[id] = on;
     setPref("overlays", savedOverlays);
   }
@@ -660,7 +747,18 @@ var App = (function () {
       html += "<div class='opt-row'><label class='opt'><input type='checkbox' value='" + esc(o.id) + "'" + (overlayState[o.id] ? " checked" : "") + "> " +
         (o.color ? "<span class='swatch' style='background:" + esc(o.color) + "'></span>" : "") + esc(tr(o.name)) + "</label>" +
         "<div class='note' data-note='" + esc(o.id) + "'></div>";
-      if (o.type === "tiles") {
+      if (o.type === "exportImage" && o.modes) {
+        var cur = lidarMode(o);
+        html += "<label class='mode'>" + esc(t("lidarMode")) + " <select data-mode='" + esc(o.id) + "'>" + o.modes.map(function (m) {
+          return "<option value='" + esc(m.id) + "'" + (m.id === cur.id ? " selected" : "") + ">" + esc(tr(m.name)) + "</option>";
+        }).join("") + "</select></label>";
+      }
+      if (o.type === "file" && myClubs().length) {
+        html += "<div class='legend'>" + myClubs().map(function (c) {
+          return "<span><i style='background:" + esc(clubColor(c.id)) + "'></i>" + esc(c.name) + "</span>";
+        }).join("") + "</div>";
+      }
+      if (o.type === "tiles" || o.type === "exportImage") {
         var op = savedOpacity[o.id] != null ? savedOpacity[o.id] : o.opacity;
         html += "<input class='opacity' type='range' min='0.1' max='1' step='0.1' data-op='" + esc(o.id) + "' value='" + op + "'>";
       }
@@ -678,6 +776,13 @@ var App = (function () {
     body.addEventListener("change", function (e) {
       var inp = e.target;
       if (inp.hasAttribute("data-club-switch")) { setActiveClub(inp.value); return; }
+      if (inp.dataset.mode) {
+        var oc = overlayCfg(inp.dataset.mode);
+        setPref("mode." + oc.id, inp.value);
+        if (overlayObjs[oc.id]) { overlayObjs[oc.id].options.mode = lidarMode(oc); overlayObjs[oc.id].redraw(); }
+        if (!overlayState[oc.id]) { setOverlay(oc.id, true); var cb = body.querySelector("input[type=checkbox][value='" + oc.id + "']"); if (cb) cb.checked = true; }
+        return;
+      }
       if (inp.value === "__tracks") { Tracks.setVisible(inp.checked); return; }
       if (inp.name === "base") setBase(inp.value);
       else if (inp.value === "__points") setPointsVisible(inp.checked);
@@ -828,6 +933,8 @@ var App = (function () {
 
     var baseId = pref("base", null) || (C.basemaps.filter(function (b) { return b.default; })[0] || C.basemaps[0]).id;
     setBase(baseId);
+    clubDots.addTo(map);
+    map.on("zoomend moveend", updateClubDots);
 
     C.overlays.forEach(function (o) {
       if (savedOpacity[o.id] != null) o.opacity = savedOpacity[o.id];
@@ -866,6 +973,7 @@ var App = (function () {
     Tracks.init(map);
     Parking.init(map);
     Sync.init();
+    setTimeout(updateClubDots, 3000);   // nachdem die Claims geladen sind
 
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js").catch(function (e) { console.warn("SW", e); });
@@ -874,7 +982,7 @@ var App = (function () {
   }
 
   return {
-    init: init, t: t, tr: tr, esc: esc, el: el, toast: toast, formatCoord: formatCoord,
+    init: init, clubColor: clubColor, updateClubDots: updateClubDots, t: t, tr: tr, esc: esc, el: el, toast: toast, formatCoord: formatCoord,
     openSheet: openSheet, closeSheet: closeSheet, onSheetClose: onSheetClose, pref: pref, setPref: setPref,
     get map() { return map; }, get gps() { return gps.last; }, get lang() { return lang; },
     startGps: startGps, distance: distance, direction: direction, formatDistance: formatDistance,
