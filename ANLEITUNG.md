@@ -51,6 +51,11 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 29
+- **Europa:** Natura-2000-Gebiete, Nationalparks & Naturschutzgebiete (EU-Umweltagentur), **Gold-Regeln pro Land** beim Antippen (`countryRules` in `config.js`).
+- **Österreich:** ca. 400 Goldvorkommen (GeoSphere IRIS) als gelbe Punkte, alle Lagerstätten, Geologie & Tektonik 1:500 000, Grundkarten basemap.at und Luftbild 30 cm.
+- Karte springt beim Verschieben über die Datumsgrenze in die echte Welt zurück (NZ-Flächen waren sonst unsichtbar).
+
 ## Neu in Version 20
 - **Neuseeland:** Goldvorkommen (GNS, über 1400 Fundstellen), Gelände-Schummerung 8 m (ganz NZ), aktive Störungen, geologische Karte 1:250 000.
 - **Schweiz:** LiDAR-Relief swissALTI3D (3 Ansichten), Geologie (GeoCover 1:25 000, 1:500 000, Tektonik, Störungen), Aeromagnetik.

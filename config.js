@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 28,
+  appVersion: 29,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -91,6 +91,22 @@ var APP_CONFIG = {
       offline: true
     },
     {
+      id: "basemapat",
+      name: { en: "Austria map (basemap.at, Austria only)", de: "Österreich-Karte (basemap.at, nur Österreich)" },
+      url: "https://maps.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png",
+      attribution: "© basemap.at",
+      maxNativeZoom: 19,
+      offline: true
+    },
+    {
+      id: "orthoat",
+      name: { en: "Austria aerial photos 30 cm (basemap.at, Austria only)", de: "Österreich-Luftbild 30 cm (basemap.at, nur Österreich)" },
+      url: "https://maps.wien.gv.at/basemap/bmaporthofoto30cm/normal/google3857/{z}/{y}/{x}.jpeg",
+      attribution: "© basemap.at",
+      maxNativeZoom: 19,
+      offline: true
+    },
+    {
       id: "osm",
       name: { en: "Street map (OSM, online only)", de: "Strassenkarte (OSM, nur online)" },
       url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -148,8 +164,29 @@ var APP_CONFIG = {
     { id: "general", name: { en: "General", de: "Allgemein" }, open: true },
     { id: "us", name: { en: "🇺🇸 USA (BLM, USGS …)", de: "🇺🇸 USA (BLM, USGS …)" }, open: true },
     { id: "nz", name: { en: "🇳🇿 New Zealand", de: "🇳🇿 Neuseeland" } },
-    { id: "ch", name: { en: "🇨🇭 Switzerland", de: "🇨🇭 Schweiz" } }
+    { id: "ch", name: { en: "🇨🇭 Switzerland", de: "🇨🇭 Schweiz" } },
+    { id: "eu", name: { en: "🇪🇺 Europe (all countries)", de: "🇪🇺 Europa (alle Länder)" } },
+    { id: "at", name: { en: "🇦🇹 Austria", de: "🇦🇹 Österreich" } }
   ],
+
+  // Gold-Regeln pro Land (Ebene "Gold-Regeln pro Land", Karte antippen). Schlüssel = Ländercode (EU-Landesgrenzen GISCO)
+  countryRules: {
+    AT: {
+      name: { en: "Austria", de: "Österreich" }, level: "limited",
+      rule: { en: "Gold is a 'free' mineral (MinroG): searching must be reported to the mining authority, and the landowner must agree beforehand.",
+              de: "Gold ist ein bergfreier Rohstoff (MinroG): Die Suche muss der Montanbehörde angezeigt werden, vorher braucht es die Zustimmung des Grundeigentümers." },
+      details: { en: "In addition: nature-protection laws of the federal states (some forbid certain tools), national park laws (e.g. Hohe Tauern – stricter), fishing and water law. Easy legal start: official gold-panning sites and show mines (e.g. Rauris, Heiligenblut). Collecting minerals as hand specimens is not covered by MinroG, but state rules apply.",
+                 de: "Zusätzlich gelten: Naturschutzgesetze der Bundesländer (teils Verbot bestimmter Hilfsmittel), Nationalparkgesetze (z. B. Hohe Tauern – strenger), Fischerei- und Wasserrecht. Einfacher legaler Einstieg: offizielle Goldwaschplätze und Schaubergwerke (z. B. Rauris, Heiligenblut). Mineraliensammeln (Handstücke) fällt nicht unter das MinroG, Landesrecht gilt trotzdem." },
+      source: "Bundesministerium für Finanzen, Montanbehörde (Stand Nov. 2026)",
+      link: "https://www.bmf.gv.at/themen/bergbau/rechtsangelegenheiten-im-bergbau/goldsuche-und-sammeln-von-mineralien-in-oesterreich.html"
+    },
+    CH: {
+      name: { en: "Switzerland", de: "Schweiz" }, level: "limited",
+      rule: { en: "Rules differ per canton – switch on 'Gold panning rules per canton' (group Switzerland) and tap the map.",
+              de: "Regeln je Kanton verschieden – Ebene „Goldwasch-Regeln pro Kanton“ (Gruppe Schweiz) einschalten und Karte antippen." },
+      link: "https://www.goldwaschen.ch/gold-in-der-schweiz/kantonale-bestimmungen/"
+    }
+  },
 
   overlays: [
     {
@@ -406,6 +443,81 @@ var APP_CONFIG = {
       attribution: "GNS Science – QMAP",
       opacity: 0.55, visible: false, offline: false,
       arcIdentify: { layers: "top", tolerance: 2, max: 2 }
+    },
+    // ---------- EUROPA (EU-weit) ----------
+    {
+      id: "euRules",
+      group: "eu",
+      type: "countryRules",
+      name: { en: "Gold rules per country (tap the map)", de: "Gold-Regeln pro Land (Karte antippen)" },
+      bordersUrl: "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson",
+      attribution: "Borders: © EuroGeographics (GISCO)",
+      visible: false, offline: false
+    },
+    {
+      id: "euNatura2000",
+      group: "eu",
+      type: "arcgisExport",
+      name: { en: "Natura 2000 protected sites (EU)", de: "Natura-2000-Schutzgebiete (EU)" },
+      url: "https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/Natura2000Sites/MapServer",
+      attribution: "EEA – Natura 2000",
+      opacity: 0.6, visible: false, offline: false,
+      arcIdentify: { layers: "visible", tolerance: 0, max: 1, title: "SITENAME",
+        fields: [ { field: "SITECODE", label: { en: "Site code", de: "Gebietsnummer" } }, { field: "MS", label: { en: "Country", de: "Land" } },
+                  { field: "Area_km2", label: { en: "Area (km²)", de: "Fläche (km²)" } } ] }
+    },
+    {
+      id: "euNatDA",
+      group: "eu",
+      type: "arcgisExport",
+      name: { en: "National parks & nature reserves (EU, national lists)", de: "Nationalparks & Naturschutzgebiete (EU, nationale Listen)" },
+      url: "https://bio.discomap.eea.europa.eu/arcgis/rest/services/ProtectedSites/NatDAv24_Dyna_WM/MapServer",
+      attribution: "EEA – Nationally designated areas",
+      opacity: 0.6, visible: false, offline: false,
+      arcIdentify: { layers: "visible", tolerance: 0, max: 2 }
+    },
+    // ---------- ÖSTERREICH (GeoSphere Austria) ----------
+    {
+      id: "atGold",
+      group: "at",
+      type: "arcgisPoints",
+      name: { en: "Gold occurrences Austria (GeoSphere IRIS, ~400)", de: "Goldvorkommen Österreich (GeoSphere IRIS, ca. 400)" },
+      url: "https://gis.geosphere.at/maps/rest/services/IRIS/Lagerstaetten/MapServer/0",
+      where: "HAUPTROHSTOFF LIKE '%Gold%' OR WERTSTOFFE LIKE '%Gold%'",
+      outFields: "VORK_NAME,HAUPTROHSTOFF,WERTSTOFFE,MINERALIEN,STATUS_TXT,GBA_BETR_DAUER,ART_TXT",
+      color: "#ffd700", radius: 8,
+      attribution: "GeoSphere Austria – IRIS",
+      visible: false, offline: false,
+      popup: { title: "VORK_NAME", fields: [
+        { field: "HAUPTROHSTOFF", label: { en: "Main raw material", de: "Hauptrohstoff" } },
+        { field: "WERTSTOFFE", label: { en: "Valuable minerals", de: "Wertstoffe" } },
+        { field: "MINERALIEN", label: { en: "Minerals", de: "Mineralien" } },
+        { field: "STATUS_TXT", label: { en: "Status", de: "Status" } },
+        { field: "GBA_BETR_DAUER", label: { en: "Mined", de: "Betrieb" } } ] }
+    },
+    {
+      id: "atDeposits",
+      group: "at",
+      type: "arcgisExport",
+      name: { en: "All deposits & old mines Austria (IRIS)", de: "Alle Lagerstätten & alten Bergbaue Österreich (IRIS)" },
+      url: "https://gis.geosphere.at/maps/rest/services/IRIS/Lagerstaetten/MapServer",
+      show: "0",
+      attribution: "GeoSphere Austria – IRIS",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:0", tolerance: 8, max: 3, title: "VORK_NAME",
+        fields: [ { field: "HAUPTROHSTOFF", label: { en: "Main raw material", de: "Hauptrohstoff" } }, { field: "WERTSTOFFE", label: { en: "Valuable minerals", de: "Wertstoffe" } },
+                  { field: "STATUS_TXT", label: { en: "Status", de: "Status" } } ] }
+    },
+    {
+      id: "atGeology",
+      group: "at",
+      type: "arcgisExport",
+      name: { en: "Geology & tectonics Austria 1:500 000 (GeoSphere)", de: "Geologie & Tektonik Österreich 1:500 000 (GeoSphere)" },
+      url: "https://gis.geosphere.at/maps/rest/services/geologie/karte_500/MapServer",
+      attribution: "GeoSphere Austria",
+      opacity: 0.55, visible: false, offline: false,
+      arcIdentify: { layers: "visible", tolerance: 3, max: 2, title: "LEGTEXT_DE",
+        fields: [ { field: "ALTER_DE", label: { en: "Age", de: "Alter" } }, { field: "LITHOL_DE", label: { en: "Rock", de: "Gestein" } } ] }
     },
     // ---------- SCHWEIZ (Bundesdaten geo.admin.ch – live) ----------
     {
@@ -708,7 +820,7 @@ var APP_CONFIG = {
     en: {
       layers: "Layers", basemap: "Base map", overlays: "Layers",
       gps: "My location", addPoint: "Add point", points: "My points", menu: "Menu",
-      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", loading: "Loading…", loadError: "Could not load",
+      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", loading: "Loading…", loadError: "Could not load",
       gpsWaiting: "Waiting for GPS…", gpsError: "GPS not available", accuracy: "accuracy",
       name: "Name", note: "Note", category: "Category", photos: "Photos", addPhoto: "Add photo",
       position: "Position", useGps: "Use GPS", useCenter: "Use map center",
@@ -821,7 +933,7 @@ var APP_CONFIG = {
     de: {
       layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen",
       gps: "Mein Standort", addPoint: "Punkt setzen", points: "Meine Punkte", menu: "Menü",
-      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", loading: "Lade…", loadError: "Laden fehlgeschlagen",
+      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", loading: "Lade…", loadError: "Laden fehlgeschlagen",
       gpsWaiting: "Warte auf GPS…", gpsError: "GPS nicht verfügbar", accuracy: "Genauigkeit",
       name: "Name", note: "Notiz", category: "Kategorie", photos: "Fotos", addPhoto: "Foto hinzufügen",
       position: "Position", useGps: "GPS verwenden", useCenter: "Kartenmitte verwenden",

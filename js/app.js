@@ -467,6 +467,38 @@ var App = (function () {
 
   function buildOverlay(cfg) {
     if (cfg.type === "tiles") return makeTileLayer(cfg, { zIndex: 10 });
+    // Punkte direkt von einem ArcGIS-Server (z. B. Goldvorkommen Österreich) – gut sichtbar, antippbar
+    if (cfg.type === "arcgisPoints") {
+      var pg = L.featureGroup();
+      var q = cfg.url + "/query?where=" + encodeURIComponent(cfg.where || "1=1") + "&outFields=" + encodeURIComponent(cfg.outFields || "*") +
+        "&outSR=4326&returnGeometry=true&f=geojson";
+      setLayerNote(cfg.id, t("loading"));
+      cachedFetch(q, "json").then(function (d) {
+        var feats = (d.features || []).filter(function (f) { return f.geometry && f.geometry.type === "Point"; });
+        feats.forEach(function (f) {
+          var a = f.properties || {}, c = f.geometry.coordinates, pc = cfg.popup || {};
+          var m = L.circleMarker([c[1], c[0]], { radius: cfg.radius || 8, color: "#000", weight: 1.5, fillColor: cfg.color, fillOpacity: 1, bubblingMouseEvents: false });
+          m.bindPopup(function () {
+            return "<div class='pop'><div class='pop-sec' style='border-left:4px solid " + esc(cfg.color) + ";padding-left:8px'><h3>" + esc(a[pc.title] || "") + "</h3>" +
+              "<div class='pop-sub'>" + esc(tr(cfg.name)) + "</div><table>" +
+              (pc.fields || []).map(function (fd) { return row(tr(fd.label), a[fd.field]); }).join("") + "</table>" +
+              (pc.link ? "<a href='" + esc(pc.link.url) + "' target='_blank' rel='noopener'>" + esc(tr(pc.link.text)) + " ↗</a>" : "") +
+              navLink(c[1], c[0]) + "</div></div>";
+          }, { maxWidth: 290 });
+          pg.addLayer(m);
+        });
+        cfg._note = "✓ " + feats.length;
+        setLayerNote(cfg.id, cfg._note);
+      }).catch(function (err) { cfg._note = t("loadError"); setLayerNote(cfg.id, cfg._note); });
+      return pg;
+    }
+    // Regeln pro Land: Landesgrenzen laden, beim Antippen das Land bestimmen (nichts zu zeichnen)
+    if (cfg.type === "countryRules") {
+      var cg = L.featureGroup();
+      cachedFetch(cfg.bordersUrl, "json").then(function (d) { cfg._countries = d.features || []; })
+        .catch(function () { setLayerNote(cfg.id, t("loadError")); });
+      return cg;
+    }
     if (cfg.type === "arcgisExport") {
       return new ExportImageLayer("", { mapServer: true, baseUrl: cfg.url, show: cfg.show, attribution: cfg.attribution, maxZoom: 20,
         crossOrigin: true, zIndex: 10, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
@@ -828,6 +860,17 @@ var App = (function () {
       if (o.type === "areaPolygons") hits.forEach(function (f) { parts.push(o.popup ? infoAreaHtml(f, o) : areaHtml(f, o)); });
       if (o.type === "file") clubFeatures().filter(function (f) { return hit(f, lon, lat); }).forEach(function (f) { parts.push(clubHtml(f)); });
       if (o.type === "userClaims") parts = parts.concat(Claims.hitHtml(lon, lat));
+      if (o.type === "countryRules" && o._countries) {
+        var land = o._countries.filter(function (f) { return hit(f, lon, lat); })[0];
+        var code = land && (land.properties.CNTR_ID || land.properties.ISO3_CODE);
+        var rule = code && (C.countryRules || {})[code];
+        if (rule) parts.push("<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(t("goldRules")) + " · " + esc(tr(rule.name)) + "</h3>" +
+          "<p class='verdict " + esc(rule.level || "limited") + "'>" + esc(tr(rule.rule)) + "</p>" +
+          (rule.details ? "<p class='note-text'>" + esc(tr(rule.details)) + "</p>" : "") +
+          (rule.source ? "<div class='src'>" + esc(t("rulesSource")) + ": " + esc(rule.source) + "</div>" : "") +
+          (rule.link ? "<a href='" + esc(rule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") +
+          "<p class='hint'>" + esc(t("landHint")) + "</p></div>");
+      }
     });
 
     // Angaben, die erst vom Server geholt werden (Landbesitz, Geologie)
