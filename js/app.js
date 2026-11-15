@@ -538,6 +538,7 @@ var App = (function () {
       if (cfg.file) {
         cfg._renderer = L.svg({ padding: 0.3 });
         var fg = L.featureGroup();
+        cfg._fg = fg;
         setLayerNote(cfg.id, t("loading"));
         Promise.all([cachedFetch(cfg.file, "json"), cfg.metaFile ? cachedFetch(cfg.metaFile, "json").catch(function () { return {}; }) : {}])
           .then(function (r) {
@@ -979,7 +980,7 @@ var App = (function () {
       var html = "";
       html += "<div class='opt-row'><label class='opt'><input type='checkbox' value='" + esc(o.id) + "'" + (overlayState[o.id] ? " checked" : "") + "> " +
         (o.color ? "<span class='swatch' style='background:" + esc(o.color) + "'></span>" : "") + esc(tr(o.name)) + "</label>" +
-        "<div class='note' data-note='" + esc(o.id) + "'>" + esc(o._note || "") + "</div>";
+        "<div class='note' data-note='" + esc(o.id) + "'>" + esc((o._note || "") + diagText(o)) + "</div>";
       if (o.recentFilter) {
         var fv = pref("blmFilter." + o.id, "all");
         html += "<label class='mode'><select data-blmfilter='" + esc(o.id) + "'>" +
@@ -1016,7 +1017,8 @@ var App = (function () {
     }
     html += "<label class='opt'><input type='checkbox' value='__points'" + (pointsVisible ? " checked" : "") + "> " + esc(t("points")) + "</label>" +
       "<label class='opt'><input type='checkbox' value='__tracks'" + (Tracks.visible ? " checked" : "") + "> " + esc(t("tracks")) + "</label>" +
-      "<p class='hint'>Version " + esc(C.appVersion) + "</p></div>";
+      "<p class='hint'>Version " + esc(C.appVersion) + " · " + esc((navigator.userAgent.match(/OS [\d_]+|Chrome\/\d+|Version\/[\d.]+/g) || []).join(" ")) +
+      " · zoom " + map.getZoom() + "</p></div>";
 
     var body = el(html);
     // aufgeklappte Gruppen merken
@@ -1249,6 +1251,20 @@ var App = (function () {
       checkForUpdate();
     }
     startGps(false);
+  }
+
+  // Diagnose für Ebenen aus Dateien: ist die Ebene auf der Karte, wie viele Flächen liegen im Ausschnitt?
+  function diagText(o) {
+    if (!o._fg || !map) return "";
+    var b = map.getBounds(), n = 0, all = 0;
+    o._fg.eachLayer(function (l) {
+      all++;
+      var lb = l.getBounds ? l.getBounds() : l.getLatLng && L.latLngBounds([l.getLatLng(), l.getLatLng()]);
+      if (lb && lb.isValid() && b.intersects(lb)) n++;
+    });
+    var svg = o._renderer && o._renderer._container;
+    return " · map:" + (map.hasLayer(o._fg) ? "yes" : "NO") + " · view:" + n + "/" + all +
+      " · svg:" + (svg ? (svg.getAttribute("width") || "?") + "x" + (svg.getAttribute("height") || "?") + (svg.parentNode ? "" : " (detached)") : "none");
   }
 
   var shownErrors = {};
