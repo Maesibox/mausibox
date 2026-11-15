@@ -51,6 +51,11 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 30
+- **Europa:** Edelmetall-Vorkommen, Bergwerke und Geologie 1:1 Mio. (EGDI) – deckt auch Frankreich und Italien ab.
+- **Deutschland:** Geologie 1:250 000 (BGR) mit Quarzgängen und Tektonik. **Spanien:** ca. 880 Goldvorkommen und Geologie 1:50 000 (IGME).
+- Gold-Regeln für Deutschland, Frankreich, Italien, Spanien (Ebene „Gold-Regeln pro Land“).
+
 ## Neu in Version 29
 - **Europa:** Natura-2000-Gebiete, Nationalparks & Naturschutzgebiete (EU-Umweltagentur), **Gold-Regeln pro Land** beim Antippen (`countryRules` in `config.js`).
 - **Österreich:** ca. 400 Goldvorkommen (GeoSphere IRIS) als gelbe Punkte, alle Lagerstätten, Geologie & Tektonik 1:500 000, Grundkarten basemap.at und Luftbild 30 cm.

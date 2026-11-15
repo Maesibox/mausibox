@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 29,
+  appVersion: 30,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -166,7 +166,9 @@ var APP_CONFIG = {
     { id: "nz", name: { en: "🇳🇿 New Zealand", de: "🇳🇿 Neuseeland" } },
     { id: "ch", name: { en: "🇨🇭 Switzerland", de: "🇨🇭 Schweiz" } },
     { id: "eu", name: { en: "🇪🇺 Europe (all countries)", de: "🇪🇺 Europa (alle Länder)" } },
-    { id: "at", name: { en: "🇦🇹 Austria", de: "🇦🇹 Österreich" } }
+    { id: "at", name: { en: "🇦🇹 Austria", de: "🇦🇹 Österreich" } },
+    { id: "de", name: { en: "🇩🇪 Germany", de: "🇩🇪 Deutschland" } },
+    { id: "es", name: { en: "🇪🇸 Spain", de: "🇪🇸 Spanien" } }
   ],
 
   // Gold-Regeln pro Land (Ebene "Gold-Regeln pro Land", Karte antippen). Schlüssel = Ländercode (EU-Landesgrenzen GISCO)
@@ -179,6 +181,38 @@ var APP_CONFIG = {
                  de: "Zusätzlich gelten: Naturschutzgesetze der Bundesländer (teils Verbot bestimmter Hilfsmittel), Nationalparkgesetze (z. B. Hohe Tauern – strenger), Fischerei- und Wasserrecht. Einfacher legaler Einstieg: offizielle Goldwaschplätze und Schaubergwerke (z. B. Rauris, Heiligenblut). Mineraliensammeln (Handstücke) fällt nicht unter das MinroG, Landesrecht gilt trotzdem." },
       source: "Bundesministerium für Finanzen, Montanbehörde (Stand Nov. 2026)",
       link: "https://www.bmf.gv.at/themen/bergbau/rechtsangelegenheiten-im-bergbau/goldsuche-und-sammeln-von-mineralien-in-oesterreich.html"
+    },
+    DE: {
+      name: { en: "Germany", de: "Deutschland" }, level: "limited",
+      rule: { en: "Hobby gold panning (pan, no machines) is usually tolerated on the known gold rivers (e.g. Rhine, Isar, Eder, Schwarza). Bank access, nature protection and fishing rules still apply; commercial mining falls under mining law.",
+              de: "Hobby-Goldwaschen (Pfanne, keine Maschinen) ist an den bekannten Goldflüssen meist geduldet (z. B. Rhein, Isar, Eder, Schwarza). Uferbetretung, Naturschutz und Fischereiregeln gelten trotzdem; gewerbliche Gewinnung ist Bergrecht." },
+      details: { en: "Metal detector: monument protection is a state matter – targeted searching almost everywhere needs a permit from the state heritage office (NFG); all states have a 'treasure law'. Strictest: Schleswig-Holstein. Nature reserves and national parks: no collecting.",
+                 de: "Metalldetektor: Denkmalrecht ist Ländersache – gezielte Suche braucht fast überall eine Nachforschungsgenehmigung (NFG) des Landesdenkmalamts; alle Länder haben ein Schatzregal. Am strengsten: Schleswig-Holstein. Naturschutzgebiete und Nationalparks: tabu." },
+      source: "orecast.app – Kurzlage Recht (Stand Sept. 2026), keine Rechtsberatung", link: "https://orecast.app/recht"
+    },
+    FR: {
+      name: { en: "France", de: "Frankreich" }, level: "limited",
+      rule: { en: "Gold panning must be declared or authorised in some départements (e.g. classic rivers of the Cévennes and Pyrenees). Clubs help with the paperwork. National parks and reserves forbid taking anything.",
+              de: "Goldwaschen ist in einigen Départements anmelde- oder genehmigungspflichtig (z. B. klassische Flüsse in den Cevennen und Pyrenäen). Vereine helfen beim Papierkram. Nationalparks und Reservate: keine Entnahme." },
+      details: { en: "Metal detector: searching for objects of historical interest without an official permit is forbidden (Code du patrimoine) and enforced.",
+                 de: "Metalldetektor: Suche nach Objekten von historischem Interesse ohne behördliche Genehmigung verboten (Code du patrimoine) – wird ernst genommen." },
+      source: "orecast.app – Kurzlage Recht (Stand Sept. 2026), keine Rechtsberatung", link: "https://orecast.app/recht"
+    },
+    IT: {
+      name: { en: "Italy", de: "Italien" }, level: "limited",
+      rule: { en: "Historic gold rivers (Piedmont, e.g. Ticino, Orba, Elvo) have local panning traditions and clubs; rules are regional. Outside organised areas: be cautious and ask locally.",
+              de: "Historische Goldflüsse (Piemont, z. B. Ticino, Orba, Elvo) haben lokale Waschtraditionen und Vereine; Regeln sind regional. Ausserhalb organisierter Reviere: zurückhaltend sein und vor Ort fragen." },
+      details: { en: "Strict country: cultural goods belong to the state; many regions also restrict taking minerals and fossils (Elba!). Metal detecting for antiquities is practically forbidden.",
+                 de: "Strenges Land: Kulturgüter gehören dem Staat; viele Regionen beschränken auch Mineralien- und Fossilentnahme (Elba!). Detektorsuche nach Antiken praktisch verboten." },
+      source: "orecast.app – Kurzlage Recht (Stand Sept. 2026), keine Rechtsberatung", link: "https://orecast.app/recht"
+    },
+    ES: {
+      name: { en: "Spain", de: "Spanien" }, level: "limited",
+      rule: { en: "Gold panning ('bateo') in rivers usually needs permission: water authority of the river basin (Confederación Hidrográfica) and often the region's mining authority. Forbidden in protected areas. Famous gold areas: Sil and Miño (Galicia, León), Las Médulas (UNESCO site – no digging).",
+              de: "Goldwaschen („bateo“) in Flüssen braucht meist eine Erlaubnis: Wasserbehörde des Flussgebiets (Confederación Hidrográfica) und oft die Bergbaubehörde der Region. In Schutzgebieten verboten. Bekannte Goldgebiete: Sil und Miño (Galicien, León), Las Médulas (UNESCO – nicht graben)." },
+      details: { en: "Not an official source: please check with the Confederación Hidrográfica and the regional government before panning. Metal detecting is regulated by the regions (heritage law) and often needs a permit.",
+                 de: "Keine amtliche Quelle: vor dem Waschen bei der Confederación Hidrográfica und der Regionalregierung nachfragen. Metalldetektor: von den Regionen geregelt (Denkmalrecht), meist genehmigungspflichtig." },
+      source: "eigene Zusammenfassung (Nov. 2026), nicht amtlich geprüft"
     },
     CH: {
       name: { en: "Switzerland", de: "Schweiz" }, level: "limited",
@@ -475,6 +509,78 @@ var APP_CONFIG = {
       attribution: "EEA – Nationally designated areas",
       opacity: 0.6, visible: false, offline: false,
       arcIdentify: { layers: "visible", tolerance: 0, max: 2 }
+    },
+    {
+      id: "euPrecious",
+      group: "eu",
+      type: "wms",
+      name: { en: "Precious metal occurrences Europe (EGDI) – France, Italy …", de: "Edelmetall-Vorkommen Europa (EGDI) – Frankreich, Italien …" },
+      url: "https://maps.europe-geology.eu/wms/", layers: "egdi_mineraloccurr_precious_metals",
+      attribution: "EuroGeoSurveys – EGDI",
+      opacity: 1, visible: false, offline: false
+    },
+    {
+      id: "euMines",
+      group: "eu",
+      type: "wms",
+      name: { en: "Mines with raw materials Europe (EGDI)", de: "Bergwerke mit Rohstoffen Europa (EGDI)" },
+      url: "https://maps.europe-geology.eu/wms/", layers: "egdi_mines_with_commodities",
+      attribution: "EuroGeoSurveys – EGDI",
+      opacity: 1, visible: false, offline: false
+    },
+    {
+      id: "euGeology",
+      group: "eu",
+      type: "wms",
+      name: { en: "Geology Europe 1:1 million (EGDI)", de: "Geologie Europa 1:1 Mio. (EGDI)" },
+      url: "https://maps.europe-geology.eu/wms/", layers: "geologicunitview",
+      attribution: "EuroGeoSurveys – EGDI",
+      opacity: 0.55, visible: false, offline: false
+    },
+    // ---------- DEUTSCHLAND (BGR) ----------
+    {
+      id: "deGeology",
+      group: "de",
+      type: "wms",
+      name: { en: "Geology Germany 1:250 000 (BGR, zoom in)", de: "Geologie Deutschland 1:250 000 (BGR, hineinzoomen)" },
+      url: "https://services.bgr.de/wms/geologie/guek250/",
+      attribution: "© BGR",
+      opacity: 0.6, visible: false, offline: false,
+      modes: [
+        { id: "strat", layers: "7,8", name: { en: "Age of rocks (stratigraphy)", de: "Alter der Gesteine (Stratigrafie)" } },
+        { id: "petro", layers: "4,5", name: { en: "Rock types (petrography)", de: "Gesteinsarten (Petrografie)" } },
+        { id: "genese", layers: "1,2", name: { en: "Origin (genesis)", de: "Entstehung (Genese)" } },
+        { id: "quartz", layers: "10", name: { en: "Quartz veins – gold indicator", de: "Quarzgänge – Hinweis auf Gold" } },
+        { id: "tekt", layers: "11", name: { en: "Faults & tectonics", de: "Störungen & Tektonik" } }
+      ]
+    },
+    // ---------- SPANIEN (IGME) ----------
+    {
+      id: "esGold",
+      group: "es",
+      type: "arcgisPoints",
+      name: { en: "Gold occurrences Spain (IGME, ~880)", de: "Goldvorkommen Spanien (IGME, ca. 880)" },
+      url: "https://mapas.igme.es/gis/rest/services/BasesDatos/IGME_BDMIN_Indicios/MapServer/0",
+      where: "Sustancia LIKE '%Oro%'",
+      outFields: "Nombre_mina,Sustancia,Provincia,Municipio,Morfologia,Asociacion_mineral",
+      color: "#ffd700", radius: 7,
+      attribution: "IGME – BDMIN",
+      visible: false, offline: false,
+      popup: { title: "Nombre_mina", fields: [
+        { field: "Sustancia", label: { en: "Minerals", de: "Rohstoffe" } },
+        { field: "Morfologia", label: { en: "Form", de: "Form" } },
+        { field: "Municipio", label: { en: "Municipality", de: "Gemeinde" } },
+        { field: "Provincia", label: { en: "Province", de: "Provinz" } } ] }
+    },
+    {
+      id: "esGeology",
+      group: "es",
+      type: "arcgisExport",
+      name: { en: "Geology Spain 1:50 000 (IGME MAGNA)", de: "Geologie Spanien 1:50 000 (IGME MAGNA)" },
+      url: "https://mapas.igme.es/gis/rest/services/Cartografia_Geologica/IGME_MAGNA_50/MapServer",
+      attribution: "IGME – MAGNA 50",
+      opacity: 0.6, visible: false, offline: false,
+      arcIdentify: { layers: "top", tolerance: 2, max: 2 }
     },
     // ---------- ÖSTERREICH (GeoSphere Austria) ----------
     {
