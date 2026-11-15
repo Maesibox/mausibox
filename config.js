@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 12,
+  appVersion: 13,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -35,7 +35,12 @@ var APP_CONFIG = {
   // Farbe pro Club (Club-Claims und Club-Dateien). Clubs ohne Eintrag bekommen eine Farbe aus clubPalette.
   clubColors: { "Havasu Gold Seekers": "#00c8e0", "AMRA": "#3d5afe", "GPAA": "#2ecc40", "49ers": "#ffd600" },
   clubPalette: ["#00bfa5", "#ff6d00", "#aa00ff", "#c6ff00", "#ff1744", "#795548"],
-  clubDotsMaxZoom: 13,               // weiter herausgezoomt: Club-Claims als Sammelpunkte mit Anzahl          // Name der App (oben links, im Browser-Tab, in Exporten)
+  clubDotsMaxZoom: 13,
+  // BLM-Änderungen: in diesen Gebieten merkt sich die App neue und abgelaufene Claims (bbox = West, Süd, Ost, Nord)
+  blmWatch: {
+    days: 30,
+    areas: [ { id: "franconia", name: "Franconia / HGS", bbox: [-114.40, 34.45, -113.95, 34.80] } ]
+  },               // weiter herausgezoomt: Club-Claims als Sammelpunkte mit Anzahl          // Name der App (oben links, im Browser-Tab, in Exporten)
 
   // Sprache beim ersten Start: "en" oder "de" (umschaltbar im Menü)
   defaultLanguage: "en",
@@ -207,6 +212,7 @@ var APP_CONFIG = {
       minZoom: 12,                 // BLM liefert Claims erst ab dieser Zoomstufe
       color: "#e02020",
       fillOpacity: 0.15,
+      recentFilter: "new",         // Auswahl im Ebenen-Fenster: alle / nur neue der letzten Tage (blmWatch)
       // Link zur offiziellen BLM-Fallseite (Inhaber, Gebühren). {SF_ID} wird ersetzt.
       detailsLink: "https://mlrs.blm.gov/s/blm-case/{SF_ID}",
       visible: true,
@@ -219,8 +225,9 @@ var APP_CONFIG = {
       url: "https://nlsdbpubgis.blm.gov/arcgis/rest/services/Mining_Claims/MiningClaims/MapServer/2/query",
       attribution: "Mining claims: BLM MLRS",
       minZoom: 12,
-      color: "#8c8c8c",
-      fillOpacity: 0.06,
+      color: "#ffffff",            // weiss gestrichelt – gut sichtbar auf Satellit und Karte
+      fillOpacity: 0.08,
+      recentFilter: "closed",      // Auswahl: alle / nur in den letzten Tagen abgelaufene
       dashArray: "4 4",            // gestrichelt
       detailsLink: "https://mlrs.blm.gov/s/blm-case/{SF_ID}",
       visible: false,
@@ -501,7 +508,7 @@ var APP_CONFIG = {
       parkSavedAt: "Saved", navigate: "Navigate (Apple Maps)", deletePark: "Delete parking spot", parkDeleted: "Parking spot deleted",
 
       // Club-Umschalter, Hilfe, Verwaltung
-      activeClub: "Show club", allClubs: "All my clubs", clubDotHint: "Tap to zoom in", clubDotClaims: "claims", lidarMode: "View", help: "Help – how it works",
+      activeClub: "Show club", allClubs: "All my clubs", chat: "Club chat", chatEmpty: "No messages yet – write the first one!", chatPlaceholder: "Message to all club members…", chatSend: "Send", blmChanges: "BLM changes (new / closed)", blmNews: "{n} BLM change(s) in your area – menu → BLM changes", blmNew: "New claims", blmClosedRecent: "Closed claims", blmSeen: "noticed", blmChangesIntro: "Changes of the last {days} days in: {areas}. The app compares the active BLM claims once a day.", blmFilterAll: "show all", blmFilterNew: "only new (last 30 days)", blmFilterClosed: "only closed in the last 30 days", extraClubs: "Also join these clubs", clubDotHint: "Tap to zoom in", clubDotClaims: "claims", lidarMode: "View", help: "Help – how it works",
       addMember: "Add person", addMemberHint: "Username of an existing account", userNotFound: "No account with this username.",
       memberAdded: "Added to club", userClubs: "Clubs", assignClub: "Add to club",
       dirs: "N,NE,E,SE,S,SW,W,NW"
@@ -614,7 +621,7 @@ var APP_CONFIG = {
       parkSavedAt: "Gespeichert", navigate: "Hinführen (Apple Karten)", deletePark: "Parkplatz löschen", parkDeleted: "Parkplatz gelöscht",
 
       // Club-Umschalter, Hilfe, Verwaltung
-      activeClub: "Club anzeigen", allClubs: "Alle meine Clubs", clubDotHint: "Antippen zum Hineinzoomen", clubDotClaims: "Claims", lidarMode: "Ansicht", help: "Hilfe – so funktioniert's",
+      activeClub: "Club anzeigen", allClubs: "Alle meine Clubs", chat: "Club-Chat", chatEmpty: "Noch keine Nachrichten – schreib die erste!", chatPlaceholder: "Nachricht an alle Club-Mitglieder…", chatSend: "Senden", blmChanges: "BLM-Änderungen (neu / abgelaufen)", blmNews: "{n} BLM-Änderung(en) in deinem Gebiet – Menü → BLM-Änderungen", blmNew: "Neue Claims", blmClosedRecent: "Abgelaufene Claims", blmSeen: "bemerkt", blmChangesIntro: "Änderungen der letzten {days} Tage in: {areas}. Die App vergleicht einmal täglich die aktiven BLM-Claims.", blmFilterAll: "alle zeigen", blmFilterNew: "nur neue (letzte 30 Tage)", blmFilterClosed: "nur in den letzten 30 Tagen abgelaufene", extraClubs: "Zusätzlich diesen Clubs beitreten", clubDotHint: "Antippen zum Hineinzoomen", clubDotClaims: "Claims", lidarMode: "Ansicht", help: "Hilfe – so funktioniert's",
       addMember: "Person hinzufügen", addMemberHint: "Benutzername eines bestehenden Kontos", userNotFound: "Kein Konto mit diesem Benutzernamen.",
       memberAdded: "Zum Club hinzugefügt", userClubs: "Clubs", assignClub: "Zu Club hinzufügen",
       dirs: "N,NO,O,SO,S,SW,W,NW"

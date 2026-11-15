@@ -155,17 +155,30 @@ var Admin = (function () {
       "<label>" + esc(t("maxUses")) + "<input name='max' type='number' min='1' max='10000' value='1' disabled></label>" +
       (club ? "<label>" + esc(t("roleForCode")) + "<select name='role'><option value='member'>" + esc(t("role_member")) + "</option>" +
         "<option value='admin'>" + esc(t("role_admin")) + "</option></select></label>" : "") +
+      (club ? extraClubsHtml(club) : "") +
       "<label>" + esc(t("validUntil")) + "<input name='until' type='date'></label>" +
       "<label>" + esc(t("note")) + "<input name='note' placeholder='z. B. Name der Person'></label>" +
       "<button class='primary'>" + esc(t("createCode")) + "</button></form>";
   }
 
+  // weitere Clubs für denselben Code: alle, in denen man selbst Admin ist (Superadmin: alle eigenen Clubs)
+  function extraClubsHtml(club) {
+    var others = acc().clubs.filter(function (c) { return c.id !== club.id && (acc().is_superadmin || c.role === "admin"); });
+    if (!others.length) return "";
+    return "<fieldset class='extra-clubs'><legend>" + esc(t("extraClubs")) + "</legend>" + others.map(function (c) {
+      return "<label class='opt'><input type='checkbox' name='extra' value='" + esc(c.id) + "'> " + esc(c.name) + "</label>";
+    }).join("") + "</fieldset>";
+  }
+
   function createCode(form, club) {
     var f = form.elements;
+    var extra = Array.prototype.filter.call(form.querySelectorAll("input[name=extra]"), function (x) { return x.checked; })
+      .map(function (x) { return x.value; });
     var row = {
       code: randomCode(prefixFor(club)),
       club_id: club ? club.id : null,
       role: f["role"] ? f["role"].value : "member",
+      extra_clubs: extra,
       max_uses: f["kind"].value === "single" ? 1 : Math.max(1, parseInt(f["max"].value, 10) || 1),
       expires_at: f["until"].value ? new Date(f["until"].value + "T23:59:59").toISOString() : null,
       note: f["note"].value.trim() || null,
@@ -186,6 +199,9 @@ var Admin = (function () {
         var off = !c.active || c.uses >= c.max_uses || (c.expires_at && c.expires_at < new Date().toISOString());
         return "<div class='arow" + (off ? " off" : "") + "'><div><b class='mono'>" + esc(c.code) + "</b>" +
           (c.role === "admin" ? " <span class='tag'>" + esc(t("role_admin")) + "</span>" : "") +
+          ((c.extra_clubs || []).length ? " <span class='tag'>+" + c.extra_clubs.map(function (id) {
+            var x = acc().clubs.filter(function (k) { return k.id === id; })[0]; return esc(x ? x.name : "?");
+          }).join(", +") + "</span>" : "") +
           "<small>" + c.uses + "/" + c.max_uses + " " + esc(t("used")) + exp + (c.active ? "" : " · " + esc(t("inactive"))) +
           (c.note ? " · " + esc(c.note) : "") + "</small></div>" +
           "<div class='abtn'><button data-qr='" + esc(c.code) + "'>" + esc(t("showQr")) + "</button>" +

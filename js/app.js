@@ -285,6 +285,13 @@ var App = (function () {
     return clubId ? pal[h % pal.length] : (overlayCfg("club") || {}).color || "#18c018";
   }
 
+  // Knopf "Hinführen": öffnet die Navigation (Apple Karten) zu dieser Stelle
+  function navLink(lat, lon) {
+    if (lat == null || lon == null || isNaN(lat) || isNaN(lon)) return "";
+    return "<div class='pop-actions'><a class='btn-like nav-btn' target='_blank' rel='noopener' href='" +
+      esc(C.parking.navigateUrl.replace("{lat}", (+lat).toFixed(6)).replace("{lon}", (+lon).toFixed(6))) + "'>➜ " + esc(t("navigate")) + "</a></div>";
+  }
+
   // ---------- Sammelpunkte: beim Herauszoomen sieht man, wo Club-Claims liegen ----------
 
   var clubDots = L.layerGroup();
@@ -424,7 +431,9 @@ var App = (function () {
 
     if (cfg.type === "blmClaims") {
       hitFeatures[cfg.id] = [];
+      var onlyRecent = cfg.recentFilter && pref("blmFilter." + cfg.id, "all") === "recent";
       return makeCellLayer(cfg, function (group, f) {
+        if (onlyRecent && !BlmWatch.isRecent(f.properties.CSE_NR, cfg.recentFilter, f.properties.LOC_DT)) return;
         var layer = L.geoJSON(f, {
           interactive: false,
           style: { color: cfg.color, weight: 2, dashArray: cfg.dashArray || null, fillColor: cfg.color, fillOpacity: cfg.fillOpacity }
@@ -572,6 +581,7 @@ var App = (function () {
       row(t("claimType"), a.BLM_PROD) + row(t("acres"), a.RCRD_ACRS) + row("Location date", date) + "</table>" +
       (link ? "<a href='" + esc(link) + "' target='_blank' rel='noopener'>" + esc(t("ownerLink")) + " ↗</a>" : "") +
       (active ? "" : "<p class='hint'>" + esc(t("closedClaimHint")) + "</p>") +
+      (function () { var c = centerOf(f); return c ? navLink(c[0], c[1]) : ""; })() +
       "<p class='hint'>" + esc(t("claimApprox")) + "</p>" +
       (active ? "<button class='mini-btn' data-newclaim='" + esc(JSON.stringify({ serial: a.CSE_NR, name: a.CSE_NAME || "", folder: "foreign",
         kind: /placer/i.test(a.BLM_PROD) ? "placer" : /mill/i.test(a.BLM_PROD) ? "millsite" : /lode/i.test(a.BLM_PROD) ? "lode" : "other" })) + "'>" +
@@ -610,7 +620,8 @@ var App = (function () {
   function clubHtml(f) {
     var p = f.properties || {};
     var long = p.description && p.description.length > 400;
-    return "<div class='pop-sec club'><h3>" + esc(p.name || t("clubClaim")) + "</h3><div class='pop-sub'>" + esc(t("clubClaim")) +
+    var isInfo = f.geometry && f.geometry.type === "Point";
+    return "<div class='pop-sec club'><h3>" + esc(p.name || t("clubClaim")) + "</h3><div class='pop-sub'>" + esc(isInfo ? t("club") : t("clubClaim")) +
       (p._club ? " · " + esc(p._club) : "") + "</div>" +
       (p.description ? (long ? "<details><summary>" + esc(p.description.slice(0, 160)) + "…</summary><p class='note-text'>" + esc(p.description) + "</p></details>"
         : "<p class='note-text'>" + esc(p.description) + "</p>") : "") +
@@ -623,9 +634,7 @@ var App = (function () {
       (p.links || []).map(function (l) {
         return "<div><a href='" + esc(l.url) + "' target='_blank' rel='noopener'>" + esc(l.text) + " ↗</a></div>";
       }).join("") +
-      (f.geometry && f.geometry.type === "Point" && p.navigate ? "<div class='pop-actions'><a class='btn-like' target='_blank' rel='noopener' href='" +
-        esc(C.parking.navigateUrl.replace("{lat}", f.geometry.coordinates[1].toFixed(6)).replace("{lon}", f.geometry.coordinates[0].toFixed(6))) +
-        "'>➜ " + esc(t("navigate")) + "</a></div>" : "") + "</div>";
+      (function () { var c = centerOf(f); return c ? navLink(c[0], c[1]) : ""; })() + "</div>";
   }
 
   function geologyHtml(d) {
@@ -725,6 +734,20 @@ var App = (function () {
     setPref("overlays", savedOverlays);
   }
 
+  function rebuildOverlay(id, on) {
+    if (overlayObjs[id]) { map.removeLayer(overlayObjs[id]); delete overlayObjs[id]; }
+    setOverlay(id, on == null ? !!overlayState[id] : on);
+  }
+  // nach dem BLM-Vergleich: Ebenen mit Filter "nur neue/abgelaufene" neu zeichnen
+  function refreshBlmFilters() {
+    C.overlays.forEach(function (o) {
+      if (o.recentFilter && overlayState[o.id] && pref("blmFilter." + o.id, "all") === "recent") rebuildOverlay(o.id);
+    });
+  }
+  function showBlmLayer(id) {
+    if (!overlayState[id]) setOverlay(id, true);
+  }
+
   function setOpacity(id, value) {
     var layer = overlayObjs[id];
     if (layer && layer.setOpacity) layer.setOpacity(value);
@@ -758,6 +781,13 @@ var App = (function () {
       html += "<div class='opt-row'><label class='opt'><input type='checkbox' value='" + esc(o.id) + "'" + (overlayState[o.id] ? " checked" : "") + "> " +
         (o.color ? "<span class='swatch' style='background:" + esc(o.color) + "'></span>" : "") + esc(tr(o.name)) + "</label>" +
         "<div class='note' data-note='" + esc(o.id) + "'></div>";
+      if (o.recentFilter) {
+        var fv = pref("blmFilter." + o.id, "all");
+        html += "<label class='mode'><select data-blmfilter='" + esc(o.id) + "'>" +
+          "<option value='all'" + (fv === "all" ? " selected" : "") + ">" + esc(t("blmFilterAll")) + "</option>" +
+          "<option value='recent'" + (fv === "recent" ? " selected" : "") + ">" + esc(t(o.recentFilter === "new" ? "blmFilterNew" : "blmFilterClosed")) + "</option>" +
+          "</select></label>";
+      }
       if (o.type === "exportImage" && o.modes) {
         var cur = lidarMode(o);
         html += "<label class='mode'>" + esc(t("lidarMode")) + " <select data-mode='" + esc(o.id) + "'>" + o.modes.map(function (m) {
@@ -787,6 +817,12 @@ var App = (function () {
     body.addEventListener("change", function (e) {
       var inp = e.target;
       if (inp.hasAttribute("data-club-switch")) { setActiveClub(inp.value); return; }
+      if (inp.dataset.blmfilter) {
+        setPref("blmFilter." + inp.dataset.blmfilter, inp.value);
+        rebuildOverlay(inp.dataset.blmfilter, true);
+        var cb2 = body.querySelector("input[type=checkbox][value='" + inp.dataset.blmfilter + "']"); if (cb2) cb2.checked = true;
+        return;
+      }
       if (inp.dataset.mode) {
         var oc = overlayCfg(inp.dataset.mode);
         setPref("mode." + oc.id, inp.value);
@@ -861,6 +897,8 @@ var App = (function () {
       "<button data-a='points'>📍 " + esc(t("points")) + "</button>" +
       "<button data-a='tracks'>〰 " + esc(t("tracks")) + "</button>" +
       "<button data-a='claims'>▣ " + esc(t("claims")) + "</button>" +
+      (Auth.enabled() && Auth.account ? "<button data-a='blmchanges' class='badge-blm'>🔔 " + esc(t("blmChanges")) + "</button>" : "") +
+      (Auth.enabled() && Auth.account && Auth.account.clubs.length ? "<button data-a='chat' class='badge-chat'>💬 " + esc(t("chat")) + "</button>" : "") +
       "<button data-a='parking'>🅿 " + esc(t("parking")) + "</button>" +
       "<button data-a='export'>⇅ " + esc(t("exportImport")) + "</button>" +
       "<button data-a='offline'>⬇ " + esc(t("offline")) + "</button>" +
@@ -883,6 +921,8 @@ var App = (function () {
       if (b.dataset.a === "about") openAbout();
       if (b.dataset.a === "account") Auth.openAccount();
       if (b.dataset.a === "claims") Claims.openList();
+      if (b.dataset.a === "blmchanges") BlmWatch.open();
+      if (b.dataset.a === "chat") Chat.open();
     });
     openSheet(t("menu"), body);
   }
@@ -984,6 +1024,8 @@ var App = (function () {
     Tracks.init(map);
     Parking.init(map);
     Sync.init();
+    BlmWatch.init();
+    Chat.init();
     setTimeout(updateClubDots, 3000);   // nachdem die Claims geladen sind
 
     if ("serviceWorker" in navigator) {
@@ -993,7 +1035,7 @@ var App = (function () {
   }
 
   return {
-    init: init, clubColor: clubColor, updateClubDots: updateClubDots, t: t, tr: tr, esc: esc, el: el, toast: toast, formatCoord: formatCoord,
+    init: init, clubColor: clubColor, updateClubDots: updateClubDots, navLink: navLink, refreshBlmFilters: refreshBlmFilters, showBlmLayer: showBlmLayer, t: t, tr: tr, esc: esc, el: el, toast: toast, formatCoord: formatCoord,
     openSheet: openSheet, closeSheet: closeSheet, onSheetClose: onSheetClose, pref: pref, setPref: setPref,
     get map() { return map; }, get gps() { return gps.last; }, get lang() { return lang; },
     startGps: startGps, distance: distance, direction: direction, formatDistance: formatDistance,

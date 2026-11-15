@@ -28,7 +28,8 @@ var Points = (function () {
       (p.note ? "<p class='note-text'>" + App.esc(p.note) + "</p>" : "") +
       "<div class='thumbs' data-photos='" + App.esc(p.id) + "'></div>" +
       "<div class='coords'>" + App.esc(App.formatCoord(p.lat, p.lon)) + (p.accuracy ? " ±" + Math.round(p.accuracy) + " m" : "") + "</div>" +
-      "<div class='pop-actions'><button data-edit='" + App.esc(p.id) + "'>" + App.esc(App.t("edit")) + "</button></div></div>";
+      "<div class='pop-actions'><button data-edit='" + App.esc(p.id) + "'>" + App.esc(App.t("edit")) + "</button></div>" +
+      App.navLink(p.lat, p.lon) + "</div>";
     return html;
   }
 

@@ -235,3 +235,21 @@ button.mini { padding: 2px 8px; font-size: 12px; }
 .layers .mode { display: block; margin: 4px 0 2px 26px; font-size: 13px; }
 .layers .mode select { max-width: 100%; font-size: 13px; }
 .pop-img { display: block; width: 100%; max-height: 220px; object-fit: contain; margin: 6px 0; background: #fff; border-radius: 4px; }
+
+/* roter Punkt: ungelesene Club-Chat-Nachrichten oder neue BLM-Änderungen */
+body.has-chat-news #btn-menu, body.has-blm-news #btn-menu { position: relative; }
+body.has-chat-news #btn-menu::after, body.has-blm-news #btn-menu::after {
+  content: ""; position: absolute; top: 2px; right: 2px; width: 12px; height: 12px; border-radius: 50%; background: #e02020; border: 2px solid #fff; }
+body.has-chat-news .menu .badge-chat::after, body.has-blm-news .menu .badge-blm::after {
+  content: " ●"; color: #e02020; }
+
+/* Club-Chat */
+.chat { display: flex; flex-direction: column; gap: 8px; }
+.chat-club { width: 100%; }
+.chat-list { max-height: 50vh; min-height: 160px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding: 4px; }
+.msg { max-width: 85%; background: #f1ede4; color: #222; border-radius: 10px; padding: 6px 10px; align-self: flex-start; }
+.msg.mine { background: #d9c27a; align-self: flex-end; }
+.msg-head small { color: #666; }
+.msg-body { white-space: pre-wrap; word-break: break-word; }
+.chat-form { display: flex; gap: 6px; align-items: flex-end; }
+.chat-form textarea { flex: 1; font-size: 16px; }

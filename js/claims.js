@@ -178,6 +178,12 @@ var Claims = (function () {
       (withPhotos ? "<div class='thumbs'></div>" : "") +
       (canEdit(c) ? "<div class='pop-actions'><button data-claim-edit='" + esc(c.id) + "'>" + esc(t("edit")) + "</button></div>"
         : "<p class='hint'>" + esc(t("readOnly")) + "</p>") +
+      (function () {
+        if (c.monument) return App.navLink(c.monument.lat, c.monument.lon);
+        var ps = c.posts || [];
+        if (!ps.length) return "";
+        return App.navLink(ps.reduce(function (s, p) { return s + p.lat; }, 0) / ps.length, ps.reduce(function (s, p) { return s + p.lon; }, 0) / ps.length);
+      })() +
       "</div></div>";
   }
 
