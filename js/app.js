@@ -520,6 +520,7 @@ var App = (function () {
       var renderArea = function (group, f) {
         var col = cfg.color || (areaClass(cfg, f.properties) === "closed" ? cfg.closedColor : cfg.limitedColor);
         group.addLayer(L.geoJSON(f, {
+          renderer: cfg._renderer,       // eigene Zeichenfläche (SVG) für Ebenen aus Dateien – zuverlässiger auf dem iPhone
           interactive: false,
           style: { color: col, weight: 2, fillColor: col, fillOpacity: cfg.fillOpacity || 0.18 }
         }));
@@ -527,7 +528,7 @@ var App = (function () {
         if (cfg.centerDot) {
           var c = centerOf(f);
           if (c) {
-            var dot = L.circleMarker(c, { radius: 7, color: "#000", weight: 1, fillColor: col, fillOpacity: 1, bubblingMouseEvents: false });
+            var dot = L.circleMarker(c, { renderer: cfg._renderer, radius: 7, color: "#000", weight: 1, fillColor: col, fillOpacity: 1, bubblingMouseEvents: false });
             dot.on("click", function () { onMapClick({ latlng: L.latLng(c[0], c[1]), forceHit: f }); });
             group.addLayer(dot);
           }
@@ -535,6 +536,7 @@ var App = (function () {
         hitFeatures[cfg.id].push(f);
       };
       if (cfg.file) {
+        cfg._renderer = L.svg({ padding: 0.3 });
         var fg = L.featureGroup();
         setLayerNote(cfg.id, t("loading"));
         Promise.all([cachedFetch(cfg.file, "json"), cfg.metaFile ? cachedFetch(cfg.metaFile, "json").catch(function () { return {}; }) : {}])
@@ -1248,6 +1250,14 @@ var App = (function () {
     }
     startGps(false);
   }
+
+  var shownErrors = {};
+  window.addEventListener("error", function (e) {
+    var msg = (e && e.message) || "error";
+    if (shownErrors[msg] || !document.getElementById("toast")) return;
+    shownErrors[msg] = true;
+    toast("⚠ " + msg.slice(0, 120));
+  });
 
   // Gibt es auf dem Server eine neuere Version? Dann alten Speicher leeren und neu laden (höchstens einmal pro Sitzung)
   function checkForUpdate() {
