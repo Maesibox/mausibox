@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 17,
+  appVersion: 18,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -384,7 +384,8 @@ var APP_CONFIG = {
       opacity: 0.6,
       visible: false, offline: false,
       identify: {
-        layers: "all:ch.bafu.bundesinventare-auen,ch.pronatura.naturschutzgebiete,ch.bafu.bundesinventare-jagdbanngebiete,ch.bafu.bundesinventare-vogelreservate,ch.bafu.schutzgebiete-schweizerischer_nationalpark",
+        // der Nationalpark lässt sich nicht abfragen (nur anzeigen)
+        layers: "all:ch.bafu.bundesinventare-auen,ch.pronatura.naturschutzgebiete,ch.bafu.bundesinventare-jagdbanngebiete,ch.bafu.bundesinventare-vogelreservate",
         tolerance: 0, title: "label", subField: "layerName", level: "closed",
         verdict: { en: "Protected area – gold panning usually not allowed", de: "Schutzgebiet – Goldwaschen meist nicht erlaubt" }
       }
