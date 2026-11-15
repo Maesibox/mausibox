@@ -435,7 +435,7 @@ var App = (function () {
       if (map.getZoom() < cfg.minZoom) { setLayerNote(cfg.id, t("zoomInFor") + " (≥ " + cfg.minZoom + ")"); return; }
       if (pending === 0) setLayerNote(cfg.id, "");
       var cells = cellsFor(map.getBounds(), cfg.cellZ);
-      if (cells.length > 40) return;
+      if (cells.length > 40) { setLayerNote(cfg.id, t("zoomInMore")); return; }
       cells.forEach(function (c) {
         var key = c.x + "/" + c.y;
         if (loaded[key]) return;
@@ -470,6 +470,26 @@ var App = (function () {
     if (cfg.type === "arcgisExport") {
       return new ExportImageLayer("", { mapServer: true, baseUrl: cfg.url, show: cfg.show, attribution: cfg.attribution, maxZoom: 20,
         crossOrigin: true, zIndex: 10, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
+    }
+    if (cfg.type === "wms" && cfg.points) {
+      var wmsLayer = L.tileLayer.wms(cfg.url, { layers: cfg.layers, format: "image/png", transparent: true, version: "1.3.0",
+        attribution: cfg.attribution, maxZoom: 20, zIndex: 10 });
+      var pts = L.featureGroup(), grp = L.featureGroup([wmsLayer, pts]);
+      // gut sichtbare Punkte (z. B. Gold) zusätzlich zum Kartenbild
+      cachedFetch(cfg.points.url, "json").then(function (d) {
+        (d.results || []).forEach(function (f) {
+          if (!f.geometry || f.geometry.type !== "Point") return;
+          var a = f.properties || f.attributes || {}, c = f.geometry.coordinates;
+          var m = L.circleMarker([c[1], c[0]], { radius: cfg.points.radius || 8, color: "#000", weight: 1.5,
+            fillColor: cfg.points.color || "#ffd700", fillOpacity: 1, bubblingMouseEvents: false });
+          m.bindPopup("<div class='pop'><div class='pop-sec'><h3>" + esc(a.label || a.obname || "") + "</h3><div class='pop-sub'>" + esc(tr(cfg.name)) +
+            "</div><table>" + row(t("commodities"), a.grkind_de || a.grkind_en) + "</table>" +
+            (a.purl ? "<a href='" + esc(a.purl) + "' target='_blank' rel='noopener'>" + esc(tr(cfg.points.linkText)) + " ↗</a>" : "") +
+            navLink(c[1], c[0]) + "</div></div>", { maxWidth: 280 });
+          pts.addLayer(m);
+        });
+      }).catch(function () { setLayerNote(cfg.id, t("loadError")); });
+      return grp;
     }
     if (cfg.type === "wms") {
       return L.tileLayer.wms(cfg.url, { layers: cfg.modes ? lidarMode(cfg).layers : cfg.layers, format: "image/png", transparent: true, version: "1.3.0",

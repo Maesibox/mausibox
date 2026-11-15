@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 21,
+  appVersion: 22,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -268,7 +268,7 @@ var APP_CONFIG = {
       where: "Permit_Type_Code='Gold Fossicking Area'",
       outFields: "OBJECTID,Operation_Name,Permit_Number,Permit_Location,Permit_Area,Permit_Expiry_Date",
       attribution: "NZ Petroleum & Minerals",
-      minZoom: 5, cellZ: 6, simplify: 0.00005,
+      minZoom: 4, cellZ: 4, simplify: 0.00005,
       color: "#00e676", fillOpacity: 0.3,
       centerDot: true,             // die Gebiete sind klein: zusätzlich ein Punkt, damit man sie findet
       visible: false, offline: false,
@@ -294,7 +294,7 @@ var APP_CONFIG = {
       where: "Permit_Type_Code<>'Gold Fossicking Area'",
       outFields: "OBJECTID,Permit_Number,Permit_Type_Description,Minerals,Owners,Operator,Operation_Name,Permit_Location,Permit_Area,Permit_Grant_Date,Permit_Expiry_Date",
       attribution: "NZ Petroleum & Minerals",
-      minZoom: 8, cellZ: 9, simplify: 0.0002,
+      minZoom: 7, cellZ: 7, simplify: 0.0003,
       color: "#e02020", fillOpacity: 0.15,
       visible: false, offline: false,
       popup: {
@@ -322,7 +322,7 @@ var APP_CONFIG = {
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/0/query",
       outFields: "*",
       attribution: "NZ Petroleum & Minerals",
-      minZoom: 8, cellZ: 9, simplify: 0.0002,
+      minZoom: 7, cellZ: 7, simplify: 0.0003,
       color: "#f5a623", fillOpacity: 0.12,
       visible: false, offline: false,
       popup: {
@@ -346,7 +346,7 @@ var APP_CONFIG = {
       url: "https://gis.nzpam.govt.nz/server/rest/services/Public/CMA_Schedule_4_Land/MapServer/0/query",
       outFields: "OBJECTID,name",
       attribution: "NZ Petroleum & Minerals",
-      minZoom: 6, cellZ: 7, simplify: 0.001,
+      minZoom: 5, cellZ: 5, simplify: 0.002,
       color: "#8e24aa", fillOpacity: 0.15,
       visible: false, offline: false,
       popup: {
@@ -450,12 +450,18 @@ var APP_CONFIG = {
       id: "chGold",
       group: "ch",
       type: "wms",
-      name: { en: "Gold & ore occurrences (swisstopo)", de: "Gold- & Erzvorkommen (swisstopo)" },
+      name: { en: "Gold & ore occurrences (swisstopo) – gold = big yellow dots", de: "Gold- & Erzvorkommen (swisstopo) – Gold = grosse gelbe Punkte" },
       url: "https://wms.geo.admin.ch/",
       layers: "ch.swisstopo.geologie-rohstoffe-vererzungen",
       attribution: "© swisstopo / ETH Georessourcen",
       opacity: 1,
       visible: false, offline: false,
+      // Goldfundstellen zusätzlich als grosse gelbe Punkte
+      points: {
+        url: "https://api3.geo.admin.ch/rest/services/api/MapServer/find?layer=ch.swisstopo.geologie-rohstoffe-vererzungen&searchText=Gold&searchField=grkind_de&contains=true&returnGeometry=true&geometryFormat=geojson&sr=4326",
+        radius: 9, color: "#ffd700",
+        linkText: { en: "Details (ETH georesources)", de: "Details (ETH Georessourcen)" }
+      },
       identify: {
         layers: "all:ch.swisstopo.geologie-rohstoffe-vererzungen", tolerance: 12,
         title: "label", sub: { en: "Ore occurrence", de: "Erzvorkommen" },
@@ -698,7 +704,7 @@ var APP_CONFIG = {
     en: {
       layers: "Layers", basemap: "Base map", overlays: "Layers",
       gps: "My location", addPoint: "Add point", points: "My points", menu: "Menu",
-      zoomInFor: "Zoom in to see", loading: "Loading…", loadError: "Could not load",
+      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", loading: "Loading…", loadError: "Could not load",
       gpsWaiting: "Waiting for GPS…", gpsError: "GPS not available", accuracy: "accuracy",
       name: "Name", note: "Note", category: "Category", photos: "Photos", addPhoto: "Add photo",
       position: "Position", useGps: "Use GPS", useCenter: "Use map center",
@@ -811,7 +817,7 @@ var APP_CONFIG = {
     de: {
       layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen",
       gps: "Mein Standort", addPoint: "Punkt setzen", points: "Meine Punkte", menu: "Menü",
-      zoomInFor: "Hineinzoomen für", loading: "Lade…", loadError: "Laden fehlgeschlagen",
+      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", loading: "Lade…", loadError: "Laden fehlgeschlagen",
       gpsWaiting: "Warte auf GPS…", gpsError: "GPS nicht verfügbar", accuracy: "Genauigkeit",
       name: "Name", note: "Notiz", category: "Kategorie", photos: "Fotos", addPhoto: "Foto hinzufügen",
       position: "Position", useGps: "GPS verwenden", useCenter: "Kartenmitte verwenden",
