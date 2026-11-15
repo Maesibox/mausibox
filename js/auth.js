@@ -152,7 +152,7 @@ var Auth = (function () {
       html += "<form data-f='register'>" +
         "<label>" + esc(t("inviteCode")) + "<input name='code' value='" + esc(invite || "") + "' autocapitalize='characters' autocomplete='off' required></label>" +
         "<p class='code-info hint'></p>" +
-        "<label>" + esc(t("username")) + "<input name='user' autocomplete='username' autocapitalize='none' pattern='[A-Za-z0-9_.\\-]{3,30}' required>" +
+        "<label>" + esc(t("username")) + "<input name='user' autocomplete='username' autocapitalize='none' autocorrect='off' spellcheck='false' required>" +
           "<small>" + esc(t("usernameRule")) + "</small></label>" +
         "<label>" + esc(t("email")) + "<input name='email' type='email' autocomplete='email' required></label>" +
         "<label>" + esc(t("password")) + "<input name='pw' type='password' autocomplete='new-password' minlength='8' required>" +
@@ -204,6 +204,11 @@ var Auth = (function () {
       };
       codeInput.addEventListener("change", check);
       if (invite) check();
+      // Benutzername: Leerzeichen gleich als _ schreiben (Handy-Tastaturen hängen oft ein Leerzeichen an)
+      form.elements["user"].addEventListener("input", function (e) {
+        var v = e.target.value.replace(/^\s+/, "").replace(/\s+(?=\S)/g, "_");
+        if (v !== e.target.value) e.target.value = v;
+      });
     }
 
     form.onsubmit = function (e) {
@@ -218,7 +223,9 @@ var Auth = (function () {
       }
 
       if (mode === "register") {
-        var code = f["code"].value.trim().toUpperCase(), user = f["user"].value.trim();
+        var code = f["code"].value.trim().toUpperCase(), user = f["user"].value.trim().replace(/\s+/g, "_");
+        f["user"].value = user;
+        if (!/^[A-Za-z0-9_.-]{3,30}$/.test(user)) { say(t("usernameInvalid")); done(); return; }
         if (f["pw"].value !== f["pw2"].value) { say(t("passwordMismatch")); done(); return; }
         client.rpc("check_invite", { p_code: code }).then(function (res) {
           if (!res.data || !res.data.valid) throw new Error(t("codeInvalid"));

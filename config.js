@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 13,
+  appVersion: 14,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -437,7 +437,7 @@ var APP_CONFIG = {
       userOrEmail: "Username or email", username: "Username", email: "Email", password: "Password",
       password2: "Repeat password", inviteCode: "Invitation code", haveCode: "I have an invitation code",
       haveAccount: "I already have an account", backToLogin: "Back to sign in",
-      usernameRule: "3–30 characters: letters, digits, . _ -", passwordRule: "At least 8 characters",
+      usernameRule: "3–30 characters: letters A–Z, digits, . _ - (no spaces, no accents)", usernameInvalid: "Username not valid: use 3–30 letters A–Z, digits or . _ - only (no spaces, no accents). Example: harvey_m", passwordRule: "At least 8 characters",
       passwordMismatch: "Passwords do not match", codeValid: "Valid code", codeClub: "Club", codePrivate: "Private user (no club)",
       codeInvalid: "This code is not valid (wrong, used up, expired or deactivated).",
       usernameTaken: "This username is already taken.", wrongLogin: "Username or password wrong.",
@@ -550,7 +550,7 @@ var APP_CONFIG = {
       userOrEmail: "Benutzername oder E-Mail", username: "Benutzername", email: "E-Mail", password: "Passwort",
       password2: "Passwort wiederholen", inviteCode: "Einladungscode", haveCode: "Ich habe einen Einladungscode",
       haveAccount: "Ich habe schon ein Konto", backToLogin: "Zurück zur Anmeldung",
-      usernameRule: "3–30 Zeichen: Buchstaben, Ziffern, . _ -", passwordRule: "Mindestens 8 Zeichen",
+      usernameRule: "3–30 Zeichen: Buchstaben A–Z, Ziffern, . _ - (keine Leerzeichen, keine Umlaute)", usernameInvalid: "Benutzername ungültig: nur 3–30 Buchstaben A–Z, Ziffern oder . _ - (keine Leerzeichen, keine Umlaute). Beispiel: harvey_m", passwordRule: "Mindestens 8 Zeichen",
       passwordMismatch: "Passwörter stimmen nicht überein", codeValid: "Gültiger Code", codeClub: "Club", codePrivate: "Privatperson (ohne Club)",
       codeInvalid: "Dieser Code ist nicht gültig (falsch, aufgebraucht, abgelaufen oder gesperrt).",
       usernameTaken: "Dieser Benutzername ist schon vergeben.", wrongLogin: "Benutzername oder Passwort falsch.",
