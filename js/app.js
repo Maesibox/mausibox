@@ -1191,11 +1191,16 @@ var App = (function () {
     document.querySelector("#sheet .sheet-close").textContent = "✕";
 
     var view = pref("view", null);
+    // gespeicherte Position in die "echte" Welt zurückholen (Längengrad -180 … 180)
+    if (view && view.lon != null) view.lon = ((view.lon + 180) % 360 + 360) % 360 - 180;
     var club = Auth.account && Auth.account.clubs.filter(function (c) { return c.start_lat != null; })[0];
     if (!view && club) view = { lat: club.start_lat, lon: club.start_lon, zoom: club.start_zoom || C.start.zoom };
     map = L.map("map", {
       zoomControl: false,
-      preferCanvas: true
+      preferCanvas: true,
+      // Wer z. B. von Arizona nach Westen über den Pazifik nach Neuseeland schiebt, landet in einer "Kopie" der Welt
+      // (Längengrad unter -180). Dort wären Flächen und Punkte unsichtbar – darum zurück in die echte Welt springen.
+      worldCopyJump: true
     }).setView(view ? [view.lat, view.lon] : [C.start.lat, C.start.lon], view ? view.zoom : C.start.zoom);
     L.control.zoom({ position: "bottomleft" }).addTo(map);
     L.control.scale({ imperial: true, metric: true, position: "bottomleft" }).addTo(map);
