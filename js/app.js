@@ -330,7 +330,7 @@ var App = (function () {
           html: "<div class='club-dot' style='background:" + esc(clubColor(cell.clubId)) + "'>" + n + "</div>" }),
         zIndexOffset: 800
       });
-      m.bindTooltip(esc(cell.club) + " · " + n + " " + t("claims") + " – " + t("clubDotHint"));
+      m.bindTooltip(esc(cell.club) + " · " + n + " " + t("clubDotClaims") + " – " + t("clubDotHint"));
       m.on("click", function () {
         if (n === 1) map.setView(cell.pts[0], (C.clubDotsMaxZoom || 13) + 2);
         else map.fitBounds(cell.pts, { padding: [60, 60], maxZoom: (C.clubDotsMaxZoom || 13) + 2 });
