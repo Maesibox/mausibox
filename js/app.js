@@ -614,7 +614,18 @@ var App = (function () {
       (p._club ? " · " + esc(p._club) : "") + "</div>" +
       (p.description ? (long ? "<details><summary>" + esc(p.description.slice(0, 160)) + "…</summary><p class='note-text'>" + esc(p.description) + "</p></details>"
         : "<p class='note-text'>" + esc(p.description) + "</p>") : "") +
-      (p.url ? "<a href='" + esc(p.url) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") + "</div>";
+      (p.url ? "<a href='" + esc(p.url) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") +
+      // Zusatz für Infopunkte (z. B. Basecamp): Bild (Lageplan), Abschnitte zum Aufklappen, Links, Navigation
+      (p.image ? "<a href='" + esc(p.image) + "' target='_blank' rel='noopener'><img class='pop-img' src='" + esc(p.image) + "' alt=''></a>" : "") +
+      (p.sections || []).map(function (s) {
+        return "<details><summary>" + esc(s.title) + "</summary><p class='note-text'>" + esc(s.text) + "</p></details>";
+      }).join("") +
+      (p.links || []).map(function (l) {
+        return "<div><a href='" + esc(l.url) + "' target='_blank' rel='noopener'>" + esc(l.text) + " ↗</a></div>";
+      }).join("") +
+      (f.geometry && f.geometry.type === "Point" && p.navigate ? "<div class='pop-actions'><a class='btn-like' target='_blank' rel='noopener' href='" +
+        esc(C.parking.navigateUrl.replace("{lat}", f.geometry.coordinates[1].toFixed(6)).replace("{lon}", f.geometry.coordinates[0].toFixed(6))) +
+        "'>➜ " + esc(t("navigate")) + "</a></div>" : "") + "</div>";
   }
 
   function geologyHtml(d) {
