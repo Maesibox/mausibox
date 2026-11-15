@@ -692,7 +692,7 @@ var App = (function () {
     }
     return results.slice(0, 5).map(function (res) {
       var a = res.attributes || {};
-      return "<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(a[id.title] || res.layerName || "") + "</h3>" +
+      return "<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(a[id.title] || a.name || a.label || res.layerName || "") + "</h3>" +
         "<div class='pop-sub'>" + esc(id.subField ? res[id.subField] : tr(id.sub)) + "</div>" +
         (id.verdict ? "<p class='verdict " + esc(id.level || "limited") + "'>" + esc(tr(id.verdict)) + "</p>" : "") +
         "<table>" + (id.fields || []).map(function (fd) { return row(tr(fd.label), a[fd.field]); }).join("") + "</table>" +
