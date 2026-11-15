@@ -51,6 +51,15 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 15
+- **Neuseeland:** Gold-Fossicking-Gebiete (öffentlich), Bergbau-Genehmigungen („Claims“), Anträge und Schedule-4-Land als Ebenen –
+  live vom Server von NZ Petroleum & Minerals, Änderungen erscheinen automatisch.
+
+## Neu in Version 13
+- Hinführen-Knopf (Apple Karten) bei Punkten, Claims, Club-Claims, Basecamp, BLM-Claims.
+- BLM-Änderungen: täglicher Vergleich (config.js → blmWatch), Filter „nur neue / nur abgelaufene (30 Tage)“, Meldung + Menü-Seite.
+- Einladungscodes für mehrere Clubs, Club-Chat, alte BLM-Claims weiss gestrichelt.
+
 ## Neu in Version 10
 - **Farbe pro Club** (in `config.js` unter `clubColors`), Legende im Ebenen-Fenster.
 - **Sammelpunkte:** weiter herausgezoomt zeigt ein farbiger Punkt mit Zahl, wo Club-Claims liegen; antippen zoomt hinein.

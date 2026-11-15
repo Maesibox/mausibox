@@ -224,7 +224,7 @@ var App = (function () {
       var url = cfg.url + "?where=" + encodeURIComponent(cfg.where || "1=1") +
         "&geometry=" + b.w + "," + b.s + "," + b.e + "," + b.n +
         "&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&outSR=4326" +
-        "&outFields=OBJECTID,Unit_Nm,Des_Tp,Mang_Name,GAP_Sts&maxAllowableOffset=" + (cfg.simplify || 0.0005) +
+        "&outFields=" + (cfg.outFields || "OBJECTID,Unit_Nm,Des_Tp,Mang_Name,GAP_Sts") + "&maxAllowableOffset=" + (cfg.simplify || 0.0005) +
         "&geometryPrecision=5&orderByFields=OBJECTID&resultOffset=" + offset + "&f=geojson";
       return cachedFetch(url, "json").then(function (data) {
         var feats = data.features || [];
@@ -446,11 +446,20 @@ var App = (function () {
     if (cfg.type === "areaPolygons") {
       hitFeatures[cfg.id] = [];
       return makeCellLayer(cfg, function (group, f) {
-        var col = areaClass(cfg, f.properties) === "closed" ? cfg.closedColor : cfg.limitedColor;
+        var col = cfg.color || (areaClass(cfg, f.properties) === "closed" ? cfg.closedColor : cfg.limitedColor);
         group.addLayer(L.geoJSON(f, {
           interactive: false,
-          style: { color: col, weight: 2, fillColor: col, fillOpacity: 0.18 }
+          style: { color: col, weight: 2, fillColor: col, fillOpacity: cfg.fillOpacity || 0.18 }
         }));
+        // kleine Flächen (z. B. Fossicking-Gebiete) zusätzlich als Punkt, damit man sie auch weit herausgezoomt findet
+        if (cfg.centerDot) {
+          var c = centerOf(f);
+          if (c) {
+            var dot = L.circleMarker(c, { radius: 7, color: "#000", weight: 1, fillColor: col, fillOpacity: 1, bubblingMouseEvents: false });
+            dot.on("click", function () { onMapClick({ latlng: L.latLng(c[0], c[1]), forceHit: f }); });
+            group.addLayer(dot);
+          }
+        }
         hitFeatures[cfg.id].push(f);
       });
     }
@@ -605,6 +614,26 @@ var App = (function () {
       "<p class='hint'>" + esc(t("landHint")) + "</p></div>";
   }
 
+  // Popup für Flächen mit eigener Beschreibung in config.js (popup: title, level, verdict, fields, link)
+  function infoAreaHtml(f, cfg) {
+    var p = f.properties || {}, pc = cfg.popup;
+    var lvl = typeof pc.level === "function" ? pc.level(p) : pc.level;
+    var fill = function (tpl) { return String(tpl).replace(/\{(\w+)\}/g, function (m, k) { return p[k] == null ? "" : encodeURIComponent(p[k]); }); };
+    var val = function (fd) {
+      var v = p[fd.field];
+      if (v == null || v === "") return "";
+      if (fd.date) return new Date(v).toISOString().slice(0, 10);
+      return String(v) + (fd.unit ? " " + fd.unit : "");
+    };
+    return "<div class='pop-sec' style='border-left:4px solid " + esc(cfg.color) + ";padding-left:8px'>" +
+      "<h3>" + esc(p[pc.title] || tr(cfg.name)) + "</h3><div class='pop-sub'>" + esc(tr(cfg.name)) + "</div>" +
+      (pc.verdict ? "<p class='verdict " + esc(lvl || "limited") + "'>" + esc(tr(pc.verdict)) + "</p>" : "") +
+      "<table>" + (pc.fields || []).map(function (fd) { return row(tr(fd.label), val(fd)); }).join("") + "</table>" +
+      (pc.link ? "<a href='" + esc(fill(pc.link.url)) + "' target='_blank' rel='noopener'>" + esc(tr(pc.link.text)) + " ↗</a>" : "") +
+      (function () { var c = centerOf(f); return c ? navLink(c[0], c[1]) : ""; })() +
+      "<p class='hint'>" + esc(tr(pc.hint || { en: t("landHint"), de: t("landHint") })) + "</p></div>";
+  }
+
   function landHtml(attrs) {
     if (!attrs) return "<div class='pop-sec'><p class='hint'>" + esc(t("landUnknown")) + "</p></div>";
     var code = attrs.ADMIN_AGENCY_CODE, info = C.landAgencies[code] || C.landAgencies[attrs.ADMIN_DEPT_CODE];
@@ -664,9 +693,9 @@ var App = (function () {
     var parts = [];
     C.overlays.forEach(function (o) {
       if (!overlayState[o.id]) return;
-      var hits = (hitFeatures[o.id] || []).filter(function (f) { return hit(f, lon, lat); });
+      var hits = (hitFeatures[o.id] || []).filter(function (f) { return f === e.forceHit || hit(f, lon, lat); });
       if (o.type === "blmClaims") hits.forEach(function (f) { parts.push(claimHtml(f, o)); });
-      if (o.type === "areaPolygons") hits.forEach(function (f) { parts.push(areaHtml(f, o)); });
+      if (o.type === "areaPolygons") hits.forEach(function (f) { parts.push(o.popup ? infoAreaHtml(f, o) : areaHtml(f, o)); });
       if (o.type === "file") clubFeatures().filter(function (f) { return hit(f, lon, lat); }).forEach(function (f) { parts.push(clubHtml(f)); });
       if (o.type === "userClaims") parts = parts.concat(Claims.hitHtml(lon, lat));
     });

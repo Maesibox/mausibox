@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 14,
+  appVersion: 15,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -202,6 +202,96 @@ var APP_CONFIG = {
         { color: "#d0021b", text: { en: "Usually closed (park, refuge, wilderness, tribal, military)", de: "Meist verboten (Park, Schutzgebiet, Wilderness, Reservat, Militär)" } },
         { color: "#f5a623", text: { en: "Restricted – check rules", de: "Eingeschränkt – Regeln prüfen" } }
       ]
+    },
+    // ---------- NEUSEELAND (live von NZ Petroleum & Minerals – Änderungen erscheinen automatisch) ----------
+    {
+      id: "nzFossick",
+      type: "areaPolygons",
+      name: { en: "NZ – Gold fossicking areas (public)", de: "NZ – Gold-Fossicking-Gebiete (öffentlich)" },
+      url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/1/query",
+      where: "Permit_Type_Code='Gold Fossicking Area'",
+      outFields: "OBJECTID,Operation_Name,Permit_Number,Permit_Location,Permit_Area,Permit_Expiry_Date",
+      attribution: "NZ Petroleum & Minerals",
+      minZoom: 5, cellZ: 6, simplify: 0.00005,
+      color: "#00e676", fillOpacity: 0.3,
+      centerDot: true,             // die Gebiete sind klein: zusätzlich ein Punkt, damit man sie findet
+      visible: false, offline: true,
+      popup: {
+        title: "Operation_Name", level: "open",
+        verdict: { en: "Public: gold fossicking without a permit (hand tools, pans, sluice boxes – check the rules)", de: "Öffentlich: Gold suchen ohne Genehmigung (Handwerkzeug, Pfanne, Sluice – Regeln beachten)" },
+        fields: [
+          { field: "Permit_Location", label: { en: "Region", de: "Region" } },
+          { field: "Permit_Area", label: { en: "Area", de: "Fläche" }, unit: "ha" },
+          { field: "Permit_Expiry_Date", label: { en: "Valid until", de: "Gültig bis" }, date: true }
+        ],
+        link: { url: "https://gis.nzpam.govt.nz/PermitWebmaps/Content/GFA/GFA{Permit_Number}.pdf", text: { en: "Official map & rules (PDF)", de: "Offizielle Karte & Regeln (PDF)" } },
+        hint: { en: "Official data from NZ Petroleum & Minerals. Read the rules in the PDF before you go.", de: "Offizielle Daten von NZ Petroleum & Minerals. Vor dem Besuch die Regeln im PDF lesen." }
+      }
+    },
+    {
+      id: "nzPermits",
+      type: "areaPolygons",
+      name: { en: "NZ – Mining permits (\"claims\")", de: "NZ – Bergbau-Genehmigungen („Claims“)" },
+      url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/1/query",
+      where: "Permit_Type_Code<>'Gold Fossicking Area'",
+      outFields: "OBJECTID,Permit_Number,Permit_Type_Description,Minerals,Owners,Operator,Operation_Name,Permit_Location,Permit_Area,Permit_Grant_Date,Permit_Expiry_Date",
+      attribution: "NZ Petroleum & Minerals",
+      minZoom: 8, cellZ: 9, simplify: 0.0002,
+      color: "#e02020", fillOpacity: 0.15,
+      visible: false, offline: true,
+      popup: {
+        title: "Operation_Name", level: "closed",
+        verdict: { en: "Permit area – no fossicking without the permit holder's OK", de: "Genehmigungsgebiet – nicht suchen ohne Erlaubnis des Inhabers" },
+        fields: [
+          { field: "Permit_Type_Description", label: { en: "Type", de: "Art" } },
+          { field: "Permit_Number", label: { en: "Permit no.", de: "Nummer" } },
+          { field: "Minerals", label: { en: "Minerals", de: "Rohstoffe" } },
+          { field: "Owners", label: { en: "Holder", de: "Inhaber" } },
+          { field: "Operator", label: { en: "Operator", de: "Betreiber" } },
+          { field: "Permit_Area", label: { en: "Area", de: "Fläche" }, unit: "ha" },
+          { field: "Permit_Grant_Date", label: { en: "Granted", de: "Erteilt" }, date: true },
+          { field: "Permit_Expiry_Date", label: { en: "Expires", de: "Läuft ab" }, date: true }
+        ],
+        link: { url: "https://www.nzpam.govt.nz/maps-geoscience/minerals-webmaps", text: { en: "NZP&M permit map", de: "Karte der Genehmigungen (NZP&M)" } }
+      }
+    },
+    {
+      id: "nzApplications",
+      type: "areaPolygons",
+      name: { en: "NZ – Permit applications", de: "NZ – Anträge für Genehmigungen" },
+      url: "https://gis.nzpam.govt.nz/server/rest/services/Public/Permits_Minerals_Layers/MapServer/0/query",
+      outFields: "*",
+      attribution: "NZ Petroleum & Minerals",
+      minZoom: 8, cellZ: 9, simplify: 0.0002,
+      color: "#f5a623", fillOpacity: 0.12,
+      visible: false, offline: false,
+      popup: {
+        title: "Application_ID", level: "limited",
+        verdict: { en: "Application pending – may soon become a permit area", de: "Antrag läuft – wird evtl. bald Genehmigungsgebiet" },
+        fields: [
+          { field: "Permit_Type_Description", label: { en: "Type", de: "Art" } },
+          { field: "Minerals", label: { en: "Minerals", de: "Rohstoffe" } },
+          { field: "Owners", label: { en: "Applicant", de: "Antragsteller" } },
+          { field: "Submitted_Date", label: { en: "Submitted", de: "Eingereicht" }, date: true },
+          { field: "Permit_Location", label: { en: "Region", de: "Region" } }
+        ]
+      }
+    },
+    {
+      id: "nzSchedule4",
+      type: "areaPolygons",
+      name: { en: "NZ – Schedule 4 land (mining restricted)", de: "NZ – Schedule-4-Land (Bergbau eingeschränkt)" },
+      url: "https://gis.nzpam.govt.nz/server/rest/services/Public/CMA_Schedule_4_Land/MapServer/0/query",
+      outFields: "OBJECTID,name",
+      attribution: "NZ Petroleum & Minerals",
+      minZoom: 6, cellZ: 7, simplify: 0.001,
+      color: "#8e24aa", fillOpacity: 0.15,
+      visible: false, offline: true,
+      popup: {
+        title: "name", level: "closed",
+        verdict: { en: "National parks, reserves, sanctuaries …: mining access restricted – fossicking usually not allowed", de: "Nationalparks, Reservate, Schutzgebiete …: Bergbau-Zugang eingeschränkt – Gold suchen meist nicht erlaubt" },
+        fields: []
+      }
     },
     {
       id: "blm",

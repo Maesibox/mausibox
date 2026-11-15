@@ -37,6 +37,9 @@ var Help = (function () {
       ["Mehrere Clubs", "Bist du in mehreren Clubs, wählst du oben im Ebenen-Fenster (oder in der Claims-Liste) den Club, dessen Claims du sehen willst – " +
         "oder alle. Der gewählte Club steht oben links neben dem App-Namen.<br>Admins teilen in der Verwaltung bestehende Konten einem Club zu " +
         "(Mitglieder → Person hinzufügen, oder bei „Alle Benutzer“)."],
+      ["Neuseeland", "Im Ebenen-Fenster gibt es vier NZ-Ebenen, live von der Behörde NZ Petroleum & Minerals (Änderungen erscheinen automatisch): " +
+        "<b>Gold-Fossicking-Gebiete</b> (grün, öffentlich, ohne Genehmigung – mit Link zum offiziellen PDF), <b>Bergbau-Genehmigungen</b> (rot, die „Claims“ – nicht betreten zum Suchen), " +
+        "<b>Anträge</b> (orange) und <b>Schedule-4-Land</b> (lila, Nationalparks usw. – meist verboten). Antippen zeigt Details und „Hinführen“."],
       ["LiDAR / Gelände", "Im Ebenen-Fenster <b>LiDAR / Gelände</b> einschalten und bei „Ansicht“ wählen: Schummerung (zeigt alte Schürfungen, Gräben, Terrassen), " +
         "Hangneigung, Hangrichtung oder Höhenlinien. Mit dem Regler die Transparenz einstellen. Braucht Internet; das erste Laden dauert ein paar Sekunden."],
       ["Offline im Gelände", "Menü → <b>Offline-Karten</b>: Gebiet auf der Karte einstellen, Zoomstufe wählen, herunterladen – am besten zu Hause im WLAN. " +
@@ -76,6 +79,9 @@ var Help = (function () {
         "“Visible for”: only me or a club. Coordinates on old notices are often NAD27 (up to ~100 m off)."],
       ["Several clubs", "If you are in several clubs, choose at the top of the layers panel (or in the claims list) which club's claims to show – or all. " +
         "The chosen club appears next to the app name.<br>Admins add existing accounts to a club in Administration (Members → Add person, or under All users)."],
+      ["New Zealand", "Four NZ layers in the layers panel, live from NZ Petroleum & Minerals (changes appear automatically): " +
+        "<b>gold fossicking areas</b> (green, public, no permit needed – with link to the official PDF), <b>mining permits</b> (red, the “claims” – keep out), " +
+        "<b>applications</b> (orange) and <b>Schedule 4 land</b> (purple, national parks etc. – usually closed). Tap for details and “Navigate”."],
       ["LiDAR / terrain", "Switch on <b>LiDAR / terrain</b> in the layers panel and choose a view: shaded relief (shows old workings, trenches, terraces), " +
         "slope, aspect or contour lines. Use the slider for transparency. Needs internet; the first load takes a few seconds."],
       ["Offline in the field", "Menu → <b>Offline maps</b>: set the area on the map, choose the zoom level, download – best at home on Wi-Fi. " +
