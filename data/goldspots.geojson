@@ -1,0 +1,707 @@
+{
+"type": "FeatureCollection",
+"features": [
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.2664,
+48.9705
+]
+},
+"properties": {
+"name": "Rhein bei Neuburgweier",
+"country": "DE",
+"river": "Rhein",
+"kind": "free",
+"de": "Klassisches Rheingold auf Kiesbänken (Oberrhein). Hobby mit Pfanne meist geduldet; Naturschutzgebiete und Rheinauen beachten.",
+"en": "Classic Rhine gold on gravel bars (Upper Rhine). Hobby panning usually tolerated; respect nature reserves."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+7.9383,
+48.6611
+]
+},
+"properties": {
+"name": "Rhein bei Rheinau (Ortenau)",
+"country": "DE",
+"river": "Rhein",
+"kind": "free",
+"de": "Rheingold-Gebiet am Oberrhein. Hobby mit Pfanne meist geduldet; Schutzgebiete beachten.",
+"en": "Rhine gold area on the Upper Rhine. Hobby panning usually tolerated; respect protected areas."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+7.5806,
+48.0291
+]
+},
+"properties": {
+"name": "Rhein bei Breisach",
+"country": "DE",
+"river": "Rhein",
+"kind": "free",
+"de": "Historisches Rheingold-Gebiet. Hobby mit Pfanne meist geduldet; Schutzgebiete beachten.",
+"en": "Historic Rhine gold area. Hobby panning usually tolerated."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+11.4931,
+47.8357
+]
+},
+"properties": {
+"name": "Isar zwischen Bad Tölz und Wolfratshausen",
+"country": "DE",
+"river": "Isar",
+"kind": "free",
+"de": "Isargold, feine Flitter. Grosse Teile der Isarauen sind Naturschutzgebiet (z. B. Pupplinger Au) – dort nicht waschen.",
+"en": "Isar gold, fine flakes. Large parts of the floodplain are nature reserves (e.g. Pupplinger Au) – no panning there."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+9.0855,
+51.1667
+]
+},
+"properties": {
+"name": "Eder bei Affoldern (Edertal)",
+"country": "DE",
+"river": "Eder",
+"kind": "free",
+"de": "Edergold – bekanntestes Goldwaschgebiet Hessens. Hobby mit Pfanne meist geduldet.",
+"en": "Eder gold – Hesse's best-known panning area. Hobby panning usually tolerated."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.7908,
+51.0772
+]
+},
+"properties": {
+"name": "Eder bei Frankenberg / Goldberg Eisenberg (Korbach)",
+"country": "DE",
+"river": "Eder",
+"kind": "free",
+"de": "Edergold; in der Nähe das historische Goldbergwerk Eisenberg bei Korbach (Besucherbergwerk).",
+"en": "Eder gold; nearby the historic Eisenberg gold mine near Korbach (visitor mine)."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+11.1957,
+50.6421
+]
+},
+"properties": {
+"name": "Schwarza bei Schwarzburg",
+"country": "DE",
+"river": "Schwarza",
+"kind": "free",
+"de": "Thüringer Waschgold aus dem Schwarzatal. Hobby mit Pfanne meist geduldet.",
+"en": "Thuringian placer gold of the Schwarza valley. Hobby panning usually tolerated."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+11.0045,
+50.5187
+]
+},
+"properties": {
+"name": "Schwarza bei Goldisthal",
+"country": "DE",
+"river": "Schwarza",
+"kind": "free",
+"de": "Oberlauf der Schwarza, historisches Goldwaschgebiet (der Ortsname sagt es).",
+"en": "Upper Schwarza, historic gold panning area."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+11.6954,
+49.9996
+]
+},
+"properties": {
+"name": "Goldkronach (Fichtelgebirge)",
+"country": "DE",
+"river": "Bäche um Goldkronach",
+"kind": "free",
+"de": "Historischer Goldbergbau mit Besucherbergwerk und Goldbergbaumuseum; Waschgold in den Bächen.",
+"en": "Historic gold mining with visitor mine and museum; placer gold in the creeks."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+12.9917,
+47.1052
+]
+},
+"properties": {
+"name": "Rauris – Goldwaschplatz Bodenhaus",
+"country": "AT",
+"river": "Hüttwinklache",
+"kind": "site",
+"de": "Offizieller Goldwaschplatz im Hüttwinkltal (Tauerngold). Ausrüstung vor Ort; gegen Gebühr.",
+"en": "Official gold panning site in the Hüttwinkl valley (Tauern gold). Equipment available; fee."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+12.995,
+47.2246
+]
+},
+"properties": {
+"name": "Rauris – Hochalm",
+"country": "AT",
+"river": "Hochalm",
+"kind": "site",
+"de": "Goldwaschen auf der Hochalm (Bergbahn Rauris), betreuter Waschplatz.",
+"en": "Gold panning at the Hochalm (Rauris cable car), supervised site."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+13.1185,
+47.0908
+]
+},
+"properties": {
+"name": "Böckstein / Gasteinertal",
+"country": "AT",
+"river": "Gasteiner Ache",
+"kind": "show",
+"de": "Altes Tauerngold-Revier, Montanmuseum Altböckstein. Ausserhalb betreuter Plätze: Anzeige bei der Montanbehörde, Grundeigentümer und Fischereiberechtigten fragen.",
+"en": "Old Tauern gold district, mining museum Altböckstein. Outside supervised sites: report to the mining authority, ask landowner and fishing rights holder."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+12.8408,
+47.0385
+]
+},
+"properties": {
+"name": "Heiligenblut (Kärnten)",
+"country": "AT",
+"river": "Möll / Gößnitz",
+"kind": "site",
+"de": "Geführtes Goldwaschen im Nationalpark Hohe Tauern. Eigenständig im Nationalpark nicht erlaubt; in Kärnten braucht es ausserhalb betreuter Plätze eine Bewilligung.",
+"en": "Guided gold panning in the Hohe Tauern National Park. Not allowed on your own inside the park; in Carinthia a permit is needed outside supervised sites."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+11.9,
+47.2182
+]
+},
+"properties": {
+"name": "Hainzenberg / Zell am Ziller",
+"country": "AT",
+"river": "Ziller",
+"kind": "show",
+"de": "Goldschaubergwerk Hainzenberg (Tirol), mit Goldwaschen für Besucher.",
+"en": "Show gold mine Hainzenberg (Tyrol), panning for visitors."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+13.044,
+47.2985
+]
+},
+"properties": {
+"name": "Salzach bei Lend",
+"country": "AT",
+"river": "Salzach",
+"kind": "permit",
+"de": "Tauerngold wird von den Zubringern in die Salzach getragen. Selbständig: Anzeige bei der Montanbehörde, Zustimmung von Grundeigentümer und Fischereiberechtigtem.",
+"en": "Tauern gold carried into the Salzach. On your own: report to mining authority, consent of landowner and fishing rights holder."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.0553,
+47.0181
+]
+},
+"properties": {
+"name": "Grosse Fontanne bei Doppleschwand (Napf)",
+"country": "CH",
+"river": "Grosse Fontanne",
+"kind": "free",
+"de": "Bekanntestes Napfgold-Gewässer. Kanton Luzern: keine besonderen Vorgaben bekannt, keine Motorgeräte, Fisch-Schonzeit beachten.",
+"en": "Best-known Napf gold stream. Canton Lucerne: no special rules known, no motorised gear, respect fish closed season."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.0726,
+47.058
+]
+},
+"properties": {
+"name": "Kleine Emme bei Wolhusen (Napf)",
+"country": "CH",
+"river": "Kleine Emme",
+"kind": "free",
+"de": "Napfgold in der Kleinen Emme. Kanton Luzern: keine Motorgeräte, Schonzeit beachten.",
+"en": "Napf gold in the Kleine Emme. Canton Lucerne: no motorised gear."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+7.9169,
+47.059
+]
+},
+"properties": {
+"name": "Luthern (Napf)",
+"country": "CH",
+"river": "Luthern",
+"kind": "free",
+"de": "Napfgold-Gewässer, auch in der swisstopo-Rohstoffkarte als Goldvorkommen. Kanton Luzern.",
+"en": "Napf gold stream, listed as gold occurrence by swisstopo. Canton Lucerne."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+7.8467,
+46.9229
+]
+},
+"properties": {
+"name": "Ilfis / Emme bei Trubschachen (Napf)",
+"country": "CH",
+"river": "Ilfis",
+"kind": "free",
+"de": "Napfgold im Emmental. Kanton Bern: Pfanne und Schaufel, max. 3 Personen, 1. Mai – 30. Sept. bewilligungsfrei.",
+"en": "Napf gold in the Emmental. Canton Bern: pan and shovel, max. 3 people, 1 May – 30 Sept. without permit."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.853,
+46.7426
+]
+},
+"properties": {
+"name": "Vorderrhein bei Disentis",
+"country": "CH",
+"river": "Vorderrhein",
+"kind": "permit",
+"de": "Rheingold in der Surselva. Gemeinde Disentis/Mustér: Bewilligung nötig.",
+"en": "Rhine gold in the Surselva. Municipality Disentis/Mustér: permit needed."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.8568,
+46.6733
+]
+},
+"properties": {
+"name": "Medelser Rhein bei Curaglia (Medel)",
+"country": "CH",
+"river": "Rein da Medel",
+"kind": "permit",
+"de": "Klassisches Bündner Goldwaschgebiet. Gemeinde Medel/Lucmagn: jegliches Goldwaschen bewilligungspflichtig (Gemeindeverwaltung).",
+"en": "Classic Grisons gold area. Medel/Lucmagn: all gold panning needs a permit from the municipality."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.8159,
+46.0126
+]
+},
+"properties": {
+"name": "Malcantone bei Astano (Tessin)",
+"country": "CH",
+"river": "Magliasina / Tresa",
+"kind": "permit",
+"de": "Ehemalige Goldminen im Malcantone (Sessa, Astano). Kanton Tessin: bewilligungspflichtig.",
+"en": "Former gold mines of the Malcantone. Canton Ticino: permit required."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+5.9838,
+46.1992
+]
+},
+"properties": {
+"name": "Allondon bei Dardagny (Genf)",
+"country": "CH",
+"river": "Allondon",
+"kind": "permit",
+"de": "Bekanntes Genfer Goldgewässer. Kanton Genf: bewilligungspflichtig; Teile sind Naturschutzgebiet.",
+"en": "Known Geneva gold stream. Canton Geneva: permit required; parts are nature reserve."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.0248,
+45.4825
+]
+},
+"properties": {
+"name": "Elvo bei Vermogno (Biella)",
+"country": "IT",
+"river": "Elvo",
+"kind": "permit",
+"de": "„Mekka“ der italienischen Goldsucher, neben der römischen Goldmine Bessa (Naturreservat – dort nicht graben). Piemont: Anmeldung bei der Region (Registro raccoglitori), nur Handwerkzeug, max. 5 g Gold pro Tag und Person, Grundeigentümer fragen. Goldmuseum in Vermogno.",
+"en": "'Mecca' of Italian gold hunters, next to the Roman Bessa gold mine (nature reserve – no digging). Piedmont: register with the region, hand tools only, max. 5 g gold per day and person."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.675,
+44.6869
+]
+},
+"properties": {
+"name": "Orba bei Silvano d'Orba",
+"country": "IT",
+"river": "Orba",
+"kind": "permit",
+"de": "Klassisches Goldwaschgebiet Orba/Piota (Ovadese). Piemont: Anmeldung bei der Region, nur Handwerkzeug, max. 5 g pro Tag.",
+"en": "Classic Orba/Piota gold area. Piedmont: register with the region, hand tools, max. 5 g per day."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.7397,
+44.6129
+]
+},
+"properties": {
+"name": "Piota / Orba bei Casaleggio Boiro",
+"country": "IT",
+"river": "Piota",
+"kind": "permit",
+"de": "Goldführende Bäche im Alto Monferrato (römische Goldwäschen). Piemont-Regeln.",
+"en": "Gold-bearing streams of the Alto Monferrato. Piedmont rules."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.6371,
+45.5972
+]
+},
+"properties": {
+"name": "Ticino bei Oleggio",
+"country": "IT",
+"river": "Ticino",
+"kind": "permit",
+"de": "Ticino-Gold (Grenze Piemont/Lombardei). Grosse Teile liegen im Naturpark Valle del Ticino – dort ist Sammeln verboten. Piemont-/Lombardei-Regeln.",
+"en": "Ticino gold. Large parts lie in the Valle del Ticino park – collecting forbidden there."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+7.9327,
+45.3003
+]
+},
+"properties": {
+"name": "Dora Baltea bei Mazzè",
+"country": "IT",
+"river": "Dora Baltea",
+"kind": "permit",
+"de": "Goldführende Dora Baltea (Canavese). Piemont: Anmeldung bei der Region, Handwerkzeug, max. 5 g pro Tag.",
+"en": "Gold-bearing Dora Baltea. Piedmont rules."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+7.9673,
+45.9684
+]
+},
+"properties": {
+"name": "Macugnaga – Goldmine Guia",
+"country": "IT",
+"river": "Anza",
+"kind": "show",
+"de": "Besucher-Goldmine Guia im Monte-Rosa-Gebiet (Valle Anzasca).",
+"en": "Guia visitor gold mine in the Monte Rosa area."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.5687,
+43.4105
+]
+},
+"properties": {
+"name": "Navelgas (Tineo, Asturien)",
+"country": "ES",
+"river": "Río Navelgas / Bárcena",
+"kind": "site",
+"de": "„Valle del Oro“ mit Goldwasch-Museum; jedes Jahr Ende Juli Goldwasch-Meisterschaft mit freier Waschzone. Ausserhalb: Erlaubnis nötig (Wasserbehörde Cantábrico, Region).",
+"en": "'Valle del Oro' with gold museum; national panning championship end of July with a free panning zone. Otherwise a permit is needed."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.5663,
+42.4984
+]
+},
+"properties": {
+"name": "Sil bei Ponferrada",
+"country": "ES",
+"river": "Sil",
+"kind": "permit",
+"de": "Goldfluss Sil (El Bierzo). Erlaubnis der Confederación Hidrográfica Miño-Sil und der Region nötig.",
+"en": "Gold river Sil. Permit from the Miño-Sil water authority and the region needed."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.7722,
+42.4203
+]
+},
+"properties": {
+"name": "Sil bei Puente de Domingo Flórez",
+"country": "ES",
+"river": "Sil",
+"kind": "permit",
+"de": "Römische Goldgebiete am Sil. Erlaubnis Confederación Hidrográfica Miño-Sil nötig.",
+"en": "Roman gold area on the Sil. Permit needed."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.9801,
+42.4301
+]
+},
+"properties": {
+"name": "Sil bei O Barco de Valdeorras",
+"country": "ES",
+"river": "Sil",
+"kind": "permit",
+"de": "Goldführender Sil in Galicien. Erlaubnis Confederación Hidrográfica Miño-Sil und Xunta nötig.",
+"en": "Gold-bearing Sil in Galicia. Permit needed."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.7915,
+42.4851
+]
+},
+"properties": {
+"name": "Las Médulas (Carucedo)",
+"country": "ES",
+"river": "–",
+"kind": "closed",
+"de": "Grösste römische Goldmine, UNESCO-Welterbe – nur ansehen, nicht graben.",
+"en": "Largest Roman gold mine, UNESCO World Heritage – look only, no digging."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+1.6273,
+43.0424
+]
+},
+"properties": {
+"name": "Ariège bei Varilhes",
+"country": "FR",
+"river": "Ariège",
+"kind": "permit",
+"de": "Die Ariège ist Frankreichs bekanntester Goldfluss („Orpaillage“). Je nach Département Anmeldung/Erlaubnis; Vereine helfen.",
+"en": "The Ariège is France's best-known gold river. Declaration/permit depending on the département."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+3.9857,
+44.0546
+]
+},
+"properties": {
+"name": "Gardon bei Anduze (Cevennen)",
+"country": "FR",
+"river": "Gardon",
+"kind": "permit",
+"de": "Klassischer Goldfluss der Cevennen. Département Gard: Regeln vorher klären.",
+"en": "Classic gold river of the Cévennes. Check the Gard rules."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+4.1998,
+44.26
+]
+},
+"properties": {
+"name": "Cèze bei Saint-Ambroix",
+"country": "FR",
+"river": "Cèze",
+"kind": "permit",
+"de": "Goldführende Cèze (Cevennen). Regeln des Départements klären.",
+"en": "Gold-bearing Cèze. Check département rules."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+0.7247,
+43.1078
+]
+},
+"properties": {
+"name": "Garonne bei Saint-Gaudens",
+"country": "FR",
+"river": "Garonne",
+"kind": "permit",
+"de": "Garonne-Gold aus den Pyrenäen. Regeln des Départements klären.",
+"en": "Garonne gold from the Pyrenees. Check département rules."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+7.7055,
+48.3181
+]
+},
+"properties": {
+"name": "Rhein bei Rhinau (Elsass)",
+"country": "FR",
+"river": "Rhin",
+"kind": "permit",
+"de": "Rheingold auf französischer Seite. Teile sind Naturschutzgebiet (Réserve naturelle).",
+"en": "Rhine gold on the French side. Parts are nature reserves."
+}
+}
+]
+}

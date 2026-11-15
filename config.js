@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 30,
+  appVersion: 31,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -177,8 +177,8 @@ var APP_CONFIG = {
       name: { en: "Austria", de: "Österreich" }, level: "limited",
       rule: { en: "Gold is a 'free' mineral (MinroG): searching must be reported to the mining authority, and the landowner must agree beforehand.",
               de: "Gold ist ein bergfreier Rohstoff (MinroG): Die Suche muss der Montanbehörde angezeigt werden, vorher braucht es die Zustimmung des Grundeigentümers." },
-      details: { en: "In addition: nature-protection laws of the federal states (some forbid certain tools), national park laws (e.g. Hohe Tauern – stricter), fishing and water law. Easy legal start: official gold-panning sites and show mines (e.g. Rauris, Heiligenblut). Collecting minerals as hand specimens is not covered by MinroG, but state rules apply.",
-                 de: "Zusätzlich gelten: Naturschutzgesetze der Bundesländer (teils Verbot bestimmter Hilfsmittel), Nationalparkgesetze (z. B. Hohe Tauern – strenger), Fischerei- und Wasserrecht. Einfacher legaler Einstieg: offizielle Goldwaschplätze und Schaubergwerke (z. B. Rauris, Heiligenblut). Mineraliensammeln (Handstücke) fällt nicht unter das MinroG, Landesrecht gilt trotzdem." },
+      details: { en: "In practice per federal state: Carinthia – a permit is needed to pan outside supervised sites (user experience 2026; ask the district authority/municipality). Salzburg – official panning sites in Rauris; elsewhere report + landowner + fishing rights holder. National parks (Hohe Tauern) – only guided panning. Everywhere: state nature-protection laws (some tools forbidden), fishing and water law, no motorised gear. Easiest legal start: official sites and show mines (Rauris, Heiligenblut, Hainzenberg).",
+                 de: "In der Praxis je Bundesland: Kärnten – ausserhalb betreuter Plätze braucht es eine Bewilligung (Erfahrung 2026; bei Bezirkshauptmannschaft/Gemeinde fragen). Salzburg – offizielle Waschplätze in Rauris; sonst Anzeige + Grundeigentümer + Fischereiberechtigter. Nationalparks (Hohe Tauern) – nur geführtes Goldwaschen. Überall: Naturschutzgesetze der Länder (teils Verbot bestimmter Hilfsmittel), Fischerei- und Wasserrecht, keine Motorgeräte. Einfachster legaler Einstieg: offizielle Plätze und Schaubergwerke (Rauris, Heiligenblut, Hainzenberg)." },
       source: "Bundesministerium für Finanzen, Montanbehörde (Stand Nov. 2026)",
       link: "https://www.bmf.gv.at/themen/bergbau/rechtsangelegenheiten-im-bergbau/goldsuche-und-sammeln-von-mineralien-in-oesterreich.html"
     },
@@ -200,16 +200,16 @@ var APP_CONFIG = {
     },
     IT: {
       name: { en: "Italy", de: "Italien" }, level: "limited",
-      rule: { en: "Historic gold rivers (Piedmont, e.g. Ticino, Orba, Elvo) have local panning traditions and clubs; rules are regional. Outside organised areas: be cautious and ask locally.",
-              de: "Historische Goldflüsse (Piemont, z. B. Ticino, Orba, Elvo) haben lokale Waschtraditionen und Vereine; Regeln sind regional. Ausserhalb organisierter Reviere: zurückhaltend sein und vor Ort fragen." },
+      rule: { en: "Rules are regional. Piedmont (Elvo, Orba, Ticino, Dora Baltea): register in writing with the Region (Registro raccoglitori, L.R. 51/1995) – the certificate is your permit; hand tools only, no motors; max. 5 g gold per person and day; landowner's consent; forbidden in protected areas. Lombardy (L.R. 2/1989) and Aosta Valley (L.R. 10/2008): similar collector rules; Trentino: annual permit from the province.",
+              de: "Regeln sind regional. Piemont (Elvo, Orba, Ticino, Dora Baltea): schriftliche Anmeldung bei der Region (Registro raccoglitori, L.R. 51/1995) – die Bestätigung ist die Erlaubnis; nur Handwerkzeug, keine Motoren; max. 5 g Gold pro Person und Tag; Zustimmung des Grundeigentümers; in Schutzgebieten verboten. Lombardei (L.R. 2/1989) und Aostatal (L.R. 10/2008): ähnliche Sammler-Regeln; Trentino: Jahresbewilligung der Provinz." },
       details: { en: "Strict country: cultural goods belong to the state; many regions also restrict taking minerals and fossils (Elba!). Metal detecting for antiquities is practically forbidden.",
                  de: "Strenges Land: Kulturgüter gehören dem Staat; viele Regionen beschränken auch Mineralien- und Fossilentnahme (Elba!). Detektorsuche nach Antiken praktisch verboten." },
-      source: "orecast.app – Kurzlage Recht (Stand Sept. 2026), keine Rechtsberatung", link: "https://orecast.app/recht"
+      source: "Regionalgesetze (L.R. Piemonte 51/1995 u. a., via cercatorioroitalia.it) und orecast.app (Stand Nov. 2026)", link: "https://cercatorioroitalia.it/primi-passi/regolamenti.html"
     },
     ES: {
       name: { en: "Spain", de: "Spanien" }, level: "limited",
-      rule: { en: "Gold panning ('bateo') in rivers usually needs permission: water authority of the river basin (Confederación Hidrográfica) and often the region's mining authority. Forbidden in protected areas. Famous gold areas: Sil and Miño (Galicia, León), Las Médulas (UNESCO site – no digging).",
-              de: "Goldwaschen („bateo“) in Flüssen braucht meist eine Erlaubnis: Wasserbehörde des Flussgebiets (Confederación Hidrográfica) und oft die Bergbaubehörde der Region. In Schutzgebieten verboten. Bekannte Goldgebiete: Sil und Miño (Galicien, León), Las Médulas (UNESCO – nicht graben)." },
+      rule: { en: "Gold panning ('bateo') needs permission: rivers are public water domain, so ask the water authority of the basin (Confederación Hidrográfica, e.g. Miño-Sil, Cantábrico) and the region's mining authority; also fishing rules. Forbidden in protected areas. Navelgas (Asturias): free panning zone during the national championship (end of July). Las Médulas: UNESCO – no digging.",
+              de: "Goldwaschen („bateo“) braucht eine Erlaubnis: Flüsse sind öffentliches Wassergut – zuständig sind die Wasserbehörde des Flussgebiets (Confederación Hidrográfica, z. B. Miño-Sil, Cantábrico) und die Bergbaubehörde der Region; dazu Fischereiregeln. In Schutzgebieten verboten. Navelgas (Asturien): freie Waschzone während der Meisterschaft (Ende Juli). Las Médulas: UNESCO – nicht graben." },
       details: { en: "Not an official source: please check with the Confederación Hidrográfica and the regional government before panning. Metal detecting is regulated by the regions (heritage law) and often needs a permit.",
                  de: "Keine amtliche Quelle: vor dem Waschen bei der Confederación Hidrográfica und der Regionalregierung nachfragen. Metalldetektor: von den Regionen geregelt (Denkmalrecht), meist genehmigungspflichtig." },
       source: "eigene Zusammenfassung (Nov. 2026), nicht amtlich geprüft"
@@ -479,6 +479,30 @@ var APP_CONFIG = {
       arcIdentify: { layers: "top", tolerance: 2, max: 2 }
     },
     // ---------- EUROPA (EU-weit) ----------
+    {
+      id: "euSpots",
+      group: "eu",
+      type: "spots",
+      name: { en: "Known gold panning places (Europe)", de: "Bekannte Goldwaschplätze (Europa)" },
+      // Liste ergänzen: tools/make_goldspots.py
+      file: "data/goldspots.geojson",
+      attribution: "Gold panning places: MAUSIBOX collection",
+      visible: false, offline: true,
+      kinds: {
+        free:   { color: "#2ecc40", level: "open",    label: { en: "Usually tolerated – rules still apply", de: "Meist geduldet – Regeln trotzdem beachten" } },
+        permit: { color: "#ff9800", level: "limited", label: { en: "Permit / registration needed", de: "Bewilligung / Anmeldung nötig" } },
+        site:   { color: "#2f80ed", level: "open",    label: { en: "Official panning site / guided – easiest legal start", de: "Offizieller Waschplatz / geführt – einfachster legaler Einstieg" } },
+        show:   { color: "#9b51e0", level: "limited", label: { en: "Show mine / museum – panning on your own: check rules", de: "Schaubergwerk / Museum – selbst waschen: Regeln klären" } },
+        closed: { color: "#e02020", level: "closed",  label: { en: "Look only – no digging", de: "Nur ansehen – nicht graben" } }
+      },
+      legend: [
+        { color: "#2ecc40", text: { en: "usually tolerated", de: "meist geduldet" } },
+        { color: "#ff9800", text: { en: "permit needed", de: "Bewilligung nötig" } },
+        { color: "#2f80ed", text: { en: "official site", de: "offizieller Waschplatz" } },
+        { color: "#9b51e0", text: { en: "show mine", de: "Schaubergwerk" } },
+        { color: "#e02020", text: { en: "no digging", de: "nicht graben" } }
+      ]
+    },
     {
       id: "euRules",
       group: "eu",
@@ -926,7 +950,7 @@ var APP_CONFIG = {
     en: {
       layers: "Layers", basemap: "Base map", overlays: "Layers",
       gps: "My location", addPoint: "Add point", points: "My points", menu: "Menu",
-      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", loading: "Loading…", loadError: "Could not load",
+      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", spotHint: "Approximate location (town / river section). Ask locally before panning.", loading: "Loading…", loadError: "Could not load",
       gpsWaiting: "Waiting for GPS…", gpsError: "GPS not available", accuracy: "accuracy",
       name: "Name", note: "Note", category: "Category", photos: "Photos", addPhoto: "Add photo",
       position: "Position", useGps: "Use GPS", useCenter: "Use map center",
@@ -1039,7 +1063,7 @@ var APP_CONFIG = {
     de: {
       layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen",
       gps: "Mein Standort", addPoint: "Punkt setzen", points: "Meine Punkte", menu: "Menü",
-      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", loading: "Lade…", loadError: "Laden fehlgeschlagen",
+      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", spotHint: "Ungefähre Lage (Ort / Flussabschnitt). Vor dem Waschen vor Ort nachfragen.", loading: "Lade…", loadError: "Laden fehlgeschlagen",
       gpsWaiting: "Warte auf GPS…", gpsError: "GPS nicht verfügbar", accuracy: "Genauigkeit",
       name: "Name", note: "Notiz", category: "Kategorie", photos: "Fotos", addPhoto: "Foto hinzufügen",
       position: "Position", useGps: "GPS verwenden", useCenter: "Kartenmitte verwenden",

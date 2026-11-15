@@ -51,6 +51,10 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 31
+- **Bekannte Goldwaschplätze (Europa):** 39 Orte in DE, AT, CH, IT, ES, FR – farbig nach Art (geduldet, Bewilligung, offizieller Platz, Schaubergwerk, nicht graben). Liste ergänzen in `tools/make_goldspots.py`.
+- Genauere Regeln für Österreich (je Bundesland, Kärnten Bewilligung), Italien (Piemont: Anmeldung, max. 5 g/Tag) und Spanien.
+
 ## Neu in Version 30
 - **Europa:** Edelmetall-Vorkommen, Bergwerke und Geologie 1:1 Mio. (EGDI) – deckt auch Frankreich und Italien ab.
 - **Deutschland:** Geologie 1:250 000 (BGR) mit Quarzgängen und Tektonik. **Spanien:** ca. 880 Goldvorkommen und Geologie 1:50 000 (IGME).

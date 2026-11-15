@@ -492,6 +492,30 @@ var App = (function () {
       }).catch(function (err) { cfg._note = t("loadError"); setLayerNote(cfg.id, cfg._note); });
       return pg;
     }
+    // Orte aus eigener Datei (z. B. bekannte Goldwaschplätze), farbig nach Art
+    if (cfg.type === "spots") {
+      var sg = L.featureGroup();
+      cachedFetch(cfg.file, "json").then(function (d) {
+        (d.features || []).forEach(function (f) {
+          var a = f.properties || {}, c = f.geometry.coordinates, k = (cfg.kinds || {})[a.kind] || {};
+          var m = L.circleMarker([c[1], c[0]], { radius: 9, color: "#000", weight: 2, fillColor: k.color || "#ffd700", fillOpacity: 1, bubblingMouseEvents: false });
+          m.bindPopup(function () {
+            var rule = (C.countryRules || {})[a.country];
+            return "<div class='pop'><div class='pop-sec' style='border-left:4px solid " + esc(k.color || "#ffd700") + ";padding-left:8px'><h3>" + esc(a.name) + "</h3>" +
+              "<div class='pop-sub'>" + esc(tr(cfg.name)) + (a.river && a.river !== "–" ? " · " + esc(a.river) : "") + "</div>" +
+              "<p class='verdict " + esc(k.level || "limited") + "'>" + esc(tr(k.label)) + "</p>" +
+              "<p class='note-text'>" + esc(lang === "de" ? a.de : (a.en || a.de)) + "</p>" +
+              (rule ? "<details><summary>" + esc(t("goldRules")) + " · " + esc(tr(rule.name)) + "</summary><p class='note-text'>" + esc(tr(rule.rule)) + "</p>" +
+                (rule.link ? "<a href='" + esc(rule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") + "</details>" : "") +
+              navLink(c[1], c[0]) + "<p class='hint'>" + esc(t("spotHint")) + "</p></div></div>";
+          }, { maxWidth: 300 });
+          sg.addLayer(m);
+        });
+        cfg._note = "✓ " + (d.features || []).length;
+        setLayerNote(cfg.id, cfg._note);
+      }).catch(function () { setLayerNote(cfg.id, t("loadError")); });
+      return sg;
+    }
     // Regeln pro Land: Landesgrenzen laden, beim Antippen das Land bestimmen (nichts zu zeichnen)
     if (cfg.type === "countryRules") {
       var cg = L.featureGroup();
