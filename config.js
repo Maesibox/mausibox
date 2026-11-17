@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 33,
+  appVersion: 34,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -191,11 +191,11 @@ var APP_CONFIG = {
     },
     FR: {
       name: { en: "France", de: "Frankreich" }, level: "limited",
-      rule: { en: "Gold panning must be declared or authorised in some départements (e.g. classic rivers of the Cévennes and Pyrenees). Clubs help with the paperwork. National parks and reserves forbid taking anything.",
-              de: "Goldwaschen ist in einigen Départements anmelde- oder genehmigungspflichtig (z. B. klassische Flüsse in den Cevennen und Pyrenäen). Vereine helfen beim Papierkram. Nationalparks und Reservate: keine Entnahme." },
-      details: { en: "Metal detector: searching for objects of historical interest without an official permit is forbidden (Code du patrimoine) and enforced.",
-                 de: "Metalldetektor: Suche nach Objekten von historischem Interesse ohne behördliche Genehmigung verboten (Code du patrimoine) – wird ernst genommen." },
-      source: "orecast.app – Kurzlage Recht (Stand Sept. 2026), keine Rechtsberatung", link: "https://orecast.app/recht"
+      rule: { en: "Hobby gold panning ('orpaillage de loisir') needs a permit from the département's DDT(M) (water police). Apply early – processing often takes 1–2 months. Valid for one département and one year; hand tools only (pan, shovel, sieve). Seasons e.g. Ariège 1 May – 31 Oct, Gard 16 May – 30 Nov (Gard: online form). Currently no permits in Brittany (Côtes-d'Armor, Morbihan, Finistère), Jura, Landes, Tarn-et-Garonne.",
+              de: "Hobby-Goldwaschen („orpaillage de loisir“) braucht eine Bewilligung der DDT(M) des Départements (Police de l'eau). Früh beantragen – die Bearbeitung dauert oft 1–2 Monate. Gilt für ein Département und ein Jahr; nur Handwerkzeug (Pfanne, Schaufel, Sieb). Saisons z. B. Ariège 1. Mai – 31. Okt., Gard 16. Mai – 30. Nov. (Gard: Online-Formular). Zurzeit keine Bewilligungen in der Bretagne (Côtes-d'Armor, Morbihan, Finistère), im Jura, in den Landes und im Tarn-et-Garonne." },
+      details: { en: "Off public rivers you also need the bank owner's consent. Metal detector: searching for objects of historical interest without an official permit is forbidden (Code du patrimoine) and enforced.",
+                 de: "Ausserhalb öffentlicher Flüsse zusätzlich Zustimmung des Ufer-Eigentümers. Metalldetektor: Suche nach Objekten von historischem Interesse ohne behördliche Genehmigung verboten (Code du patrimoine) – wird ernst genommen." },
+      source: "Präfekturen Ariège und Gard, prospection-de-loisir.fr (Nov. 2026), keine Rechtsberatung", link: "https://www.goldlineorpaillage.fr/adresse-faire-autorisations-orpaillage/"
     },
     IT: {
       name: { en: "Italy", de: "Italien" }, level: "limited",
@@ -203,15 +203,58 @@ var APP_CONFIG = {
               de: "Regeln sind regional. Piemont (Elvo, Orba, Ticino, Dora Baltea): schriftliche Anmeldung bei der Region (Registro raccoglitori, L.R. 51/1995) – die Bestätigung ist die Erlaubnis; nur Handwerkzeug, keine Motoren; max. 5 g Gold pro Person und Tag; Zustimmung des Grundeigentümers; in Schutzgebieten verboten. Lombardei (L.R. 2/1989) und Aostatal (L.R. 10/2008): ähnliche Sammler-Regeln; Trentino: Jahresbewilligung der Provinz." },
       details: { en: "Strict country: cultural goods belong to the state; many regions also restrict taking minerals and fossils (Elba!). Metal detecting for antiquities is practically forbidden.",
                  de: "Strenges Land: Kulturgüter gehören dem Staat; viele Regionen beschränken auch Mineralien- und Fossilentnahme (Elba!). Detektorsuche nach Antiken praktisch verboten." },
-      source: "Regionalgesetze (L.R. Piemonte 51/1995 u. a., via cercatorioroitalia.it) und orecast.app (Stand Nov. 2026)", link: "https://cercatorioroitalia.it/primi-passi/regolamenti.html"
+      source: "Regionalgesetze (L.R. Piemonte 51/1995 u. a., via cercatorioroitalia.it) und orecast.app (Stand Nov. 2026)", link: "https://www.regione.piemonte.it/web/temi/sviluppo/attivita-estrattive/raccoglitori-ricercatori-minerali-scopo-collezionistico"
     },
     ES: {
       name: { en: "Spain", de: "Spanien" }, level: "limited",
-      rule: { en: "Gold panning ('bateo') needs permission: rivers are public water domain, so ask the water authority of the basin (Confederación Hidrográfica, e.g. Miño-Sil, Cantábrico) and the region's mining authority; also fishing rules. Forbidden in protected areas. Navelgas (Asturias): free panning zone during the national championship (end of July). Las Médulas: UNESCO – no digging.",
-              de: "Goldwaschen („bateo“) braucht eine Erlaubnis: Flüsse sind öffentliches Wassergut – zuständig sind die Wasserbehörde des Flussgebiets (Confederación Hidrográfica, z. B. Miño-Sil, Cantábrico) und die Bergbaubehörde der Region; dazu Fischereiregeln. In Schutzgebieten verboten. Navelgas (Asturien): freie Waschzone während der Meisterschaft (Ende Juli). Las Médulas: UNESCO – nicht graben." },
+      rule: { en: "Gold panning ('bateo') needs permission: rivers are public water domain, so ask the water authority of the basin (Confederación Hidrográfica, e.g. Miño-Sil, Cantábrico) and the region's mining authority; also fishing rules. Forbidden in protected areas. Navelgas (Asturias): ask the Museo del Oro first – they know the current rules; free panning zone during the national championship (end of July). Las Médulas: UNESCO – no digging.",
+              de: "Goldwaschen („bateo“) braucht eine Erlaubnis: Flüsse sind öffentliches Wassergut – zuständig sind die Wasserbehörde des Flussgebiets (Confederación Hidrográfica, z. B. Miño-Sil, Cantábrico) und die Bergbaubehörde der Region; dazu Fischereiregeln. In Schutzgebieten verboten. Navelgas (Asturien): zuerst beim Museo del Oro fragen – die wissen, was aktuell gilt; freie Waschzone während der Meisterschaft (Ende Juli). Las Médulas: UNESCO – nicht graben." },
       details: { en: "Not an official source: please check with the Confederación Hidrográfica and the regional government before panning. Metal detecting is regulated by the regions (heritage law) and often needs a permit.",
                  de: "Keine amtliche Quelle: vor dem Waschen bei der Confederación Hidrográfica und der Regionalregierung nachfragen. Metalldetektor: von den Regionen geregelt (Denkmalrecht), meist genehmigungspflichtig." },
       source: "eigene Zusammenfassung (Nov. 2026), nicht amtlich geprüft"
+    },
+    UK: {
+      name: { en: "United Kingdom", de: "Grossbritannien" }, level: "limited",
+      rule: { en: "Gold belongs to the Crown; there is no national hobby licence. You need the landowner's permission or a local permit (Wanlockhead: Museum of Lead Mining; Kildonan: Suisgill Estate; Tyndrum: Strathfillan Community Development Trust). Wales: no panning on Natural Resources Wales land.",
+              de: "Gold gehört der Krone; eine landesweite Hobby-Lizenz gibt es nicht. Man braucht die Erlaubnis des Grundbesitzers oder eine lokale Lizenz (Wanlockhead: Museum of Lead Mining; Kildonan: Suisgill Estate; Tyndrum: Strathfillan Community Development Trust). Wales: auf Land von Natural Resources Wales kein Goldwaschen." },
+      details: { en: "Respect salmon spawning seasons and SSSI protected sites. Hand tools only.", de: "Lachs-Laichzeiten und Schutzgebiete (SSSI) beachten. Nur Handwerkzeug." },
+      source: "ukgoldprospector.co.uk (2026), nicht amtlich", link: "https://ukgoldprospector.co.uk/news/gold-panning-laws-uk.html"
+    },
+    IE: {
+      name: { en: "Ireland", de: "Irland" }, level: "limited",
+      rule: { en: "Minerals belong to the state, but small hobby finds are tolerated. No motorised gear in waters; ask the landowner.",
+              de: "Bodenschätze gehören dem Staat, kleine Hobby-Funde werden aber toleriert. Keine Motorgeräte in Gewässern; Grundeigentümer fragen." },
+      source: "eigene Zusammenfassung (Nov. 2026), nicht amtlich geprüft"
+    },
+    FI: {
+      name: { en: "Finland", de: "Finnland" }, level: "limited",
+      rule: { en: "On state land a gold panning permit from Tukes is required (online, up to 10 years, annual report). On private land the owner's consent is enough. Lemmenjoki National Park: only designated areas with a permit. Easiest: tourist sites like Tankavaara.",
+              de: "Auf Staatsland braucht es eine Goldwasch-Erlaubnis von Tukes (online, bis 10 Jahre, jährlicher Bericht). Auf Privatland reicht die Zustimmung des Eigentümers. Lemmenjoki-Nationalpark: nur in ausgewiesenen Gebieten mit Erlaubnis. Am einfachsten: Touristen-Waschplätze wie Tankavaara." },
+      source: "Tukes, Metsähallitus (Nov. 2026)", link: "https://tukes.fi/en/mining-ore-prospecting-and-gold-panning/gold-panning"
+    },
+    SE: {
+      name: { en: "Sweden", de: "Schweden" }, level: "limited",
+      rule: { en: "Small-scale hobby panning normally needs no permit under the Minerals Act (SGU); refill holes and ask the landowner. Forbidden in nature reserves and national parks; motorised gear needs a permit.",
+              de: "Kleines Hobby-Waschen braucht laut SGU normalerweise keine Bewilligung nach dem Mineralgesetz; Löcher wieder füllen und Grundeigentümer fragen. In Naturreservaten und Nationalparks verboten; Motorgeräte nur mit Bewilligung." },
+      source: "detektorist.se, SGU-Auskunft (nicht amtlich geprüft)", link: "https://www.detektorist.se/vaska-guld-sverige-regler/"
+    },
+    CZ: {
+      name: { en: "Czechia", de: "Tschechien" }, level: "limited",
+      rule: { en: "Panning as a light hobby is tolerated: hand tools only, don't alter the riverbed, don't sell the gold. Forbidden in national parks, protected landscape areas (CHKO) and reserves.",
+              de: "Waschen als einfaches Hobby ist geduldet: nur Handwerkzeug, Flussbett nicht verändern, Gold nicht verkaufen. In Nationalparks, Landschaftsschutzgebieten (CHKO) und Reservaten verboten." },
+      source: "rawgold.eu (2025), nicht amtlich", link: "https://www.rawgold.eu/blog/50681-ryzovani-zlata-a-zakon-co-je-legalni-a-co-uz-je-tezba-2025"
+    },
+    SK: {
+      name: { en: "Slovakia", de: "Slowakei" }, level: "limited",
+      rule: { en: "Unclear – sources disagree whether hobby panning is free or needs a permit. Forbidden in national parks. Ask the municipality or river authority first.",
+              de: "Unklar – die Quellen widersprechen sich, ob Hobby-Waschen frei ist oder eine Bewilligung braucht. In Nationalparks verboten. Vorher Gemeinde oder Gewässerverwalter fragen." },
+      source: "rawgold.sk (2026), nicht amtlich", link: "https://www.rawgold.sk/post/60935-kde-ryzovat-zlato-na-slovensku"
+    },
+    PL: {
+      name: { en: "Poland", de: "Polen" }, level: "limited",
+      rule: { en: "Commonly described as allowed without permit in public waters (free access); landowner's consent on private land. Water law is not fully clear. Złotoryja offers courses and the Polish championship (end of May).",
+              de: "Gilt meist als ohne Bewilligung erlaubt in öffentlichen Gewässern (freier Zugang); auf Privatgrund Zustimmung des Eigentümers. Wasserrecht nicht ganz eindeutig. In Złotoryja gibt es Kurse und die polnische Meisterschaft (Ende Mai)." },
+      source: "eska.pl, polsatnews.pl (2025), nicht amtlich"
     },
     CH: {
       name: { en: "Switzerland", de: "Schweiz" }, level: "limited",
@@ -949,7 +992,7 @@ var APP_CONFIG = {
     en: {
       layers: "Layers", basemap: "Base map", overlays: "Layers",
       gps: "My location", addPoint: "Add point", points: "My points", menu: "Menu",
-      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", spotFind: "What you find", spotPermit: "Permit / where to ask", spotHint: "Approximate location (town / river section). Ask locally before panning.", loading: "Loading…", loadError: "Could not load",
+      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", spotFind: "What you find", spotPermit: "Permit / where to ask", spotPermitLink: "Permit: form / office", spotLocalLink: "Local contact (museum / panning site)", spotHint: "Approximate location (town / river section). Ask locally before panning.", loading: "Loading…", loadError: "Could not load",
       gpsWaiting: "Waiting for GPS…", gpsError: "GPS not available", accuracy: "accuracy",
       name: "Name", note: "Note", category: "Category", photos: "Photos", addPhoto: "Add photo",
       position: "Position", useGps: "Use GPS", useCenter: "Use map center",
@@ -1062,7 +1105,7 @@ var APP_CONFIG = {
     de: {
       layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen",
       gps: "Mein Standort", addPoint: "Punkt setzen", points: "Meine Punkte", menu: "Menü",
-      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", spotFind: "Was man findet", spotPermit: "Bewilligung / wo fragen", spotHint: "Ungefähre Lage (Ort / Flussabschnitt). Vor dem Waschen vor Ort nachfragen.", loading: "Lade…", loadError: "Laden fehlgeschlagen",
+      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", spotFind: "Was man findet", spotPermit: "Bewilligung / wo fragen", spotPermitLink: "Bewilligung: Formular / Stelle", spotLocalLink: "Anlaufstelle vor Ort (Museum / Waschplatz)", spotHint: "Ungefähre Lage (Ort / Flussabschnitt). Vor dem Waschen vor Ort nachfragen.", loading: "Lade…", loadError: "Laden fehlgeschlagen",
       gpsWaiting: "Warte auf GPS…", gpsError: "GPS nicht verfügbar", accuracy: "Genauigkeit",
       name: "Name", note: "Notiz", category: "Kategorie", photos: "Fotos", addPhoto: "Foto hinzufügen",
       position: "Position", useGps: "GPS verwenden", useCenter: "Kartenmitte verwenden",
