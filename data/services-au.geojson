@@ -1,0 +1,255 @@
+{
+"type": "FeatureCollection",
+"features": [
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+115.86,
+-31.95
+]
+},
+"properties": {
+"name": "Reeds Prospecting Supplies",
+"country": "AU",
+"river": "Perth",
+"kind": "hire",
+"de": "Grösste Detektor-Mietflotte in Perth (ganze Minelab-Palette). Mindestens 2 Tage, Kaution je nach Gerät.",
+"en": "Perth's largest detector hire fleet (full Minelab range). Minimum 2 days, deposit depends on model.",
+"find_de": "Detektoren mieten oder kaufen, Ausrüstung und Tipps.",
+"find_en": "Rent or buy detectors, gear and tips.",
+"permit_de": "Für die Suche selbst braucht es trotzdem die Lizenz des Bundesstaats (in WA den Miner's Right) und Erlaubnis auf Tenements.",
+"permit_en": "You still need the state licence (in WA the Miner's Right) and permission on tenements to prospect.",
+"permit_link": null,
+"link": "https://reedsprospecting.com.au/pages/hire-detectors",
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+115.83,
+-31.93
+]
+},
+"properties": {
+"name": "Miners Den",
+"country": "AU",
+"river": "Perth",
+"kind": "hire",
+"de": "Prospecting-Laden; Detektoren auch zur Miete auf Kauf (6–36 Monate).",
+"en": "Prospecting shop; detectors also rent-to-own (6–36 months).",
+"find_de": "Detektoren mieten oder kaufen, Ausrüstung und Tipps.",
+"find_en": "Rent or buy detectors, gear and tips.",
+"permit_de": "Für die Suche selbst braucht es trotzdem die Lizenz des Bundesstaats (in WA den Miner's Right) und Erlaubnis auf Tenements.",
+"permit_en": "You still need the state licence (in WA the Miner's Right) and permission on tenements to prospect.",
+"permit_link": null,
+"link": "https://www.minersden.com.au/rental/",
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.468,
+-30.748
+]
+},
+"properties": {
+"name": "Finders Keepers Gold Prospecting",
+"country": "AU",
+"river": "Kalgoorlie (Hannan St) und Perth",
+"kind": "hire",
+"de": "Prospecting-Laden in Kalgoorlie und Perth.",
+"en": "Prospecting shop in Kalgoorlie and Perth.",
+"find_de": "Detektoren mieten oder kaufen, Ausrüstung und Tipps.",
+"find_en": "Rent or buy detectors, gear and tips.",
+"permit_de": "Für die Suche selbst braucht es trotzdem die Lizenz des Bundesstaats (in WA den Miner's Right) und Erlaubnis auf Tenements.",
+"permit_en": "You still need the state licence (in WA the Miner's Right) and permission on tenements to prospect.",
+"permit_link": null,
+"link": "https://finderskeepersgold.com/",
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.463,
+-30.752
+]
+},
+"properties": {
+"name": "Prospectors Patch",
+"country": "AU",
+"river": "Kalgoorlie",
+"kind": "hire",
+"de": "Detektor-Verleih in Kalgoorlie (Abholung im Laden).",
+"en": "Detector hire in Kalgoorlie (collect in store).",
+"find_de": "Detektoren mieten oder kaufen, Ausrüstung und Tipps.",
+"find_en": "Rent or buy detectors, gear and tips.",
+"permit_de": "Für die Suche selbst braucht es trotzdem die Lizenz des Bundesstaats (in WA den Miner's Right) und Erlaubnis auf Tenements.",
+"permit_en": "You still need the state licence (in WA the Miner's Right) and permission on tenements to prospect.",
+"permit_link": null,
+"link": "https://prospectorspatch.com.au/pages/hire",
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.335,
+-28.885
+]
+},
+"properties": {
+"name": "Pirates Gold Prospecting Tours",
+"country": "AU",
+"river": "Leonora / Kalgoorlie",
+"kind": "tour",
+"de": "Tag-along-Touren April–August auf privaten Leases in den Eastern Goldfields mit Training; dazu Tagestouren ab Kalgoorlie. Seit 1984 am Detektieren.",
+"en": "Tag-along tours April–August on private leases in the Eastern Goldfields with training; plus day tours from Kalgoorlie. Detecting since 1984.",
+"find_de": "Geführte Touren auf Gebieten mit Erlaubnis – mit Training, oft mit Leih-Detektor.",
+"find_en": "Guided tours on ground with permission – with training, often with hire detector.",
+"permit_de": "Seriöse Touren gehen auf Gebiete mit Erlaubnis (eigene oder gepachtete Leases). Miner's Right trotzdem vorher besorgen.",
+"permit_en": "Serious tours go to ground with permission (own or leased tenements). Still get your Miner's Right first.",
+"permit_link": null,
+"link": "https://www.piratesgold.com.au/",
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.325,
+-28.878
+]
+},
+"properties": {
+"name": "Gold Talk Leonora",
+"country": "AU",
+"river": "Leonora",
+"kind": "tour",
+"de": "Dreitägiger Anfänger-Kurs im Goldwaschen und Detektieren.",
+"en": "Three-day beginner course in prospecting and detecting.",
+"find_de": "Geführte Touren auf Gebieten mit Erlaubnis – mit Training, oft mit Leih-Detektor.",
+"find_en": "Guided tours on ground with permission – with training, often with hire detector.",
+"permit_de": "Seriöse Touren gehen auf Gebiete mit Erlaubnis (eigene oder gepachtete Leases). Miner's Right trotzdem vorher besorgen.",
+"permit_en": "Serious tours go to ground with permission (own or leased tenements). Still get your Miner's Right first.",
+"permit_link": null,
+"link": "https://www.goldtalkleonora.com.au/",
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.17,
+-30.956
+]
+},
+"properties": {
+"name": "Coolgardie Gold Safaris",
+"country": "AU",
+"river": "Coolgardie",
+"kind": "tour",
+"de": "Touren über 3, 5 oder 10 Tage und Touren nach Mass.",
+"en": "Tours over 3, 5 or 10 days and custom tours.",
+"find_de": "Geführte Touren auf Gebieten mit Erlaubnis – mit Training, oft mit Leih-Detektor.",
+"find_en": "Guided tours on ground with permission – with training, often with hire detector.",
+"permit_de": "Seriöse Touren gehen auf Gebiete mit Erlaubnis (eigene oder gepachtete Leases). Miner's Right trotzdem vorher besorgen.",
+"permit_en": "Serious tours go to ground with permission (own or leased tenements). Still get your Miner's Right first.",
+"permit_link": null,
+"link": "https://www.coolgardiegoldsafaris.com.au/",
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.475,
+-30.744
+]
+},
+"properties": {
+"name": "Gold Nugget Tours",
+"country": "AU",
+"river": "Kalgoorlie-Boulder",
+"kind": "tour",
+"de": "Tagestouren mit Einführung und Ausrüstung (Mai–Oktober).",
+"en": "Day tours with introduction and gear (May–October).",
+"find_de": "Geführte Touren auf Gebieten mit Erlaubnis – mit Training, oft mit Leih-Detektor.",
+"find_en": "Guided tours on ground with permission – with training, often with hire detector.",
+"permit_de": "Seriöse Touren gehen auf Gebiete mit Erlaubnis (eigene oder gepachtete Leases). Miner's Right trotzdem vorher besorgen.",
+"permit_en": "Serious tours go to ground with permission (own or leased tenements). Still get your Miner's Right first.",
+"permit_link": null,
+"link": "https://www.westernaustralia.com/en/tour/gold-nugget-tours/5e785a5f5cd6b7c075bdb33f",
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.455,
+-30.76
+]
+},
+"properties": {
+"name": "Gold and Relics",
+"country": "AU",
+"river": "Kalgoorlie, Leinster, Leonora",
+"kind": "tour",
+"de": "Tag-along- und All-inclusive-Touren (auf Wunsch mit Flug ab Perth).",
+"en": "Tag-along and all-inclusive tours (optionally with flights from Perth).",
+"find_de": "Geführte Touren auf Gebieten mit Erlaubnis – mit Training, oft mit Leih-Detektor.",
+"find_en": "Guided tours on ground with permission – with training, often with hire detector.",
+"permit_de": "Seriöse Touren gehen auf Gebiete mit Erlaubnis (eigene oder gepachtete Leases). Miner's Right trotzdem vorher besorgen.",
+"permit_en": "Serious tours go to ground with permission (own or leased tenements). Still get your Miner's Right first.",
+"permit_link": null,
+"link": "https://goldandrelics.com.au/",
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+149.415,
+-33.032
+]
+},
+"properties": {
+"name": "Metal Detector Hire (Hill End)",
+"country": "AU",
+"river": "Hill End, NSW",
+"kind": "hire",
+"de": "Detektor-Miete ab A$50 pro Tag.",
+"en": "Detector hire from A$50 per day.",
+"find_de": "Detektoren mieten oder kaufen, Ausrüstung und Tipps.",
+"find_en": "Rent or buy detectors, gear and tips.",
+"permit_de": "Für die Suche selbst braucht es trotzdem die Lizenz des Bundesstaats (in WA den Miner's Right) und Erlaubnis auf Tenements.",
+"permit_en": "You still need the state licence (in WA the Miner's Right) and permission on tenements to prospect.",
+"permit_link": null,
+"link": "https://metaldetectorhire.com.au/",
+"state": "New South Wales"
+}
+}
+]
+}

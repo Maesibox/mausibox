@@ -500,7 +500,7 @@ var App = (function () {
           var a = f.properties || {}, c = f.geometry.coordinates, k = (cfg.kinds || {})[a.kind] || {};
           var m = L.circleMarker([c[1], c[0]], { radius: 9, color: "#000", weight: 2, fillColor: k.color || "#ffd700", fillOpacity: 1, bubblingMouseEvents: false });
           m.bindPopup(function () {
-            var rule = (C.countryRules || {})[a.country], stRule = a.state && (C.usStateRules || {})[a.state];
+            var rule = (C.countryRules || {})[a.country], stRule = a.state && (C[{ US: "usStateRules", AU: "auStateRules" }[a.country]] || {})[a.state];
             return "<div class='pop'><div class='pop-sec' style='border-left:4px solid " + esc(k.color || "#ffd700") + ";padding-left:8px'><h3>" + esc(a.name) + "</h3>" +
               "<div class='pop-sub'>" + esc(tr(cfg.name)) + (a.river && a.river !== "–" ? " · " + esc(a.river) : "") + "</div>" +
               "<p class='verdict " + esc(k.level || "limited") + "'>" + esc(tr(k.label)) + "</p>" +
@@ -556,8 +556,9 @@ var App = (function () {
       return grp;
     }
     if (cfg.type === "wms") {
-      return L.tileLayer.wms(cfg.url, { layers: cfg.modes ? lidarMode(cfg).layers : cfg.layers, format: "image/png", transparent: true, version: "1.3.0",
-        attribution: cfg.attribution, maxZoom: 20, zIndex: 10, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
+      // params: zusätzliche WMS-Angaben, z. B. ein Filter (CQL_FILTER) nur für Gold
+      return L.tileLayer.wms(cfg.url, Object.assign({ layers: cfg.modes ? lidarMode(cfg).layers : cfg.layers, format: "image/png", transparent: true, version: "1.3.0",
+        attribution: cfg.attribution, maxZoom: 20, zIndex: 10, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity }, cfg.params || {}));
     }
     if (cfg.type === "exportImage") {
       return new ExportImageLayer("", { baseUrl: cfg.url, mode: cfg.modes ? lidarMode(cfg) : { rule: "" }, attribution: cfg.attribution, maxZoom: 20, maxNativeZoom: 18,
@@ -686,7 +687,7 @@ var App = (function () {
   };
 
   function row(label, value) {
-    if (value == null || value === "") return "";
+    if (value == null || String(value).trim() === "") return "";
     return "<tr><th>" + esc(label) + "</th><td>" + esc(value) + "</td></tr>";
   }
 
@@ -799,6 +800,17 @@ var App = (function () {
           .slice(0, 8).map(function (k) { return row(k, a[k]); }).join("");
       return "<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(title) + "</h3>" +
         "<div class='pop-sub'>" + esc(res.layerName || tr(cfg.name)) + "</div><table>" + rows + "</table></div>";
+    }).join("");
+  }
+
+  // Ergebnis einer WMS-Abfrage (GetFeatureInfo) als Popup-Abschnitt
+  function wmsInfoHtml(cfg, feats) {
+    var wi = cfg.wmsInfo;
+    return feats.slice(0, wi.max || 3).map(function (f) {
+      var a = f.properties || {}, title = wi.titles ? wi.titles.map(function (k) { return a[k]; }).filter(Boolean)[0] : a[wi.title];
+      var rows = (wi.fields || []).map(function (fd) { return row(tr(fd.label), a[fd.field]); }).join("");
+      return "<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(title || tr(cfg.name)) + "</h3>" +
+        "<div class='pop-sub'>" + esc(tr(cfg.name)) + "</div><table>" + rows + "</table></div>";
     }).join("");
   }
 
@@ -933,6 +945,18 @@ var App = (function () {
         "&mapExtent=" + [b.getWest(), b.getSouth(), b.getEast(), b.getNorth()].map(function (v) { return v.toFixed(5); }).join(",") +
         "&imageDisplay=" + sz.x + "," + sz.y + ",96&returnGeometry=false&f=json";
       slow.push(cachedFetch(url, "json").then(function (res) { return arcIdentifyHtml(o, res.results || []); }));
+    });
+    // WMS-Ebenen mit wmsInfo (z. B. Minen von Geoscience Australia): Angaben zum angetippten Punkt
+    C.overlays.forEach(function (o) {
+      if (!o.wmsInfo || !overlayState[o.id]) return;
+      var wi = o.wmsInfo, b = map.getBounds(), sz = map.getSize(), pt = map.latLngToContainerPoint(e.latlng);
+      var sw = L.CRS.EPSG3857.project(b.getSouthWest()), ne = L.CRS.EPSG3857.project(b.getNorthEast());
+      var url = o.url + "?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&STYLES=&SRS=EPSG:3857&LAYERS=" + encodeURIComponent(wi.layers) +
+        "&QUERY_LAYERS=" + encodeURIComponent(wi.layers) + "&BBOX=" + [sw.x, sw.y, ne.x, ne.y].map(function (v) { return v.toFixed(1); }).join(",") +
+        "&WIDTH=" + sz.x + "&HEIGHT=" + sz.y + "&X=" + Math.round(pt.x) + "&Y=" + Math.round(pt.y) +
+        "&INFO_FORMAT=application/json&FEATURE_COUNT=" + (wi.max || 3) + "&BUFFER=" + (wi.buffer || 8) +
+        Object.keys(o.params || {}).map(function (k) { return "&" + k + "=" + encodeURIComponent(o.params[k]); }).join("");
+      slow.push(cachedFetch(url, "json").then(function (res) { return wmsInfoHtml(o, res.features || []); }));
     });
     C.overlays.forEach(function (o) {
       var oid = o.modes && lidarMode(o).identify ? lidarMode(o).identify : o.identify;

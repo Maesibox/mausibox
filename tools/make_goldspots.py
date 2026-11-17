@@ -61,6 +61,16 @@ FIND = {
  "museum": ("Besuchermine / Museum mit Goldwaschen für Gäste.", "Visitor mine / museum with panning for guests."),
  "idaho": ("Flitter und kleine Körner – Idahos Goldrausch begann 1860 an der Orofino Creek.", "Flakes and small grains – Idaho's gold rush started in 1860 on Orofino Creek."),
  "wash": ("Flitter und für Washington eher grobes Gold (Liberty / Swauk).", "Flakes and fairly coarse gold for Washington (Liberty / Swauk)."),
+ "wa-gf": ("Nuggets im Laterit und in alten Schürfstellen – Detektor-Land der Eastern Goldfields.", "Nuggets in laterite and old workings – detector country of the Eastern Goldfields."),
+ "wa-mw": ("Nuggets in den Murchison-Goldfeldern, oft im flachen Schutt.", "Nuggets in the Murchison goldfields, often in shallow ground."),
+ "pilbara": ("Grobe Nuggets im Pilbara-Schutt; sehr abgelegen und heiss.", "Coarse nuggets in Pilbara gravels; very remote and hot."),
+ "vic": ("Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.", "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found."),
+ "qld": ("Flitter und Nuggets in alten Goldfeldern.", "Flakes and nuggets in old goldfields."),
+ "nsw": ("Flitter und kleine Nuggets in den alten Goldfeldern am Turon und um Hill End.", "Flakes and small nuggets in the old goldfields on the Turon and around Hill End."),
+ "nt": ("Nuggets um Tennant Creek, sehr abgelegen.", "Nuggets around Tennant Creek, very remote."),
+ "au-other": ("Flitter und kleine Nuggets.", "Flakes and small nuggets."),
+ "service": ("Detektoren mieten oder kaufen, Ausrüstung und Tipps.", "Rent or buy detectors, gear and tips."),
+ "tour": ("Geführte Touren auf Gebieten mit Erlaubnis – mit Training, oft mit Leih-Detektor.", "Guided tours on ground with permission – with training, often with hire detector."),
  "nevada": ("Nuggets im Wüstenschotter – Detektor-Gebiet.", "Nuggets in desert gravels – detecting area."),
  "bretagne": ("Flitter und kleine Körner; goldführende Quarzgänge in der Umgebung.", "Flakes and small grains; gold-bearing quartz veins nearby."),
 }
@@ -153,6 +163,31 @@ PERMIT = {
  "US-AK-BLM": ("Alaska, öffentliches BLM-Waschgebiet: Handwerkzeug und leichtes Gerät (Pfanne, Rinne, Rocker, Pickel, Schaufel). Nicht auf benachbarten Claims waschen. Aktuellen Stand beim BLM Alaska prüfen.",
                "Alaska, public BLM panning area: hand tools and light gear (pan, sluice, rocker, pick, shovel). Don't pan on adjacent claims. Check current status with BLM Alaska.",
                "https://www.blm.gov/programs/recreation/recreation-activities/alaska"),
+ "AU-WA": ("Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+           "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+           "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights"),
+ "AU-VIC": ("Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+            "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+            "https://detectormaps.com/au/fossicking-laws/"),
+ "AU-QLD": ("Queensland: Fossicking Licence nötig (1 Monat, 6 Monate oder 1 Jahr). Ohne weitere Erlaubnis nur in Designated Fossicking Areas und General Permission Areas; sonst schriftliche Zustimmung des Landbesitzers.",
+            "Queensland: fossicking licence required (1 month, 6 months or 1 year). Without further permission only in designated fossicking areas and general permission areas; otherwise written landholder consent.",
+            "https://www.qld.gov.au/recreation/activities/areas-facilities/fossicking"),
+ "AU-NSW": ("New South Wales: keine allgemeine Lizenz, aber Zustimmung des Landbesitzers nötig. In State Forests ein Fossicking Permit der Forestry Corporation (12 Monate, ca. A$27.50). In Nationalparks verboten (auch Hill End Historic Site).",
+            "New South Wales: no general licence, but landholder consent needed. In state forests a fossicking permit from Forestry Corporation (12 months, about A$27.50). Forbidden in national parks (incl. Hill End Historic Site).",
+            "https://www.regional.nsw.gov.au/meg/exploration/fossicking"),
+ "AU-NT": ("Northern Territory: Fossicking Permit nötig (Quellen widersprechen sich, ob er überall gilt); in ausgewiesenen Fossicking Areas wie Warrego einfacher. Aboriginal Land nur mit Erlaubnis.",
+           "Northern Territory: fossicking permit required (sources disagree whether everywhere); easier in declared fossicking areas such as Warrego. Aboriginal land only with permission.",
+           "https://detectormaps.com/au/fossicking-laws/"),
+ "AU-SA": ("South Australia: Hobby-Fossicking ohne Verkaufsabsicht braucht meist keine Erlaubnis; Landbesitzer fragen, Parks gesperrt.",
+           "South Australia: hobby fossicking without intent to sell usually needs no permit; ask the landholder, parks are closed.",
+           "https://detectormaps.com/au/fossicking-laws/"),
+ "AU-TAS": ("Tasmanien: In den ausgewiesenen Fossicking Areas ohne Lizenz; anderswo braucht es eine Prospecting Licence von Mineral Resources Tasmania.",
+            "Tasmania: no licence inside the declared fossicking areas; elsewhere a prospecting licence from Mineral Resources Tasmania.",
+            "https://detectormaps.com/au/fossicking-laws/"),
+ "AU-SHOP": ("Für die Suche selbst braucht es trotzdem die Lizenz des Bundesstaats (in WA den Miner's Right) und Erlaubnis auf Tenements.",
+             "You still need the state licence (in WA the Miner's Right) and permission on tenements to prospect.", None),
+ "AU-TOUR": ("Seriöse Touren gehen auf Gebiete mit Erlaubnis (eigene oder gepachtete Leases). Miner's Right trotzdem vorher besorgen.",
+             "Serious tours go to ground with permission (own or leased tenements). Still get your Miner's Right first.", None),
  "US-CLUB": ("Club-Claims (z. B. GPAA): nur für Mitglieder, Mitgliederausweis und Claim-Regeln mitnehmen. Mitgliedschaft online.",
              "Club claims (e.g. GPAA): members only, carry your membership card and the claim rules. Membership online.",
              "https://www.goldprospectors.org/"),
@@ -326,14 +361,15 @@ US_SPOTS = [
 ]
 
 # Bundesstaat eines US-Orts bestimmen (für die Regeln pro Staat)
-STATES = json.load(open(os.path.join(DATA, "us", "states.json")))["features"]
+STATE_FILES = {c: json.load(open(os.path.join(DATA, c.lower(), "states.json")))["features"] for c in ("US", "AU")}
 def in_ring(x, y, ring):
     inside = False
     for i in range(len(ring)):
         x1, y1 = ring[i - 1]; x2, y2 = ring[i]
         if (y2 > y) != (y1 > y) and x < (x1 - x2) * (y - y2) / (y1 - y2) + x2: inside = not inside
     return inside
-def state_of(lon, lat):
+def state_of(lon, lat, country):
+    STATES = STATE_FILES[country]
     for f in STATES:
         g = f["geometry"]
         polys = g["coordinates"] if g["type"] == "MultiPolygon" else [g["coordinates"]]
@@ -391,6 +427,62 @@ CLUBS = [
  ("IT", "Associazione Biellese Cercatori d'Oro", "Vermogno (Biella)", 45.4900, 8.0350, "club", "Verein seit 1985, betreibt das Goldmuseum in Vermogno und Wettbewerbe in der Bessa; hilft bei der Anmeldung im Piemont.", "Club since 1985, runs the gold museum in Vermogno and competitions in the Bessa; helps with the Piedmont registration.", "https://www.cercatoridoro.it/"),
 ]
 
+# Australien – Goldgebiete (Lage = Ort, Gebiet ringsum)
+AU_SPOTS = [
+ # Western Australia – Eastern Goldfields
+ ("AU", "Kalgoorlie-Boulder", "Eastern Goldfields", -30.7490, 121.4660, "crown", "wa-gf", "AU-WA", "Hauptstadt der Goldfields mit Super Pit, Läden, Verleih und Touren. Rundherum ist fast alles Tenement – Ebene «WA – Tenements» prüfen.", "Capital of the Goldfields with Super Pit, shops, hire and tours. Almost everything around is tenement – check the 'WA tenements' layer."),
+ ("AU", "Coolgardie", "Eastern Goldfields", -30.9530, 121.1650, "crown", "wa-gf", "AU-WA", "Hier begann 1892 der Goldrausch im Westen. Viele alte Schürfstellen.", "The western gold rush started here in 1892. Many old workings."),
+ ("AU", "Kanowna (Geisterstadt)", "Eastern Goldfields", -30.6000, 121.6000, "crown", "wa-gf", "AU-WA", "Verlassene Goldgräberstadt nordöstlich von Kalgoorlie.", "Abandoned gold-rush town north-east of Kalgoorlie."),
+ ("AU", "Kurnalpi", "Eastern Goldfields", -30.5200, 122.2500, "crown", "wa-gf", "AU-WA", "Bekanntes Detektor-Gebiet östlich von Kalgoorlie.", "Known detecting area east of Kalgoorlie."),
+ ("AU", "Menzies", "Eastern Goldfields", -29.6900, 121.0300, "crown", "wa-gf", "AU-WA", "Alte Goldgräberstadt am Golden Quest Discovery Trail.", "Old gold-rush town on the Golden Quest Discovery Trail."),
+ ("AU", "Leonora / Gwalia", "Eastern Goldfields", -28.8800, 121.3300, "crown", "wa-gf", "AU-WA", "Goldgräberort mit historischer Gwalia-Mine; Ausgangspunkt für Touren und Kurse.", "Gold town with the historic Gwalia mine; base for tours and courses."),
+ ("AU", "Laverton", "Eastern Goldfields", -28.6300, 122.4000, "crown", "wa-gf", "AU-WA", "Abgelegener Goldort am Rand der Wüste.", "Remote gold town at the edge of the desert."),
+ ("AU", "Norseman", "Eastern Goldfields", -32.2000, 121.7800, "crown", "wa-gf", "AU-WA", "Südliches Ende der Goldfields.", "Southern end of the Goldfields."),
+ # Murchison und Pilbara
+ ("AU", "Mount Magnet", "Murchison", -28.0600, 117.8500, "crown", "wa-mw", "AU-WA", "Ältestes noch aktives Goldfeld in WA.", "Oldest still active goldfield in WA."),
+ ("AU", "Cue", "Murchison", -27.4200, 117.9000, "crown", "wa-mw", "AU-WA", "Historischer Goldort im Murchison.", "Historic gold town in the Murchison."),
+ ("AU", "Meekatharra", "Murchison", -26.5900, 118.4900, "crown", "wa-mw", "AU-WA", "Nördliches Murchison-Goldfeld.", "Northern Murchison goldfield."),
+ ("AU", "Marble Bar", "Pilbara", -21.1700, 119.7500, "crown", "pilbara", "AU-WA", "Heissester Ort Australiens, grobes Pilbara-Gold. Nur im Winter.", "Australia's hottest town, coarse Pilbara gold. Winter only."),
+ ("AU", "Nullagine", "Pilbara", -21.8900, 120.1100, "crown", "pilbara", "AU-WA", "Abgelegenes Pilbara-Goldfeld.", "Remote Pilbara goldfield."),
+ # Victoria – Goldenes Dreieck
+ ("AU", "Ballarat", "Golden Triangle", -37.5600, 143.8500, "crown", "vic", "AU-VIC", "Südecke des Goldenen Dreiecks; Sovereign Hill (Museum mit Goldwaschen).", "Southern corner of the Golden Triangle; Sovereign Hill (museum with panning)."),
+ ("AU", "Bendigo", "Golden Triangle", -36.7600, 144.2800, "crown", "vic", "AU-VIC", "Ostecke des Goldenen Dreiecks, State Forests ringsum.", "Eastern corner of the Golden Triangle, state forests around."),
+ ("AU", "St Arnaud", "Golden Triangle", -36.6200, 143.2600, "crown", "vic", "AU-VIC", "Westecke des Goldenen Dreiecks.", "Western corner of the Golden Triangle."),
+ ("AU", "Dunolly", "Golden Triangle", -36.8600, 143.7300, "crown", "vic", "AU-VIC", "Mitten im Nugget-Gebiet; nahe Moliagul (Welcome Stranger, grösster Nugget der Welt).", "In the heart of nugget country; near Moliagul (Welcome Stranger, world's largest nugget)."),
+ ("AU", "Moliagul – Welcome Stranger", "Golden Triangle", -36.7500, 143.6700, "show", "vic", "AU-VIC", "Fundort des Welcome Stranger (1869, 72 kg Gold) – Gedenkstein.", "Find site of the Welcome Stranger (1869, 72 kg of gold) – memorial."),
+ ("AU", "Tarnagulla", "Golden Triangle", -36.7700, 143.8300, "crown", "vic", "AU-VIC", "Klassisches Detektor-Gebiet im Goldenen Dreieck.", "Classic detecting area in the Golden Triangle."),
+ ("AU", "Wedderburn", "Golden Triangle", -36.4200, 143.6100, "crown", "vic", "AU-VIC", "Berühmt für Nuggets nahe der Oberfläche.", "Famous for near-surface nuggets."),
+ ("AU", "Inglewood / Kingower", "Golden Triangle", -36.5700, 143.8700, "crown", "vic", "AU-VIC", "Nugget-Gebiet im Norden des Dreiecks.", "Nugget area in the north of the triangle."),
+ ("AU", "Creswick Creek", "Creswick Creek", -37.4200, 143.8900, "closed", "vic", "AU-VIC", "Prospecting in diesem Bach ist nicht erlaubt.", "Prospecting is not permitted in this creek."),
+ # Queensland
+ ("AU", "Charters Towers", "Burdekin", -20.0800, 146.2600, "crown", "qld", "AU-QLD", "Historische Goldstadt; Fossicking Licence und Erlaubnis nötig.", "Historic gold town; fossicking licence and permission needed."),
+ ("AU", "Clermont", "Central Queensland", -22.8200, 147.6400, "crown", "qld", "AU-QLD", "Bekanntes Detektor-Gebiet in Zentral-Queensland.", "Known detecting area in central Queensland."),
+ ("AU", "Palmer River", "Palmer River", -16.1000, 144.1000, "crown", "qld", "AU-QLD", "Historisches Goldfeld im hohen Norden, sehr abgelegen und heiss.", "Historic goldfield in the far north, very remote and hot."),
+ ("AU", "Gympie", "Mary River", -26.1900, 152.6700, "show", "qld", "AU-QLD", "Goldgräberstadt mit Bergbau-Museum.", "Gold town with mining museum."),
+ # New South Wales
+ ("AU", "Tambaroora Fossicking Area (Hill End)", "Tambaroora", -33.0000, 149.4300, "fossick", "nsw", "AU-NSW", "Ausgewiesene Crown-Land-Fossicking-Fläche bei Hill End. Die Hill End Historic Site selbst ist Nationalpark – dort verboten.", "Designated Crown-land fossicking area near Hill End. Hill End Historic Site itself is national park – forbidden there."),
+ ("AU", "Sofala / Turon River", "Turon River", -33.0800, 149.6900, "crown", "nsw", "AU-NSW", "Ältestes Goldfeld von NSW am Turon.", "Oldest goldfield of NSW on the Turon."),
+ ("AU", "Araluen", "Araluen Creek", -35.6500, 149.8100, "crown", "nsw", "AU-NSW", "Historisches Goldtal im Süden von NSW.", "Historic gold valley in southern NSW."),
+ # Northern Territory, South Australia, Tasmanien
+ ("AU", "Tennant Creek / Warrego Fossicking Area", "Tennant Creek", -19.6500, 134.1900, "fossick", "nt", "AU-NT", "Bekanntestes Goldgebiet im Northern Territory; Warrego Fossicking Area in der Nähe.", "Best-known gold area in the Northern Territory; Warrego Fossicking Area nearby."),
+ ("AU", "Echunga Goldfield", "Adelaide Hills", -35.1000, 138.8000, "crown", "au-other", "AU-SA", "Erstes Goldfeld Südaustraliens (1852).", "South Australia's first goldfield (1852)."),
+ ("AU", "Beaconsfield Mine & Heritage Centre", "Tamar", -41.2000, 146.8200, "show", "au-other", "AU-TAS", "Goldminen-Museum in Tasmanien.", "Gold mine museum in Tasmania."),
+]
+
+# Australien – Verleih, Läden, Touren (Lage = Ort, Adresse auf der Website)
+AU_SERVICES = [
+ ("AU", "Reeds Prospecting Supplies", "Perth", -31.9500, 115.8600, "hire", "service", "AU-SHOP", "Grösste Detektor-Mietflotte in Perth (ganze Minelab-Palette). Mindestens 2 Tage, Kaution je nach Gerät.", "Perth's largest detector hire fleet (full Minelab range). Minimum 2 days, deposit depends on model.", "https://reedsprospecting.com.au/pages/hire-detectors"),
+ ("AU", "Miners Den", "Perth", -31.9300, 115.8300, "hire", "service", "AU-SHOP", "Prospecting-Laden; Detektoren auch zur Miete auf Kauf (6–36 Monate).", "Prospecting shop; detectors also rent-to-own (6–36 months).", "https://www.minersden.com.au/rental/"),
+ ("AU", "Finders Keepers Gold Prospecting", "Kalgoorlie (Hannan St) und Perth", -30.7480, 121.4680, "hire", "service", "AU-SHOP", "Prospecting-Laden in Kalgoorlie und Perth.", "Prospecting shop in Kalgoorlie and Perth.", "https://finderskeepersgold.com/"),
+ ("AU", "Prospectors Patch", "Kalgoorlie", -30.7520, 121.4630, "hire", "service", "AU-SHOP", "Detektor-Verleih in Kalgoorlie (Abholung im Laden).", "Detector hire in Kalgoorlie (collect in store).", "https://prospectorspatch.com.au/pages/hire"),
+ ("AU", "Pirates Gold Prospecting Tours", "Leonora / Kalgoorlie", -28.8850, 121.3350, "tour", "tour", "AU-TOUR", "Tag-along-Touren April–August auf privaten Leases in den Eastern Goldfields mit Training; dazu Tagestouren ab Kalgoorlie. Seit 1984 am Detektieren.", "Tag-along tours April–August on private leases in the Eastern Goldfields with training; plus day tours from Kalgoorlie. Detecting since 1984.", "https://www.piratesgold.com.au/"),
+ ("AU", "Gold Talk Leonora", "Leonora", -28.8780, 121.3250, "tour", "tour", "AU-TOUR", "Dreitägiger Anfänger-Kurs im Goldwaschen und Detektieren.", "Three-day beginner course in prospecting and detecting.", "https://www.goldtalkleonora.com.au/"),
+ ("AU", "Coolgardie Gold Safaris", "Coolgardie", -30.9560, 121.1700, "tour", "tour", "AU-TOUR", "Touren über 3, 5 oder 10 Tage und Touren nach Mass.", "Tours over 3, 5 or 10 days and custom tours.", "https://www.coolgardiegoldsafaris.com.au/"),
+ ("AU", "Gold Nugget Tours", "Kalgoorlie-Boulder", -30.7440, 121.4750, "tour", "tour", "AU-TOUR", "Tagestouren mit Einführung und Ausrüstung (Mai–Oktober).", "Day tours with introduction and gear (May–October).", "https://www.westernaustralia.com/en/tour/gold-nugget-tours/5e785a5f5cd6b7c075bdb33f"),
+ ("AU", "Gold and Relics", "Kalgoorlie, Leinster, Leonora", -30.7600, 121.4550, "tour", "tour", "AU-TOUR", "Tag-along- und All-inclusive-Touren (auf Wunsch mit Flug ab Perth).", "Tag-along and all-inclusive tours (optionally with flights from Perth).", "https://goldandrelics.com.au/"),
+ ("AU", "Metal Detector Hire (Hill End)", "Hill End, NSW", -33.0320, 149.4150, "hire", "service", "AU-SHOP", "Detektor-Miete ab A$50 pro Tag.", "Detector hire from A$50 per day.", "https://metaldetectorhire.com.au/"),
+]
+
 def build(spots, name):
     feats = []
     for spot in spots:
@@ -401,7 +493,7 @@ def build(spots, name):
                       "properties": {"name": name_, "country": c, "river": river, "kind": kind, "de": de, "en": en,
                                      "find_de": f[0], "find_en": f[1], "permit_de": p[0], "permit_en": p[1],
                                      "permit_link": p[2], "link": link}})
-        if c == "US": feats[-1]["properties"]["state"] = state_of(lon, lat)
+        if c in STATE_FILES: feats[-1]["properties"]["state"] = state_of(lon, lat, c)
     out = os.path.join(DATA, name)
     os.makedirs(DATA, exist_ok=True)
     json.dump({"type": "FeatureCollection", "features": feats}, open(out, "w"), ensure_ascii=False, indent=0)
@@ -409,6 +501,8 @@ def build(spots, name):
 
 build(SPOTS, "goldspots.geojson")
 build(US_SPOTS, "goldspots-us.geojson")
+build(AU_SPOTS, "goldspots-au.geojson")
+build(AU_SERVICES, "services-au.geojson")
 
 # Clubs
 cf = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [lon, lat]},

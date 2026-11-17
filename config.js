@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 37,
+  appVersion: 38,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -164,6 +164,7 @@ var APP_CONFIG = {
     { id: "general", name: { en: "General", de: "Allgemein" }, open: true },
     { id: "us", name: { en: "🇺🇸 USA (BLM, USGS …)", de: "🇺🇸 USA (BLM, USGS …)" }, open: true },
     { id: "nz", name: { en: "🇳🇿 New Zealand", de: "🇳🇿 Neuseeland" } },
+    { id: "au", name: { en: "🇦🇺 Australia", de: "🇦🇺 Australien" } },
     // Europa: zuerst alles, was überall gilt; danach nur noch, was es pro Land zusätzlich gibt
     { id: "eu", name: { en: "🇪🇺 Europe – all countries", de: "🇪🇺 Europa – alle Länder" } },
     { id: "ch", name: { en: "🇨🇭 Switzerland – details", de: "🇨🇭 Schweiz – Details" } },
@@ -293,6 +294,12 @@ var APP_CONFIG = {
       details: { en: "Closed: national parks (except special permits, e.g. Whiskeytown), wilderness areas, national monuments (often), Native American reservations, withdrawn areas. Never take artifacts (ARPA). Motorised gear (dredge, highbanker) needs state and sometimes federal permits; some eastern National Forests want a letter of authorisation even for panning. State land, state parks and private land: own rules – see the state.", de: "Gesperrt: Nationalparks (ausser mit Spezial-Erlaubnis, z. B. Whiskeytown), Wilderness-Gebiete, oft National Monuments, Indianerreservate, gesperrte (withdrawn) Gebiete. Nie Artefakte mitnehmen (ARPA). Motorgeräte (Dredge, Highbanker) brauchen Bewilligungen des Staats, teils auch des Bundes; einige National Forests im Osten wollen sogar fürs Waschen eine schriftliche Erlaubnis. Staatsland, State Parks und Privatland: eigene Regeln – siehe Bundesstaat." },
       source: "BLM, US Forest Service, NPS (Nov. 2026), keine Rechtsberatung", link: "https://www.blm.gov/programs/energy-and-minerals/mining-and-minerals/locatable-minerals"
     },
+    AU: {
+      name: { en: "Australia", de: "Australien" }, level: "limited",
+      rule: { en: "Every state has its own licence: Western Australia and Victoria – Miner's Right; Queensland – fossicking licence; NSW – landholder consent, permit for state forests; Northern Territory – fossicking permit; Tasmania – free in fossicking areas, else prospecting licence; South Australia – mostly no permit. Tenements (claims) only with the holder's consent.", de: "Jeder Bundesstaat hat seine eigene Lizenz: Western Australia und Victoria – Miner's Right; Queensland – Fossicking Licence; NSW – Zustimmung des Landbesitzers, Permit für State Forests; Northern Territory – Fossicking Permit; Tasmanien – in Fossicking Areas frei, sonst Prospecting Licence; South Australia – meist keine Erlaubnis. Tenements (Claims) nur mit Erlaubnis des Halters." },
+      details: { en: "Forbidden almost everywhere: national parks, conservation parks, nature reserves; Aboriginal and exclusive native-title land only with permission. Hobby finds may be kept; selling or motorised mining needs a mining title.", de: "Fast überall verboten: Nationalparks, Conservation Parks, Naturreservate; Aboriginal Land und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Hobby-Funde darf man behalten; Verkauf im grossen Stil oder Abbau mit Maschinen braucht einen Mining Title." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://detectormaps.com/au/fossicking-laws/"
+    },
   },
 
   // Gold-Regeln pro US-Bundesstaat (Ebene «Gold-Regeln USA», Karte antippen). Schlüssel = Name in data/us/states.json
@@ -373,6 +380,51 @@ var APP_CONFIG = {
       name: { en: "North Carolina", de: "North Carolina" }, level: "limited",
       rule: { en: "Mostly private land: ask the owner or use commercial panning sites (Reed Gold Mine, Cotton Patch …). In National Forests ask the ranger district first.", de: "Meist Privatland: Eigentümer fragen oder Bezahl-Waschplätze nutzen (Reed Gold Mine u. a.). In National Forests vorher beim Ranger District fragen." },
       source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    }
+  },
+
+  // Gold-Regeln pro australischem Bundesstaat (Ebene «Gold-Regeln Australien», Karte antippen). Schlüssel = Name in data/au/states.json
+  auStateRules: {
+    "Western Australia": {
+      name: { en: "Western Australia", de: "Western Australia" }, level: "limited",
+      rule: { en: "Miner's Right required for all prospecting incl. metal detecting (one-off, about A$30). Covers Crown land incl. pastoral leases (inform the pastoralist). On tenements only with the holder's written consent; on an exploration licence a Section 40E permit (hand tools). Reserves closed. Check the 'WA tenements' layer before you go.", de: "Miner's Right für jede Suche nötig, auch mit dem Metalldetektor (einmalig, ca. A$30). Gilt auf Crown Land inkl. Pastoral Leases (Pastoralisten informieren). Auf Tenements nur mit schriftlicher Erlaubnis des Halters; auf einer Exploration Licence mit Section-40E-Permit (Handwerkzeug). Reserven gesperrt. Vorher die Ebene «WA – Tenements» prüfen." },
+      details: { en: "Miner's Right and 40E permit: Department of Mines (DEMIRS), online. Tours and hire in Kalgoorlie, Leonora, Coolgardie and Perth – see layer 'Hire & guided tours'.", de: "Miner's Right und 40E-Permit: Bergbaubehörde (DEMIRS), online. Touren und Verleih in Kalgoorlie, Leonora, Coolgardie und Perth – siehe Ebene «Verleih & geführte Touren»." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights"
+    },
+    "Victoria": {
+      name: { en: "Victoria", de: "Victoria" }, level: "limited",
+      rule: { en: "Miner's Right required (valid 10 years, about A$29, individuals only). Allowed on much Crown land and in many state forests; mostly not in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.", de: "Miner's Right nötig (10 Jahre gültig, ca. A$29, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in vielen State Forests; in Nationalparks meist nicht; einzelne Bäche gesperrt (z. B. Creswick Creek). Privatland nur mit Zustimmung." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://detectormaps.com/au/fossicking-laws/"
+    },
+    "Queensland": {
+      name: { en: "Queensland", de: "Queensland" }, level: "limited",
+      rule: { en: "Fossicking licence required (1 month, 6 months or 1 year). Without further permission only in designated fossicking areas and general permission areas; elsewhere written landholder consent.", de: "Fossicking Licence nötig (1 Monat, 6 Monate oder 1 Jahr). Ohne weitere Erlaubnis nur in Designated Fossicking Areas und General Permission Areas; sonst schriftliche Zustimmung des Landbesitzers." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://www.qld.gov.au/recreation/activities/areas-facilities/fossicking"
+    },
+    "New South Wales": {
+      name: { en: "New South Wales", de: "New South Wales" }, level: "limited",
+      rule: { en: "No general licence, but landholder consent. State forests: fossicking permit from Forestry Corporation (12 months, about A$27.50). National parks closed (incl. Hill End Historic Site). Fossicking districts are shown on MinView.", de: "Keine allgemeine Lizenz, aber Zustimmung des Landbesitzers. State Forests: Fossicking Permit der Forestry Corporation (12 Monate, ca. A$27.50). Nationalparks gesperrt (auch Hill End Historic Site). Fossicking Districts sind im MinView eingezeichnet." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://www.regional.nsw.gov.au/meg/exploration/fossicking"
+    },
+    "Northern Territory": {
+      name: { en: "Northern Territory", de: "Northern Territory" }, level: "limited",
+      rule: { en: "Fossicking permit required (sources disagree whether everywhere); declared fossicking areas such as Warrego near Tennant Creek. Aboriginal land only with permission.", de: "Fossicking Permit nötig (Quellen widersprechen sich, ob überall); ausgewiesene Fossicking Areas wie Warrego bei Tennant Creek. Aboriginal Land nur mit Erlaubnis." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://detectormaps.com/au/fossicking-laws/"
+    },
+    "South Australia": {
+      name: { en: "South Australia", de: "South Australia" }, level: "open",
+      rule: { en: "Recreational fossicking without intent to sell usually needs no permit. Ask the landholder; parks and reserves closed.", de: "Hobby-Fossicking ohne Verkaufsabsicht braucht meist keine Erlaubnis. Landbesitzer fragen; Parks und Reserven gesperrt." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://detectormaps.com/au/fossicking-laws/"
+    },
+    "Tasmania": {
+      name: { en: "Tasmania", de: "Tasmania" }, level: "limited",
+      rule: { en: "No licence inside the declared fossicking areas; elsewhere a prospecting licence from Mineral Resources Tasmania.", de: "In den ausgewiesenen Fossicking Areas ohne Lizenz; anderswo Prospecting Licence von Mineral Resources Tasmania." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://detectormaps.com/au/fossicking-laws/"
+    },
+    "Australian Capital Territory": {
+      name: { en: "Australian Capital Territory", de: "Australian Capital Territory" }, level: "closed",
+      rule: { en: "No public fossicking areas.", de: "Keine öffentlichen Fossicking-Gebiete." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung"
     }
   },
 
@@ -668,6 +720,163 @@ var APP_CONFIG = {
       arcIdentify: { layers: "top", tolerance: 2, max: 2 }
     },
     // ---------- EUROPA (EU-weit) ----------
+    {
+      id: "auSpots",
+      group: "au",
+      type: "spots",
+      name: { en: "Gold areas Australia (Golden Triangle, Goldfields …)", de: "Goldgebiete Australien (Goldenes Dreieck, Goldfields …)" },
+      // Liste ergänzen: tools/make_goldspots.py (AU_SPOTS)
+      file: "data/goldspots-au.geojson",
+      attribution: "Gold areas: MAUSIBOX collection",
+      visible: false, offline: true,
+      kinds: {
+        crown:   { color: "#2ecc40", level: "open",    label: { en: "Crown land with state licence – check tenements", de: "Crown Land mit Lizenz des Staats – Tenements prüfen" } },
+        fossick: { color: "#2f80ed", level: "open",    label: { en: "Declared fossicking area", de: "Ausgewiesene Fossicking Area" } },
+        show:    { color: "#9b51e0", level: "limited", label: { en: "Museum / historic site", de: "Museum / historische Stätte" } },
+        closed:  { color: "#e02020", level: "closed",  label: { en: "Prospecting not allowed", de: "Suchen nicht erlaubt" } }
+      },
+      legend: [
+        { color: "#2ecc40", text: { en: "Crown land + licence", de: "Crown Land + Lizenz" } },
+        { color: "#2f80ed", text: { en: "fossicking area", de: "Fossicking Area" } },
+        { color: "#9b51e0", text: { en: "museum", de: "Museum" } },
+        { color: "#e02020", text: { en: "closed", de: "gesperrt" } }
+      ]
+    },
+    {
+      id: "auServices",
+      group: "au",
+      type: "spots",
+      name: { en: "Detector hire, shops & guided tours (Australia)", de: "Detektor-Verleih, Läden & geführte Touren (Australien)" },
+      file: "data/services-au.geojson",
+      hint: "serviceHint",
+      attribution: "Services: MAUSIBOX collection",
+      visible: false, offline: true,
+      kinds: {
+        hire: { color: "#ff9800", level: "open", label: { en: "Detector hire / prospecting shop", de: "Detektor-Verleih / Prospecting-Laden" } },
+        tour: { color: "#00bfa5", level: "open", label: { en: "Guided tours / courses", de: "Geführte Touren / Kurse" } }
+      },
+      legend: [
+        { color: "#ff9800", text: { en: "hire / shop", de: "Verleih / Laden" } },
+        { color: "#00bfa5", text: { en: "tours", de: "Touren" } }
+      ]
+    },
+    {
+      id: "auRules",
+      group: "au",
+      type: "countryRules",
+      name: { en: "Gold rules & licences per state (tap the map)", de: "Gold-Regeln & Lizenzen pro Bundesstaat (Karte antippen)" },
+      bordersUrl: "data/au/states.json",
+      codeProp: "name", rulesKey: "auStateRules", alsoCountry: "AU",
+      visible: false, offline: true
+    },
+    {
+      id: "auTenements",
+      group: "au",
+      type: "arcgisExport",
+      name: { en: "WA – Tenements (claims, live & pending, DEMIRS)", de: "WA – Tenements (Claims, aktiv & beantragt, DEMIRS)" },
+      url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Industry_and_Mining/MapServer",
+      show: "3",
+      attribution: "Mining tenements: DEMIRS / SLIP (WA)",
+      opacity: 0.8, visible: false, offline: false,
+      arcIdentify: { layers: "visible:3", tolerance: 2, max: 3, title: "fmt_tenid",
+        fields: [ { field: "type", label: { en: "Type", de: "Art" } }, { field: "tenstatus", label: { en: "Status", de: "Status" } },
+                  { field: "holder1", label: { en: "Holder", de: "Halter" } }, { field: "holder2", label: { en: "Holder 2", de: "Halter 2" } },
+                  { field: "grantdate", label: { en: "Granted", de: "Erteilt" } }, { field: "enddate", label: { en: "Expires", de: "Läuft ab" } } ] }
+    },
+    {
+      id: "auTenDead",
+      group: "au",
+      type: "arcgisExport",
+      name: { en: "WA – Dead tenements (ground may be open again – check live ones)", de: "WA – Erloschene Tenements (evtl. wieder frei – aktive prüfen)" },
+      url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Industry_and_Mining/MapServer",
+      show: "15",
+      attribution: "Mining tenements: DEMIRS / SLIP (WA)",
+      opacity: 0.6, visible: false, offline: false,
+      arcIdentify: { layers: "visible:15", tolerance: 2, max: 3, title: "fmt_tenid",
+        fields: [ { field: "type", label: { en: "Type", de: "Art" } }, { field: "tenstatus", label: { en: "Status", de: "Status" } },
+                  { field: "deathreason", label: { en: "Reason", de: "Grund" } }, { field: "enddate", label: { en: "Ended", de: "Beendet" } } ] }
+    },
+    {
+      id: "auMinedex",
+      group: "au",
+      type: "arcgisExport",
+      name: { en: "WA – Mines & deposits (MINEDEX)", de: "WA – Minen & Lagerstätten (MINEDEX)" },
+      url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Industry_and_Mining/MapServer",
+      show: "0",
+      attribution: "MINEDEX: DEMIRS / SLIP (WA)",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:0", tolerance: 8, max: 3, title: "site_title",
+        fields: [ { field: "site_commo", label: { en: "Commodities", de: "Rohstoffe" } }, { field: "site_type_", label: { en: "Type", de: "Art" } },
+                  { field: "site_stage", label: { en: "Stage", de: "Stand" } }, { field: "proj_title", label: { en: "Project", de: "Projekt" } } ] }
+    },
+    {
+      id: "auDrill",
+      group: "au",
+      type: "arcgisExport",
+      name: { en: "WA – Drill holes & old exploration (WAMEX, zoom in)", de: "WA – Bohrlöcher & alte Exploration (WAMEX, hineinzoomen)" },
+      url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Industry_and_Mining/MapServer",
+      show: "28,35",
+      attribution: "WAMEX: DEMIRS / SLIP (WA)",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:28,35", tolerance: 6, max: 3,
+        fields: [ { field: "holeid", label: { en: "Hole", de: "Bohrloch" } }, { field: "holetype", label: { en: "Hole type", de: "Bohrart" } },
+                  { field: "maxdepth", label: { en: "Depth (m)", de: "Tiefe (m)" } }, { field: "target_commodity", label: { en: "Target", de: "Ziel" } },
+                  { field: "operator", label: { en: "Company", de: "Firma" } }, { field: "activityty", label: { en: "Activity", de: "Tätigkeit" } },
+                  { field: "elements", label: { en: "Elements", de: "Elemente" } }, { field: "wamex_a_no", label: { en: "Report (A-no.)", de: "Bericht (A-Nr.)" } } ] }
+    },
+    {
+      id: "auGeology",
+      group: "au",
+      type: "arcgisExport",
+      name: { en: "WA – Bedrock geology 1:500k / 1:100k (GSWA)", de: "WA – Gesteinsgeologie 1:500 000 / 1:100 000 (GSWA)" },
+      url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Geology_and_Soils_Map/MapServer",
+      show: "21,4",
+      attribution: "Geology: GSWA / DEMIRS",
+      opacity: 0.55, visible: false, offline: false,
+      arcIdentify: { layers: "visible:21,4", tolerance: 0, max: 1, title: "unitname",
+        fields: [ { field: "descriptn", label: { en: "Description", de: "Beschreibung" } }, { field: "code", label: { en: "Code", de: "Code" } },
+                  { field: "greenstone", label: { en: "Greenstone belt", de: "Grünsteingürtel" } } ] }
+    },
+    {
+      id: "auFaults",
+      group: "au",
+      type: "arcgisExport",
+      name: { en: "WA – Faults & linear structures (GSWA)", de: "WA – Störungen & Strukturlinien (GSWA)" },
+      url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Geology_and_Soils_Map/MapServer",
+      show: "1,23",
+      attribution: "Structures: GSWA / DEMIRS",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:1,23", tolerance: 5, max: 2, title: "feature",
+        fields: [ { field: "type", label: { en: "Type", de: "Art" } }, { field: "name", label: { en: "Name", de: "Name" } } ] }
+    },
+    {
+      id: "auGold",
+      group: "au",
+      type: "wms",
+      name: { en: "Gold deposits & occurrences, all Australia (Geoscience Australia)", de: "Goldlagerstätten & -vorkommen ganz Australien (Geoscience Australia)" },
+      url: "https://services.ga.gov.au/gis/earthresource/wms",
+      layers: "ama:MineralDeposits,ama:MineralOccurrences",
+      params: { CQL_FILTER: "COMMODITY_CODES LIKE '%Au%';COMMODITY_CODES LIKE '%Au%'" },
+      attribution: "Mineral deposits: Geoscience Australia (CC BY 4.0)",
+      opacity: 1, visible: false, offline: false,
+      wmsInfo: { layers: "ama:MineralDeposits,ama:MineralOccurrences", max: 3, titles: ["DEPOSIT_NAME", "OCCURRENCE_NAME"],
+        fields: [ { field: "OPERATING_STATUS", label: { en: "Status", de: "Status" } }, { field: "COMMODITY_NAMES", label: { en: "Commodities", de: "Rohstoffe" } },
+                  { field: "PROVINCES", label: { en: "Province", de: "Provinz" } }, { field: "ACCURACY_M", label: { en: "Accuracy (m)", de: "Genauigkeit (m)" } } ] }
+    },
+    {
+      id: "auMag",
+      group: "au",
+      type: "wms",
+      name: { en: "Magnetics Australia (Geoscience Australia)", de: "Magnetik Australien (Geoscience Australia)" },
+      url: "https://services.ga.gov.au/gis/geophysical-grids/wms",
+      attribution: "Magnetic Anomaly Map of Australia: Geoscience Australia (CC BY 4.0)",
+      opacity: 0.6, visible: false, offline: false,
+      modes: [
+        { id: "tmi", layers: "geophys:tmi_hsi_v2_white", name: { en: "Total magnetic intensity (colour)", de: "Magnetische Totalintensität (farbig)" } },
+        { id: "1vd", layers: "geophys:magmap_v7_2019_1VD", name: { en: "First vertical derivative – shows structures and greenstone lines", de: "1. Ableitung – zeigt Strukturen und Grünsteinzüge" } },
+        { id: "rtp", layers: "geophys:magmap_v7_2019_RTP", name: { en: "Reduced to pole", de: "Polreduziert" } }
+      ]
+    },
     {
       id: "euSpots",
       group: "eu",
@@ -1162,7 +1371,7 @@ var APP_CONFIG = {
     en: {
       layers: "Layers", basemap: "Base map", overlays: "Layers",
       gps: "My location", addPoint: "Add point", points: "My points", menu: "Menu",
-      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", spotFind: "What you find", spotPermit: "Permit / where to ask", spotPermitLink: "Permit: form / office", spotLocalLink: "Local contact (museum / panning site)", spotHint: "Approximate location (town / river section). Ask locally before panning.", clubJoin: "Website / join", clubHint: "Location = club seat (town), not the claims. Fees and claims change – check the club website.", loading: "Loading…", loadError: "Could not load",
+      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", spotFind: "What you find", spotPermit: "Permit / where to ask", spotPermitLink: "Permit: form / office", spotLocalLink: "Local contact (museum / panning site)", spotHint: "Approximate location (town / river section). Ask locally before panning.", clubJoin: "Website / join", serviceHint: "Location = town; exact address on the website.", clubHint: "Location = club seat (town), not the claims. Fees and claims change – check the club website.", loading: "Loading…", loadError: "Could not load",
       gpsWaiting: "Waiting for GPS…", gpsError: "GPS not available", accuracy: "accuracy",
       name: "Name", note: "Note", category: "Category", photos: "Photos", addPhoto: "Add photo",
       position: "Position", useGps: "Use GPS", useCenter: "Use map center",
@@ -1275,7 +1484,7 @@ var APP_CONFIG = {
     de: {
       layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen",
       gps: "Mein Standort", addPoint: "Punkt setzen", points: "Meine Punkte", menu: "Menü",
-      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", spotFind: "Was man findet", spotPermit: "Bewilligung / wo fragen", spotPermitLink: "Bewilligung: Formular / Stelle", spotLocalLink: "Anlaufstelle vor Ort (Museum / Waschplatz)", spotHint: "Ungefähre Lage (Ort / Flussabschnitt). Vor dem Waschen vor Ort nachfragen.", clubJoin: "Website / Mitglied werden", clubHint: "Lage = Sitz des Clubs (Ort), nicht die Claims. Beiträge und Claims ändern sich – auf der Club-Website nachsehen.", loading: "Lade…", loadError: "Laden fehlgeschlagen",
+      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", spotFind: "Was man findet", spotPermit: "Bewilligung / wo fragen", spotPermitLink: "Bewilligung: Formular / Stelle", spotLocalLink: "Anlaufstelle vor Ort (Museum / Waschplatz)", spotHint: "Ungefähre Lage (Ort / Flussabschnitt). Vor dem Waschen vor Ort nachfragen.", clubJoin: "Website / Mitglied werden", serviceHint: "Lage = Ort; genaue Adresse auf der Website.", clubHint: "Lage = Sitz des Clubs (Ort), nicht die Claims. Beiträge und Claims ändern sich – auf der Club-Website nachsehen.", loading: "Lade…", loadError: "Laden fehlgeschlagen",
       gpsWaiting: "Warte auf GPS…", gpsError: "GPS nicht verfügbar", accuracy: "Genauigkeit",
       name: "Name", note: "Notiz", category: "Kategorie", photos: "Fotos", addPhoto: "Foto hinzufügen",
       position: "Position", useGps: "GPS verwenden", useCenter: "Kartenmitte verwenden",

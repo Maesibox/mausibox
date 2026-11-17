@@ -1,0 +1,805 @@
+{
+"type": "FeatureCollection",
+"features": [
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.466,
+-30.749
+]
+},
+"properties": {
+"name": "Kalgoorlie-Boulder",
+"country": "AU",
+"river": "Eastern Goldfields",
+"kind": "crown",
+"de": "Hauptstadt der Goldfields mit Super Pit, Läden, Verleih und Touren. Rundherum ist fast alles Tenement – Ebene «WA – Tenements» prüfen.",
+"en": "Capital of the Goldfields with Super Pit, shops, hire and tours. Almost everything around is tenement – check the 'WA tenements' layer.",
+"find_de": "Nuggets im Laterit und in alten Schürfstellen – Detektor-Land der Eastern Goldfields.",
+"find_en": "Nuggets in laterite and old workings – detector country of the Eastern Goldfields.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.165,
+-30.953
+]
+},
+"properties": {
+"name": "Coolgardie",
+"country": "AU",
+"river": "Eastern Goldfields",
+"kind": "crown",
+"de": "Hier begann 1892 der Goldrausch im Westen. Viele alte Schürfstellen.",
+"en": "The western gold rush started here in 1892. Many old workings.",
+"find_de": "Nuggets im Laterit und in alten Schürfstellen – Detektor-Land der Eastern Goldfields.",
+"find_en": "Nuggets in laterite and old workings – detector country of the Eastern Goldfields.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.6,
+-30.6
+]
+},
+"properties": {
+"name": "Kanowna (Geisterstadt)",
+"country": "AU",
+"river": "Eastern Goldfields",
+"kind": "crown",
+"de": "Verlassene Goldgräberstadt nordöstlich von Kalgoorlie.",
+"en": "Abandoned gold-rush town north-east of Kalgoorlie.",
+"find_de": "Nuggets im Laterit und in alten Schürfstellen – Detektor-Land der Eastern Goldfields.",
+"find_en": "Nuggets in laterite and old workings – detector country of the Eastern Goldfields.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+122.25,
+-30.52
+]
+},
+"properties": {
+"name": "Kurnalpi",
+"country": "AU",
+"river": "Eastern Goldfields",
+"kind": "crown",
+"de": "Bekanntes Detektor-Gebiet östlich von Kalgoorlie.",
+"en": "Known detecting area east of Kalgoorlie.",
+"find_de": "Nuggets im Laterit und in alten Schürfstellen – Detektor-Land der Eastern Goldfields.",
+"find_en": "Nuggets in laterite and old workings – detector country of the Eastern Goldfields.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.03,
+-29.69
+]
+},
+"properties": {
+"name": "Menzies",
+"country": "AU",
+"river": "Eastern Goldfields",
+"kind": "crown",
+"de": "Alte Goldgräberstadt am Golden Quest Discovery Trail.",
+"en": "Old gold-rush town on the Golden Quest Discovery Trail.",
+"find_de": "Nuggets im Laterit und in alten Schürfstellen – Detektor-Land der Eastern Goldfields.",
+"find_en": "Nuggets in laterite and old workings – detector country of the Eastern Goldfields.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.33,
+-28.88
+]
+},
+"properties": {
+"name": "Leonora / Gwalia",
+"country": "AU",
+"river": "Eastern Goldfields",
+"kind": "crown",
+"de": "Goldgräberort mit historischer Gwalia-Mine; Ausgangspunkt für Touren und Kurse.",
+"en": "Gold town with the historic Gwalia mine; base for tours and courses.",
+"find_de": "Nuggets im Laterit und in alten Schürfstellen – Detektor-Land der Eastern Goldfields.",
+"find_en": "Nuggets in laterite and old workings – detector country of the Eastern Goldfields.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+122.4,
+-28.63
+]
+},
+"properties": {
+"name": "Laverton",
+"country": "AU",
+"river": "Eastern Goldfields",
+"kind": "crown",
+"de": "Abgelegener Goldort am Rand der Wüste.",
+"en": "Remote gold town at the edge of the desert.",
+"find_de": "Nuggets im Laterit und in alten Schürfstellen – Detektor-Land der Eastern Goldfields.",
+"find_en": "Nuggets in laterite and old workings – detector country of the Eastern Goldfields.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.78,
+-32.2
+]
+},
+"properties": {
+"name": "Norseman",
+"country": "AU",
+"river": "Eastern Goldfields",
+"kind": "crown",
+"de": "Südliches Ende der Goldfields.",
+"en": "Southern end of the Goldfields.",
+"find_de": "Nuggets im Laterit und in alten Schürfstellen – Detektor-Land der Eastern Goldfields.",
+"find_en": "Nuggets in laterite and old workings – detector country of the Eastern Goldfields.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+117.85,
+-28.06
+]
+},
+"properties": {
+"name": "Mount Magnet",
+"country": "AU",
+"river": "Murchison",
+"kind": "crown",
+"de": "Ältestes noch aktives Goldfeld in WA.",
+"en": "Oldest still active goldfield in WA.",
+"find_de": "Nuggets in den Murchison-Goldfeldern, oft im flachen Schutt.",
+"find_en": "Nuggets in the Murchison goldfields, often in shallow ground.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+117.9,
+-27.42
+]
+},
+"properties": {
+"name": "Cue",
+"country": "AU",
+"river": "Murchison",
+"kind": "crown",
+"de": "Historischer Goldort im Murchison.",
+"en": "Historic gold town in the Murchison.",
+"find_de": "Nuggets in den Murchison-Goldfeldern, oft im flachen Schutt.",
+"find_en": "Nuggets in the Murchison goldfields, often in shallow ground.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+118.49,
+-26.59
+]
+},
+"properties": {
+"name": "Meekatharra",
+"country": "AU",
+"river": "Murchison",
+"kind": "crown",
+"de": "Nördliches Murchison-Goldfeld.",
+"en": "Northern Murchison goldfield.",
+"find_de": "Nuggets in den Murchison-Goldfeldern, oft im flachen Schutt.",
+"find_en": "Nuggets in the Murchison goldfields, often in shallow ground.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+119.75,
+-21.17
+]
+},
+"properties": {
+"name": "Marble Bar",
+"country": "AU",
+"river": "Pilbara",
+"kind": "crown",
+"de": "Heissester Ort Australiens, grobes Pilbara-Gold. Nur im Winter.",
+"en": "Australia's hottest town, coarse Pilbara gold. Winter only.",
+"find_de": "Grobe Nuggets im Pilbara-Schutt; sehr abgelegen und heiss.",
+"find_en": "Coarse nuggets in Pilbara gravels; very remote and hot.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+120.11,
+-21.89
+]
+},
+"properties": {
+"name": "Nullagine",
+"country": "AU",
+"river": "Pilbara",
+"kind": "crown",
+"de": "Abgelegenes Pilbara-Goldfeld.",
+"en": "Remote Pilbara goldfield.",
+"find_de": "Grobe Nuggets im Pilbara-Schutt; sehr abgelegen und heiss.",
+"find_en": "Coarse nuggets in Pilbara gravels; very remote and hot.",
+"permit_de": "Western Australia: Miner's Right nötig (auch für den Metalldetektor) – gilt für Crown Land inkl. Pastoral Leases. Auf Tenements (Claims) nur mit Erlaubnis des Halters; auf einer Exploration Licence mit einem Section-40E-Permit (nur Handwerkzeug). Pastoralisten vorher informieren. Reserven und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Ebene «WA – Tenements» prüfen!",
+"permit_en": "Western Australia: Miner's Right required (also for metal detecting) – covers Crown land incl. pastoral leases. On tenements only with the holder's consent; on an exploration licence with a Section 40E permit (hand tools only). Inform pastoralists first. Reserves and exclusive native-title areas only with permission. Check the 'WA tenements' layer!",
+"permit_link": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights",
+"link": null,
+"state": "Western Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+143.85,
+-37.56
+]
+},
+"properties": {
+"name": "Ballarat",
+"country": "AU",
+"river": "Golden Triangle",
+"kind": "crown",
+"de": "Südecke des Goldenen Dreiecks; Sovereign Hill (Museum mit Goldwaschen).",
+"en": "Southern corner of the Golden Triangle; Sovereign Hill (museum with panning).",
+"find_de": "Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.",
+"find_en": "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found.",
+"permit_de": "Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+"permit_en": "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Victoria"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+144.28,
+-36.76
+]
+},
+"properties": {
+"name": "Bendigo",
+"country": "AU",
+"river": "Golden Triangle",
+"kind": "crown",
+"de": "Ostecke des Goldenen Dreiecks, State Forests ringsum.",
+"en": "Eastern corner of the Golden Triangle, state forests around.",
+"find_de": "Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.",
+"find_en": "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found.",
+"permit_de": "Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+"permit_en": "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Victoria"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+143.26,
+-36.62
+]
+},
+"properties": {
+"name": "St Arnaud",
+"country": "AU",
+"river": "Golden Triangle",
+"kind": "crown",
+"de": "Westecke des Goldenen Dreiecks.",
+"en": "Western corner of the Golden Triangle.",
+"find_de": "Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.",
+"find_en": "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found.",
+"permit_de": "Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+"permit_en": "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Victoria"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+143.73,
+-36.86
+]
+},
+"properties": {
+"name": "Dunolly",
+"country": "AU",
+"river": "Golden Triangle",
+"kind": "crown",
+"de": "Mitten im Nugget-Gebiet; nahe Moliagul (Welcome Stranger, grösster Nugget der Welt).",
+"en": "In the heart of nugget country; near Moliagul (Welcome Stranger, world's largest nugget).",
+"find_de": "Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.",
+"find_en": "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found.",
+"permit_de": "Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+"permit_en": "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Victoria"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+143.67,
+-36.75
+]
+},
+"properties": {
+"name": "Moliagul – Welcome Stranger",
+"country": "AU",
+"river": "Golden Triangle",
+"kind": "show",
+"de": "Fundort des Welcome Stranger (1869, 72 kg Gold) – Gedenkstein.",
+"en": "Find site of the Welcome Stranger (1869, 72 kg of gold) – memorial.",
+"find_de": "Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.",
+"find_en": "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found.",
+"permit_de": "Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+"permit_en": "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Victoria"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+143.83,
+-36.77
+]
+},
+"properties": {
+"name": "Tarnagulla",
+"country": "AU",
+"river": "Golden Triangle",
+"kind": "crown",
+"de": "Klassisches Detektor-Gebiet im Goldenen Dreieck.",
+"en": "Classic detecting area in the Golden Triangle.",
+"find_de": "Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.",
+"find_en": "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found.",
+"permit_de": "Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+"permit_en": "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Victoria"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+143.61,
+-36.42
+]
+},
+"properties": {
+"name": "Wedderburn",
+"country": "AU",
+"river": "Golden Triangle",
+"kind": "crown",
+"de": "Berühmt für Nuggets nahe der Oberfläche.",
+"en": "Famous for near-surface nuggets.",
+"find_de": "Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.",
+"find_en": "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found.",
+"permit_de": "Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+"permit_en": "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Victoria"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+143.87,
+-36.57
+]
+},
+"properties": {
+"name": "Inglewood / Kingower",
+"country": "AU",
+"river": "Golden Triangle",
+"kind": "crown",
+"de": "Nugget-Gebiet im Norden des Dreiecks.",
+"en": "Nugget area in the north of the triangle.",
+"find_de": "Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.",
+"find_en": "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found.",
+"permit_de": "Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+"permit_en": "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Victoria"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+143.89,
+-37.42
+]
+},
+"properties": {
+"name": "Creswick Creek",
+"country": "AU",
+"river": "Creswick Creek",
+"kind": "closed",
+"de": "Prospecting in diesem Bach ist nicht erlaubt.",
+"en": "Prospecting is not permitted in this creek.",
+"find_de": "Nuggets und Flitter im «Goldenen Dreieck» – hier wurden die grössten Nuggets der Welt gefunden.",
+"find_en": "Nuggets and flakes in the 'Golden Triangle' – where the world's largest nuggets were found.",
+"permit_de": "Victoria: Miner's Right nötig (10 Jahre gültig, nur für Personen). Erlaubt auf vielen Crown-Land-Flächen und in State Forests; in Nationalparks meist verboten; einzelne Bäche gesperrt (z. B. Creswick Creek). Auf Privatland nur mit Zustimmung.",
+"permit_en": "Victoria: Miner's Right required (valid 10 years, individuals only). Allowed on much Crown land and in state forests; mostly closed in national parks; some creeks closed (e.g. Creswick Creek). Private land only with consent.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Victoria"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+146.26,
+-20.08
+]
+},
+"properties": {
+"name": "Charters Towers",
+"country": "AU",
+"river": "Burdekin",
+"kind": "crown",
+"de": "Historische Goldstadt; Fossicking Licence und Erlaubnis nötig.",
+"en": "Historic gold town; fossicking licence and permission needed.",
+"find_de": "Flitter und Nuggets in alten Goldfeldern.",
+"find_en": "Flakes and nuggets in old goldfields.",
+"permit_de": "Queensland: Fossicking Licence nötig (1 Monat, 6 Monate oder 1 Jahr). Ohne weitere Erlaubnis nur in Designated Fossicking Areas und General Permission Areas; sonst schriftliche Zustimmung des Landbesitzers.",
+"permit_en": "Queensland: fossicking licence required (1 month, 6 months or 1 year). Without further permission only in designated fossicking areas and general permission areas; otherwise written landholder consent.",
+"permit_link": "https://www.qld.gov.au/recreation/activities/areas-facilities/fossicking",
+"link": null,
+"state": "Queensland"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+147.64,
+-22.82
+]
+},
+"properties": {
+"name": "Clermont",
+"country": "AU",
+"river": "Central Queensland",
+"kind": "crown",
+"de": "Bekanntes Detektor-Gebiet in Zentral-Queensland.",
+"en": "Known detecting area in central Queensland.",
+"find_de": "Flitter und Nuggets in alten Goldfeldern.",
+"find_en": "Flakes and nuggets in old goldfields.",
+"permit_de": "Queensland: Fossicking Licence nötig (1 Monat, 6 Monate oder 1 Jahr). Ohne weitere Erlaubnis nur in Designated Fossicking Areas und General Permission Areas; sonst schriftliche Zustimmung des Landbesitzers.",
+"permit_en": "Queensland: fossicking licence required (1 month, 6 months or 1 year). Without further permission only in designated fossicking areas and general permission areas; otherwise written landholder consent.",
+"permit_link": "https://www.qld.gov.au/recreation/activities/areas-facilities/fossicking",
+"link": null,
+"state": "Queensland"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+144.1,
+-16.1
+]
+},
+"properties": {
+"name": "Palmer River",
+"country": "AU",
+"river": "Palmer River",
+"kind": "crown",
+"de": "Historisches Goldfeld im hohen Norden, sehr abgelegen und heiss.",
+"en": "Historic goldfield in the far north, very remote and hot.",
+"find_de": "Flitter und Nuggets in alten Goldfeldern.",
+"find_en": "Flakes and nuggets in old goldfields.",
+"permit_de": "Queensland: Fossicking Licence nötig (1 Monat, 6 Monate oder 1 Jahr). Ohne weitere Erlaubnis nur in Designated Fossicking Areas und General Permission Areas; sonst schriftliche Zustimmung des Landbesitzers.",
+"permit_en": "Queensland: fossicking licence required (1 month, 6 months or 1 year). Without further permission only in designated fossicking areas and general permission areas; otherwise written landholder consent.",
+"permit_link": "https://www.qld.gov.au/recreation/activities/areas-facilities/fossicking",
+"link": null,
+"state": "Queensland"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+152.67,
+-26.19
+]
+},
+"properties": {
+"name": "Gympie",
+"country": "AU",
+"river": "Mary River",
+"kind": "show",
+"de": "Goldgräberstadt mit Bergbau-Museum.",
+"en": "Gold town with mining museum.",
+"find_de": "Flitter und Nuggets in alten Goldfeldern.",
+"find_en": "Flakes and nuggets in old goldfields.",
+"permit_de": "Queensland: Fossicking Licence nötig (1 Monat, 6 Monate oder 1 Jahr). Ohne weitere Erlaubnis nur in Designated Fossicking Areas und General Permission Areas; sonst schriftliche Zustimmung des Landbesitzers.",
+"permit_en": "Queensland: fossicking licence required (1 month, 6 months or 1 year). Without further permission only in designated fossicking areas and general permission areas; otherwise written landholder consent.",
+"permit_link": "https://www.qld.gov.au/recreation/activities/areas-facilities/fossicking",
+"link": null,
+"state": "Queensland"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+149.43,
+-33.0
+]
+},
+"properties": {
+"name": "Tambaroora Fossicking Area (Hill End)",
+"country": "AU",
+"river": "Tambaroora",
+"kind": "fossick",
+"de": "Ausgewiesene Crown-Land-Fossicking-Fläche bei Hill End. Die Hill End Historic Site selbst ist Nationalpark – dort verboten.",
+"en": "Designated Crown-land fossicking area near Hill End. Hill End Historic Site itself is national park – forbidden there.",
+"find_de": "Flitter und kleine Nuggets in den alten Goldfeldern am Turon und um Hill End.",
+"find_en": "Flakes and small nuggets in the old goldfields on the Turon and around Hill End.",
+"permit_de": "New South Wales: keine allgemeine Lizenz, aber Zustimmung des Landbesitzers nötig. In State Forests ein Fossicking Permit der Forestry Corporation (12 Monate, ca. A$27.50). In Nationalparks verboten (auch Hill End Historic Site).",
+"permit_en": "New South Wales: no general licence, but landholder consent needed. In state forests a fossicking permit from Forestry Corporation (12 months, about A$27.50). Forbidden in national parks (incl. Hill End Historic Site).",
+"permit_link": "https://www.regional.nsw.gov.au/meg/exploration/fossicking",
+"link": null,
+"state": "New South Wales"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+149.69,
+-33.08
+]
+},
+"properties": {
+"name": "Sofala / Turon River",
+"country": "AU",
+"river": "Turon River",
+"kind": "crown",
+"de": "Ältestes Goldfeld von NSW am Turon.",
+"en": "Oldest goldfield of NSW on the Turon.",
+"find_de": "Flitter und kleine Nuggets in den alten Goldfeldern am Turon und um Hill End.",
+"find_en": "Flakes and small nuggets in the old goldfields on the Turon and around Hill End.",
+"permit_de": "New South Wales: keine allgemeine Lizenz, aber Zustimmung des Landbesitzers nötig. In State Forests ein Fossicking Permit der Forestry Corporation (12 Monate, ca. A$27.50). In Nationalparks verboten (auch Hill End Historic Site).",
+"permit_en": "New South Wales: no general licence, but landholder consent needed. In state forests a fossicking permit from Forestry Corporation (12 months, about A$27.50). Forbidden in national parks (incl. Hill End Historic Site).",
+"permit_link": "https://www.regional.nsw.gov.au/meg/exploration/fossicking",
+"link": null,
+"state": "New South Wales"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+149.81,
+-35.65
+]
+},
+"properties": {
+"name": "Araluen",
+"country": "AU",
+"river": "Araluen Creek",
+"kind": "crown",
+"de": "Historisches Goldtal im Süden von NSW.",
+"en": "Historic gold valley in southern NSW.",
+"find_de": "Flitter und kleine Nuggets in den alten Goldfeldern am Turon und um Hill End.",
+"find_en": "Flakes and small nuggets in the old goldfields on the Turon and around Hill End.",
+"permit_de": "New South Wales: keine allgemeine Lizenz, aber Zustimmung des Landbesitzers nötig. In State Forests ein Fossicking Permit der Forestry Corporation (12 Monate, ca. A$27.50). In Nationalparks verboten (auch Hill End Historic Site).",
+"permit_en": "New South Wales: no general licence, but landholder consent needed. In state forests a fossicking permit from Forestry Corporation (12 months, about A$27.50). Forbidden in national parks (incl. Hill End Historic Site).",
+"permit_link": "https://www.regional.nsw.gov.au/meg/exploration/fossicking",
+"link": null,
+"state": "New South Wales"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+134.19,
+-19.65
+]
+},
+"properties": {
+"name": "Tennant Creek / Warrego Fossicking Area",
+"country": "AU",
+"river": "Tennant Creek",
+"kind": "fossick",
+"de": "Bekanntestes Goldgebiet im Northern Territory; Warrego Fossicking Area in der Nähe.",
+"en": "Best-known gold area in the Northern Territory; Warrego Fossicking Area nearby.",
+"find_de": "Nuggets um Tennant Creek, sehr abgelegen.",
+"find_en": "Nuggets around Tennant Creek, very remote.",
+"permit_de": "Northern Territory: Fossicking Permit nötig (Quellen widersprechen sich, ob er überall gilt); in ausgewiesenen Fossicking Areas wie Warrego einfacher. Aboriginal Land nur mit Erlaubnis.",
+"permit_en": "Northern Territory: fossicking permit required (sources disagree whether everywhere); easier in declared fossicking areas such as Warrego. Aboriginal land only with permission.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Northern Territory"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+138.8,
+-35.1
+]
+},
+"properties": {
+"name": "Echunga Goldfield",
+"country": "AU",
+"river": "Adelaide Hills",
+"kind": "crown",
+"de": "Erstes Goldfeld Südaustraliens (1852).",
+"en": "South Australia's first goldfield (1852).",
+"find_de": "Flitter und kleine Nuggets.",
+"find_en": "Flakes and small nuggets.",
+"permit_de": "South Australia: Hobby-Fossicking ohne Verkaufsabsicht braucht meist keine Erlaubnis; Landbesitzer fragen, Parks gesperrt.",
+"permit_en": "South Australia: hobby fossicking without intent to sell usually needs no permit; ask the landholder, parks are closed.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "South Australia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+146.82,
+-41.2
+]
+},
+"properties": {
+"name": "Beaconsfield Mine & Heritage Centre",
+"country": "AU",
+"river": "Tamar",
+"kind": "show",
+"de": "Goldminen-Museum in Tasmanien.",
+"en": "Gold mine museum in Tasmania.",
+"find_de": "Flitter und kleine Nuggets.",
+"find_en": "Flakes and small nuggets.",
+"permit_de": "Tasmanien: In den ausgewiesenen Fossicking Areas ohne Lizenz; anderswo braucht es eine Prospecting Licence von Mineral Resources Tasmania.",
+"permit_en": "Tasmania: no licence inside the declared fossicking areas; elsewhere a prospecting licence from Mineral Resources Tasmania.",
+"permit_link": "https://detectormaps.com/au/fossicking-laws/",
+"link": null,
+"state": "Tasmania"
+}
+}
+]
+}
