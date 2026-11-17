@@ -692,11 +692,11 @@ var App = (function () {
       return "<div class='pop'><h3>" + esc(a.site_name || t("mine")) + "</h3><div class='pop-sub'>" + esc(t("mine")) + "</div><table>" +
         row(t("devStatus"), a.dev_stat) + row(t("commodities"), codes) +
         row("", formatCoord(p.lat, p.lon)) + "</table>" +
-        (a.url ? "<a href='" + esc(a.url) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo")) + "</a>" : "") + "</div>";
+        (a.url ? "<a href='" + esc(a.url) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo")) + "</a>" : "") + navLink(p.lat, p.lon) + "</div>";
     }
     return "<div class='pop'><h3>" + esc(a.ftr_type || t("mineFeature")) + "</h3><div class='pop-sub'>" + esc(t("mineFeature")) + "</div><table>" +
       row(t("name"), a.ftr_name) + row(t("topoMap"), a.topo_name ? a.topo_name + " (" + a.topo_date + ")" : "") +
-      row("", formatCoord(p.lat, p.lon)) + "</table></div>";
+      row("", formatCoord(p.lat, p.lon)) + "</table>" + navLink(p.lat, p.lon) + "</div>";
   }
 
   // Liegt ein Punkt in einem (Multi-)Polygon?
@@ -1267,6 +1267,8 @@ var App = (function () {
     map = L.map("map", {
       zoomControl: false,
       preferCanvas: true,
+      // eine einzige Zeichenfläche für alle Punkte und Linien: eine zweite würde alle Klicks darunter abfangen
+      renderer: L.canvas({ tolerance: 8 }),
       // Wer z. B. von Arizona nach Westen über den Pazifik nach Neuseeland schiebt, landet in einer "Kopie" der Welt
       // (Längengrad unter -180). Dort wären Flächen und Punkte unsichtbar – darum zurück in die echte Welt springen.
       worldCopyJump: true

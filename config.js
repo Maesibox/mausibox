@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 32,
+  appVersion: 33,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -164,11 +164,10 @@ var APP_CONFIG = {
     { id: "general", name: { en: "General", de: "Allgemein" }, open: true },
     { id: "us", name: { en: "🇺🇸 USA (BLM, USGS …)", de: "🇺🇸 USA (BLM, USGS …)" }, open: true },
     { id: "nz", name: { en: "🇳🇿 New Zealand", de: "🇳🇿 Neuseeland" } },
-    { id: "ch", name: { en: "🇨🇭 Switzerland", de: "🇨🇭 Schweiz" } },
-    { id: "eu", name: { en: "🇪🇺 Europe (all countries)", de: "🇪🇺 Europa (alle Länder)" } },
-    { id: "at", name: { en: "🇦🇹 Austria", de: "🇦🇹 Österreich" } },
-    { id: "de", name: { en: "🇩🇪 Germany", de: "🇩🇪 Deutschland" } },
-    { id: "es", name: { en: "🇪🇸 Spain", de: "🇪🇸 Spanien" } }
+    // Europa: zuerst alles, was überall gilt; danach nur noch, was es pro Land zusätzlich gibt
+    { id: "eu", name: { en: "🇪🇺 Europe – all countries", de: "🇪🇺 Europa – alle Länder" } },
+    { id: "ch", name: { en: "🇨🇭 Switzerland – details", de: "🇨🇭 Schweiz – Details" } },
+    { id: "eux", name: { en: "🇦🇹 🇩🇪 🇪🇸 More country details", de: "🇦🇹 🇩🇪 🇪🇸 Weitere Länder-Details" } }
   ],
 
   // Gold-Regeln pro Land (Ebene "Gold-Regeln pro Land", Karte antippen). Schlüssel = Ländercode (EU-Landesgrenzen GISCO)
@@ -513,6 +512,24 @@ var APP_CONFIG = {
       visible: false, offline: false
     },
     {
+      id: "euPrecious",
+      group: "eu",
+      type: "wms",
+      name: { en: "Precious metal occurrences Europe (EGDI) – France, Italy …", de: "Edelmetall-Vorkommen Europa (EGDI) – Frankreich, Italien …" },
+      url: "https://maps.europe-geology.eu/wms/", layers: "egdi_mineraloccurr_precious_metals",
+      attribution: "EuroGeoSurveys – EGDI",
+      opacity: 1, visible: false, offline: false
+    },
+    {
+      id: "euMines",
+      group: "eu",
+      type: "wms",
+      name: { en: "Mines with raw materials Europe (EGDI)", de: "Bergwerke mit Rohstoffen Europa (EGDI)" },
+      url: "https://maps.europe-geology.eu/wms/", layers: "egdi_mines_with_commodities",
+      attribution: "EuroGeoSurveys – EGDI",
+      opacity: 1, visible: false, offline: false
+    },
+    {
       id: "euNatura2000",
       group: "eu",
       type: "arcgisExport",
@@ -535,24 +552,6 @@ var APP_CONFIG = {
       arcIdentify: { layers: "visible", tolerance: 0, max: 2 }
     },
     {
-      id: "euPrecious",
-      group: "eu",
-      type: "wms",
-      name: { en: "Precious metal occurrences Europe (EGDI) – France, Italy …", de: "Edelmetall-Vorkommen Europa (EGDI) – Frankreich, Italien …" },
-      url: "https://maps.europe-geology.eu/wms/", layers: "egdi_mineraloccurr_precious_metals",
-      attribution: "EuroGeoSurveys – EGDI",
-      opacity: 1, visible: false, offline: false
-    },
-    {
-      id: "euMines",
-      group: "eu",
-      type: "wms",
-      name: { en: "Mines with raw materials Europe (EGDI)", de: "Bergwerke mit Rohstoffen Europa (EGDI)" },
-      url: "https://maps.europe-geology.eu/wms/", layers: "egdi_mines_with_commodities",
-      attribution: "EuroGeoSurveys – EGDI",
-      opacity: 1, visible: false, offline: false
-    },
-    {
       id: "euGeology",
       group: "eu",
       type: "wms",
@@ -564,9 +563,9 @@ var APP_CONFIG = {
     // ---------- DEUTSCHLAND (BGR) ----------
     {
       id: "deGeology",
-      group: "de",
+      group: "eux",
       type: "wms",
-      name: { en: "Geology Germany 1:250 000 (BGR, zoom in)", de: "Geologie Deutschland 1:250 000 (BGR, hineinzoomen)" },
+      name: { en: "🇩🇪 Geology Germany 1:250 000 (BGR, zoom in)", de: "🇩🇪 Geologie Deutschland 1:250 000 (BGR, hineinzoomen)" },
       url: "https://services.bgr.de/wms/geologie/guek250/",
       attribution: "© BGR",
       opacity: 0.6, visible: false, offline: false,
@@ -581,9 +580,9 @@ var APP_CONFIG = {
     // ---------- SPANIEN (IGME) ----------
     {
       id: "esGold",
-      group: "es",
+      group: "eux",
       type: "arcgisPoints",
-      name: { en: "Gold occurrences Spain (IGME, ~880)", de: "Goldvorkommen Spanien (IGME, ca. 880)" },
+      name: { en: "🇪🇸 Gold occurrences Spain (IGME, ~880)", de: "🇪🇸 Goldvorkommen Spanien (IGME, ca. 880)" },
       url: "https://mapas.igme.es/gis/rest/services/BasesDatos/IGME_BDMIN_Indicios/MapServer/0",
       where: "Sustancia LIKE '%Oro%'",
       outFields: "Nombre_mina,Sustancia,Provincia,Municipio,Morfologia,Asociacion_mineral",
@@ -598,9 +597,9 @@ var APP_CONFIG = {
     },
     {
       id: "esGeology",
-      group: "es",
+      group: "eux",
       type: "arcgisExport",
-      name: { en: "Geology Spain 1:50 000 (IGME MAGNA)", de: "Geologie Spanien 1:50 000 (IGME MAGNA)" },
+      name: { en: "🇪🇸 Geology Spain 1:50 000 (IGME MAGNA)", de: "🇪🇸 Geologie Spanien 1:50 000 (IGME MAGNA)" },
       url: "https://mapas.igme.es/gis/rest/services/Cartografia_Geologica/IGME_MAGNA_50/MapServer",
       attribution: "IGME – MAGNA 50",
       opacity: 0.6, visible: false, offline: false,
@@ -609,9 +608,9 @@ var APP_CONFIG = {
     // ---------- ÖSTERREICH (GeoSphere Austria) ----------
     {
       id: "atGold",
-      group: "at",
+      group: "eux",
       type: "arcgisPoints",
-      name: { en: "Gold occurrences Austria (GeoSphere IRIS, ~400)", de: "Goldvorkommen Österreich (GeoSphere IRIS, ca. 400)" },
+      name: { en: "🇦🇹 Gold occurrences Austria (GeoSphere IRIS, ~400)", de: "🇦🇹 Goldvorkommen Österreich (GeoSphere IRIS, ca. 400)" },
       url: "https://gis.geosphere.at/maps/rest/services/IRIS/Lagerstaetten/MapServer/0",
       where: "HAUPTROHSTOFF LIKE '%Gold%' OR WERTSTOFFE LIKE '%Gold%'",
       outFields: "VORK_NAME,HAUPTROHSTOFF,WERTSTOFFE,MINERALIEN,STATUS_TXT,GBA_BETR_DAUER,ART_TXT",
@@ -627,9 +626,9 @@ var APP_CONFIG = {
     },
     {
       id: "atDeposits",
-      group: "at",
+      group: "eux",
       type: "arcgisExport",
-      name: { en: "All deposits & old mines Austria (IRIS)", de: "Alle Lagerstätten & alten Bergbaue Österreich (IRIS)" },
+      name: { en: "🇦🇹 All deposits & old mines Austria (IRIS)", de: "🇦🇹 Alle Lagerstätten & alten Bergbaue Österreich (IRIS)" },
       url: "https://gis.geosphere.at/maps/rest/services/IRIS/Lagerstaetten/MapServer",
       show: "0",
       attribution: "GeoSphere Austria – IRIS",
@@ -640,9 +639,9 @@ var APP_CONFIG = {
     },
     {
       id: "atGeology",
-      group: "at",
+      group: "eux",
       type: "arcgisExport",
-      name: { en: "Geology & tectonics Austria 1:500 000 (GeoSphere)", de: "Geologie & Tektonik Österreich 1:500 000 (GeoSphere)" },
+      name: { en: "🇦🇹 Geology & tectonics Austria 1:500 000 (GeoSphere)", de: "🇦🇹 Geologie & Tektonik Österreich 1:500 000 (GeoSphere)" },
       url: "https://gis.geosphere.at/maps/rest/services/geologie/karte_500/MapServer",
       attribution: "GeoSphere Austria",
       opacity: 0.55, visible: false, offline: false,

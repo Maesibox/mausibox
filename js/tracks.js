@@ -7,7 +7,6 @@ var Tracks = (function () {
   var C = APP_CONFIG;
   var TC = C.tracks;
   var layer = L.featureGroup();
-  var renderer = L.canvas({ tolerance: 8 });
   var cache = {};        // id -> Strecke
   var shapes = {};       // id -> { all: [Layer], bands: [Layer], line: Layer, band: Layer }
   var map = null;
@@ -92,18 +91,18 @@ var Tracks = (function () {
     pieces(tr).forEach(function (seg) {
       var ll = seg.map(function (p) { return [p[0], p[1]]; });
       if (tr.type === "detect") {
-        var band = L.polyline(ll, { renderer: renderer, color: tc.color, weight: bandWeight(tr, ll.length ? ll[0][0] : 35),
+        var band = L.polyline(ll, { color: tc.color, weight: bandWeight(tr, ll.length ? ll[0][0] : 35),
           opacity: 0.4, lineCap: "round", lineJoin: "round", interactive: false });
         layer.addLayer(band); sh.all.push(band); sh.bands.push(band); sh.band = band;
       }
-      var line = L.polyline(ll, { renderer: renderer, color: tc.color, weight: tr.type === "detect" ? 2 : 4, opacity: 0.95,
+      var line = L.polyline(ll, { color: tc.color, weight: tr.type === "detect" ? 2 : 4, opacity: 0.95,
         dashArray: tr.type === "drive" ? "10 6" : null, bubblingMouseEvents: false });
       line.bindPopup(function () { return popupHtml(cache[tr.id]); }, { maxWidth: 280 });
       layer.addLayer(line); sh.all.push(line); sh.line = line;
     });
     var first = tr.segments[0] && tr.segments[0][0];
     if (first) {
-      var dot = L.circleMarker([first[0], first[1]], { renderer: renderer, radius: 5, color: "#fff", weight: 2, fillColor: tc.color, fillOpacity: 1, interactive: false });
+      var dot = L.circleMarker([first[0], first[1]], { radius: 5, color: "#fff", weight: 2, fillColor: tc.color, fillOpacity: 1, interactive: false });
       layer.addLayer(dot); sh.all.push(dot);
     }
     shapes[tr.id] = sh;
