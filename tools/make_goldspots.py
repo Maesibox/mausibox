@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
-Erzeugt data/goldspots.geojson: bekannte Goldwasch-Orte in Europa (ungefähre Lage = Ort / Flussabschnitt).
+Erzeugt data/goldspots.geojson (Europa) und data/goldspots-us.geojson (USA): bekannte Goldwasch-Orte
+(ungefähre Lage = Ort / Flussabschnitt).
 Arten (kind): free = meist geduldet/frei (Regeln beachten), permit = Bewilligung/Anmeldung nötig,
-site = offizieller/bezahlter Goldwaschplatz oder Kurs, show = Schaubergwerk/Museum (nur ansehen), closed = Graben verboten.
+site = offizieller/bezahlter Goldwaschplatz oder Kurs, show = Schaubergwerk/Museum (nur ansehen), closed = Graben verboten,
+unclear = Regeln nicht geprüft (selbst vor Ort informieren), club = Club-Claims (nur für Mitglieder).
 Jeder Ort bekommt: Beschreibung, "Was man findet" (FIND) und "Bewilligung / wo fragen" (PERMIT, sonst das Land).
 Ergänzen: einfach eine Zeile in SPOTS anfügen und das Skript laufen lassen:  python3 tools/make_goldspots.py
 """
 import json, os
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "goldspots.geojson")
+DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")
 
 # Was man findet (DE, EN)
 FIND = {
@@ -43,6 +45,21 @@ FIND = {
  "otava": ("Feine Flitter, selten kleine Körner; viel Schwarzsand.", "Fine flakes, rarely small grains; lots of black sand."),
  "hron": ("Feine Flitter aus den Kremnitzer und Schemnitzer Bergen.", "Fine flakes from the Kremnica and Štiavnica mountains."),
  "kaczawa": ("Feine Flitter, selten kleine Körner.", "Fine flakes, rarely small grains."),
+ "portugal": ("Feine Flitter; im Norden römische Goldminen mit Waschgold in den Bächen.", "Fine flakes; Roman gold mines in the north with placer gold in the creeks."),
+ "siebenb": ("Siebenbürgisches Gold: Flitter im Arieș, der seit der Römerzeit gewaschen wird.", "Transylvanian gold: flakes in the Arieș, washed since Roman times."),
+ "drau": ("Sehr feines Flittergold (Drau- und Murgold) mit Schwarzsand.", "Very fine flake gold (Drava and Mura gold) with black sand."),
+ "finnmark": ("Flitter und kleine Körner – 1866 erster Goldfund Nordnorwegens bei Karasjok.", "Flakes and small grains – first gold find of northern Norway near Karasjok in 1866."),
+ "az": ("Flitter und Nuggets im Wüstenschotter – oft mit dem Metalldetektor gesucht.", "Flakes and nuggets in desert gravels – often searched with a metal detector."),
+ "az-creek": ("Feine Flitter und kleine Körner im Bachkies.", "Fine flakes and small grains in the creek gravel."),
+ "motherlode": ("Mother-Lode-Gold: Flitter, ab und zu kleine Nuggets.", "Mother Lode gold: flakes, occasionally small nuggets."),
+ "kern": ("Flitter und kleine Körner.", "Flakes and small grains."),
+ "oregon": ("Flitter und kleine Körner aus den Klamath- und Kaskaden-Bergen.", "Flakes and small grains from the Klamath and Cascade mountains."),
+ "alaska": ("Flitter bis grobe Nuggets – Alaska-Gold ist oft grob.", "Flakes to coarse nuggets – Alaska gold is often coarse."),
+ "nome": ("Feines Strandgold im Sand der Beringsee.", "Fine beach gold in the Bering Sea sand."),
+ "rockies": ("Flitter und kleine Körner.", "Flakes and small grains."),
+ "east": ("Flitter und kleine Körner; im Osten oft in Bezahl-Waschplätzen mit Konzentrat.", "Flakes and small grains; in the east often at paid sites with concentrate."),
+ "museum": ("Besuchermine / Museum mit Goldwaschen für Gäste.", "Visitor mine / museum with panning for guests."),
+ "nevada": ("Nuggets im Wüstenschotter – Detektor-Gebiet.", "Nuggets in desert gravels – detecting area."),
  "bretagne": ("Flitter und kleine Körner; goldführende Quarzgänge in der Umgebung.", "Flakes and small grains; gold-bearing quartz veins nearby."),
 }
 
@@ -102,6 +119,30 @@ PERMIT = {
  "SK": ("Rechtslage unklar – Quellen widersprechen sich (teils «frei für den Eigenbedarf», teils «nur mit Bewilligung»). In Nationalparks verboten, Kiesgruben nur mit Erlaubnis des Besitzers. Vorher Gemeinde bzw. Gewässerverwalter (Slovenský vodohospodársky podnik) fragen.",
         "Legal situation unclear – sources disagree. Forbidden in national parks; gravel pits only with the owner's consent. Ask the municipality or the river authority first.",
         "https://www.rawgold.sk/post/60935-kde-ryzovat-zlato-na-slovensku"),
+ "UNK": ("Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+         "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.", None),
+ "US": ("Auf Bundesland (BLM, Forest Service): Pfanne, Schaufel und kleines Handwerkzeug meist ohne Erlaubnis (casual use) – aber nur, wo kein Claim liegt (Ebene «BLM-Claims» einschalten). Auf Claims nur mit Erlaubnis des Besitzers. Wilderness und Nationalparks meist verboten, State Parks haben eigene Regeln. Motorgeräte und Dredges brauchen Bewilligungen. Laichzeiten beachten. Vorher beim zuständigen BLM- bzw. Forest-Service-Büro nachfragen.",
+        "On federal land (BLM, Forest Service): pan, shovel and small hand tools usually need no permit (casual use) – but only where there is no claim (turn on the 'BLM claims' layer). On claims only with the owner's permission. Wilderness and national parks are mostly closed; state parks have their own rules. Motorised gear and dredges need permits. Respect spawning seasons. Ask the local BLM or Forest Service office first.",
+        "https://goldfever.app/post/gold-panning-laws-by-state/"),
+ "US-CA": ("Kalifornien: Pfanne und Hände («hands and pans») meist erlaubt; Saugbagger (suction dredge) im ganzen Staat verboten. State Parks: nur die Goldpfanne als Werkzeug. Claims beachten.",
+           "California: hands and pans usually allowed; suction dredging banned statewide. State parks: the gold pan is the only tool allowed. Watch for claims.", None),
+ "US-AZ": ("Arizona: auf BLM-Land Pfanne und Detektor meist ohne Erlaubnis, aber fast alles Gute ist geclaimt – Ebene «BLM-Claims» einschalten. State Trust Land braucht eine Erlaubnis des Arizona State Land Department.",
+           "Arizona: on BLM land panning and detecting usually need no permit, but most good ground is claimed – turn on the 'BLM claims' layer. State Trust land needs a permit from the Arizona State Land Department.", None),
+ "US-OR": ("Oregon: Claims auf Bundesland sind nicht offen (nur mit Erlaubnis des Besitzers). In den ausgeschiedenen Hobby-Waschgebieten braucht es keine BLM-Erlaubnis; nicht waschen, wenn Lachse laichen oder Eier im Kies liegen.",
+           "Oregon: claims on federal land are not open (only with the owner's permission). In the designated recreational panning areas no BLM permit is needed; no panning while salmon spawn or eggs are in the gravel.",
+           "https://www.oregon.gov/dogami/milo/archive/HistoricalSociety/Josephine/OregonsHeritageRecreationalGoldPanning.pdf"),
+ "US-AK": ("Alaska: auf manchem öffentlichen Land erlaubt, mit Einschränkungen. Auf Privatland und Claims nur mit Erlaubnis des Besitzers. Der Pipeline-Korridor (27 Fuss beidseitig) ist gesperrt.",
+           "Alaska: allowed on some public land with restrictions. On private land and claims only with the owner's permission. The pipeline corridor (27 ft each side) is closed.",
+           "https://www.nps.gov/anch/planyourvisit/gold-panning.htm"),
+ "US-WHIS": ("Whiskeytown NRA: Goldwasch-Erlaubnis für 1 Dollar (1 Jahr gültig), ab 17 Jahren, dazu Eintrittspass. Erhältlich im Visitor Center oder online bei Recreation.gov.",
+             "Whiskeytown NRA: gold panning permit for 1 dollar (valid 1 year), age 17+, plus entrance pass. Available at the visitor center or online at Recreation.gov.",
+             "https://www.nps.gov/whis/planyourvisit/gold-panning.htm"),
+ "US-SD": ("Black Hills National Forest: Waschen von Hand ohne Erlaubnis; mit Motorgeräten oder Saugbagger braucht es Erlaubnis und Kaution. Claims und Privatland beachten.",
+           "Black Hills National Forest: hand panning needs no permit; motorised equipment or dredges need a permit and bond. Watch for claims and private land.",
+           "https://www.fs.usda.gov/r02/blackhills/recreation/gold-panning-rockhounding-metal-detecting"),
+ "US-CLUB": ("Club-Claims (z. B. GPAA): nur für Mitglieder, Mitgliederausweis und Claim-Regeln mitnehmen. Mitgliedschaft online.",
+             "Club claims (e.g. GPAA): members only, carry your membership card and the claim rules. Membership online.",
+             "https://www.goldprospectors.org/"),
  "PL": ("Laut gängigen Quellen ohne Bewilligung geduldet (freier Zugang zu öffentlichen Gewässern); auf Privatgrund Zustimmung des Eigentümers. Rechtslage nicht ganz eindeutig (Wasserrecht). Keine Motorgeräte, Schutzgebiete meiden.",
         "According to common sources tolerated without permit (free access to public waters); on private land the owner's consent. Legal situation not entirely clear (water law). No motorised gear, avoid protected areas.", None),
 }
@@ -188,17 +229,92 @@ SPOTS = [
  ("SK", "Kremnica – Goldstadt", "–", 48.7050, 18.9180, "show", "mine", None, "Alte Goldbergbaustadt mit Münzstätte, Museum und Goldwaschen bei Veranstaltungen.", "Old gold mining town with mint and museum.", "https://www.kremnica.sk/"),
  # Polen
  ("PL", "Złotoryja / Kaczawa", "Kaczawa", 51.1260, 15.9200, "site", "kaczawa", None, "Polens Goldstadt: Goldwasch-Schule und jedes Jahr Ende Mai polnische Goldwasch-Meisterschaft. Goldwasch-Kurse auch in der Mühle Wielisław.", "Poland's gold town: panning school and Polish panning championship end of May.", "https://www.zlotoryja.pl/"),
+ # Portugal, Rumänien, Slowenien, Kroatien, Norwegen – Regeln nicht geprüft
+ ("PT", "Jales – Goldminen-Museum (Vila Pouca de Aguiar)", "–", 41.4700, -7.6000, "show", "portugal", "UNK", "Ehemalige Goldmine (bis in die 1990er), heute Museum. In den Bachschottern um Jales gibt es Waschgold.", "Former gold mine (until the 1990s), now a museum. Placer gold in the creeks around Jales."),
+ ("PT", "Tresminas – römische Goldminen", "–", 41.4800, -7.4700, "show", "portugal", "UNK", "Grosse römische Tagebaue und Stollen – ansehen, nicht graben.", "Large Roman open pits and galleries – look, don't dig."),
+ ("PT", "Valongo – Parque Paleozoico", "Ferreira", 41.1900, -8.5000, "show", "portugal", "UNK", "Römische Goldbergbau-Spuren im Naturpark bei Porto – nur ansehen.", "Roman gold workings in the nature park near Porto – look only."),
+ ("PT", "Castromil (Paredes)", "Bäche um Castromil", 41.1550, -8.3750, "unclear", "portugal", "UNK", "Römische Goldmine; Spuren von Gold im Bachkies.", "Roman gold mine; traces of gold in the creek gravel."),
+ ("PT", "Rio Ceira", "Ceira", 40.1500, -8.1500, "unclear", "portugal", "UNK", "Fluss, in dem immer wieder Seifengold gewaschen wurde.", "River where placer gold has been washed on and off."),
+ ("RO", "Roșia Montană – römische Goldstollen", "–", 46.3060, 23.1300, "show", "mine", "UNK", "UNESCO-Welterbe mit römischen Goldstollen und Museum – nur ansehen.", "UNESCO World Heritage with Roman gold galleries and museum – look only."),
+ ("RO", "Arieș bei Baia de Arieș", "Arieș", 46.3700, 23.2800, "unclear", "siebenb", "UNK", "Der «Goldfluss» Siebenbürgens; Goldwäscher gab es hier bis ins 20. Jahrhundert.", "The 'gold river' of Transylvania; gold washers worked here into the 20th century."),
+ ("RO", "Brad – Goldmuseum", "Crișul Alb", 46.1300, 22.7900, "show", "mine", "UNK", "Goldmuseum mit berühmten Goldstufen aus dem Siebenbürgischen Erzgebirge.", "Gold museum with famous gold specimens from the Apuseni Mountains."),
+ ("SI", "Drau bei Ptuj", "Drava", 46.4200, 15.8700, "unclear", "drau", "UNK", "Drau-Gold, früher von Goldwäschern gewaschen.", "Drava gold, historically washed."),
+ ("SI", "Mur bei Veržej", "Mura", 46.5800, 16.1600, "unclear", "drau", "UNK", "Mur-Gold – historisch bekannte Goldwäscherei an der Mur.", "Mura gold – historically known gold washing."),
+ ("HR", "Drau bei Donji Vidovec", "Drava", 46.3300, 16.7900, "unclear", "drau", "UNK", "An der Drau wird hier häufig Gold gesucht.", "Gold is often searched for on the Drava here."),
+ ("NO", "Karasjohka bei Karasjok", "Karasjohka", 69.4700, 25.5100, "unclear", "finnmark", "UNK", "Erster Seifengold-Fund Nordnorwegens (1866); Gold in den Flüssen des Tana-Systems. Der Anárjohka-Nationalpark ist tabu.", "First placer gold find in northern Norway (1866); gold in the Tana river system. Anárjohka National Park is off limits."),
 ]
 
-feats = []
-for spot in SPOTS:
-    c, name, river, lat, lon, kind, find, permit, de, en = spot[:10]
-    link = spot[10] if len(spot) > 10 else None     # eigene Anlaufstelle vor Ort (Museum, Waschplatz)
-    f, p = FIND[find], PERMIT[permit or c]
-    feats.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": [lon, lat]},
-                  "properties": {"name": name, "country": c, "river": river, "kind": kind, "de": de, "en": en,
-                                 "find_de": f[0], "find_en": f[1], "permit_de": p[0], "permit_en": p[1],
-                                 "permit_link": p[2], "link": link}})
-os.makedirs(os.path.dirname(OUT), exist_ok=True)
-json.dump({"type": "FeatureCollection", "features": feats}, open(OUT, "w"), ensure_ascii=False, indent=0)
-print(len(feats), "Orte ->", OUT)
+# USA – öffentliche Waschgebiete, bekannte Goldgebiete, Bezahl-Waschplätze
+US_SPOTS = [
+ # Arizona
+ ("US", "Lynx Creek Gold Pan Day Use Area (Prescott NF)", "Lynx Creek", 34.5600, -112.3500, "free", "az-creek", "US-AZ", "Öffentliches Waschgebiet des Forest Service in einer Mineral-Withdrawal-Zone (keine Claims). Nur Pfanne und Handwerkzeug.", "Forest Service public panning area in a mineral withdrawal (no claims). Pan and hand tools only.", "https://www.fs.usda.gov/r03/prescott"),
+ ("US", "Rich Hill / Stanton (GPAA)", "Weaver Gulch", 34.1650, -112.7350, "club", "az", "US-CLUB", "Berühmt für Nuggets; Teile sind GPAA-Club-Claims (nur für Mitglieder). Rundherum viele private Claims.", "Famous for nuggets; parts are GPAA club claims (members only). Many private claims around."),
+ ("US", "Gold Basin (Mohave County)", "Wüstenschotter", 35.8700, -114.2700, "free", "az", "US-AZ", "Bekanntes Detektor-Gebiet auf BLM-Land; viele Claims – Ebene «BLM-Claims» einschalten.", "Known detecting area on BLM land; many claims – turn on the 'BLM claims' layer."),
+ ("US", "Quartzsite / La Paz (BLM)", "Wüstenschotter", 33.6600, -114.2300, "free", "az", "US-AZ", "Winter-Treffpunkt der Goldsucher; Detektor-Gebiete auf BLM-Land, aber viele Claims.", "Winter meeting place for prospectors; detecting on BLM land, but many claims."),
+ ("US", "Gold Road Mine (Oatman)", "–", 35.0450, -114.3690, "show", "museum", "US-AZ", "Besuchermine mit Führungen bei Oatman.", "Visitor mine with tours near Oatman.", "https://www.goldroadmine.com/"),
+ # Kalifornien
+ ("US", "Keyesville (BLM, Kern River)", "Kern River", 35.6450, -118.5000, "free", "kern", "US-CA", "Ca. 400 Acres BLM-Land auf 2 km am Kern River, für Hobby-Goldwaschen ausgeschieden.", "About 400 acres of BLM land along 1.25 miles of the Kern River set aside for recreational panning."),
+ ("US", "Merced River bei Briceburg (BLM)", "Merced River", 37.6050, -119.9660, "free", "motherlode", "US-CA", "Mehrere Meilen des Merced River in der Merced River Recreation Area sind fürs Goldwaschen offen.", "Several miles of the Merced River in the Merced River Recreation Area are open to panning."),
+ ("US", "Auburn State Recreation Area", "American River", 38.9150, -121.0400, "free", "motherlode", "US-CA", "Goldwaschen nach der «hands and pans»-Methode erlaubt – nur Pfanne, keine anderen Werkzeuge.", "Panning allowed by the 'hands and pans' method – pan only, no other tools.", "https://www.parks.ca.gov/?page_id=502"),
+ ("US", "Whiskeytown NRA (Clear Creek)", "Clear Creek", 40.6200, -122.5500, "permit", "motherlode", "US-WHIS", "Beliebt: Tower House Historic District (Mill, Crystal und Clear Creek) und Clear Creek Picnic Area.", "Popular: Tower House Historic District and Clear Creek Picnic Area."),
+ ("US", "Columbia State Historic Park", "–", 38.0350, -120.4010, "site", "museum", "US-CA", "Goldgräberstadt mit bezahltem Goldwaschen für Besucher.", "Gold rush town with paid panning for visitors.", "https://www.parks.ca.gov/?page_id=552"),
+ ("US", "Marshall Gold Discovery SHP (Coloma)", "American River", 38.8000, -120.8900, "show", "museum", "US-CA", "Hier begann 1848 der kalifornische Goldrausch; Goldwasch-Programme für Besucher.", "Start of the 1848 California gold rush; panning programs for visitors.", "https://www.parks.ca.gov/?page_id=484"),
+ # Oregon
+ ("US", "Butte Falls Recreational Gold Panning Area (BLM)", "Big Butte Creek", 42.5430, -122.5660, "free", "oregon", "US-OR", "Eines der vier Hobby-Waschgebiete auf Bundesland in Oregon (BLM Medford).", "One of four recreational panning areas on federal land in Oregon (BLM Medford)."),
+ ("US", "Little Applegate (BLM)", "Little Applegate River", 42.1880, -122.9860, "free", "oregon", "US-OR", "Hobby-Waschgebiet des BLM; keine BLM-Erlaubnis nötig.", "BLM recreational panning site; no BLM permit needed."),
+ ("US", "Quartzville Recreation Corridor (BLM)", "Quartzville Creek", 44.5800, -122.3500, "free", "oregon", "US-OR", "Bekanntes Hobby-Goldgebiet bei Sweet Home; aktuellen Status beim BLM Salem prüfen.", "Known recreational gold area near Sweet Home; check current status with BLM Salem."),
+ # Alaska
+ ("US", "Nome – Goldstrand", "Beringsee", 64.4990, -165.4100, "free", "nome", "US-AK", "Die berühmten Goldstrände von Nome; Teile des Strands sind für Hobby-Goldsucher offen.", "The famous gold beaches of Nome; parts of the beach are open to recreational miners."),
+ ("US", "Resurrection Creek bei Hope (Chugach NF)", "Resurrection Creek", 60.9000, -149.6300, "free", "alaska", "US-AK", "Beliebtes öffentliches Goldwaschgebiet auf der Kenai-Halbinsel (BLM-Broschüre im Link).", "Popular public panning area on the Kenai Peninsula.", "https://www.blm.gov/sites/blm.gov/files/documents/files/PublicRoom_Alaska_kenai-goldpanning-booklet-2018_FINAL.pdf"),
+ ("US", "Dalton Highway – BLM-Waschbäche", "Bäche am Dalton Highway", 67.2500, -150.1700, "free", "alaska", "US-AK", "Das BLM gibt Bachabschnitte entlang des Dalton Highway fürs Goldwaschen frei (Karte im Link).", "BLM opens creek sections along the Dalton Highway to recreational panning (map in link).", "https://www.blm.gov/sites/default/files/docs/2022-04/Dalton-Highway_Gold-Panning_WEB.pdf"),
+ ("US", "Crow Creek Mine (Girdwood)", "Crow Creek", 61.0000, -149.1100, "site", "alaska", "US-AK", "Historische Goldmine mit Goldwaschen gegen Gebühr.", "Historic gold mine with fee panning.", "https://www.crowcreekgoldmine.com/"),
+ ("US", "Chicken (Alaska)", "Chicken Creek", 64.0700, -141.9400, "site", "alaska", "US-AK", "Goldgräberort am Taylor Highway mit Bezahl-Waschplätzen; rundherum Claims.", "Gold-rush village on the Taylor Highway with fee panning; claims all around."),
+ # Rocky Mountains und Black Hills
+ ("US", "Cache Creek bei Granite (BLM, Colorado)", "Cache Creek", 39.0600, -106.2700, "free", "rockies", "US", "BLM-Gebiet, offen für Hobby-Goldwaschen und kleine Rinnen.", "BLM area open to recreational panning and sluicing."),
+ ("US", "Libby Creek Gold Panning Area (Kootenai NF, Montana)", "Libby Creek", 48.2700, -115.5600, "free", "rockies", "US", "Öffentliches Waschgebiet des Forest Service südlich von Libby.", "Forest Service public panning area south of Libby."),
+ ("US", "Black Hills – Rapid Creek (South Dakota)", "Rapid Creek", 44.0800, -103.5800, "free", "rockies", "US-SD", "Im Black Hills National Forest ist Waschen von Hand ohne Erlaubnis erlaubt.", "Hand panning without permit in the Black Hills National Forest."),
+ ("US", "Big Thunder Gold Mine (Keystone)", "–", 43.8940, -103.4200, "show", "museum", "US-SD", "Besuchermine mit Goldwaschen.", "Visitor mine with panning."),
+ # Nevada
+ ("US", "Rye Patch (Nevada)", "Wüstenschotter", 40.4800, -118.3000, "free", "nevada", "US", "Berühmtes Nugget-Detektor-Gebiet; sehr viele Claims – Ebene «BLM-Claims» einschalten.", "Famous nugget detecting area; very many claims – turn on the 'BLM claims' layer."),
+ # Osten
+ ("US", "Consolidated Gold Mine (Dahlonega, Georgia)", "–", 34.5500, -83.9700, "site", "east", "US", "Besuchermine mit Goldwaschen im ersten US-Goldrausch-Gebiet.", "Visitor mine with panning in the first US gold rush area.", "https://www.consolidatedgoldmine.com/"),
+ ("US", "Reed Gold Mine (North Carolina)", "Little Meadow Creek", 35.2850, -80.4700, "site", "east", "US", "Ort des ersten belegten Goldfunds der USA (1799); staatliche historische Stätte mit Goldwaschen in der Saison.", "Site of the first documented US gold find (1799); state historic site with seasonal panning.", "https://historicsites.nc.gov/all-sites/reed-gold-mine"),
+]
+
+# Bundesstaat eines US-Orts bestimmen (für die Regeln pro Staat)
+STATES = json.load(open(os.path.join(DATA, "us", "states.json")))["features"]
+def in_ring(x, y, ring):
+    inside = False
+    for i in range(len(ring)):
+        x1, y1 = ring[i - 1]; x2, y2 = ring[i]
+        if (y2 > y) != (y1 > y) and x < (x1 - x2) * (y - y2) / (y1 - y2) + x2: inside = not inside
+    return inside
+def state_of(lon, lat):
+    for f in STATES:
+        g = f["geometry"]
+        polys = g["coordinates"] if g["type"] == "MultiPolygon" else [g["coordinates"]]
+        if any(in_ring(lon, lat, p[0]) for p in polys): return f["properties"]["name"]
+    # Orte an der Küste liegen manchmal knapp ausserhalb der vereinfachten Grenze: nächster Staat
+    best = min(((x - lon) ** 2 + (y - lat) ** 2, f["properties"]["name"]) for f in STATES
+               for p in (f["geometry"]["coordinates"] if f["geometry"]["type"] == "MultiPolygon" else [f["geometry"]["coordinates"]])
+               for x, y in p[0])
+    return best[1]
+
+def build(spots, name):
+    feats = []
+    for spot in spots:
+        c, name_, river, lat, lon, kind, find, permit, de, en = spot[:10]
+        link = spot[10] if len(spot) > 10 else None     # eigene Anlaufstelle vor Ort (Museum, Waschplatz)
+        f, p = FIND[find], PERMIT[permit or c]
+        feats.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": [lon, lat]},
+                      "properties": {"name": name_, "country": c, "river": river, "kind": kind, "de": de, "en": en,
+                                     "find_de": f[0], "find_en": f[1], "permit_de": p[0], "permit_en": p[1],
+                                     "permit_link": p[2], "link": link}})
+        if c == "US": feats[-1]["properties"]["state"] = state_of(lon, lat)
+    out = os.path.join(DATA, name)
+    os.makedirs(DATA, exist_ok=True)
+    json.dump({"type": "FeatureCollection", "features": feats}, open(out, "w"), ensure_ascii=False, indent=0)
+    print(len(feats), "Orte ->", out)
+
+build(SPOTS, "goldspots.geojson")
+build(US_SPOTS, "goldspots-us.geojson")

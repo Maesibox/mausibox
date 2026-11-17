@@ -1584,6 +1584,294 @@
 "permit_link": null,
 "link": "https://www.zlotoryja.pl/"
 }
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-7.6,
+41.47
+]
+},
+"properties": {
+"name": "Jales – Goldminen-Museum (Vila Pouca de Aguiar)",
+"country": "PT",
+"river": "–",
+"kind": "show",
+"de": "Ehemalige Goldmine (bis in die 1990er), heute Museum. In den Bachschottern um Jales gibt es Waschgold.",
+"en": "Former gold mine (until the 1990s), now a museum. Placer gold in the creeks around Jales.",
+"find_de": "Feine Flitter; im Norden römische Goldminen mit Waschgold in den Bächen.",
+"find_en": "Fine flakes; Roman gold mines in the north with placer gold in the creeks.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-7.47,
+41.48
+]
+},
+"properties": {
+"name": "Tresminas – römische Goldminen",
+"country": "PT",
+"river": "–",
+"kind": "show",
+"de": "Grosse römische Tagebaue und Stollen – ansehen, nicht graben.",
+"en": "Large Roman open pits and galleries – look, don't dig.",
+"find_de": "Feine Flitter; im Norden römische Goldminen mit Waschgold in den Bächen.",
+"find_en": "Fine flakes; Roman gold mines in the north with placer gold in the creeks.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-8.5,
+41.19
+]
+},
+"properties": {
+"name": "Valongo – Parque Paleozoico",
+"country": "PT",
+"river": "Ferreira",
+"kind": "show",
+"de": "Römische Goldbergbau-Spuren im Naturpark bei Porto – nur ansehen.",
+"en": "Roman gold workings in the nature park near Porto – look only.",
+"find_de": "Feine Flitter; im Norden römische Goldminen mit Waschgold in den Bächen.",
+"find_en": "Fine flakes; Roman gold mines in the north with placer gold in the creeks.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-8.375,
+41.155
+]
+},
+"properties": {
+"name": "Castromil (Paredes)",
+"country": "PT",
+"river": "Bäche um Castromil",
+"kind": "unclear",
+"de": "Römische Goldmine; Spuren von Gold im Bachkies.",
+"en": "Roman gold mine; traces of gold in the creek gravel.",
+"find_de": "Feine Flitter; im Norden römische Goldminen mit Waschgold in den Bächen.",
+"find_en": "Fine flakes; Roman gold mines in the north with placer gold in the creeks.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-8.15,
+40.15
+]
+},
+"properties": {
+"name": "Rio Ceira",
+"country": "PT",
+"river": "Ceira",
+"kind": "unclear",
+"de": "Fluss, in dem immer wieder Seifengold gewaschen wurde.",
+"en": "River where placer gold has been washed on and off.",
+"find_de": "Feine Flitter; im Norden römische Goldminen mit Waschgold in den Bächen.",
+"find_en": "Fine flakes; Roman gold mines in the north with placer gold in the creeks.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+23.13,
+46.306
+]
+},
+"properties": {
+"name": "Roșia Montană – römische Goldstollen",
+"country": "RO",
+"river": "–",
+"kind": "show",
+"de": "UNESCO-Welterbe mit römischen Goldstollen und Museum – nur ansehen.",
+"en": "UNESCO World Heritage with Roman gold galleries and museum – look only.",
+"find_de": "Besucherbergwerk: Goldquarz ansehen, Goldwaschen für Besucher.",
+"find_en": "Visitor mine: see gold quartz, panning for visitors.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+23.28,
+46.37
+]
+},
+"properties": {
+"name": "Arieș bei Baia de Arieș",
+"country": "RO",
+"river": "Arieș",
+"kind": "unclear",
+"de": "Der «Goldfluss» Siebenbürgens; Goldwäscher gab es hier bis ins 20. Jahrhundert.",
+"en": "The 'gold river' of Transylvania; gold washers worked here into the 20th century.",
+"find_de": "Siebenbürgisches Gold: Flitter im Arieș, der seit der Römerzeit gewaschen wird.",
+"find_en": "Transylvanian gold: flakes in the Arieș, washed since Roman times.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+22.79,
+46.13
+]
+},
+"properties": {
+"name": "Brad – Goldmuseum",
+"country": "RO",
+"river": "Crișul Alb",
+"kind": "show",
+"de": "Goldmuseum mit berühmten Goldstufen aus dem Siebenbürgischen Erzgebirge.",
+"en": "Gold museum with famous gold specimens from the Apuseni Mountains.",
+"find_de": "Besucherbergwerk: Goldquarz ansehen, Goldwaschen für Besucher.",
+"find_en": "Visitor mine: see gold quartz, panning for visitors.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+15.87,
+46.42
+]
+},
+"properties": {
+"name": "Drau bei Ptuj",
+"country": "SI",
+"river": "Drava",
+"kind": "unclear",
+"de": "Drau-Gold, früher von Goldwäschern gewaschen.",
+"en": "Drava gold, historically washed.",
+"find_de": "Sehr feines Flittergold (Drau- und Murgold) mit Schwarzsand.",
+"find_en": "Very fine flake gold (Drava and Mura gold) with black sand.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+16.16,
+46.58
+]
+},
+"properties": {
+"name": "Mur bei Veržej",
+"country": "SI",
+"river": "Mura",
+"kind": "unclear",
+"de": "Mur-Gold – historisch bekannte Goldwäscherei an der Mur.",
+"en": "Mura gold – historically known gold washing.",
+"find_de": "Sehr feines Flittergold (Drau- und Murgold) mit Schwarzsand.",
+"find_en": "Very fine flake gold (Drava and Mura gold) with black sand.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+16.79,
+46.33
+]
+},
+"properties": {
+"name": "Drau bei Donji Vidovec",
+"country": "HR",
+"river": "Drava",
+"kind": "unclear",
+"de": "An der Drau wird hier häufig Gold gesucht.",
+"en": "Gold is often searched for on the Drava here.",
+"find_de": "Sehr feines Flittergold (Drau- und Murgold) mit Schwarzsand.",
+"find_en": "Very fine flake gold (Drava and Mura gold) with black sand.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+25.51,
+69.47
+]
+},
+"properties": {
+"name": "Karasjohka bei Karasjok",
+"country": "NO",
+"river": "Karasjohka",
+"kind": "unclear",
+"de": "Erster Seifengold-Fund Nordnorwegens (1866); Gold in den Flüssen des Tana-Systems. Der Anárjohka-Nationalpark ist tabu.",
+"en": "First placer gold find in northern Norway (1866); gold in the Tana river system. Anárjohka National Park is off limits.",
+"find_de": "Flitter und kleine Körner – 1866 erster Goldfund Nordnorwegens bei Karasjok.",
+"find_en": "Flakes and small grains – first gold find of northern Norway near Karasjok in 1866.",
+"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
+"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
+"permit_link": null,
+"link": null
+}
 }
 ]
 }

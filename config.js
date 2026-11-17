@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 34,
+  appVersion: 35,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -261,6 +261,118 @@ var APP_CONFIG = {
       rule: { en: "Rules differ per canton – switch on 'Gold panning rules per canton' (group Switzerland) and tap the map.",
               de: "Regeln je Kanton verschieden – Ebene „Goldwasch-Regeln pro Kanton“ (Gruppe Schweiz) einschalten und Karte antippen." },
       link: "https://www.goldwaschen.ch/gold-in-der-schweiz/kantonale-bestimmungen/"
+    },
+    PT: {
+      name: { en: "Portugal", de: "Portugal" }, level: "limited",
+      rule: { en: "Rules not checked – please ask locally (municipality, landowner, fishing authority) before panning. Avoid protected areas; hand tools only.", de: "Regeln nicht geprüft – vor dem Waschen bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug." },
+      source: "noch nicht recherchiert (Nov. 2026)"
+    },
+    RO: {
+      name: { en: "Romania", de: "Rumänien" }, level: "limited",
+      rule: { en: "Rules not checked – please ask locally (municipality, landowner, fishing authority) before panning. Avoid protected areas; hand tools only.", de: "Regeln nicht geprüft – vor dem Waschen bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug." },
+      source: "noch nicht recherchiert (Nov. 2026)"
+    },
+    SI: {
+      name: { en: "Slovenia", de: "Slowenien" }, level: "limited",
+      rule: { en: "Rules not checked – please ask locally (municipality, landowner, fishing authority) before panning. Avoid protected areas; hand tools only.", de: "Regeln nicht geprüft – vor dem Waschen bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug." },
+      source: "noch nicht recherchiert (Nov. 2026)"
+    },
+    HR: {
+      name: { en: "Croatia", de: "Kroatien" }, level: "limited",
+      rule: { en: "Rules not checked – please ask locally (municipality, landowner, fishing authority) before panning. Avoid protected areas; hand tools only.", de: "Regeln nicht geprüft – vor dem Waschen bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug." },
+      source: "noch nicht recherchiert (Nov. 2026)"
+    },
+    NO: {
+      name: { en: "Norway", de: "Norwegen" }, level: "limited",
+      rule: { en: "Rules not checked – please ask locally (municipality, landowner, fishing authority) before panning. Avoid protected areas; hand tools only.", de: "Regeln nicht geprüft – vor dem Waschen bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug." },
+      source: "noch nicht recherchiert (Nov. 2026)"
+    },
+    US: {
+      name: { en: "USA (federal land)", de: "USA (Bundesland)" }, level: "open",
+      rule: { en: "Same everywhere on federal land (BLM, National Forests): panning with pan, shovel and small hand tools is 'casual use' and usually needs no permit – but only on land without a mining claim. On a claim the minerals belong to the claimant: only with permission. Check claims with the 'BLM claims' layer.", de: "Auf Bundesland (BLM, National Forests) überall gleich: Waschen mit Pfanne, Schaufel und kleinem Handwerkzeug gilt als «casual use» und braucht meist keine Erlaubnis – aber nur auf Land ohne Mining Claim. Auf einem Claim gehören die Mineralien dem Claim-Besitzer: nur mit seiner Erlaubnis. Claims mit der Ebene «BLM-Claims» prüfen." },
+      details: { en: "Closed: national parks (except special permits, e.g. Whiskeytown), wilderness areas, national monuments (often), Native American reservations, withdrawn areas. Never take artifacts (ARPA). Motorised gear (dredge, highbanker) needs state and sometimes federal permits; some eastern National Forests want a letter of authorisation even for panning. State land, state parks and private land: own rules – see the state.", de: "Gesperrt: Nationalparks (ausser mit Spezial-Erlaubnis, z. B. Whiskeytown), Wilderness-Gebiete, oft National Monuments, Indianerreservate, gesperrte (withdrawn) Gebiete. Nie Artefakte mitnehmen (ARPA). Motorgeräte (Dredge, Highbanker) brauchen Bewilligungen des Staats, teils auch des Bundes; einige National Forests im Osten wollen sogar fürs Waschen eine schriftliche Erlaubnis. Staatsland, State Parks und Privatland: eigene Regeln – siehe Bundesstaat." },
+      source: "BLM, US Forest Service, NPS (Nov. 2026), keine Rechtsberatung", link: "https://www.blm.gov/programs/energy-and-minerals/mining-and-minerals/locatable-minerals"
+    },
+  },
+
+  // Gold-Regeln pro US-Bundesstaat (Ebene «Gold-Regeln USA», Karte antippen). Schlüssel = Name in data/us/states.json
+  usStateRules: {
+    "Arizona": {
+      name: { en: "Arizona", de: "Arizona" }, level: "limited",
+      rule: { en: "Mostly BLM and National Forest land: panning and metal detecting are casual use, but almost every good area is claimed – check the 'BLM claims' layer. State Trust land (blue on land maps) is not public for prospecting: you need a permit from the Arizona State Land Department. Public panning area: Lynx Creek (Prescott NF).", de: "Meist BLM- und National-Forest-Land: Waschen und Detektor sind «casual use», aber fast jedes gute Gebiet ist geclaimt – Ebene «BLM-Claims» prüfen. State Trust Land ist zum Goldsuchen nicht öffentlich: Erlaubnis des Arizona State Land Department nötig. Öffentliches Waschgebiet: Lynx Creek (Prescott NF)." },
+      details: { en: "Summer heat: detect in the cool season. Clubs (GPAA, local clubs like HGS) hold claims open to members.", de: "Sommerhitze: Detektor-Saison ist der Winter. Clubs (GPAA, lokale Clubs wie HGS) haben Claims für Mitglieder." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung", link: "https://land.az.gov/"
+    },
+    "California": {
+      name: { en: "California", de: "California" }, level: "limited",
+      rule: { en: "Hands and pans are allowed on most open federal land. Suction dredging is banned statewide. State parks: the gold pan is the only tool allowed (e.g. Auburn SRA). Many rivers are claimed – check first. Sluices or highbankers in a stream: ask the California Department of Fish and Wildlife first.", de: "Pfanne und Hände sind auf dem meisten offenen Bundesland erlaubt. Saugbagger (suction dredge) im ganzen Staat verboten. State Parks: nur die Goldpfanne als Werkzeug (z. B. Auburn SRA). Viele Flüsse sind geclaimt – vorher prüfen. Rinne oder Highbanker im Bach: vorher beim California Department of Fish and Wildlife nachfragen." },
+      details: { en: "Public panning areas: Keyesville (Kern River), Merced River at Briceburg, Whiskeytown NRA ($1 permit).", de: "Öffentliche Waschgebiete: Keyesville (Kern River), Merced River bei Briceburg, Whiskeytown NRA (Erlaubnis 1 Dollar)." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung", link: "https://wildlife.ca.gov/Conservation/Environmental-Review/Suction-Dredge-Permitting"
+    },
+    "Nevada": {
+      name: { en: "Nevada", de: "Nevada" }, level: "open",
+      rule: { en: "Mostly BLM land: panning and detecting are casual use. Very many claims (Rye Patch, Winnemucca area) – check the 'BLM claims' layer.", de: "Fast nur BLM-Land: Waschen und Detektor sind «casual use». Sehr viele Claims (Rye Patch, Gegend Winnemucca) – Ebene «BLM-Claims» prüfen." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    },
+    "Oregon": {
+      name: { en: "Oregon", de: "Oregon" }, level: "limited",
+      rule: { en: "Hand panning is allowed on open federal land and in four designated recreational areas (e.g. Butte Falls, Little Applegate). Claims on federal land are not open. No mining while salmon spawn. Motorised in-stream mining is heavily restricted in salmon habitat; suction dredges need a DEQ permit.", de: "Waschen von Hand auf offenem Bundesland und in vier ausgeschiedenen Hobby-Gebieten erlaubt (z. B. Butte Falls, Little Applegate). Claims auf Bundesland sind nicht offen. Nicht waschen, wenn Lachse laichen. Motorisiertes Goldwaschen im Bach ist in Lachs-Gewässern stark eingeschränkt; Saugbagger brauchen eine Bewilligung der DEQ." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung", link: "https://www.oregon.gov/dogami/milo/archive/HistoricalSociety/Josephine/OregonsHeritageRecreationalGoldPanning.pdf"
+    },
+    "Washington": {
+      name: { en: "Washington", de: "Washington" }, level: "limited",
+      rule: { en: "Follow the 'Gold and Fish' rules of the Washington Department of Fish and Wildlife: it sets which rivers are open, when (work windows) and which equipment is allowed. Hand panning outside the wetted stream is least restricted.", de: "Die Broschüre «Gold and Fish» des Washington Department of Fish and Wildlife ist massgebend: welche Flüsse offen sind, wann (Arbeitsfenster) und welches Gerät erlaubt ist. Waschen von Hand ausserhalb des Wassers ist am wenigsten eingeschränkt." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    },
+    "Idaho": {
+      name: { en: "Idaho", de: "Idaho" }, level: "open",
+      rule: { en: "Hand panning on open federal land is casual use. Suction dredging needs a recreational dredge permit from the Idaho Department of Water Resources and an EPA permit.", de: "Waschen von Hand auf offenem Bundesland ist «casual use». Saugbagger brauchen eine Freizeit-Dredge-Bewilligung des Idaho Department of Water Resources und eine Bewilligung der EPA." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    },
+    "Montana": {
+      name: { en: "Montana", de: "Montana" }, level: "open",
+      rule: { en: "Hand panning on open federal land is casual use; public panning areas e.g. Libby Creek (Kootenai NF). Motorised equipment needs state permits.", de: "Waschen von Hand auf offenem Bundesland ist «casual use»; öffentliche Waschgebiete z. B. Libby Creek (Kootenai NF). Motorgeräte brauchen Bewilligungen des Staats." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    },
+    "Colorado": {
+      name: { en: "Colorado", de: "Colorado" }, level: "open",
+      rule: { en: "Hand panning and small sluices on open federal land are allowed (e.g. Cache Creek BLM area near Granite). Suction dredges with a nozzle over 4 inches need a permit.", de: "Waschen von Hand und kleine Rinnen auf offenem Bundesland erlaubt (z. B. BLM-Gebiet Cache Creek bei Granite). Saugbagger mit Düse über 4 Zoll brauchen eine Bewilligung." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    },
+    "New Mexico": {
+      name: { en: "New Mexico", de: "New Mexico" }, level: "limited",
+      rule: { en: "Casual use on open BLM land. State Trust land needs a permit from the State Land Office.", de: "«Casual use» auf offenem BLM-Land. State Trust Land braucht eine Erlaubnis des State Land Office." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    },
+    "Utah": {
+      name: { en: "Utah", de: "Utah" }, level: "limited",
+      rule: { en: "Casual use on open BLM land. State trust lands (SITLA) need a permit.", de: "«Casual use» auf offenem BLM-Land. Staatliches Trust Land (SITLA) braucht eine Erlaubnis." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    },
+    "Wyoming": {
+      name: { en: "Wyoming", de: "Wyoming" }, level: "open",
+      rule: { en: "Casual use on open BLM and Forest Service land.", de: "«Casual use» auf offenem BLM- und Forest-Service-Land." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    },
+    "Alaska": {
+      name: { en: "Alaska", de: "Alaska" }, level: "limited",
+      rule: { en: "Recreational panning is allowed with restrictions on some public land (e.g. Nome beach, Resurrection Creek, Dalton Highway creeks). Claims are everywhere – only with the owner's permission. The Trans-Alaska Pipeline corridor is closed.", de: "Hobby-Goldwaschen ist auf manchem öffentlichen Land mit Einschränkungen erlaubt (z. B. Strand von Nome, Resurrection Creek, Bäche am Dalton Highway). Überall Claims – nur mit Erlaubnis des Besitzers. Der Korridor der Alaska-Pipeline ist gesperrt." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung", link: "https://www.nps.gov/anch/planyourvisit/gold-panning.htm"
+    },
+    "South Dakota": {
+      name: { en: "South Dakota", de: "South Dakota" }, level: "open",
+      rule: { en: "Black Hills National Forest: hand panning needs no permit; motorised equipment or dredging needs a permit and bond.", de: "Black Hills National Forest: Waschen von Hand ohne Erlaubnis; Motorgeräte oder Saugbagger brauchen Erlaubnis und Kaution." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung", link: "https://www.fs.usda.gov/r02/blackhills/recreation/gold-panning-rockhounding-metal-detecting"
+    },
+    "Georgia": {
+      name: { en: "Georgia", de: "Georgia" }, level: "limited",
+      rule: { en: "Gold belt around Dahlonega. In the Chattahoochee National Forest ask the ranger district whether recreational panning is allowed (eastern forests may require a letter of authorisation). Easiest: commercial mines with panning.", de: "Goldgürtel um Dahlonega. Im Chattahoochee National Forest beim Ranger District fragen, ob Hobby-Waschen erlaubt ist (Wälder im Osten verlangen teils eine schriftliche Erlaubnis). Am einfachsten: Besucherminen mit Goldwaschen." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    },
+    "North Carolina": {
+      name: { en: "North Carolina", de: "North Carolina" }, level: "limited",
+      rule: { en: "Mostly private land: ask the owner or use commercial panning sites (Reed Gold Mine, Cotton Patch …). In National Forests ask the ranger district first.", de: "Meist Privatland: Eigentümer fragen oder Bezahl-Waschplätze nutzen (Reed Gold Mine u. a.). In National Forests vorher beim Ranger District fragen." },
+      source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
     }
   },
 
@@ -322,6 +434,39 @@ var APP_CONFIG = {
         { id: "Aspect Map", name: { en: "Aspect (facing direction)", de: "Hangrichtung" } },
         { id: "Contour Smoothed 25", name: { en: "Contour lines (25 ft)", de: "Höhenlinien (25 ft)" }, format: "png32" }
       ]
+    },
+    {
+      id: "usSpots",
+      group: "us",
+      type: "spots",
+      name: { en: "Known gold places & public panning areas (USA)", de: "Bekannte Goldplätze & öffentliche Waschgebiete (USA)" },
+      // Liste ergänzen: tools/make_goldspots.py (US_SPOTS)
+      file: "data/goldspots-us.geojson",
+      attribution: "Gold places: MAUSIBOX collection",
+      visible: false, offline: true,
+      kinds: {
+        free:   { color: "#2ecc40", level: "open",    label: { en: "Public land / panning area – no claim, casual use", de: "Öffentliches Land / Waschgebiet – ohne Claim, «casual use»" } },
+        permit: { color: "#ff9800", level: "limited", label: { en: "Permit needed", de: "Erlaubnis nötig" } },
+        club:   { color: "#00bfa5", level: "limited", label: { en: "Club claims – members only", de: "Club-Claims – nur für Mitglieder" } },
+        site:   { color: "#2f80ed", level: "open",    label: { en: "Fee panning / visitor mine", de: "Bezahl-Waschplatz / Besuchermine" } },
+        show:   { color: "#9b51e0", level: "limited", label: { en: "Museum / historic site", de: "Museum / historische Stätte" } }
+      },
+      legend: [
+        { color: "#2ecc40", text: { en: "public area", de: "öffentlich" } },
+        { color: "#ff9800", text: { en: "permit", de: "Erlaubnis" } },
+        { color: "#00bfa5", text: { en: "club claims", de: "Club-Claims" } },
+        { color: "#2f80ed", text: { en: "fee site", de: "Bezahl-Platz" } },
+        { color: "#9b51e0", text: { en: "museum", de: "Museum" } }
+      ]
+    },
+    {
+      id: "usRules",
+      group: "us",
+      type: "countryRules",
+      name: { en: "Gold rules USA & per state (tap the map)", de: "Gold-Regeln USA & pro Bundesstaat (Karte antippen)" },
+      bordersUrl: "data/us/states.json",
+      codeProp: "name", rulesKey: "usStateRules", alsoCountry: "US",
+      visible: false, offline: true
     },
     {
       id: "landStatus",
@@ -535,14 +680,16 @@ var APP_CONFIG = {
         permit: { color: "#ff9800", level: "limited", label: { en: "Permit / registration needed", de: "Bewilligung / Anmeldung nötig" } },
         site:   { color: "#2f80ed", level: "open",    label: { en: "Official panning site / guided – easiest legal start", de: "Offizieller Waschplatz / geführt – einfachster legaler Einstieg" } },
         show:   { color: "#9b51e0", level: "limited", label: { en: "Show mine / museum – panning on your own: check rules", de: "Schaubergwerk / Museum – selbst waschen: Regeln klären" } },
-        closed: { color: "#e02020", level: "closed",  label: { en: "Look only – no digging", de: "Nur ansehen – nicht graben" } }
+        closed: { color: "#e02020", level: "closed",  label: { en: "Look only – no digging", de: "Nur ansehen – nicht graben" } },
+        unclear: { color: "#9e9e9e", level: "limited", label: { en: "Rules not checked – ask locally", de: "Regeln nicht geprüft – selbst vor Ort informieren" } }
       },
       legend: [
         { color: "#2ecc40", text: { en: "usually tolerated", de: "meist geduldet" } },
         { color: "#ff9800", text: { en: "permit needed", de: "Bewilligung nötig" } },
         { color: "#2f80ed", text: { en: "official site", de: "offizieller Waschplatz" } },
         { color: "#9b51e0", text: { en: "show mine", de: "Schaubergwerk" } },
-        { color: "#e02020", text: { en: "no digging", de: "nicht graben" } }
+        { color: "#e02020", text: { en: "no digging", de: "nicht graben" } },
+        { color: "#9e9e9e", text: { en: "rules not checked", de: "Regeln nicht geprüft" } }
       ]
     },
     {

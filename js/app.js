@@ -500,7 +500,7 @@ var App = (function () {
           var a = f.properties || {}, c = f.geometry.coordinates, k = (cfg.kinds || {})[a.kind] || {};
           var m = L.circleMarker([c[1], c[0]], { radius: 9, color: "#000", weight: 2, fillColor: k.color || "#ffd700", fillOpacity: 1, bubblingMouseEvents: false });
           m.bindPopup(function () {
-            var rule = (C.countryRules || {})[a.country];
+            var rule = (C.countryRules || {})[a.country], stRule = a.state && (C.usStateRules || {})[a.state];
             return "<div class='pop'><div class='pop-sec' style='border-left:4px solid " + esc(k.color || "#ffd700") + ";padding-left:8px'><h3>" + esc(a.name) + "</h3>" +
               "<div class='pop-sub'>" + esc(tr(cfg.name)) + (a.river && a.river !== "–" ? " · " + esc(a.river) : "") + "</div>" +
               "<p class='verdict " + esc(k.level || "limited") + "'>" + esc(tr(k.label)) + "</p>" +
@@ -511,6 +511,9 @@ var App = (function () {
               (a.link && a.link !== a.permit_link ? "<a href='" + esc(a.link) + "' target='_blank' rel='noopener'>🏛 " + esc(t("spotLocalLink")) + " ↗</a><br>" : "") +
               (rule ? "<details><summary>" + esc(t("goldRules")) + " · " + esc(tr(rule.name)) + "</summary><p class='note-text'>" + esc(tr(rule.rule)) + "</p>" +
                 (rule.link ? "<a href='" + esc(rule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") + "</details>" : "") +
+              (stRule ? "<details><summary>" + esc(t("goldRules")) + " · " + esc(tr(stRule.name)) + "</summary><p class='note-text'>" + esc(tr(stRule.rule)) + "</p>" +
+                (stRule.details ? "<p class='note-text'>" + esc(tr(stRule.details)) + "</p>" : "") +
+                (stRule.link ? "<a href='" + esc(stRule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") + "</details>" : "") +
               navLink(c[1], c[0]) + "<p class='hint'>" + esc(t("spotHint")) + "</p></div></div>";
           }, { maxWidth: 300 });
           sg.addLayer(m);
@@ -878,6 +881,15 @@ var App = (function () {
     return html + "</div>";
   }
 
+  function rulePopupHtml(rule) {
+    return "<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(t("goldRules")) + " · " + esc(tr(rule.name)) + "</h3>" +
+          "<p class='verdict " + esc(rule.level || "limited") + "'>" + esc(tr(rule.rule)) + "</p>" +
+          (rule.details ? "<p class='note-text'>" + esc(tr(rule.details)) + "</p>" : "") +
+          (rule.source ? "<div class='src'>" + esc(t("rulesSource")) + ": " + esc(rule.source) + "</div>" : "") +
+          (rule.link ? "<a href='" + esc(rule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") +
+          "<p class='hint'>" + esc(t("landHint")) + "</p></div>";
+  }
+
   function onMapClick(e) {
     var lat = e.latlng.lat, lon = e.latlng.lng;
     var parts = [];
@@ -889,15 +901,11 @@ var App = (function () {
       if (o.type === "file") clubFeatures().filter(function (f) { return hit(f, lon, lat); }).forEach(function (f) { parts.push(clubHtml(f)); });
       if (o.type === "userClaims") parts = parts.concat(Claims.hitHtml(lon, lat));
       if (o.type === "countryRules" && o._countries) {
+        // Länder (EU-Grenzen, Schlüssel = Ländercode) oder z. B. US-Bundesstaaten (rulesKey, codeProp = Name)
         var land = o._countries.filter(function (f) { return hit(f, lon, lat); })[0];
-        var code = land && (land.properties.CNTR_ID || land.properties.ISO3_CODE);
-        var rule = code && (C.countryRules || {})[code];
-        if (rule) parts.push("<div class='pop-sec' style='border-left:4px solid #888;padding-left:8px'><h3>" + esc(t("goldRules")) + " · " + esc(tr(rule.name)) + "</h3>" +
-          "<p class='verdict " + esc(rule.level || "limited") + "'>" + esc(tr(rule.rule)) + "</p>" +
-          (rule.details ? "<p class='note-text'>" + esc(tr(rule.details)) + "</p>" : "") +
-          (rule.source ? "<div class='src'>" + esc(t("rulesSource")) + ": " + esc(rule.source) + "</div>" : "") +
-          (rule.link ? "<a href='" + esc(rule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") +
-          "<p class='hint'>" + esc(t("landHint")) + "</p></div>");
+        var code = land && (o.codeProp ? land.properties[o.codeProp] : (land.properties.CNTR_ID || land.properties.ISO3_CODE));
+        var found = [o.alsoCountry && (C.countryRules || {})[o.alsoCountry], code && (C[o.rulesKey || "countryRules"] || {})[code]];
+        found.filter(Boolean).forEach(function (rule) { parts.push(rulePopupHtml(rule)); });
       }
     });
 
