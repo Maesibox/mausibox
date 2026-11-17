@@ -344,6 +344,53 @@ def state_of(lon, lat):
                for x, y in p[0])
     return best[1]
 
+# Goldsucher-Clubs und -Vereine (data/clubs.geojson). Lage = Sitz des Clubs (ungefähr, Stadt), nicht die Claims.
+# Art: national = landesweit mit vielen Claims, claims = Club mit eigenen Claims, club = Club / GPAA-Chapter (Claims erfragen)
+# Keine Namen oder Telefonnummern von Privatpersonen eintragen – nur Club-Name, Ort und Website.
+CLAIMS_DE = "Mitglieder dürfen auf den Club-Claims suchen. Vorher Claim-Regeln und Karten beim Club holen."
+CLAIMS_EN = "Members may prospect on the club claims. Get the claim rules and maps from the club first."
+ASK_DE = "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen."
+ASK_EN = "Outings, classes and meetings; ask whether the club holds its own claims."
+CLUBS = [
+ # (Land, Name, Ort, Breite, Länge, Art, Beschreibung DE, Beschreibung EN, Website)
+ ("US", "GPAA – Gold Prospectors Association of America", "Murrieta, CA (landesweit)", 33.5540, -117.2140, "national", "Grösster Goldsucher-Club der USA: über 200 Claim-Gebiete in vielen Bundesstaaten, dazu lokale Chapters. " + CLAIMS_DE, "Largest US prospecting club: 200+ claim areas in many states plus local chapters. " + CLAIMS_EN, "https://www.goldprospectors.org/"),
+ ("US", "LDMA – Lost Dutchman's Mining Association", "Murrieta, CA (landesweit)", 33.5700, -117.1900, "national", "Camps mit Claims in Kalifornien, Arizona, Oregon, Georgia, North und South Carolina (z. B. Stanton AZ, Duisenburg CA). Mitgliedschaft auf Lebenszeit, inklusive GPAA.", "Camps with claims in California, Arizona, Oregon, Georgia, North and South Carolina (e.g. Stanton AZ, Duisenburg CA). Lifetime membership, includes GPAA.", "https://www.myldma.com/"),
+ ("US", "The New 49ers", "Happy Camp, CA", 41.7920, -123.3800, "national", "Viele Meilen Claims am Klamath River und Nebenflüssen in Nordkalifornien. " + CLAIMS_DE, "Many miles of claims on the Klamath River and tributaries in northern California. " + CLAIMS_EN, "https://www.goldgold.com/"),
+ ("US", "Alaska Miners Association", "Anchorage, AK", 61.1900, -149.8700, "club", "Bergbau-Verband Alaskas – Infos zu Regeln und Kontakten, keine Hobby-Claims.", "Alaska's mining association – rules and contacts, no hobby claims.", "https://www.alaskaminers.org/"),
+ # Arizona
+ ("US", "Havasu Gold Seekers", "Lake Havasu City, AZ", 34.4800, -114.3200, "claims", "Club seit 1991 mit eigenen Gold-Claims (laut Newsletter 2025: 4 Claims, über 80 Acres). " + CLAIMS_DE, "Club since 1991 with its own gold claims (2025 newsletter: 4 claims, 80+ acres). " + CLAIMS_EN, "https://www.havasugoldseekers.com/"),
+ ("US", "Roadrunner Prospectors Club", "Phoenix, AZ", 33.4900, -112.1200, "claims", "Seit 1982; laut eigener Website über 280 Gold-Claims (mehr als 5500 Acres), vor allem in den Bradshaw Mountains. " + CLAIMS_DE, "Since 1982; 280+ gold claims (over 5,500 acres) per its website, mainly in the Bradshaw Mountains. " + CLAIMS_EN, "https://www.roadrunnergold.com/"),
+ ("US", "Desert Gold Diggers", "Tucson, AZ", 32.2200, -110.9700, "claims", "Seit 1984, eigene Claims im Süden und Südosten Arizonas. " + CLAIMS_DE, "Since 1984, own claims in southern and south-eastern Arizona. " + CLAIMS_EN, "https://desertgolddiggers.com/"),
+ ("US", "Arizona Association of Gold Prospectors", "Phoenix, AZ", 33.4500, -112.0700, "club", "Einer der bekanntesten Goldsucher-Clubs Arizonas. " + ASK_DE, "One of Arizona's best-known prospecting clubs. " + ASK_EN, "https://www.arizonagoldprospectors.org/"),
+ # Kalifornien
+ ("US", "Prospectors Club of Southern California", "Downey, CA", 33.9400, -118.1300, "claims", "Seit 1966, besitzt mehrere Gold-Claims in Kalifornien. " + CLAIMS_DE, "Since 1966, holds several gold claims in California. " + CLAIMS_EN, "https://www.prospectorsclub.org/"),
+ ("US", "Mother Lode Goldhounds", "Forest Hill, CA", 39.0200, -120.8200, "club", "Club im Mother-Lode-Gebiet. " + ASK_DE, "Club in the Mother Lode. " + ASK_EN, "https://www.goldhounds.com/"),
+ ("US", "Coarsegold Gold Prospectors", "Coarsegold, CA", 37.2600, -119.7000, "club", ASK_DE, ASK_EN, "https://www.coarsegoldprospectors.com/"),
+ ("US", "Orange County 49ers", "Orange, CA", 33.7900, -117.8500, "club", ASK_DE, ASK_EN, "https://www.oc49ers.com/"),
+ ("US", "Route 66 Gold Miners (GPAA)", "Brea, CA", 33.9200, -117.9000, "club", "GPAA-Chapter. " + ASK_DE, "GPAA chapter. " + ASK_EN, "https://www.route66goldminers.org/"),
+ ("US", "Central Valley Prospectors", "Fresno, CA", 36.7400, -119.7900, "club", ASK_DE, ASK_EN, "https://www.cvprospectors.org/"),
+ ("US", "Treasure Seekers of San Diego County", "San Diego, CA", 32.7200, -117.1600, "club", ASK_DE, ASK_EN, "https://www.treasureseekersofsandiego.org/"),
+ ("US", "Delta Gold Diggers", "Stockton-Gegend, CA", 37.9600, -121.2900, "club", ASK_DE, ASK_EN, "https://www.deltagolddiggers.com/"),
+ # weitere Staaten
+ ("US", "Comstock Gold Prospectors", "Reno, NV", 39.5300, -119.8100, "club", ASK_DE, ASK_EN, "https://www.cgpgold.org/"),
+ ("US", "Waldo Mining District", "Cave Junction, OR", 42.1600, -123.6500, "club", "Bergbau-Bezirk und Verein im Südwesten Oregons. " + ASK_DE, "Mining district and association in south-western Oregon. " + ASK_EN, "https://www.waldominingdistrict.com/"),
+ ("US", "Portland Gold Prospectors (GPAA)", "Portland, OR", 45.5200, -122.6800, "club", "GPAA-Chapter; führt eine Liste öffentlicher Waschplätze in Oregon. " + ASK_DE, "GPAA chapter; keeps a list of public panning places in Oregon. " + ASK_EN, "https://www.portlandgoldprospectors.org/"),
+ ("US", "Douglas County Prospectors Association", "Roseburg, OR", 43.2200, -123.3400, "club", ASK_DE, ASK_EN, "https://www.dcpagold.org/"),
+ ("US", "Colorado Springs GPAA Chapter", "Colorado Springs, CO", 38.8300, -104.8200, "club", "GPAA-Chapter. " + ASK_DE, "GPAA chapter. " + ASK_EN, "https://www.cosgpaa.org/"),
+ ("US", "Gold Prospectors Association of New Mexico", "Albuquerque, NM", 35.0800, -106.6500, "club", ASK_DE, ASK_EN, "https://www.gpanm.org/"),
+ ("US", "Utah Gold Prospectors Club", "Salt Lake City, UT", 40.7600, -111.8900, "club", ASK_DE, ASK_EN, "https://www.ugpc.org/"),
+ ("US", "Headwaters GPAA", "Harrison, MT", 45.7000, -111.7800, "club", "GPAA-Chapter im Südwesten Montanas. " + ASK_DE, "GPAA chapter in south-western Montana. " + ASK_EN, "https://www.headwatersgpaa.com/"),
+ ("US", "Central Montana Prospectors", "Great Falls, MT", 47.5000, -111.3000, "club", ASK_DE, ASK_EN, "https://www.centralmontanaprospectors.org/"),
+ ("US", "Casper GPAA Chapter", "Casper, WY", 42.8500, -106.3100, "club", "GPAA-Chapter. " + ASK_DE, "GPAA chapter. " + ASK_EN, "https://www.caspergpaa.org/"),
+ ("US", "Weekend Gold Miners", "Dahlonega, GA", 34.5300, -83.9800, "club", ASK_DE, ASK_EN, "https://www.weekendgoldminers.com/"),
+ ("US", "Central Virginia Gold Prospectors", "Zentral-Virginia", 37.9000, -78.0000, "club", ASK_DE, ASK_EN, "https://www.cvgp.net/"),
+ ("US", "Ohio State Prospectors Association", "Ohio", 40.0000, -82.9000, "club", ASK_DE, ASK_EN, "https://www.ospagold.com/"),
+ ("US", "Buckeye Chapter GPAA", "Belleville, OH", 40.6200, -82.5100, "club", "GPAA-Chapter. " + ASK_DE, "GPAA chapter. " + ASK_EN, "https://www.buckeyegold.com/"),
+ # Europa
+ ("CH", "Schweizerische Goldwäschervereinigung (SGV)", "Schweiz (Napf)", 47.1200, 7.9900, "national", "Landesverband der Goldwäscher (ca. 400 Mitglieder); Kurse, Wettbewerbe und die Übersicht der kantonalen Bestimmungen.", "Swiss gold panners' association (about 400 members); courses, competitions and the overview of cantonal rules.", "https://www.goldwaschen.ch/"),
+ ("IT", "Associazione Biellese Cercatori d'Oro", "Vermogno (Biella)", 45.4900, 8.0350, "club", "Verein seit 1985, betreibt das Goldmuseum in Vermogno und Wettbewerbe in der Bessa; hilft bei der Anmeldung im Piemont.", "Club since 1985, runs the gold museum in Vermogno and competitions in the Bessa; helps with the Piedmont registration.", "https://www.cercatoridoro.it/"),
+]
+
 def build(spots, name):
     feats = []
     for spot in spots:
@@ -362,3 +409,10 @@ def build(spots, name):
 
 build(SPOTS, "goldspots.geojson")
 build(US_SPOTS, "goldspots-us.geojson")
+
+# Clubs
+cf = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [lon, lat]},
+       "properties": {"name": n, "country": c, "river": town, "kind": kind, "de": de, "en": en, "join": url}}
+      for c, n, town, lat, lon, kind, de, en, url in CLUBS]
+json.dump({"type": "FeatureCollection", "features": cf}, open(os.path.join(DATA, "clubs.geojson"), "w"), ensure_ascii=False, indent=0)
+print(len(cf), "Clubs ->", os.path.join(DATA, "clubs.geojson"))

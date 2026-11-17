@@ -1,0 +1,613 @@
+{
+"type": "FeatureCollection",
+"features": [
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-117.214,
+33.554
+]
+},
+"properties": {
+"name": "GPAA – Gold Prospectors Association of America",
+"country": "US",
+"river": "Murrieta, CA (landesweit)",
+"kind": "national",
+"de": "Grösster Goldsucher-Club der USA: über 200 Claim-Gebiete in vielen Bundesstaaten, dazu lokale Chapters. Mitglieder dürfen auf den Club-Claims suchen. Vorher Claim-Regeln und Karten beim Club holen.",
+"en": "Largest US prospecting club: 200+ claim areas in many states plus local chapters. Members may prospect on the club claims. Get the claim rules and maps from the club first.",
+"join": "https://www.goldprospectors.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-117.19,
+33.57
+]
+},
+"properties": {
+"name": "LDMA – Lost Dutchman's Mining Association",
+"country": "US",
+"river": "Murrieta, CA (landesweit)",
+"kind": "national",
+"de": "Camps mit Claims in Kalifornien, Arizona, Oregon, Georgia, North und South Carolina (z. B. Stanton AZ, Duisenburg CA). Mitgliedschaft auf Lebenszeit, inklusive GPAA.",
+"en": "Camps with claims in California, Arizona, Oregon, Georgia, North and South Carolina (e.g. Stanton AZ, Duisenburg CA). Lifetime membership, includes GPAA.",
+"join": "https://www.myldma.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-123.38,
+41.792
+]
+},
+"properties": {
+"name": "The New 49ers",
+"country": "US",
+"river": "Happy Camp, CA",
+"kind": "national",
+"de": "Viele Meilen Claims am Klamath River und Nebenflüssen in Nordkalifornien. Mitglieder dürfen auf den Club-Claims suchen. Vorher Claim-Regeln und Karten beim Club holen.",
+"en": "Many miles of claims on the Klamath River and tributaries in northern California. Members may prospect on the club claims. Get the claim rules and maps from the club first.",
+"join": "https://www.goldgold.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-149.87,
+61.19
+]
+},
+"properties": {
+"name": "Alaska Miners Association",
+"country": "US",
+"river": "Anchorage, AK",
+"kind": "club",
+"de": "Bergbau-Verband Alaskas – Infos zu Regeln und Kontakten, keine Hobby-Claims.",
+"en": "Alaska's mining association – rules and contacts, no hobby claims.",
+"join": "https://www.alaskaminers.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-114.32,
+34.48
+]
+},
+"properties": {
+"name": "Havasu Gold Seekers",
+"country": "US",
+"river": "Lake Havasu City, AZ",
+"kind": "claims",
+"de": "Club seit 1991 mit eigenen Gold-Claims (laut Newsletter 2025: 4 Claims, über 80 Acres). Mitglieder dürfen auf den Club-Claims suchen. Vorher Claim-Regeln und Karten beim Club holen.",
+"en": "Club since 1991 with its own gold claims (2025 newsletter: 4 claims, 80+ acres). Members may prospect on the club claims. Get the claim rules and maps from the club first.",
+"join": "https://www.havasugoldseekers.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-112.12,
+33.49
+]
+},
+"properties": {
+"name": "Roadrunner Prospectors Club",
+"country": "US",
+"river": "Phoenix, AZ",
+"kind": "claims",
+"de": "Seit 1982; laut eigener Website über 280 Gold-Claims (mehr als 5500 Acres), vor allem in den Bradshaw Mountains. Mitglieder dürfen auf den Club-Claims suchen. Vorher Claim-Regeln und Karten beim Club holen.",
+"en": "Since 1982; 280+ gold claims (over 5,500 acres) per its website, mainly in the Bradshaw Mountains. Members may prospect on the club claims. Get the claim rules and maps from the club first.",
+"join": "https://www.roadrunnergold.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-110.97,
+32.22
+]
+},
+"properties": {
+"name": "Desert Gold Diggers",
+"country": "US",
+"river": "Tucson, AZ",
+"kind": "claims",
+"de": "Seit 1984, eigene Claims im Süden und Südosten Arizonas. Mitglieder dürfen auf den Club-Claims suchen. Vorher Claim-Regeln und Karten beim Club holen.",
+"en": "Since 1984, own claims in southern and south-eastern Arizona. Members may prospect on the club claims. Get the claim rules and maps from the club first.",
+"join": "https://desertgolddiggers.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-112.07,
+33.45
+]
+},
+"properties": {
+"name": "Arizona Association of Gold Prospectors",
+"country": "US",
+"river": "Phoenix, AZ",
+"kind": "club",
+"de": "Einer der bekanntesten Goldsucher-Clubs Arizonas. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "One of Arizona's best-known prospecting clubs. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.arizonagoldprospectors.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-118.13,
+33.94
+]
+},
+"properties": {
+"name": "Prospectors Club of Southern California",
+"country": "US",
+"river": "Downey, CA",
+"kind": "claims",
+"de": "Seit 1966, besitzt mehrere Gold-Claims in Kalifornien. Mitglieder dürfen auf den Club-Claims suchen. Vorher Claim-Regeln und Karten beim Club holen.",
+"en": "Since 1966, holds several gold claims in California. Members may prospect on the club claims. Get the claim rules and maps from the club first.",
+"join": "https://www.prospectorsclub.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-120.82,
+39.02
+]
+},
+"properties": {
+"name": "Mother Lode Goldhounds",
+"country": "US",
+"river": "Forest Hill, CA",
+"kind": "club",
+"de": "Club im Mother-Lode-Gebiet. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Club in the Mother Lode. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.goldhounds.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-119.7,
+37.26
+]
+},
+"properties": {
+"name": "Coarsegold Gold Prospectors",
+"country": "US",
+"river": "Coarsegold, CA",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.coarsegoldprospectors.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-117.85,
+33.79
+]
+},
+"properties": {
+"name": "Orange County 49ers",
+"country": "US",
+"river": "Orange, CA",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.oc49ers.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-117.9,
+33.92
+]
+},
+"properties": {
+"name": "Route 66 Gold Miners (GPAA)",
+"country": "US",
+"river": "Brea, CA",
+"kind": "club",
+"de": "GPAA-Chapter. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "GPAA chapter. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.route66goldminers.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-119.79,
+36.74
+]
+},
+"properties": {
+"name": "Central Valley Prospectors",
+"country": "US",
+"river": "Fresno, CA",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.cvprospectors.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-117.16,
+32.72
+]
+},
+"properties": {
+"name": "Treasure Seekers of San Diego County",
+"country": "US",
+"river": "San Diego, CA",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.treasureseekersofsandiego.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-121.29,
+37.96
+]
+},
+"properties": {
+"name": "Delta Gold Diggers",
+"country": "US",
+"river": "Stockton-Gegend, CA",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.deltagolddiggers.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-119.81,
+39.53
+]
+},
+"properties": {
+"name": "Comstock Gold Prospectors",
+"country": "US",
+"river": "Reno, NV",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.cgpgold.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-123.65,
+42.16
+]
+},
+"properties": {
+"name": "Waldo Mining District",
+"country": "US",
+"river": "Cave Junction, OR",
+"kind": "club",
+"de": "Bergbau-Bezirk und Verein im Südwesten Oregons. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Mining district and association in south-western Oregon. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.waldominingdistrict.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-122.68,
+45.52
+]
+},
+"properties": {
+"name": "Portland Gold Prospectors (GPAA)",
+"country": "US",
+"river": "Portland, OR",
+"kind": "club",
+"de": "GPAA-Chapter; führt eine Liste öffentlicher Waschplätze in Oregon. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "GPAA chapter; keeps a list of public panning places in Oregon. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.portlandgoldprospectors.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-123.34,
+43.22
+]
+},
+"properties": {
+"name": "Douglas County Prospectors Association",
+"country": "US",
+"river": "Roseburg, OR",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.dcpagold.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-104.82,
+38.83
+]
+},
+"properties": {
+"name": "Colorado Springs GPAA Chapter",
+"country": "US",
+"river": "Colorado Springs, CO",
+"kind": "club",
+"de": "GPAA-Chapter. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "GPAA chapter. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.cosgpaa.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-106.65,
+35.08
+]
+},
+"properties": {
+"name": "Gold Prospectors Association of New Mexico",
+"country": "US",
+"river": "Albuquerque, NM",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.gpanm.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-111.89,
+40.76
+]
+},
+"properties": {
+"name": "Utah Gold Prospectors Club",
+"country": "US",
+"river": "Salt Lake City, UT",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.ugpc.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-111.78,
+45.7
+]
+},
+"properties": {
+"name": "Headwaters GPAA",
+"country": "US",
+"river": "Harrison, MT",
+"kind": "club",
+"de": "GPAA-Chapter im Südwesten Montanas. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "GPAA chapter in south-western Montana. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.headwatersgpaa.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-111.3,
+47.5
+]
+},
+"properties": {
+"name": "Central Montana Prospectors",
+"country": "US",
+"river": "Great Falls, MT",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.centralmontanaprospectors.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-106.31,
+42.85
+]
+},
+"properties": {
+"name": "Casper GPAA Chapter",
+"country": "US",
+"river": "Casper, WY",
+"kind": "club",
+"de": "GPAA-Chapter. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "GPAA chapter. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.caspergpaa.org/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-83.98,
+34.53
+]
+},
+"properties": {
+"name": "Weekend Gold Miners",
+"country": "US",
+"river": "Dahlonega, GA",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.weekendgoldminers.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-78.0,
+37.9
+]
+},
+"properties": {
+"name": "Central Virginia Gold Prospectors",
+"country": "US",
+"river": "Zentral-Virginia",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.cvgp.net/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-82.9,
+40.0
+]
+},
+"properties": {
+"name": "Ohio State Prospectors Association",
+"country": "US",
+"river": "Ohio",
+"kind": "club",
+"de": "Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.ospagold.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-82.51,
+40.62
+]
+},
+"properties": {
+"name": "Buckeye Chapter GPAA",
+"country": "US",
+"river": "Belleville, OH",
+"kind": "club",
+"de": "GPAA-Chapter. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "GPAA chapter. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://www.buckeyegold.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+7.99,
+47.12
+]
+},
+"properties": {
+"name": "Schweizerische Goldwäschervereinigung (SGV)",
+"country": "CH",
+"river": "Schweiz (Napf)",
+"kind": "national",
+"de": "Landesverband der Goldwäscher (ca. 400 Mitglieder); Kurse, Wettbewerbe und die Übersicht der kantonalen Bestimmungen.",
+"en": "Swiss gold panners' association (about 400 members); courses, competitions and the overview of cantonal rules.",
+"join": "https://www.goldwaschen.ch/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+8.035,
+45.49
+]
+},
+"properties": {
+"name": "Associazione Biellese Cercatori d'Oro",
+"country": "IT",
+"river": "Vermogno (Biella)",
+"kind": "club",
+"de": "Verein seit 1985, betreibt das Goldmuseum in Vermogno und Wettbewerbe in der Bessa; hilft bei der Anmeldung im Piemont.",
+"en": "Club since 1985, runs the gold museum in Vermogno and competitions in the Bessa; helps with the Piedmont registration.",
+"join": "https://www.cercatoridoro.it/"
+}
+}
+]
+}

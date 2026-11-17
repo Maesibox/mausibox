@@ -509,12 +509,13 @@ var App = (function () {
               (a.permit_de ? "<p class='note-text'><b>📋 " + esc(t("spotPermit")) + ":</b> " + esc(lang === "de" ? a.permit_de : a.permit_en) + "</p>" : "") +
               (a.permit_link ? "<a href='" + esc(a.permit_link) + "' target='_blank' rel='noopener'>📝 " + esc(t("spotPermitLink")) + " ↗</a><br>" : "") +
               (a.link && a.link !== a.permit_link ? "<a href='" + esc(a.link) + "' target='_blank' rel='noopener'>🏛 " + esc(t("spotLocalLink")) + " ↗</a><br>" : "") +
+              (a.join ? "<a href='" + esc(a.join) + "' target='_blank' rel='noopener'>🤝 " + esc(t("clubJoin")) + " ↗</a><br>" : "") +
               (rule ? "<details><summary>" + esc(t("goldRules")) + " · " + esc(tr(rule.name)) + "</summary><p class='note-text'>" + esc(tr(rule.rule)) + "</p>" +
                 (rule.link ? "<a href='" + esc(rule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") + "</details>" : "") +
               (stRule ? "<details><summary>" + esc(t("goldRules")) + " · " + esc(tr(stRule.name)) + "</summary><p class='note-text'>" + esc(tr(stRule.rule)) + "</p>" +
                 (stRule.details ? "<p class='note-text'>" + esc(tr(stRule.details)) + "</p>" : "") +
                 (stRule.link ? "<a href='" + esc(stRule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") + "</details>" : "") +
-              navLink(c[1], c[0]) + "<p class='hint'>" + esc(t("spotHint")) + "</p></div></div>";
+              navLink(c[1], c[0]) + "<p class='hint'>" + esc(t(cfg.hint || "spotHint")) + "</p></div></div>";
           }, { maxWidth: 300 });
           sg.addLayer(m);
         });

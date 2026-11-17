@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 36,
+  appVersion: 37,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -981,6 +981,27 @@ var APP_CONFIG = {
       visible: true
     },
     {
+      id: "clubs",
+      group: "general",
+      type: "spots",
+      name: { en: "Prospecting clubs & associations (join for claims)", de: "Goldsucher-Clubs & Vereine (Mitglied werden für Claims)" },
+      // Liste ergänzen: tools/make_goldspots.py (CLUBS)
+      file: "data/clubs.geojson",
+      hint: "clubHint",
+      attribution: "Clubs: MAUSIBOX collection",
+      visible: false, offline: true,
+      kinds: {
+        national: { color: "#d500f9", level: "open",    label: { en: "Nationwide club / association", de: "Landesweiter Club / Verband" } },
+        claims:   { color: "#00bfa5", level: "open",    label: { en: "Club with its own claims", de: "Club mit eigenen Claims" } },
+        club:     { color: "#80cbc4", level: "limited", label: { en: "Club / chapter – ask about claims", de: "Club / Chapter – nach Claims fragen" } }
+      },
+      legend: [
+        { color: "#d500f9", text: { en: "nationwide", de: "landesweit" } },
+        { color: "#00bfa5", text: { en: "own claims", de: "eigene Claims" } },
+        { color: "#80cbc4", text: { en: "club", de: "Club" } }
+      ]
+    },
+    {
       id: "myclaims",
       group: "general",
       type: "userClaims",
@@ -1141,7 +1162,7 @@ var APP_CONFIG = {
     en: {
       layers: "Layers", basemap: "Base map", overlays: "Layers",
       gps: "My location", addPoint: "Add point", points: "My points", menu: "Menu",
-      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", spotFind: "What you find", spotPermit: "Permit / where to ask", spotPermitLink: "Permit: form / office", spotLocalLink: "Local contact (museum / panning site)", spotHint: "Approximate location (town / river section). Ask locally before panning.", loading: "Loading…", loadError: "Could not load",
+      zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", spotFind: "What you find", spotPermit: "Permit / where to ask", spotPermitLink: "Permit: form / office", spotLocalLink: "Local contact (museum / panning site)", spotHint: "Approximate location (town / river section). Ask locally before panning.", clubJoin: "Website / join", clubHint: "Location = club seat (town), not the claims. Fees and claims change – check the club website.", loading: "Loading…", loadError: "Could not load",
       gpsWaiting: "Waiting for GPS…", gpsError: "GPS not available", accuracy: "accuracy",
       name: "Name", note: "Note", category: "Category", photos: "Photos", addPhoto: "Add photo",
       position: "Position", useGps: "Use GPS", useCenter: "Use map center",
@@ -1254,7 +1275,7 @@ var APP_CONFIG = {
     de: {
       layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen",
       gps: "Mein Standort", addPoint: "Punkt setzen", points: "Meine Punkte", menu: "Menü",
-      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", spotFind: "Was man findet", spotPermit: "Bewilligung / wo fragen", spotPermitLink: "Bewilligung: Formular / Stelle", spotLocalLink: "Anlaufstelle vor Ort (Museum / Waschplatz)", spotHint: "Ungefähre Lage (Ort / Flussabschnitt). Vor dem Waschen vor Ort nachfragen.", loading: "Lade…", loadError: "Laden fehlgeschlagen",
+      zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", spotFind: "Was man findet", spotPermit: "Bewilligung / wo fragen", spotPermitLink: "Bewilligung: Formular / Stelle", spotLocalLink: "Anlaufstelle vor Ort (Museum / Waschplatz)", spotHint: "Ungefähre Lage (Ort / Flussabschnitt). Vor dem Waschen vor Ort nachfragen.", clubJoin: "Website / Mitglied werden", clubHint: "Lage = Sitz des Clubs (Ort), nicht die Claims. Beiträge und Claims ändern sich – auf der Club-Website nachsehen.", loading: "Lade…", loadError: "Laden fehlgeschlagen",
       gpsWaiting: "Warte auf GPS…", gpsError: "GPS nicht verfügbar", accuracy: "Genauigkeit",
       name: "Name", note: "Notiz", category: "Kategorie", photos: "Fotos", addPhoto: "Foto hinzufügen",
       position: "Position", useGps: "GPS verwenden", useCenter: "Kartenmitte verwenden",
