@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 39,
+  appVersion: 40,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -821,7 +821,7 @@ var APP_CONFIG = {
       arcIdentify: { layers: "visible:28,35", tolerance: 6, max: 3, title: "HOLEID",
         fields: [ { field: "HOLETYPE", label: { en: "Hole type", de: "Bohrart" } }, { field: "MAXDEPTH", label: { en: "Depth (m)", de: "Tiefe (m)" } },
                   { field: "TARGET_COMMODITY", label: { en: "Target", de: "Ziel" } }, { field: "OPERATOR", label: { en: "Company", de: "Firma" } },
-                  { field: "PROJECT", label: { en: "Project", de: "Projekt" } }, { field: "PERIOD_TO", label: { en: "Year", de: "Jahr" } },
+                  { field: "PROJECT", label: { en: "Project", de: "Projekt" } }, { field: "PERIOD_TO", label: { en: "Drilled until", de: "Gebohrt bis" } },
                   { field: "ANUMBER", label: { en: "Report (A-no.)", de: "Bericht (A-Nr.)" } },
                   { field: "ACTIVITYTY", label: { en: "Activity", de: "Tätigkeit" } }, { field: "ELEMENTS", label: { en: "Elements", de: "Elemente" } },
                   { field: "WAMEX_A_NO", label: { en: "Report (A-no.)", de: "Bericht (A-Nr.)" } } ] }
