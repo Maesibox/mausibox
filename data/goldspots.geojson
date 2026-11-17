@@ -15,8 +15,12 @@
 "country": "DE",
 "river": "Rhein",
 "kind": "free",
-"de": "Klassisches Rheingold auf Kiesbänken (Oberrhein). Hobby mit Pfanne meist geduldet; Naturschutzgebiete und Rheinauen beachten.",
-"en": "Classic Rhine gold on gravel bars (Upper Rhine). Hobby panning usually tolerated; respect nature reserves."
+"de": "Klassisches Rheingold auf Kiesbänken am Oberrhein. Am besten nach Hochwasser an frisch umgelagerten Kiesbankköpfen. Naturschutzgebiete und Rheinauen beachten.",
+"en": "Classic Rhine gold on gravel bars of the Upper Rhine. Best after floods on freshly reworked bar heads. Respect nature reserves.",
+"find_de": "Sehr feines Flittergold (meist unter 0,5 mm) mit viel Schwarzsand. Kleine Ausbeute, dafür auf vielen Kiesbänken.",
+"find_en": "Very fine flake gold (mostly under 0.5 mm) with lots of black sand. Small yields, but on many gravel bars.",
+"permit_de": "Hobby mit Pfanne und Schaufel ist in den meisten Bundesländern ohne Bewilligung geduldet (nicht gewerblich). Fragen: Untere Naturschutzbehörde (Landratsamt) für Schutzgebiete, Fischereiberechtigter wegen Laichzeiten, Grundeigentümer für den Zugang. Keine Motorpumpen.",
+"permit_en": "Hobby panning with pan and shovel is tolerated without permit in most states (non-commercial). Ask: district nature-protection office for reserves, fishing rights holder for spawning seasons, landowner for access. No motor pumps."
 }
 },
 {
@@ -33,8 +37,12 @@
 "country": "DE",
 "river": "Rhein",
 "kind": "free",
-"de": "Rheingold-Gebiet am Oberrhein. Hobby mit Pfanne meist geduldet; Schutzgebiete beachten.",
-"en": "Rhine gold area on the Upper Rhine. Hobby panning usually tolerated; respect protected areas."
+"de": "Rheingold-Gebiet am Oberrhein; früher wurde hier gewerbsmässig Gold gewaschen. Schutzgebiete beachten.",
+"en": "Rhine gold area on the Upper Rhine, historically washed commercially. Respect protected areas.",
+"find_de": "Sehr feines Flittergold (meist unter 0,5 mm) mit viel Schwarzsand. Kleine Ausbeute, dafür auf vielen Kiesbänken.",
+"find_en": "Very fine flake gold (mostly under 0.5 mm) with lots of black sand. Small yields, but on many gravel bars.",
+"permit_de": "Hobby mit Pfanne und Schaufel ist in den meisten Bundesländern ohne Bewilligung geduldet (nicht gewerblich). Fragen: Untere Naturschutzbehörde (Landratsamt) für Schutzgebiete, Fischereiberechtigter wegen Laichzeiten, Grundeigentümer für den Zugang. Keine Motorpumpen.",
+"permit_en": "Hobby panning with pan and shovel is tolerated without permit in most states (non-commercial). Ask: district nature-protection office for reserves, fishing rights holder for spawning seasons, landowner for access. No motor pumps."
 }
 },
 {
@@ -51,8 +59,12 @@
 "country": "DE",
 "river": "Rhein",
 "kind": "free",
-"de": "Historisches Rheingold-Gebiet. Hobby mit Pfanne meist geduldet; Schutzgebiete beachten.",
-"en": "Historic Rhine gold area. Hobby panning usually tolerated."
+"de": "Historisches Rheingold-Gebiet am Kaiserstuhl. Schutzgebiete beachten.",
+"en": "Historic Rhine gold area near the Kaiserstuhl.",
+"find_de": "Sehr feines Flittergold (meist unter 0,5 mm) mit viel Schwarzsand. Kleine Ausbeute, dafür auf vielen Kiesbänken.",
+"find_en": "Very fine flake gold (mostly under 0.5 mm) with lots of black sand. Small yields, but on many gravel bars.",
+"permit_de": "Hobby mit Pfanne und Schaufel ist in den meisten Bundesländern ohne Bewilligung geduldet (nicht gewerblich). Fragen: Untere Naturschutzbehörde (Landratsamt) für Schutzgebiete, Fischereiberechtigter wegen Laichzeiten, Grundeigentümer für den Zugang. Keine Motorpumpen.",
+"permit_en": "Hobby panning with pan and shovel is tolerated without permit in most states (non-commercial). Ask: district nature-protection office for reserves, fishing rights holder for spawning seasons, landowner for access. No motor pumps."
 }
 },
 {
@@ -69,8 +81,12 @@
 "country": "DE",
 "river": "Isar",
 "kind": "free",
-"de": "Isargold, feine Flitter. Grosse Teile der Isarauen sind Naturschutzgebiet (z. B. Pupplinger Au) – dort nicht waschen.",
-"en": "Isar gold, fine flakes. Large parts of the floodplain are nature reserves (e.g. Pupplinger Au) – no panning there."
+"de": "Isargold auf den Kiesbänken. Grosse Teile der Isarauen sind Naturschutzgebiet (z. B. Pupplinger Au) – dort nicht waschen.",
+"en": "Isar gold on gravel bars. Large parts are nature reserves (e.g. Pupplinger Au) – no panning there.",
+"find_de": "Feine Flitter, selten etwas gröber; dazu Granat und Schwarzsand.",
+"find_en": "Fine flakes, rarely coarser; garnet and black sand.",
+"permit_de": "Hobby mit Pfanne und Schaufel ist in den meisten Bundesländern ohne Bewilligung geduldet (nicht gewerblich). Fragen: Untere Naturschutzbehörde (Landratsamt) für Schutzgebiete, Fischereiberechtigter wegen Laichzeiten, Grundeigentümer für den Zugang. Keine Motorpumpen.",
+"permit_en": "Hobby panning with pan and shovel is tolerated without permit in most states (non-commercial). Ask: district nature-protection office for reserves, fishing rights holder for spawning seasons, landowner for access. No motor pumps."
 }
 },
 {
@@ -87,8 +103,12 @@
 "country": "DE",
 "river": "Eder",
 "kind": "free",
-"de": "Edergold – bekanntestes Goldwaschgebiet Hessens. Hobby mit Pfanne meist geduldet.",
-"en": "Eder gold – Hesse's best-known panning area. Hobby panning usually tolerated."
+"de": "Edergold – bekanntestes Goldwaschgebiet Hessens, unterhalb des Edersees.",
+"en": "Eder gold – Hesse's best-known panning area, below the Edersee.",
+"find_de": "Flitter bis kleine Körner – für Deutschland eher grobes Gold.",
+"find_en": "Flakes to small grains – fairly coarse for Germany.",
+"permit_de": "Hobby mit Pfanne und Schaufel ist in den meisten Bundesländern ohne Bewilligung geduldet (nicht gewerblich). Fragen: Untere Naturschutzbehörde (Landratsamt) für Schutzgebiete, Fischereiberechtigter wegen Laichzeiten, Grundeigentümer für den Zugang. Keine Motorpumpen.",
+"permit_en": "Hobby panning with pan and shovel is tolerated without permit in most states (non-commercial). Ask: district nature-protection office for reserves, fishing rights holder for spawning seasons, landowner for access. No motor pumps."
 }
 },
 {
@@ -105,8 +125,12 @@
 "country": "DE",
 "river": "Eder",
 "kind": "free",
-"de": "Edergold; in der Nähe das historische Goldbergwerk Eisenberg bei Korbach (Besucherbergwerk).",
-"en": "Eder gold; nearby the historic Eisenberg gold mine near Korbach (visitor mine)."
+"de": "Edergold; in der Nähe das historische Goldbergwerk Eisenberg bei Korbach (Besucherbergwerk) – die Quelle des Edergolds.",
+"en": "Eder gold; nearby the historic Eisenberg gold mine near Korbach (visitor mine).",
+"find_de": "Flitter bis kleine Körner – für Deutschland eher grobes Gold.",
+"find_en": "Flakes to small grains – fairly coarse for Germany.",
+"permit_de": "Hobby mit Pfanne und Schaufel ist in den meisten Bundesländern ohne Bewilligung geduldet (nicht gewerblich). Fragen: Untere Naturschutzbehörde (Landratsamt) für Schutzgebiete, Fischereiberechtigter wegen Laichzeiten, Grundeigentümer für den Zugang. Keine Motorpumpen.",
+"permit_en": "Hobby panning with pan and shovel is tolerated without permit in most states (non-commercial). Ask: district nature-protection office for reserves, fishing rights holder for spawning seasons, landowner for access. No motor pumps."
 }
 },
 {
@@ -123,8 +147,12 @@
 "country": "DE",
 "river": "Schwarza",
 "kind": "free",
-"de": "Thüringer Waschgold aus dem Schwarzatal. Hobby mit Pfanne meist geduldet.",
-"en": "Thuringian placer gold of the Schwarza valley. Hobby panning usually tolerated."
+"de": "Thüringer Waschgold aus dem Schwarzatal, seit dem Mittelalter gewaschen.",
+"en": "Thuringian placer gold of the Schwarza valley, washed since medieval times.",
+"find_de": "Flitter und kleine Körner; historisch wurden an der Schwarza auch grössere Stücke gefunden.",
+"find_en": "Flakes and small grains; historically larger pieces too.",
+"permit_de": "Hobby mit Pfanne und Schaufel ist in den meisten Bundesländern ohne Bewilligung geduldet (nicht gewerblich). Fragen: Untere Naturschutzbehörde (Landratsamt) für Schutzgebiete, Fischereiberechtigter wegen Laichzeiten, Grundeigentümer für den Zugang. Keine Motorpumpen.",
+"permit_en": "Hobby panning with pan and shovel is tolerated without permit in most states (non-commercial). Ask: district nature-protection office for reserves, fishing rights holder for spawning seasons, landowner for access. No motor pumps."
 }
 },
 {
@@ -142,7 +170,11 @@
 "river": "Schwarza",
 "kind": "free",
 "de": "Oberlauf der Schwarza, historisches Goldwaschgebiet (der Ortsname sagt es).",
-"en": "Upper Schwarza, historic gold panning area."
+"en": "Upper Schwarza, historic gold panning area.",
+"find_de": "Flitter und kleine Körner; historisch wurden an der Schwarza auch grössere Stücke gefunden.",
+"find_en": "Flakes and small grains; historically larger pieces too.",
+"permit_de": "Hobby mit Pfanne und Schaufel ist in den meisten Bundesländern ohne Bewilligung geduldet (nicht gewerblich). Fragen: Untere Naturschutzbehörde (Landratsamt) für Schutzgebiete, Fischereiberechtigter wegen Laichzeiten, Grundeigentümer für den Zugang. Keine Motorpumpen.",
+"permit_en": "Hobby panning with pan and shovel is tolerated without permit in most states (non-commercial). Ask: district nature-protection office for reserves, fishing rights holder for spawning seasons, landowner for access. No motor pumps."
 }
 },
 {
@@ -160,7 +192,11 @@
 "river": "Bäche um Goldkronach",
 "kind": "free",
 "de": "Historischer Goldbergbau mit Besucherbergwerk und Goldbergbaumuseum; Waschgold in den Bächen.",
-"en": "Historic gold mining with visitor mine and museum; placer gold in the creeks."
+"en": "Historic gold mining with visitor mine and museum; placer gold in the creeks.",
+"find_de": "Feine Flitter in den Bächen des alten Bergbaureviers.",
+"find_en": "Fine flakes in the creeks of the old mining district.",
+"permit_de": "Hobby mit Pfanne und Schaufel ist in den meisten Bundesländern ohne Bewilligung geduldet (nicht gewerblich). Fragen: Untere Naturschutzbehörde (Landratsamt) für Schutzgebiete, Fischereiberechtigter wegen Laichzeiten, Grundeigentümer für den Zugang. Keine Motorpumpen.",
+"permit_en": "Hobby panning with pan and shovel is tolerated without permit in most states (non-commercial). Ask: district nature-protection office for reserves, fishing rights holder for spawning seasons, landowner for access. No motor pumps."
 }
 },
 {
@@ -177,8 +213,12 @@
 "country": "AT",
 "river": "Hüttwinklache",
 "kind": "site",
-"de": "Offizieller Goldwaschplatz im Hüttwinkltal (Tauerngold). Ausrüstung vor Ort; gegen Gebühr.",
-"en": "Official gold panning site in the Hüttwinkl valley (Tauern gold). Equipment available; fee."
+"de": "Offizieller Goldwaschplatz im Hüttwinkltal (Tauerngold). Pfannen vor Ort, gegen Gebühr – ohne Formalitäten.",
+"en": "Official gold panning site in the Hüttwinkl valley. Pans available; fee – no paperwork.",
+"find_de": "Tauerngold: Flitter und kleine Körner, schön gelb; dazu Granat und Magnetit.",
+"find_en": "Tauern gold: flakes and small grains, bright yellow; garnet and magnetite.",
+"permit_de": "Anzeige bei der Montanbehörde (Bundesministerium für Finanzen) und vorher Zustimmung von Grundeigentümer und Fischereiberechtigtem. In Kärnten braucht es ausserhalb betreuter Plätze eine Bewilligung (Bezirkshauptmannschaft / Gemeinde). Einfachster legaler Weg: offizielle Waschplätze.",
+"permit_en": "Report to the mining authority (Federal Ministry of Finance) and get consent of landowner and fishing rights holder first. Carinthia: permit needed outside supervised sites (district authority / municipality). Easiest legal way: official panning sites."
 }
 },
 {
@@ -196,7 +236,11 @@
 "river": "Hochalm",
 "kind": "site",
 "de": "Goldwaschen auf der Hochalm (Bergbahn Rauris), betreuter Waschplatz.",
-"en": "Gold panning at the Hochalm (Rauris cable car), supervised site."
+"en": "Gold panning at the Hochalm (Rauris cable car), supervised site.",
+"find_de": "Tauerngold: Flitter und kleine Körner, schön gelb; dazu Granat und Magnetit.",
+"find_en": "Tauern gold: flakes and small grains, bright yellow; garnet and magnetite.",
+"permit_de": "Anzeige bei der Montanbehörde (Bundesministerium für Finanzen) und vorher Zustimmung von Grundeigentümer und Fischereiberechtigtem. In Kärnten braucht es ausserhalb betreuter Plätze eine Bewilligung (Bezirkshauptmannschaft / Gemeinde). Einfachster legaler Weg: offizielle Waschplätze.",
+"permit_en": "Report to the mining authority (Federal Ministry of Finance) and get consent of landowner and fishing rights holder first. Carinthia: permit needed outside supervised sites (district authority / municipality). Easiest legal way: official panning sites."
 }
 },
 {
@@ -213,8 +257,12 @@
 "country": "AT",
 "river": "Gasteiner Ache",
 "kind": "show",
-"de": "Altes Tauerngold-Revier, Montanmuseum Altböckstein. Ausserhalb betreuter Plätze: Anzeige bei der Montanbehörde, Grundeigentümer und Fischereiberechtigten fragen.",
-"en": "Old Tauern gold district, mining museum Altböckstein. Outside supervised sites: report to the mining authority, ask landowner and fishing rights holder."
+"de": "Altes Tauerngold-Revier mit Montanmuseum Altböckstein.",
+"en": "Old Tauern gold district with mining museum Altböckstein.",
+"find_de": "Tauerngold: Flitter und kleine Körner, schön gelb; dazu Granat und Magnetit.",
+"find_en": "Tauern gold: flakes and small grains, bright yellow; garnet and magnetite.",
+"permit_de": "Anzeige bei der Montanbehörde (Bundesministerium für Finanzen) und vorher Zustimmung von Grundeigentümer und Fischereiberechtigtem. In Kärnten braucht es ausserhalb betreuter Plätze eine Bewilligung (Bezirkshauptmannschaft / Gemeinde). Einfachster legaler Weg: offizielle Waschplätze.",
+"permit_en": "Report to the mining authority (Federal Ministry of Finance) and get consent of landowner and fishing rights holder first. Carinthia: permit needed outside supervised sites (district authority / municipality). Easiest legal way: official panning sites."
 }
 },
 {
@@ -231,8 +279,12 @@
 "country": "AT",
 "river": "Möll / Gößnitz",
 "kind": "site",
-"de": "Geführtes Goldwaschen im Nationalpark Hohe Tauern. Eigenständig im Nationalpark nicht erlaubt; in Kärnten braucht es ausserhalb betreuter Plätze eine Bewilligung.",
-"en": "Guided gold panning in the Hohe Tauern National Park. Not allowed on your own inside the park; in Carinthia a permit is needed outside supervised sites."
+"de": "Geführtes Goldwaschen im Nationalpark Hohe Tauern. Selbständig im Nationalpark nicht erlaubt.",
+"en": "Guided gold panning in the Hohe Tauern National Park. Not allowed on your own inside the park.",
+"find_de": "Tauerngold: Flitter und kleine Körner, schön gelb; dazu Granat und Magnetit.",
+"find_en": "Tauern gold: flakes and small grains, bright yellow; garnet and magnetite.",
+"permit_de": "Anzeige bei der Montanbehörde (Bundesministerium für Finanzen) und vorher Zustimmung von Grundeigentümer und Fischereiberechtigtem. In Kärnten braucht es ausserhalb betreuter Plätze eine Bewilligung (Bezirkshauptmannschaft / Gemeinde). Einfachster legaler Weg: offizielle Waschplätze.",
+"permit_en": "Report to the mining authority (Federal Ministry of Finance) and get consent of landowner and fishing rights holder first. Carinthia: permit needed outside supervised sites (district authority / municipality). Easiest legal way: official panning sites."
 }
 },
 {
@@ -250,7 +302,11 @@
 "river": "Ziller",
 "kind": "show",
 "de": "Goldschaubergwerk Hainzenberg (Tirol), mit Goldwaschen für Besucher.",
-"en": "Show gold mine Hainzenberg (Tyrol), panning for visitors."
+"en": "Show gold mine Hainzenberg (Tyrol), panning for visitors.",
+"find_de": "Besucherbergwerk: Goldquarz ansehen, Goldwaschen für Besucher.",
+"find_en": "Visitor mine: see gold quartz, panning for visitors.",
+"permit_de": "Anzeige bei der Montanbehörde (Bundesministerium für Finanzen) und vorher Zustimmung von Grundeigentümer und Fischereiberechtigtem. In Kärnten braucht es ausserhalb betreuter Plätze eine Bewilligung (Bezirkshauptmannschaft / Gemeinde). Einfachster legaler Weg: offizielle Waschplätze.",
+"permit_en": "Report to the mining authority (Federal Ministry of Finance) and get consent of landowner and fishing rights holder first. Carinthia: permit needed outside supervised sites (district authority / municipality). Easiest legal way: official panning sites."
 }
 },
 {
@@ -267,8 +323,12 @@
 "country": "AT",
 "river": "Salzach",
 "kind": "permit",
-"de": "Tauerngold wird von den Zubringern in die Salzach getragen. Selbständig: Anzeige bei der Montanbehörde, Zustimmung von Grundeigentümer und Fischereiberechtigtem.",
-"en": "Tauern gold carried into the Salzach. On your own: report to mining authority, consent of landowner and fishing rights holder."
+"de": "Die Zubringer aus den Tauern tragen das Gold in die Salzach.",
+"en": "Tauern gold carried into the Salzach by its tributaries.",
+"find_de": "Tauerngold: Flitter und kleine Körner, schön gelb; dazu Granat und Magnetit.",
+"find_en": "Tauern gold: flakes and small grains, bright yellow; garnet and magnetite.",
+"permit_de": "Anzeige bei der Montanbehörde (Bundesministerium für Finanzen) und vorher Zustimmung von Grundeigentümer und Fischereiberechtigtem. In Kärnten braucht es ausserhalb betreuter Plätze eine Bewilligung (Bezirkshauptmannschaft / Gemeinde). Einfachster legaler Weg: offizielle Waschplätze.",
+"permit_en": "Report to the mining authority (Federal Ministry of Finance) and get consent of landowner and fishing rights holder first. Carinthia: permit needed outside supervised sites (district authority / municipality). Easiest legal way: official panning sites."
 }
 },
 {
@@ -285,8 +345,12 @@
 "country": "CH",
 "river": "Grosse Fontanne",
 "kind": "free",
-"de": "Bekanntestes Napfgold-Gewässer. Kanton Luzern: keine besonderen Vorgaben bekannt, keine Motorgeräte, Fisch-Schonzeit beachten.",
-"en": "Best-known Napf gold stream. Canton Lucerne: no special rules known, no motorised gear, respect fish closed season."
+"de": "Bekanntestes Napfgold-Gewässer. Kanton Luzern: keine besonderen Vorgaben bekannt.",
+"en": "Best-known Napf gold stream. Canton Lucerne: no special rules known.",
+"find_de": "Napfgold: Flitter bis 1–2 mm, selten kleine Nuggets; sehr reines Gold.",
+"find_en": "Napf gold: flakes up to 1–2 mm, rarely small nuggets; very pure gold.",
+"permit_de": "Je nach Kanton und Gemeinde – Details in der Ebene «Goldwaschen-Regeln pro Kanton». Meist Gemeinde- oder Kantonsverwaltung (Fischerei / Umwelt). Fisch-Schonzeiten beachten, keine Motorgeräte.",
+"permit_en": "Depends on canton and municipality – see the layer 'Gold panning rules per canton'. Usually municipality or canton (fisheries / environment). Respect fish closed seasons, no motorised gear."
 }
 },
 {
@@ -303,8 +367,12 @@
 "country": "CH",
 "river": "Kleine Emme",
 "kind": "free",
-"de": "Napfgold in der Kleinen Emme. Kanton Luzern: keine Motorgeräte, Schonzeit beachten.",
-"en": "Napf gold in the Kleine Emme. Canton Lucerne: no motorised gear."
+"de": "Napfgold in der Kleinen Emme, viele Kiesbänke. Kanton Luzern.",
+"en": "Napf gold in the Kleine Emme, many gravel bars. Canton Lucerne.",
+"find_de": "Napfgold: Flitter bis 1–2 mm, selten kleine Nuggets; sehr reines Gold.",
+"find_en": "Napf gold: flakes up to 1–2 mm, rarely small nuggets; very pure gold.",
+"permit_de": "Je nach Kanton und Gemeinde – Details in der Ebene «Goldwaschen-Regeln pro Kanton». Meist Gemeinde- oder Kantonsverwaltung (Fischerei / Umwelt). Fisch-Schonzeiten beachten, keine Motorgeräte.",
+"permit_en": "Depends on canton and municipality – see the layer 'Gold panning rules per canton'. Usually municipality or canton (fisheries / environment). Respect fish closed seasons, no motorised gear."
 }
 },
 {
@@ -322,7 +390,11 @@
 "river": "Luthern",
 "kind": "free",
 "de": "Napfgold-Gewässer, auch in der swisstopo-Rohstoffkarte als Goldvorkommen. Kanton Luzern.",
-"en": "Napf gold stream, listed as gold occurrence by swisstopo. Canton Lucerne."
+"en": "Napf gold stream, listed as gold occurrence by swisstopo. Canton Lucerne.",
+"find_de": "Napfgold: Flitter bis 1–2 mm, selten kleine Nuggets; sehr reines Gold.",
+"find_en": "Napf gold: flakes up to 1–2 mm, rarely small nuggets; very pure gold.",
+"permit_de": "Je nach Kanton und Gemeinde – Details in der Ebene «Goldwaschen-Regeln pro Kanton». Meist Gemeinde- oder Kantonsverwaltung (Fischerei / Umwelt). Fisch-Schonzeiten beachten, keine Motorgeräte.",
+"permit_en": "Depends on canton and municipality – see the layer 'Gold panning rules per canton'. Usually municipality or canton (fisheries / environment). Respect fish closed seasons, no motorised gear."
 }
 },
 {
@@ -340,7 +412,11 @@
 "river": "Ilfis",
 "kind": "free",
 "de": "Napfgold im Emmental. Kanton Bern: Pfanne und Schaufel, max. 3 Personen, 1. Mai – 30. Sept. bewilligungsfrei.",
-"en": "Napf gold in the Emmental. Canton Bern: pan and shovel, max. 3 people, 1 May – 30 Sept. without permit."
+"en": "Napf gold in the Emmental. Canton Bern: pan and shovel, max. 3 people, 1 May – 30 Sept. without permit.",
+"find_de": "Napfgold: Flitter bis 1–2 mm, selten kleine Nuggets; sehr reines Gold.",
+"find_en": "Napf gold: flakes up to 1–2 mm, rarely small nuggets; very pure gold.",
+"permit_de": "Je nach Kanton und Gemeinde – Details in der Ebene «Goldwaschen-Regeln pro Kanton». Meist Gemeinde- oder Kantonsverwaltung (Fischerei / Umwelt). Fisch-Schonzeiten beachten, keine Motorgeräte.",
+"permit_en": "Depends on canton and municipality – see the layer 'Gold panning rules per canton'. Usually municipality or canton (fisheries / environment). Respect fish closed seasons, no motorised gear."
 }
 },
 {
@@ -358,7 +434,11 @@
 "river": "Vorderrhein",
 "kind": "permit",
 "de": "Rheingold in der Surselva. Gemeinde Disentis/Mustér: Bewilligung nötig.",
-"en": "Rhine gold in the Surselva. Municipality Disentis/Mustér: permit needed."
+"en": "Rhine gold in the Surselva. Disentis/Mustér: permit needed.",
+"find_de": "Flitter und ab und zu kleine Nuggets – oft gröber als Napfgold.",
+"find_en": "Flakes and occasional small nuggets – often coarser than Napf gold.",
+"permit_de": "Je nach Kanton und Gemeinde – Details in der Ebene «Goldwaschen-Regeln pro Kanton». Meist Gemeinde- oder Kantonsverwaltung (Fischerei / Umwelt). Fisch-Schonzeiten beachten, keine Motorgeräte.",
+"permit_en": "Depends on canton and municipality – see the layer 'Gold panning rules per canton'. Usually municipality or canton (fisheries / environment). Respect fish closed seasons, no motorised gear."
 }
 },
 {
@@ -376,7 +456,11 @@
 "river": "Rein da Medel",
 "kind": "permit",
 "de": "Klassisches Bündner Goldwaschgebiet. Gemeinde Medel/Lucmagn: jegliches Goldwaschen bewilligungspflichtig (Gemeindeverwaltung).",
-"en": "Classic Grisons gold area. Medel/Lucmagn: all gold panning needs a permit from the municipality."
+"en": "Classic Grisons gold area. Medel/Lucmagn: all panning needs a municipal permit.",
+"find_de": "Flitter und ab und zu kleine Nuggets – oft gröber als Napfgold.",
+"find_en": "Flakes and occasional small nuggets – often coarser than Napf gold.",
+"permit_de": "Je nach Kanton und Gemeinde – Details in der Ebene «Goldwaschen-Regeln pro Kanton». Meist Gemeinde- oder Kantonsverwaltung (Fischerei / Umwelt). Fisch-Schonzeiten beachten, keine Motorgeräte.",
+"permit_en": "Depends on canton and municipality – see the layer 'Gold panning rules per canton'. Usually municipality or canton (fisheries / environment). Respect fish closed seasons, no motorised gear."
 }
 },
 {
@@ -394,7 +478,11 @@
 "river": "Magliasina / Tresa",
 "kind": "permit",
 "de": "Ehemalige Goldminen im Malcantone (Sessa, Astano). Kanton Tessin: bewilligungspflichtig.",
-"en": "Former gold mines of the Malcantone. Canton Ticino: permit required."
+"en": "Former gold mines of the Malcantone. Canton Ticino: permit required.",
+"find_de": "Feine Flitter; Pyrit und Arsenkies aus den alten Minen.",
+"find_en": "Fine flakes; pyrite and arsenopyrite from the old mines.",
+"permit_de": "Je nach Kanton und Gemeinde – Details in der Ebene «Goldwaschen-Regeln pro Kanton». Meist Gemeinde- oder Kantonsverwaltung (Fischerei / Umwelt). Fisch-Schonzeiten beachten, keine Motorgeräte.",
+"permit_en": "Depends on canton and municipality – see the layer 'Gold panning rules per canton'. Usually municipality or canton (fisheries / environment). Respect fish closed seasons, no motorised gear."
 }
 },
 {
@@ -412,7 +500,11 @@
 "river": "Allondon",
 "kind": "permit",
 "de": "Bekanntes Genfer Goldgewässer. Kanton Genf: bewilligungspflichtig; Teile sind Naturschutzgebiet.",
-"en": "Known Geneva gold stream. Canton Geneva: permit required; parts are nature reserve."
+"en": "Known Geneva gold stream. Permit required; parts are nature reserve.",
+"find_de": "Feine Flitter im Kies.",
+"find_en": "Fine flakes in the gravel.",
+"permit_de": "Je nach Kanton und Gemeinde – Details in der Ebene «Goldwaschen-Regeln pro Kanton». Meist Gemeinde- oder Kantonsverwaltung (Fischerei / Umwelt). Fisch-Schonzeiten beachten, keine Motorgeräte.",
+"permit_en": "Depends on canton and municipality – see the layer 'Gold panning rules per canton'. Usually municipality or canton (fisheries / environment). Respect fish closed seasons, no motorised gear."
 }
 },
 {
@@ -429,8 +521,12 @@
 "country": "IT",
 "river": "Elvo",
 "kind": "permit",
-"de": "„Mekka“ der italienischen Goldsucher, neben der römischen Goldmine Bessa (Naturreservat – dort nicht graben). Piemont: Anmeldung bei der Region (Registro raccoglitori), nur Handwerkzeug, max. 5 g Gold pro Tag und Person, Grundeigentümer fragen. Goldmuseum in Vermogno.",
-"en": "'Mecca' of Italian gold hunters, next to the Roman Bessa gold mine (nature reserve – no digging). Piedmont: register with the region, hand tools only, max. 5 g gold per day and person."
+"de": "„Mekka“ der italienischen Goldsucher, neben der römischen Goldmine Bessa (Naturreservat – dort nicht graben). Goldmuseum in Vermogno.",
+"en": "'Mecca' of Italian gold hunters, next to the Roman Bessa gold mine (nature reserve – no digging). Gold museum in Vermogno.",
+"find_de": "Flitter und kleine Nuggets, viel Granat – einer der ergiebigsten Bäche Italiens.",
+"find_en": "Flakes and small nuggets, lots of garnet – one of Italy's richest streams.",
+"permit_de": "Piemont: Eintrag ins Register der Goldsucher der Region Piemont (Bergbau-Aufsicht), nur Handwerkzeug, max. 5 g Gold pro Tag. Vereine (z. B. in Biella) helfen bei der Anmeldung. Grundeigentümer fragen, Naturparks sind tabu.",
+"permit_en": "Piedmont: register as gold collector with the Piedmont region (mining supervision), hand tools only, max. 5 g gold per day. Local clubs (e.g. in Biella) help. Ask the landowner; nature parks are off limits."
 }
 },
 {
@@ -447,8 +543,12 @@
 "country": "IT",
 "river": "Orba",
 "kind": "permit",
-"de": "Klassisches Goldwaschgebiet Orba/Piota (Ovadese). Piemont: Anmeldung bei der Region, nur Handwerkzeug, max. 5 g pro Tag.",
-"en": "Classic Orba/Piota gold area. Piedmont: register with the region, hand tools, max. 5 g per day."
+"de": "Klassisches Goldwaschgebiet Orba/Piota (Ovadese).",
+"en": "Classic Orba/Piota gold area.",
+"find_de": "Vergleichsweise grosse Flitter und kleine Nuggets.",
+"find_en": "Comparatively large flakes and small nuggets.",
+"permit_de": "Piemont: Eintrag ins Register der Goldsucher der Region Piemont (Bergbau-Aufsicht), nur Handwerkzeug, max. 5 g Gold pro Tag. Vereine (z. B. in Biella) helfen bei der Anmeldung. Grundeigentümer fragen, Naturparks sind tabu.",
+"permit_en": "Piedmont: register as gold collector with the Piedmont region (mining supervision), hand tools only, max. 5 g gold per day. Local clubs (e.g. in Biella) help. Ask the landowner; nature parks are off limits."
 }
 },
 {
@@ -465,8 +565,12 @@
 "country": "IT",
 "river": "Piota",
 "kind": "permit",
-"de": "Goldführende Bäche im Alto Monferrato (römische Goldwäschen). Piemont-Regeln.",
-"en": "Gold-bearing streams of the Alto Monferrato. Piedmont rules."
+"de": "Goldführende Bäche im Alto Monferrato mit römischen Goldwäschen.",
+"en": "Gold-bearing streams of the Alto Monferrato with Roman workings.",
+"find_de": "Vergleichsweise grosse Flitter und kleine Nuggets.",
+"find_en": "Comparatively large flakes and small nuggets.",
+"permit_de": "Piemont: Eintrag ins Register der Goldsucher der Region Piemont (Bergbau-Aufsicht), nur Handwerkzeug, max. 5 g Gold pro Tag. Vereine (z. B. in Biella) helfen bei der Anmeldung. Grundeigentümer fragen, Naturparks sind tabu.",
+"permit_en": "Piedmont: register as gold collector with the Piedmont region (mining supervision), hand tools only, max. 5 g gold per day. Local clubs (e.g. in Biella) help. Ask the landowner; nature parks are off limits."
 }
 },
 {
@@ -483,8 +587,12 @@
 "country": "IT",
 "river": "Ticino",
 "kind": "permit",
-"de": "Ticino-Gold (Grenze Piemont/Lombardei). Grosse Teile liegen im Naturpark Valle del Ticino – dort ist Sammeln verboten. Piemont-/Lombardei-Regeln.",
-"en": "Ticino gold. Large parts lie in the Valle del Ticino park – collecting forbidden there."
+"de": "Ticino-Gold an der Grenze Piemont/Lombardei. Grosse Teile liegen im Naturpark Valle del Ticino.",
+"en": "Ticino gold on the Piedmont/Lombardy border. Large parts lie in the Valle del Ticino park.",
+"find_de": "Feine bis mittlere Flitter, viel Schwarzsand.",
+"find_en": "Fine to medium flakes, lots of black sand.",
+"permit_de": "Im Parco del Ticino ist Sammeln verboten. Ausserhalb: Piemont-Ufer → Register der Region Piemont; Lombardei-Ufer → Region Lombardei fragen.",
+"permit_en": "Collecting is forbidden in the Ticino park. Outside: Piedmont bank → Piedmont register; Lombardy bank → ask the Lombardy region."
 }
 },
 {
@@ -501,8 +609,12 @@
 "country": "IT",
 "river": "Dora Baltea",
 "kind": "permit",
-"de": "Goldführende Dora Baltea (Canavese). Piemont: Anmeldung bei der Region, Handwerkzeug, max. 5 g pro Tag.",
-"en": "Gold-bearing Dora Baltea. Piedmont rules."
+"de": "Goldführende Dora Baltea im Canavese.",
+"en": "Gold-bearing Dora Baltea in the Canavese.",
+"find_de": "Feine bis mittlere Flitter.",
+"find_en": "Fine to medium flakes.",
+"permit_de": "Piemont: Eintrag ins Register der Goldsucher der Region Piemont (Bergbau-Aufsicht), nur Handwerkzeug, max. 5 g Gold pro Tag. Vereine (z. B. in Biella) helfen bei der Anmeldung. Grundeigentümer fragen, Naturparks sind tabu.",
+"permit_en": "Piedmont: register as gold collector with the Piedmont region (mining supervision), hand tools only, max. 5 g gold per day. Local clubs (e.g. in Biella) help. Ask the landowner; nature parks are off limits."
 }
 },
 {
@@ -520,7 +632,11 @@
 "river": "Anza",
 "kind": "show",
 "de": "Besucher-Goldmine Guia im Monte-Rosa-Gebiet (Valle Anzasca).",
-"en": "Guia visitor gold mine in the Monte Rosa area."
+"en": "Guia visitor gold mine in the Monte Rosa area.",
+"find_de": "Besucherbergwerk: Goldquarz ansehen, Goldwaschen für Besucher.",
+"find_en": "Visitor mine: see gold quartz, panning for visitors.",
+"permit_de": "Piemont: Eintrag ins Register der Goldsucher der Region Piemont (Bergbau-Aufsicht), nur Handwerkzeug, max. 5 g Gold pro Tag. Vereine (z. B. in Biella) helfen bei der Anmeldung. Grundeigentümer fragen, Naturparks sind tabu.",
+"permit_en": "Piedmont: register as gold collector with the Piedmont region (mining supervision), hand tools only, max. 5 g gold per day. Local clubs (e.g. in Biella) help. Ask the landowner; nature parks are off limits."
 }
 },
 {
@@ -537,8 +653,100 @@
 "country": "ES",
 "river": "Río Navelgas / Bárcena",
 "kind": "site",
-"de": "„Valle del Oro“ mit Goldwasch-Museum; jedes Jahr Ende Juli Goldwasch-Meisterschaft mit freier Waschzone. Ausserhalb: Erlaubnis nötig (Wasserbehörde Cantábrico, Region).",
-"en": "'Valle del Oro' with gold museum; national panning championship end of July with a free panning zone. Otherwise a permit is needed."
+"de": "„Valle del Oro“ mit Goldwasch-Museum; jedes Jahr Ende Juli Goldwasch-Meisterschaft mit freier Waschzone.",
+"en": "'Valle del Oro' with gold museum; panning championship end of July with a free panning zone.",
+"find_de": "Flitter und kleine Körner, teils recht grob; römische Abbauspuren in der ganzen Gegend.",
+"find_en": "Flakes and small grains, partly quite coarse; Roman workings all around.",
+"permit_de": "Asturien: Erlaubnis der Confederación Hidrográfica del Cantábrico (Nutzung des Flussbetts), Info beim Principado de Asturias (Minas). Während der Meisterschaft in Navelgas (Ende Juli) gibt es eine freie Waschzone.",
+"permit_en": "Asturias: permit from the Confederación Hidrográfica del Cantábrico, info from the Principado de Asturias (mines). During the Navelgas championship (end of July) there is a free panning zone."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.546,
+43.408
+]
+},
+"properties": {
+"name": "Río Navelgas – Seitenzonen",
+"country": "ES",
+"river": "Río Navelgas",
+"kind": "permit",
+"de": "Nicht direkt im Dorf, sondern Nebenarme, alte Hochwasserlinien, Kies- und Sandbänke. Navelgas ist offiziell als Goldgebiet mit römischer Goldgewinnung dokumentiert (IGME).",
+"en": "Not in the village itself but side channels, old flood lines, gravel and sand bars. Officially documented gold area with Roman workings.",
+"find_de": "Flitter und kleine Körner, teils recht grob; römische Abbauspuren in der ganzen Gegend.",
+"find_en": "Flakes and small grains, partly quite coarse; Roman workings all around.",
+"permit_de": "Asturien: Erlaubnis der Confederación Hidrográfica del Cantábrico (Nutzung des Flussbetts), Info beim Principado de Asturias (Minas). Während der Meisterschaft in Navelgas (Ende Juli) gibt es eine freie Waschzone.",
+"permit_en": "Asturias: permit from the Confederación Hidrográfica del Cantábrico, info from the Principado de Asturias (mines). During the Navelgas championship (end of July) there is a free panning zone."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.575,
+43.397
+]
+},
+"properties": {
+"name": "Naraval / Río Naraval",
+"country": "ES",
+"river": "Río Naraval",
+"kind": "permit",
+"de": "Besser als der Hauptbach: kleine Seitenrinnen, flache Sedimentzonen, alte Kurven neben dem Bach, kleine Terrassen.",
+"en": "Better than the main creek: side gullies, flat sediment zones, old bends, small terraces.",
+"find_de": "Flitter und kleine Körner, teils recht grob; römische Abbauspuren in der ganzen Gegend.",
+"find_en": "Flakes and small grains, partly quite coarse; Roman workings all around.",
+"permit_de": "Asturien: Erlaubnis der Confederación Hidrográfica del Cantábrico (Nutzung des Flussbetts), Info beim Principado de Asturias (Minas). Während der Meisterschaft in Navelgas (Ende Juli) gibt es eine freie Waschzone.",
+"permit_en": "Asturias: permit from the Confederación Hidrográfica del Cantábrico, info from the Principado de Asturias (mines). During the Navelgas championship (end of July) there is a free panning zone."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.536,
+43.384
+]
+},
+"properties": {
+"name": "Yerbo / kleine Zuflüsse",
+"country": "ES",
+"river": "Zuflüsse Río Navelgas",
+"kind": "permit",
+"de": "Ruhiger und weniger offensichtlich – gut für Testpfannen.",
+"en": "Quieter and less obvious – good for test pans.",
+"find_de": "Flitter und kleine Körner, teils recht grob; römische Abbauspuren in der ganzen Gegend.",
+"find_en": "Flakes and small grains, partly quite coarse; Roman workings all around.",
+"permit_de": "Asturien: Erlaubnis der Confederación Hidrográfica del Cantábrico (Nutzung des Flussbetts), Info beim Principado de Asturias (Minas). Während der Meisterschaft in Navelgas (Ende Juli) gibt es eine freie Waschzone.",
+"permit_en": "Asturias: permit from the Confederación Hidrográfica del Cantábrico, info from the Principado de Asturias (mines). During the Navelgas championship (end of July) there is a free panning zone."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.42,
+43.455
+]
+},
+"properties": {
+"name": "San Feliz (NE von Navelgas)",
+"country": "ES",
+"river": "Bäche um San Feliz",
+"kind": "permit",
+"de": "Goldhinweise in Eluvionen über der Vegadeo-Formation beschrieben (Fachliteratur).",
+"en": "Gold reported in eluvium above the Vegadeo formation (literature).",
+"find_de": "Flitter und kleine Körner, teils recht grob; römische Abbauspuren in der ganzen Gegend.",
+"find_en": "Flakes and small grains, partly quite coarse; Roman workings all around.",
+"permit_de": "Asturien: Erlaubnis der Confederación Hidrográfica del Cantábrico (Nutzung des Flussbetts), Info beim Principado de Asturias (Minas). Während der Meisterschaft in Navelgas (Ende Juli) gibt es eine freie Waschzone.",
+"permit_en": "Asturias: permit from the Confederación Hidrográfica del Cantábrico, info from the Principado de Asturias (mines). During the Navelgas championship (end of July) there is a free panning zone."
 }
 },
 {
@@ -555,8 +763,12 @@
 "country": "ES",
 "river": "Sil",
 "kind": "permit",
-"de": "Goldfluss Sil (El Bierzo). Erlaubnis der Confederación Hidrográfica Miño-Sil und der Region nötig.",
-"en": "Gold river Sil. Permit from the Miño-Sil water authority and the region needed."
+"de": "Goldfluss Sil im Bierzo.",
+"en": "Gold river Sil in El Bierzo.",
+"find_de": "Feine Flitter, angereichert an Innenkurven, Kiesbänken und alten Hochwasserterrassen (Transportgold aus Las Médulas / Cabrera).",
+"find_en": "Fine flakes, concentrated on inside bends, gravel bars and old flood terraces.",
+"permit_de": "Kastilien-León / Galicien: Erlaubnis der Confederación Hidrográfica Miño-Sil (Nutzung des Flussbetts) und der Region (Junta de Castilla y León bzw. Xunta de Galicia – Bergbau). Schutzgebiete wie Las Médulas sind tabu.",
+"permit_en": "Castile-León / Galicia: permit from the Confederación Hidrográfica Miño-Sil and the region (mining office). Protected areas like Las Médulas are off limits."
 }
 },
 {
@@ -564,17 +776,43 @@
 "geometry": {
 "type": "Point",
 "coordinates": [
--6.7722,
-42.4203
+-6.818,
+42.416
 ]
 },
 "properties": {
-"name": "Sil bei Puente de Domingo Flórez",
+"name": "Puente de Domingo Flórez / Río Sil",
 "country": "ES",
 "river": "Sil",
 "kind": "permit",
-"de": "Römische Goldgebiete am Sil. Erlaubnis Confederación Hidrográfica Miño-Sil nötig.",
-"en": "Roman gold area on the Sil. Permit needed."
+"de": "Guter Startpunkt für tiefer liegende Umlagerungen unterhalb von Las Médulas. Nicht in geschützten Bereichen graben.",
+"en": "Good start for reworked gravels below Las Médulas. No digging in protected areas.",
+"find_de": "Feine Flitter, angereichert an Innenkurven, Kiesbänken und alten Hochwasserterrassen (Transportgold aus Las Médulas / Cabrera).",
+"find_en": "Fine flakes, concentrated on inside bends, gravel bars and old flood terraces.",
+"permit_de": "Kastilien-León / Galicien: Erlaubnis der Confederación Hidrográfica Miño-Sil (Nutzung des Flussbetts) und der Region (Junta de Castilla y León bzw. Xunta de Galicia – Bergbau). Schutzgebiete wie Las Médulas sind tabu.",
+"permit_en": "Castile-León / Galicia: permit from the Confederación Hidrográfica Miño-Sil and the region (mining office). Protected areas like Las Médulas are off limits."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.982,
+42.414
+]
+},
+"properties": {
+"name": "Sobradelo / Río Sil",
+"country": "ES",
+"river": "Sil",
+"kind": "permit",
+"de": "Breitere Talbereiche, Kies- und Sandbänke, alte Hochwasserterrassen mit Transportgold. Parkplatz als Start, dann 0,5–2 km die Seitenzonen ablaufen.",
+"en": "Wider valley, gravel and sand bars, old flood terraces with transported gold.",
+"find_de": "Feine Flitter, angereichert an Innenkurven, Kiesbänken und alten Hochwasserterrassen (Transportgold aus Las Médulas / Cabrera).",
+"find_en": "Fine flakes, concentrated on inside bends, gravel bars and old flood terraces.",
+"permit_de": "Kastilien-León / Galicien: Erlaubnis der Confederación Hidrográfica Miño-Sil (Nutzung des Flussbetts) und der Region (Junta de Castilla y León bzw. Xunta de Galicia – Bergbau). Schutzgebiete wie Las Médulas sind tabu.",
+"permit_en": "Castile-León / Galicia: permit from the Confederación Hidrográfica Miño-Sil and the region (mining office). Protected areas like Las Médulas are off limits."
 }
 },
 {
@@ -591,8 +829,34 @@
 "country": "ES",
 "river": "Sil",
 "kind": "permit",
-"de": "Goldführender Sil in Galicien. Erlaubnis Confederación Hidrográfica Miño-Sil und Xunta nötig.",
-"en": "Gold-bearing Sil in Galicia. Permit needed."
+"de": "Goldführender Sil in Galicien.",
+"en": "Gold-bearing Sil in Galicia.",
+"find_de": "Feine Flitter, angereichert an Innenkurven, Kiesbänken und alten Hochwasserterrassen (Transportgold aus Las Médulas / Cabrera).",
+"find_en": "Fine flakes, concentrated on inside bends, gravel bars and old flood terraces.",
+"permit_de": "Kastilien-León / Galicien: Erlaubnis der Confederación Hidrográfica Miño-Sil (Nutzung des Flussbetts) und der Region (Junta de Castilla y León bzw. Xunta de Galicia – Bergbau). Schutzgebiete wie Las Médulas sind tabu.",
+"permit_en": "Castile-León / Galicia: permit from the Confederación Hidrográfica Miño-Sil and the region (mining office). Protected areas like Las Médulas are off limits."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-6.759,
+42.303
+]
+},
+"properties": {
+"name": "La Baña / Río Cabrera",
+"country": "ES",
+"river": "Río Cabrera",
+"kind": "permit",
+"de": "Seitentäler, trockene Rinnen und altes Schwemmmaterial; viele römische Abbaustellen und Terrassen entlang Sil/Cabrera. Gute Kombination aus Geologie und wenig besuchten Zonen.",
+"en": "Side valleys, dry gullies and old alluvium; many Roman workings along Sil/Cabrera. Little visited.",
+"find_de": "Flitter in Seitenrinnen und altem Schwemmmaterial; römische Kanäle und Abbauterrassen.",
+"find_en": "Flakes in side gullies and old alluvium; Roman channels and terraces.",
+"permit_de": "Kastilien-León / Galicien: Erlaubnis der Confederación Hidrográfica Miño-Sil (Nutzung des Flussbetts) und der Region (Junta de Castilla y León bzw. Xunta de Galicia – Bergbau). Schutzgebiete wie Las Médulas sind tabu.",
+"permit_en": "Castile-León / Galicia: permit from the Confederación Hidrográfica Miño-Sil and the region (mining office). Protected areas like Las Médulas are off limits."
 }
 },
 {
@@ -610,7 +874,11 @@
 "river": "–",
 "kind": "closed",
 "de": "Grösste römische Goldmine, UNESCO-Welterbe – nur ansehen, nicht graben.",
-"en": "Largest Roman gold mine, UNESCO World Heritage – look only, no digging."
+"en": "Largest Roman gold mine, UNESCO World Heritage – look only, no digging.",
+"find_de": "Nichts mitnehmen – Welterbe. Sehenswert: rote Abbauwände und römische Stollen.",
+"find_en": "Take nothing – World Heritage. Worth seeing: red mining cliffs and Roman tunnels.",
+"permit_de": "Kastilien-León / Galicien: Erlaubnis der Confederación Hidrográfica Miño-Sil (Nutzung des Flussbetts) und der Region (Junta de Castilla y León bzw. Xunta de Galicia – Bergbau). Schutzgebiete wie Las Médulas sind tabu.",
+"permit_en": "Castile-León / Galicia: permit from the Confederación Hidrográfica Miño-Sil and the region (mining office). Protected areas like Las Médulas are off limits."
 }
 },
 {
@@ -627,8 +895,12 @@
 "country": "FR",
 "river": "Ariège",
 "kind": "permit",
-"de": "Die Ariège ist Frankreichs bekanntester Goldfluss („Orpaillage“). Je nach Département Anmeldung/Erlaubnis; Vereine helfen.",
-"en": "The Ariège is France's best-known gold river. Declaration/permit depending on the département."
+"de": "Die Ariège ist Frankreichs bekanntester Goldfluss. Besonders Sandbänke und Innenkurven sind beliebt; Vereine helfen.",
+"en": "The Ariège is France's best-known gold river. Sand bars and inside bends are popular.",
+"find_de": "Pyrenäengold: Flitter, selten kleine Nuggets – vor allem in Sandbänken und Innenkurven.",
+"find_en": "Pyrenees gold: flakes, rarely small nuggets – mainly in sand bars and inside bends.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
 }
 },
 {
@@ -636,35 +908,21 @@
 "geometry": {
 "type": "Point",
 "coordinates": [
-3.9857,
-44.0546
+-0.264,
+43.177
 ]
 },
 "properties": {
-"name": "Gardon bei Anduze (Cevennen)",
+"name": "Gave de Pau bei Nay",
 "country": "FR",
-"river": "Gardon",
+"river": "Gave de Pau",
 "kind": "permit",
-"de": "Klassischer Goldfluss der Cevennen. Département Gard: Regeln vorher klären.",
-"en": "Classic gold river of the Cévennes. Check the Gard rules."
-}
-},
-{
-"type": "Feature",
-"geometry": {
-"type": "Point",
-"coordinates": [
-4.1998,
-44.26
-]
-},
-"properties": {
-"name": "Cèze bei Saint-Ambroix",
-"country": "FR",
-"river": "Cèze",
-"kind": "permit",
-"de": "Goldführende Cèze (Cevennen). Regeln des Départements klären.",
-"en": "Gold-bearing Cèze. Check département rules."
+"de": "Der Gave de Pau bringt Gold aus den zentralen Pyrenäen.",
+"en": "The Gave de Pau carries gold from the central Pyrenees.",
+"find_de": "Pyrenäengold: Flitter, selten kleine Nuggets – vor allem in Sandbänken und Innenkurven.",
+"find_en": "Pyrenees gold: flakes, rarely small nuggets – mainly in sand bars and inside bends.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
 }
 },
 {
@@ -681,8 +939,188 @@
 "country": "FR",
 "river": "Garonne",
 "kind": "permit",
-"de": "Garonne-Gold aus den Pyrenäen. Regeln des Départements klären.",
-"en": "Garonne gold from the Pyrenees. Check département rules."
+"de": "Garonne-Gold aus den Pyrenäen.",
+"en": "Garonne gold from the Pyrenees.",
+"find_de": "Pyrenäengold: Flitter, selten kleine Nuggets – vor allem in Sandbänken und Innenkurven.",
+"find_en": "Pyrenees gold: flakes, rarely small nuggets – mainly in sand bars and inside bends.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+3.9857,
+44.0546
+]
+},
+"properties": {
+"name": "Gardon bei Anduze (Cevennen)",
+"country": "FR",
+"river": "Gardon",
+"kind": "permit",
+"de": "Einer der bekanntesten Goldflüsse Frankreichs. In Anduze gibt es Goldwasch-Kurse.",
+"en": "One of France's best-known gold rivers. Panning courses in Anduze.",
+"find_de": "Feine Flitter, oft im Moos und Wurzelwerk an der Hochwasserlinie.",
+"find_en": "Fine flakes, often in moss and roots at the flood line.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+4.081,
+44.125
+]
+},
+"properties": {
+"name": "Gardon bei Alès",
+"country": "FR",
+"river": "Gardon d'Alès",
+"kind": "permit",
+"de": "Gardon d'Alès, feine Goldflitter.",
+"en": "Gardon d'Alès, fine gold flakes.",
+"find_de": "Feine Flitter, oft im Moos und Wurzelwerk an der Hochwasserlinie.",
+"find_en": "Fine flakes, often in moss and roots at the flood line.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+4.1998,
+44.26
+]
+},
+"properties": {
+"name": "Cèze bei Saint-Ambroix",
+"country": "FR",
+"river": "Cèze",
+"kind": "permit",
+"de": "Goldführende Cèze in den Cevennen.",
+"en": "Gold-bearing Cèze in the Cévennes.",
+"find_de": "Feine Flitter, oft im Moos und Wurzelwerk an der Hochwasserlinie.",
+"find_en": "Fine flakes, often in moss and roots at the flood line.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+3.384,
+45.294
+]
+},
+"properties": {
+"name": "Allier bei Brioude (Auvergne)",
+"country": "FR",
+"river": "Allier",
+"kind": "permit",
+"de": "Zentralmassiv: der Allier ist bekannt für Schwemmland mit feinem Waschgold. In der Auvergne gibt es touristische Goldwasch-Angebote.",
+"en": "Massif Central: the Allier is known for alluvium with fine gold. Tourist panning offers in the Auvergne.",
+"find_de": "Feines Waschgold in Schwemmlandablagerungen.",
+"find_en": "Fine placer gold in alluvial deposits.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+1.205,
+45.515
+]
+},
+"properties": {
+"name": "Pays de Saint-Yrieix (Haute-Vienne)",
+"country": "FR",
+"river": "Bäche um Saint-Yrieix-la-Perche",
+"kind": "site",
+"de": "Historisch bekanntes Goldgebiet im Limousin. Der Naturpark Périgord-Limousin bietet geführte Goldwasch-Kurse – gut für Anfänger.",
+"en": "Historic gold area in the Limousin. The Périgord-Limousin nature park offers guided courses – good for beginners.",
+"find_de": "Flitter in den Bächen rund um das alte Goldbergbaurevier (Mine du Bourneix).",
+"find_en": "Flakes in the creeks around the old gold mining district.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-2.989,
+48.199
+]
+},
+"properties": {
+"name": "Mûr-de-Bretagne (Goldenes Dreieck)",
+"country": "FR",
+"river": "Bäche um Guerlédan",
+"kind": "permit",
+"de": "„Goldenes Dreieck der Bretagne“ zwischen Mûr-de-Bretagne, Loudéac und Pontivy – Quarzvorkommen und goldführende Bäche.",
+"en": "'Golden triangle of Brittany' between Mûr-de-Bretagne, Loudéac and Pontivy.",
+"find_de": "Flitter und kleine Körner; goldführende Quarzgänge in der Umgebung.",
+"find_en": "Flakes and small grains; gold-bearing quartz veins nearby.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-2.963,
+48.068
+]
+},
+"properties": {
+"name": "Pontivy / Blavet (Goldenes Dreieck)",
+"country": "FR",
+"river": "Blavet",
+"kind": "permit",
+"de": "Südecke des goldenen Dreiecks der Bretagne.",
+"en": "Southern corner of Brittany's golden triangle.",
+"find_de": "Flitter und kleine Körner; goldführende Quarzgänge in der Umgebung.",
+"find_en": "Flakes and small grains; gold-bearing quartz veins nearby.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-2.754,
+48.178
+]
+},
+"properties": {
+"name": "Loudéac (Goldenes Dreieck)",
+"country": "FR",
+"river": "Bäche um Loudéac",
+"kind": "permit",
+"de": "Ostecke des goldenen Dreiecks der Bretagne.",
+"en": "Eastern corner of Brittany's golden triangle.",
+"find_de": "Flitter und kleine Körner; goldführende Quarzgänge in der Umgebung.",
+"find_en": "Flakes and small grains; gold-bearing quartz veins nearby.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
 }
 },
 {
@@ -700,7 +1138,11 @@
 "river": "Rhin",
 "kind": "permit",
 "de": "Rheingold auf französischer Seite. Teile sind Naturschutzgebiet (Réserve naturelle).",
-"en": "Rhine gold on the French side. Parts are nature reserves."
+"en": "Rhine gold on the French side. Parts are nature reserves.",
+"find_de": "Sehr feines Flittergold (meist unter 0,5 mm) mit viel Schwarzsand. Kleine Ausbeute, dafür auf vielen Kiesbänken.",
+"find_en": "Very fine flake gold (mostly under 0.5 mm) with lots of black sand. Small yields, but on many gravel bars.",
+"permit_de": "Hobby-Goldwaschen (orpaillage de loisir) mit Pfanne, Schaufel und Sieb ist grundsätzlich geduldet. Vorher bei der Mairie und der DDT(M) des Départements fragen (Erlasse der Präfektur, Laichzonen). Ufer sind oft Privatgrund – Eigentümer fragen. Keine Motorpumpen.",
+"permit_en": "Hobby gold panning (orpaillage de loisir) with pan, shovel and sieve is generally tolerated. Ask the town hall and the département's DDT(M) first (prefecture orders, spawning zones). Banks are often private – ask the owner. No motor pumps."
 }
 }
 ]

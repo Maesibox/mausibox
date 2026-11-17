@@ -505,6 +505,8 @@ var App = (function () {
               "<div class='pop-sub'>" + esc(tr(cfg.name)) + (a.river && a.river !== "–" ? " · " + esc(a.river) : "") + "</div>" +
               "<p class='verdict " + esc(k.level || "limited") + "'>" + esc(tr(k.label)) + "</p>" +
               "<p class='note-text'>" + esc(lang === "de" ? a.de : (a.en || a.de)) + "</p>" +
+              (a.find_de ? "<p class='note-text'><b>🔎 " + esc(t("spotFind")) + ":</b> " + esc(lang === "de" ? a.find_de : a.find_en) + "</p>" : "") +
+              (a.permit_de ? "<p class='note-text'><b>📋 " + esc(t("spotPermit")) + ":</b> " + esc(lang === "de" ? a.permit_de : a.permit_en) + "</p>" : "") +
               (rule ? "<details><summary>" + esc(t("goldRules")) + " · " + esc(tr(rule.name)) + "</summary><p class='note-text'>" + esc(tr(rule.rule)) + "</p>" +
                 (rule.link ? "<a href='" + esc(rule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") + "</details>" : "") +
               navLink(c[1], c[0]) + "<p class='hint'>" + esc(t("spotHint")) + "</p></div></div>";
