@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 35,
+  appVersion: 36,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -449,14 +449,16 @@ var APP_CONFIG = {
         permit: { color: "#ff9800", level: "limited", label: { en: "Permit needed", de: "Erlaubnis nötig" } },
         club:   { color: "#00bfa5", level: "limited", label: { en: "Club claims – members only", de: "Club-Claims – nur für Mitglieder" } },
         site:   { color: "#2f80ed", level: "open",    label: { en: "Fee panning / visitor mine", de: "Bezahl-Waschplatz / Besuchermine" } },
-        show:   { color: "#9b51e0", level: "limited", label: { en: "Museum / historic site", de: "Museum / historische Stätte" } }
+        show:   { color: "#9b51e0", level: "limited", label: { en: "Museum / historic site", de: "Museum / historische Stätte" } },
+        unclear: { color: "#9e9e9e", level: "limited", label: { en: "Access not confirmed – check locally", de: "Zugang nicht bestätigt – vor Ort prüfen" } }
       },
       legend: [
         { color: "#2ecc40", text: { en: "public area", de: "öffentlich" } },
         { color: "#ff9800", text: { en: "permit", de: "Erlaubnis" } },
         { color: "#00bfa5", text: { en: "club claims", de: "Club-Claims" } },
         { color: "#2f80ed", text: { en: "fee site", de: "Bezahl-Platz" } },
-        { color: "#9b51e0", text: { en: "museum", de: "Museum" } }
+        { color: "#9b51e0", text: { en: "museum", de: "Museum" } },
+        { color: "#9e9e9e", text: { en: "not confirmed", de: "nicht bestätigt" } }
       ]
     },
     {

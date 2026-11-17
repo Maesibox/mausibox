@@ -59,6 +59,8 @@ FIND = {
  "rockies": ("Flitter und kleine Körner.", "Flakes and small grains."),
  "east": ("Flitter und kleine Körner; im Osten oft in Bezahl-Waschplätzen mit Konzentrat.", "Flakes and small grains; in the east often at paid sites with concentrate."),
  "museum": ("Besuchermine / Museum mit Goldwaschen für Gäste.", "Visitor mine / museum with panning for guests."),
+ "idaho": ("Flitter und kleine Körner – Idahos Goldrausch begann 1860 an der Orofino Creek.", "Flakes and small grains – Idaho's gold rush started in 1860 on Orofino Creek."),
+ "wash": ("Flitter und für Washington eher grobes Gold (Liberty / Swauk).", "Flakes and fairly coarse gold for Washington (Liberty / Swauk)."),
  "nevada": ("Nuggets im Wüstenschotter – Detektor-Gebiet.", "Nuggets in desert gravels – detecting area."),
  "bretagne": ("Flitter und kleine Körner; goldführende Quarzgänge in der Umgebung.", "Flakes and small grains; gold-bearing quartz veins nearby."),
 }
@@ -140,6 +142,17 @@ PERMIT = {
  "US-SD": ("Black Hills National Forest: Waschen von Hand ohne Erlaubnis; mit Motorgeräten oder Saugbagger braucht es Erlaubnis und Kaution. Claims und Privatland beachten.",
            "Black Hills National Forest: hand panning needs no permit; motorised equipment or dredges need a permit and bond. Watch for claims and private land.",
            "https://www.fs.usda.gov/r02/blackhills/recreation/gold-panning-rockhounding-metal-detecting"),
+ "US-WA": ("Washington: Regeln der Broschüre «Gold and Fish» des Washington Department of Fish and Wildlife (offene Flüsse, Arbeitsfenster, erlaubtes Gerät). Staatsland des DNR ist geschlossen, ausser mit Placer-Vertrag. Auf Bundesland ohne Claim: «casual use».",
+           "Washington: follow the 'Gold and Fish' pamphlet of the Washington Department of Fish and Wildlife (open rivers, work windows, allowed gear). DNR state land is closed unless you hold a placer contract. On federal land without a claim: casual use.", None),
+ "US-NC": ("Uwharrie National Forest: Goldwaschen auf dem grössten Teil des Waldes ohne Gebühr und Erlaubnis, solange nur Schaufel und Pfanne benutzt werden und der Bach nicht stark gestört wird.",
+           "Uwharrie National Forest: panning on most of the forest without fee or permit as long as only shovel and pan are used and the stream is not significantly disturbed.",
+           "https://www.montgomerycountync.gov/visit/what-to-do/pan-for-gold-in-the-uwharries"),
+ "US-OR-HP": ("Oregon, «hands and pans only»: nur Hände und Pfanne – nicht einmal Schaufel oder Pickel. Keine Claims möglich. Nicht waschen, wenn Lachse laichen.",
+              "Oregon, 'hands and pans only': hands and pan only – not even shovel or pick. No claims possible. No panning while salmon spawn.",
+              "https://portlandgoldprospectors.org/wp-content/uploads/2025/03/PlaceToMineInOregonList.pdf"),
+ "US-AK-BLM": ("Alaska, öffentliches BLM-Waschgebiet: Handwerkzeug und leichtes Gerät (Pfanne, Rinne, Rocker, Pickel, Schaufel). Nicht auf benachbarten Claims waschen. Aktuellen Stand beim BLM Alaska prüfen.",
+               "Alaska, public BLM panning area: hand tools and light gear (pan, sluice, rocker, pick, shovel). Don't pan on adjacent claims. Check current status with BLM Alaska.",
+               "https://www.blm.gov/programs/recreation/recreation-activities/alaska"),
  "US-CLUB": ("Club-Claims (z. B. GPAA): nur für Mitglieder, Mitgliederausweis und Claim-Regeln mitnehmen. Mitgliedschaft online.",
              "Club claims (e.g. GPAA): members only, carry your membership card and the claim rules. Membership online.",
              "https://www.goldprospectors.org/"),
@@ -247,7 +260,7 @@ SPOTS = [
 # USA – öffentliche Waschgebiete, bekannte Goldgebiete, Bezahl-Waschplätze
 US_SPOTS = [
  # Arizona
- ("US", "Lynx Creek Gold Pan Day Use Area (Prescott NF)", "Lynx Creek", 34.5600, -112.3500, "free", "az-creek", "US-AZ", "Öffentliches Waschgebiet des Forest Service in einer Mineral-Withdrawal-Zone (keine Claims). Nur Pfanne und Handwerkzeug.", "Forest Service public panning area in a mineral withdrawal (no claims). Pan and hand tools only.", "https://www.fs.usda.gov/r03/prescott"),
+ ("US", "Lynx Creek Gold Pan Day Use Area (Prescott NF)", "Lynx Creek", 34.5600, -112.3500, "free", "az-creek", "US-AZ", "Öffentliches Waschgebiet des Forest Service in einer Mineral-Withdrawal-Zone (keine Claims). Nur Pfanne und Handwerkzeug.", "Forest Service public panning area in a mineral withdrawal (no claims). Pan and hand tools only.", "https://www.fs.usda.gov/r03/prescott/recreation/lynx-creek-gold-pan-day-use-area"),
  ("US", "Rich Hill / Stanton (GPAA)", "Weaver Gulch", 34.1650, -112.7350, "club", "az", "US-CLUB", "Berühmt für Nuggets; Teile sind GPAA-Club-Claims (nur für Mitglieder). Rundherum viele private Claims.", "Famous for nuggets; parts are GPAA club claims (members only). Many private claims around."),
  ("US", "Gold Basin (Mohave County)", "Wüstenschotter", 35.8700, -114.2700, "free", "az", "US-AZ", "Bekanntes Detektor-Gebiet auf BLM-Land; viele Claims – Ebene «BLM-Claims» einschalten.", "Known detecting area on BLM land; many claims – turn on the 'BLM claims' layer."),
  ("US", "Quartzsite / La Paz (BLM)", "Wüstenschotter", 33.6600, -114.2300, "free", "az", "US-AZ", "Winter-Treffpunkt der Goldsucher; Detektor-Gebiete auf BLM-Land, aber viele Claims.", "Winter meeting place for prospectors; detecting on BLM land, but many claims."),
@@ -279,6 +292,37 @@ US_SPOTS = [
  # Osten
  ("US", "Consolidated Gold Mine (Dahlonega, Georgia)", "–", 34.5500, -83.9700, "site", "east", "US", "Besuchermine mit Goldwaschen im ersten US-Goldrausch-Gebiet.", "Visitor mine with panning in the first US gold rush area.", "https://www.consolidatedgoldmine.com/"),
  ("US", "Reed Gold Mine (North Carolina)", "Little Meadow Creek", 35.2850, -80.4700, "site", "east", "US", "Ort des ersten belegten Goldfunds der USA (1799); staatliche historische Stätte mit Goldwaschen in der Saison.", "Site of the first documented US gold find (1799); state historic site with seasonal panning.", "https://historicsites.nc.gov/all-sites/reed-gold-mine"),
+ # --- weitere Recherche (Nov. 2026) ---
+ # Kalifornien
+ ("US", "PiPi Campground (Eldorado NF)", "Middle Fork Cosumnes River", 38.5530, -120.4360, "free", "motherlode", "US-CA", "Vom Forest Service selbst vorgeschlagener Platz zum Goldwaschen. Teile des Waldes sind gesperrt – beim Ranger District fragen.", "Panning spot suggested by the Forest Service itself. Parts of the forest are closed – ask the ranger district.", "https://www.fs.usda.gov/media/122082"),
+ ("US", "South Yuba River bei Washington (Tahoe NF)", "South Yuba River", 39.3600, -120.8000, "free", "motherlode", "US-CA", "Rund zwei Quadratmeilen am South Yuba, die fürs Goldwaschen ausgeschieden sind (laut Hobbyquellen).", "About two square miles on the South Yuba set aside for panning (hobby sources)."),
+ ("US", "Union Flat Campground (Tahoe NF)", "North Yuba River", 39.5670, -120.7450, "free", "motherlode", "US-CA", "Goldwasch-Parzelle des Forest Service beim Campingplatz am North Yuba.", "Forest Service panning parcel at the campground on the North Yuba."),
+ ("US", "East Fork San Gabriel River (Angeles NF)", "East Fork San Gabriel", 34.2370, -117.7660, "free", "motherlode", "US-CA", "Historisches Goldwaschgebiet nahe Los Angeles – Status vor Ort prüfen.", "Historic panning area near Los Angeles – check status locally."),
+ # Oregon
+ ("US", "Rogue River – Hellgate Recreation Area", "Rogue River", 42.5500, -123.5500, "free", "oregon", "US-OR-HP", "27 Meilen des Rogue zwischen Applegate River und Graves Creek, öffentlich – aber nur Hände und Pfanne.", "27 miles of the Rogue between the Applegate River and Graves Creek, public – hands and pans only.", "https://portlandgoldprospectors.org/wp-content/uploads/2025/03/PlaceToMineInOregonList.pdf"),
+ ("US", "Gold Nugget Wayside (Rogue River)", "Rogue River", 42.4300, -123.0500, "free", "oregon", "US-OR-HP", "Kleine Zugänge zum Rogue ohne Claims, offen für alle.", "Small access points to the Rogue without claims, open to all."),
+ ("US", "Sixes River Recreational Mining Site (BLM)", "Sixes River", 42.8300, -124.3800, "free", "oregon", "US-OR", "Rund eine Meile am Sixes River, nur Pfanne und Rinne (Lachs-Gewässer).", "About one mile of the Sixes River, pan and sluice only (salmon habitat)."),
+ ("US", "Sumpter Valley Dredge (State Heritage Area)", "Powder River", 44.7500, -118.2000, "show", "oregon", "US-OR", "Riesiger Goldbagger als Museum; an Wochenenden (Mai–Oktober) Goldwasch-Vorführungen der Ranger.", "Huge gold dredge museum; ranger panning demonstrations on weekends (May–October).", "https://stateparks.oregon.gov/index.cfm?do=park.profile&parkId=174"),
+ ("US", "McCully Forks Campground (Sumpter)", "McCully Fork", 44.7700, -118.2400, "free", "oregon", "US-OR", "In Listen freier Goldwaschplätze bei Sumpter genannt.", "Listed among free panning sites near Sumpter."),
+ # Washington, Idaho, Wyoming, Colorado, New Mexico
+ ("US", "Liberty / Swauk Creek (Washington)", "Swauk Creek", 47.2500, -120.6700, "free", "wash", "US-WA", "Beliebter Hobby-Goldbach beim alten Goldgräberort Liberty (Blewett Pass).", "Popular hobby gold creek at the old mining town of Liberty (Blewett Pass)."),
+ ("US", "Land of the Yankee Fork (Idaho)", "Yankee Fork", 44.4900, -114.2100, "site", "idaho", "US", "State Park mit Goldwasch-Station beim Besucherzentrum in Challis; im Yankee-Fork-Tal alte Goldbagger.", "State park with a panning station at the interpretive center in Challis; old gold dredges in the Yankee Fork valley."),
+ ("US", "Orofino Creek bei Pierce (Idaho)", "Orofino Creek", 46.4900, -115.8000, "free", "idaho", "US", "Hier begann 1860 Idahos Goldrausch. Claims und Privatland beachten.", "Idaho's 1860 gold rush started here. Watch for claims and private land."),
+ ("US", "Boise Basin bei Idaho City", "Mores Creek", 43.8300, -115.8300, "free", "idaho", "US", "Bäche im Boise National Forest rund um Idaho City, gut erreichbar.", "Accessible creeks in the Boise National Forest around Idaho City."),
+ ("US", "South Pass City / Atlantic City (Wyoming)", "Willow Creek", 42.4700, -108.8000, "show", "rockies", "US", "Hier begann Wyomings Goldrausch; South Pass City ist eine staatliche historische Stätte. Zugang zum Waschen vor Ort klären.", "Wyoming's gold rush started here; South Pass City is a state historic site. Check panning access locally.", "https://wyoparks.wyo.gov/index.php/places-to-go/south-pass-city"),
+ ("US", "Clear Creek bei Idaho Springs (Colorado)", "Clear Creek", 39.7400, -105.5500, "free", "rockies", "US", "Gut erreichbarer Goldbach westlich von Denver; viel Privatland – öffentliche Abschnitte suchen.", "Accessible gold creek west of Denver; much private land – look for public stretches."),
+ ("US", "Elizabethtown / Moreno Creek (New Mexico)", "Moreno Creek", 36.6200, -105.2800, "unclear", "rockies", "US", "Goldgräber-Geisterstadt am Mount Baldy; Moreno Creek wird als öffentlich zugänglich genannt – vor Ort prüfen.", "Gold rush ghost town at Mount Baldy; Moreno Creek is named as public access – check locally."),
+ ("US", "Vulture Mine (Wickenburg, Arizona)", "–", 33.8170, -112.8300, "show", "museum", "US-AZ", "Berühmteste Goldmine Arizonas, Führungen; rundherum Detektor-Gebiet mit vielen Claims.", "Arizona's most famous gold mine, tours; detecting area with many claims around.", "https://www.vultureminetours.com/"),
+ # Alaska
+ ("US", "Nome Creek (White Mountains, BLM)", "Nome Creek", 65.3600, -146.6000, "free", "alaska", "US-AK-BLM", "Mehrere Meilen von Nome Creek sind fürs Hobby-Goldwaschen ausgeschieden (Angaben 2–4 Meilen).", "Several miles of Nome Creek set aside for recreational panning (2–4 miles reported).", "https://www.blm.gov/programs/recreation/recreation-activities/alaska"),
+ ("US", "Jack Wade Creek / Fortymile (Taylor Highway)", "Jack Wade Creek", 64.0800, -141.6300, "free", "alaska", "US-AK-BLM", "Öffentliches Waschgebiet vom Walker Fork Campground Richtung Meile 85 – ohne Motorgeräte.", "Public panning area from Walker Fork Campground toward mile 85 – non-motorised.", "https://www.blm.gov/programs/recreation/recreation-activities/alaska"),
+ ("US", "Caribou Creek (Glenn Highway)", "Caribou Creek", 61.8100, -147.6700, "free", "alaska", "US-AK", "Öffentliches Hobby-Goldgebiet östlich von Palmer.", "Public recreational mining area east of Palmer."),
+ ("US", "Petersville", "Peters Creek", 62.3700, -150.7500, "free", "alaska", "US-AK", "Abgelegenes, aber per Strasse erreichbares Hobby-Goldgebiet nördlich von Anchorage.", "Remote but road-accessible recreational mining area north of Anchorage."),
+ ("US", "Hatcher Pass – Little Susitna River", "Little Susitna River", 61.7700, -149.3000, "free", "alaska", "US-AK", "Staatliches Public Use Area mit Goldwaschen am Little Susitna.", "State public use area with panning on the Little Susitna."),
+ ("US", "Sixmile Creek (Hope Highway)", "Sixmile Creek", 60.8300, -149.4300, "free", "alaska", "US-AK", "Im Kenai-Goldwasch-Führer des BLM beschrieben.", "Described in the BLM Kenai gold panning guide.", "https://www.blm.gov/sites/blm.gov/files/documents/files/PublicRoom_Alaska_kenai-goldpanning-booklet-2018_FINAL.pdf"),
+ ("US", "Bertha Creek (Chugach NF)", "Bertha Creek", 60.7500, -149.2500, "free", "alaska", "US-AK", "Rund eine Stunde südlich von Anchorage, im Kenai-Führer des BLM.", "About an hour south of Anchorage, in the BLM Kenai guide.", "https://www.blm.gov/sites/blm.gov/files/documents/files/PublicRoom_Alaska_kenai-goldpanning-booklet-2018_FINAL.pdf"),
+ # Osten
+ ("US", "Uwharrie National Forest (North Carolina)", "Bäche im Uwharrie NF", 35.4000, -80.0000, "free", "east", "US-NC", "Goldwaschen auf dem grössten Teil des Waldes erlaubt, ohne Gebühr und Erlaubnis.", "Panning allowed on most of the forest, no fee or permit.", "https://www.montgomerycountync.gov/visit/what-to-do/pan-for-gold-in-the-uwharries"),
 ]
 
 # Bundesstaat eines US-Orts bestimmen (für die Regeln pro Staat)
