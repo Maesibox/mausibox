@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 38,
+  appVersion: 39,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -818,11 +818,13 @@ var APP_CONFIG = {
       show: "28,35",
       attribution: "WAMEX: DEMIRS / SLIP (WA)",
       opacity: 1, visible: false, offline: false,
-      arcIdentify: { layers: "visible:28,35", tolerance: 6, max: 3,
-        fields: [ { field: "holeid", label: { en: "Hole", de: "Bohrloch" } }, { field: "holetype", label: { en: "Hole type", de: "Bohrart" } },
-                  { field: "maxdepth", label: { en: "Depth (m)", de: "Tiefe (m)" } }, { field: "target_commodity", label: { en: "Target", de: "Ziel" } },
-                  { field: "operator", label: { en: "Company", de: "Firma" } }, { field: "activityty", label: { en: "Activity", de: "Tätigkeit" } },
-                  { field: "elements", label: { en: "Elements", de: "Elemente" } }, { field: "wamex_a_no", label: { en: "Report (A-no.)", de: "Bericht (A-Nr.)" } } ] }
+      arcIdentify: { layers: "visible:28,35", tolerance: 6, max: 3, title: "HOLEID",
+        fields: [ { field: "HOLETYPE", label: { en: "Hole type", de: "Bohrart" } }, { field: "MAXDEPTH", label: { en: "Depth (m)", de: "Tiefe (m)" } },
+                  { field: "TARGET_COMMODITY", label: { en: "Target", de: "Ziel" } }, { field: "OPERATOR", label: { en: "Company", de: "Firma" } },
+                  { field: "PROJECT", label: { en: "Project", de: "Projekt" } }, { field: "PERIOD_TO", label: { en: "Year", de: "Jahr" } },
+                  { field: "ANUMBER", label: { en: "Report (A-no.)", de: "Bericht (A-Nr.)" } },
+                  { field: "ACTIVITYTY", label: { en: "Activity", de: "Tätigkeit" } }, { field: "ELEMENTS", label: { en: "Elements", de: "Elemente" } },
+                  { field: "WAMEX_A_NO", label: { en: "Report (A-no.)", de: "Bericht (A-Nr.)" } } ] }
     },
     {
       id: "auGeology",
