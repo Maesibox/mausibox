@@ -71,6 +71,10 @@ FIND = {
  "au-other": ("Flitter und kleine Nuggets.", "Flakes and small nuggets."),
  "tas": ("Alluviales Gold in Bächen und alten Goldfeldern – Tasmaniens Gold ist oft fein, aber es gibt Nuggets.", "Alluvial gold in creeks and old goldfields – Tasmanian gold is often fine, but nuggets occur."),
  "tas-gem": ("Kein Gold: Saphir (Korund), Zinnstein und andere Edelsteine im alten Zinn-Schwemmland.", "No gold: sapphire (corundum), cassiterite and other gems in old tin alluvium."),
+ "bc": ("Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.", "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars."),
+ "klondike": ("Klondike-Gold: Flitter und Nuggets, berühmt seit 1896.", "Klondike gold: flakes and nuggets, famous since 1896."),
+ "jp": ("Goldwaschen für Besucher, oft mit garantiertem Fund.", "Gold panning for visitors, often with a guaranteed find."),
+ "za": ("Historische Goldfelder – nur Besucher-Goldwaschen.", "Historic goldfields – visitor panning only."),
  "service": ("Detektoren mieten oder kaufen, Ausrüstung und Tipps.", "Rent or buy detectors, gear and tips."),
  "tour": ("Geführte Touren auf Gebieten mit Erlaubnis – mit Training, oft mit Leih-Detektor.", "Guided tours on ground with permission – with training, often with hire detector."),
  "nevada": ("Nuggets im Wüstenschotter – Detektor-Gebiet.", "Nuggets in desert gravels – detecting area."),
@@ -190,6 +194,15 @@ PERMIT = {
              "You still need the state licence (in WA the Miner's Right) and permission on tenements to prospect.", None),
  "AU-TOUR": ("Seriöse Touren gehen auf Gebiete mit Erlaubnis (eigene oder gepachtete Leases). Miner's Right trotzdem vorher besorgen.",
              "Serious tours go to ground with permission (own or leased tenements). Still get your Miner's Right first.", None),
+ "CA-BCRES": ("BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+              "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+              "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning"),
+ "CA-YT": ("Yukon: Hobby-Goldwaschen mit Pfanne und Schaufel auf freiem Staatsland ohne Claim erlaubt. Vorher beim Mining Recorder in Dawson (Front Street) oder im Besucherzentrum fragen, wo es erlaubt ist – fast alles am Klondike ist geclaimt.",
+           "Yukon: hobby panning with pan and shovel allowed on vacant government land without claim. Ask the Dawson Mining Recorder or the visitor centre first where it is allowed – almost everything on the Klondike is claimed.",
+           "https://yukon.ca/sites/default/files/emr/emr-recreational-gold-panning-visitors-guide.pdf"),
+ "CA-SHOW": ("Museum / historische Stätte – Goldwaschen nur im Angebot vor Ort.", "Museum / historic site – panning only as offered on site.", None),
+ "JP-T": ("Nur in Besucherminen und ausgewiesenen Waschplätzen; freies Goldsuchen gibt es in Japan nicht.", "Only at visitor mines and designated panning spots; free prospecting does not exist in Japan.", None),
+ "ZA-T": ("Nur Besucher-Goldwaschen; Prospektieren braucht eine Bewilligung nach Bergrecht.", "Visitor panning only; prospecting needs a permit under mining law.", None),
  "US-CLUB": ("Club-Claims (z. B. GPAA): nur für Mitglieder, Mitgliederausweis und Claim-Regeln mitnehmen. Mitgliedschaft online.",
              "Club claims (e.g. GPAA): members only, carry your membership card and the claim rules. Membership online.",
              "https://www.goldprospectors.org/"),
@@ -363,7 +376,7 @@ US_SPOTS = [
 ]
 
 # Bundesstaat eines US-Orts bestimmen (für die Regeln pro Staat)
-STATE_FILES = {c: json.load(open(os.path.join(DATA, c.lower(), "states.json")))["features"] for c in ("US", "AU")}
+STATE_FILES = {c: json.load(open(os.path.join(DATA, c.lower(), "states.json")))["features"] for c in ("US", "AU", "CA")}
 def in_ring(x, y, ring):
     inside = False
     for i in range(len(ring)):
@@ -492,6 +505,40 @@ AU_SERVICES = [
  ("AU", "Metal Detector Hire (Hill End)", "Hill End, NSW", -33.0320, 149.4150, "hire", "service", "AU-SHOP", "Detektor-Miete ab A$50 pro Tag.", "Detector hire from A$50 per day.", "https://metaldetectorhire.com.au/"),
 ]
 
+# Kanada – BC Recreational Panning Reserves (Mitte aus den GPS-Dateien der Provinz) und Yukon
+CA_SPOTS = [
+ ("CA", "Barnes Creek Panning Reserve", "Barnes Creek", 49.9079, -118.1285, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet am Barnes Creek (Monashee).", "Official recreational panning reserve on Barnes Creek."),
+ ("CA", "Cayoosh Creek Panning Reserve", "Cayoosh Creek", 50.6809, -121.9320, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet bei Lillooet.", "Official recreational panning reserve near Lillooet."),
+ ("CA", "Erickson Panning Reserve", "Goat River", 49.0995, -116.4524, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet bei Creston.", "Official recreational panning reserve near Creston."),
+ ("CA", "Goldstream River Panning Reserve", "Goldstream River", 51.6723, -118.5570, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet nördlich von Revelstoke (nicht der Park bei Victoria).", "Official recreational panning reserve north of Revelstoke (not the park near Victoria)."),
+ ("CA", "Hope Panning Reserve", "Fraser River", 49.3900, -121.4464, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet am Fraser bei Hope (31 ha).", "Official recreational panning reserve on the Fraser at Hope (31 ha)."),
+ ("CA", "Kennedy River Panning Reserve", "Kennedy River", 49.1313, -125.4238, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet auf Vancouver Island.", "Official recreational panning reserve on Vancouver Island."),
+ ("CA", "Kettle River Panning Reserve", "Kettle River", 50.0795, -118.4812, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet am Kettle River.", "Official recreational panning reserve on the Kettle River."),
+ ("CA", "Lytton Panning Reserve (Site 1)", "Fraser River", 50.2793, -121.6186, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet am Fraser bei Lytton.", "Official recreational panning reserve on the Fraser at Lytton."),
+ ("CA", "Lytton Panning Reserve (Site 2)", "Fraser River", 50.2337, -121.5860, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet am Fraser bei Lytton.", "Official recreational panning reserve on the Fraser at Lytton."),
+ ("CA", "Princeton Panning Reserve", "Similkameen / Tulameen", 49.4597, -120.5038, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet bei Princeton (Similkameen-Gold).", "Official recreational panning reserve near Princeton."),
+ ("CA", "Quesnel-Fraser River Junction Panning Reserve", "Fraser / Quesnel", 52.9794, -122.4933, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet am Zusammenfluss bei Quesnel (Cariboo).", "Official recreational panning reserve at the Quesnel junction (Cariboo)."),
+ ("CA", "Spruce Creek Panning Reserve (Atlin)", "Spruce Creek", 59.5802, -133.6225, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet im Goldfeld von Atlin, ganz im Norden von BC.", "Official recreational panning reserve in the Atlin goldfield, far northern BC."),
+ ("CA", "Wild Horse River Panning Reserve", "Wild Horse River", 49.6104, -115.6168, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet bei Fort Steele (Kootenay-Goldrausch 1864).", "Official recreational panning reserve near Fort Steele."),
+ ("CA", "Yale Town Panning Reserve", "Fraser River", 49.5613, -121.4276, "free", "bc", "CA-BCRES", "Offizielles Hobby-Waschgebiet am Fraser bei Yale (Fraser-Goldrausch 1858).", "Official recreational panning reserve on the Fraser at Yale."),
+ ("CA", "Barkerville Historic Town", "Williams Creek", 53.0700, -121.5150, "show", "bc", "CA-SHOW", "Goldgräberstadt des Cariboo-Goldrauschs als Museum, mit Goldwaschen für Besucher.", "Cariboo gold rush town as a museum, with panning for visitors."),
+ # Yukon
+ ("CA", "Free Claim #6 (Bonanza Creek)", "Bonanza Creek", 63.9300, -139.3200, "free", "klondike", "CA-YT", "Gratis-Touristen-Claim der Klondike Visitors Association – Pfanne und Schaufel, im Sommer. Lage ungefähr, Wegbeschreibung im Besucherzentrum.", "Free tourist claim of the Klondike Visitors Association – pan and shovel, in summer. Approximate location; directions at the visitor centre."),
+ ("CA", "Discovery Claim (Bonanza Creek)", "Bonanza Creek", 63.9480, -139.3150, "show", "klondike", "CA-SHOW", "Hier begann 1896 der Klondike-Goldrausch (Parks Canada).", "Where the Klondike gold rush began in 1896 (Parks Canada)."),
+ ("CA", "Dredge No. 4", "Bonanza Creek", 63.9700, -139.3350, "show", "klondike", "CA-SHOW", "Riesiger historischer Goldbagger (Parks Canada).", "Huge historic gold dredge (Parks Canada)."),
+ ("CA", "Dawson City – Mining Recorder & Besucherzentrum", "Klondike", 64.0600, -139.4300, "show", "klondike", "CA-YT", "Hier erfährt man, wo man frei waschen darf; Touren und Bezahl-Claims in der Umgebung.", "Find out here where free panning is allowed; tours and fee claims nearby."),
+]
+
+# Weitere Länder – nur Touristen-Orte
+WORLD_SPOTS = [
+ ("JP", "Toi Kinzan (Izu)", "–", 34.9140, 138.7870, "site", "jp", "JP-T", "Alte Goldmine mit Museum und Goldwasch-Halle für Besucher.", "Old gold mine with museum and panning hall for visitors."),
+ ("JP", "Sado Kinzan (Sado-Insel)", "–", 38.0430, 138.2580, "site", "jp", "JP-T", "UNESCO-Welterbe-Goldmine mit Goldwasch-Erlebnis.", "UNESCO World Heritage gold mine with panning experience."),
+ ("JP", "Usotan – Goldwasch-Fluss (Nakatombetsu, Hokkaido)", "Usotan", 44.9700, 142.2900, "site", "jp", "JP-T", "Bekannter Goldwasch-Ort auf Hokkaido mit Waschplatz am Fluss; im Sommer Goldwasch-Meisterschaft. Lage ungefähr.", "Known panning place in Hokkaido with a river panning area; panning championship in summer. Approximate location."),
+ ("ZA", "Pilgrim's Rest", "Blyde", -24.9080, 30.7570, "site", "za", "ZA-T", "Historische Goldgräberstadt (1873) mit Goldwasch-Vorführungen.", "Historic gold-rush town (1873) with panning demonstrations."),
+ ("ZA", "Barberton", "–", -25.7870, 31.0530, "show", "za", "ZA-T", "Historisches Goldfeld mit Museen und Geo-Trail.", "Historic goldfield with museums and geo trail."),
+ ("ZA", "Gold Reef City (Johannesburg)", "–", -26.2360, 28.0130, "site", "za", "ZA-T", "Freizeitpark auf einer alten Goldmine, mit Goldwaschen und Untertage-Tour.", "Theme park on an old gold mine, with panning and underground tour."),
+]
+
 def build(spots, name):
     feats = []
     for spot in spots:
@@ -512,6 +559,8 @@ build(SPOTS, "goldspots.geojson")
 build(US_SPOTS, "goldspots-us.geojson")
 build(AU_SPOTS, "goldspots-au.geojson")
 build(AU_SERVICES, "services-au.geojson")
+build(CA_SPOTS, "goldspots-ca.geojson")
+build(WORLD_SPOTS, "goldspots-world.geojson")
 
 # Clubs
 cf = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [lon, lat]},

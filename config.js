@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 42,
+  appVersion: 43,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -161,17 +161,21 @@ var APP_CONFIG = {
 
   // Gruppen im Ebenen-Fenster (aufklappbar), damit es nicht zu viele Ebenen auf einmal sind
   overlayGroups: [
-    { id: "general", name: { en: "General", de: "Allgemein" }, open: true },
+    // parent = Untergruppe einer anderen Gruppe (wird darin eingeklappt angezeigt)
+    { id: "general", name: { en: "General – worldwide", de: "Allgemein – weltweit" }, open: true },
     { id: "us", name: { en: "🇺🇸 USA (BLM, USGS …)", de: "🇺🇸 USA (BLM, USGS …)" }, open: true },
+    { id: "ca", name: { en: "🇨🇦 Canada (British Columbia, Yukon)", de: "🇨🇦 Kanada (British Columbia, Yukon)" } },
+    { id: "au", name: { en: "🇦🇺 Australia", de: "🇦🇺 Australien" } },
+    { id: "auwa", parent: "au", name: { en: "Western Australia – claims, drill holes, geology", de: "Western Australia – Claims, Bohrlöcher, Geologie" } },
+    { id: "auqld", parent: "au", name: { en: "Queensland – claims, old shafts, geology", de: "Queensland – Claims, alte Schächte, Geologie" } },
+    { id: "ausouth", parent: "au", name: { en: "NSW, Victoria, South Australia, Tasmania", de: "NSW, Victoria, South Australia, Tasmanien" } },
     { id: "nz", name: { en: "🇳🇿 New Zealand", de: "🇳🇿 Neuseeland" } },
-    { id: "au", name: { en: "🇦🇺 Australia – all states", de: "🇦🇺 Australien – alle Staaten" } },
-    { id: "auwa", name: { en: "🇦🇺 Western Australia – claims, drill holes, geology", de: "🇦🇺 Western Australia – Claims, Bohrlöcher, Geologie" } },
-    { id: "auqld", name: { en: "🇦🇺 Queensland – claims, old workings, geology", de: "🇦🇺 Queensland – Claims, alte Schächte, Geologie" } },
-    { id: "ausouth", name: { en: "🇦🇺 NSW, Victoria, SA, Tasmania", de: "🇦🇺 NSW, Victoria, South Australia, Tasmanien" } },
-    // Europa: zuerst alles, was überall gilt; danach nur noch, was es pro Land zusätzlich gibt
-    { id: "eu", name: { en: "🇪🇺 Europe – all countries", de: "🇪🇺 Europa – alle Länder" } },
-    { id: "ch", name: { en: "🇨🇭 Switzerland – details", de: "🇨🇭 Schweiz – Details" } },
-    { id: "eux", name: { en: "🇦🇹 🇩🇪 🇪🇸 More country details", de: "🇦🇹 🇩🇪 🇪🇸 Weitere Länder-Details" } }
+    { id: "eu", name: { en: "🇪🇺 Europe", de: "🇪🇺 Europa" } },
+    { id: "ch", parent: "eu", name: { en: "🇨🇭 Switzerland – details", de: "🇨🇭 Schweiz – Details" } },
+    { id: "at", parent: "eu", name: { en: "🇦🇹 Austria", de: "🇦🇹 Österreich" } },
+    { id: "de", parent: "eu", name: { en: "🇩🇪 Germany", de: "🇩🇪 Deutschland" } },
+    { id: "es", parent: "eu", name: { en: "🇪🇸 Spain", de: "🇪🇸 Spanien" } },
+    { id: "world", name: { en: "🌍 Other countries (tourist places only)", de: "🌍 Weitere Länder (nur Touristen-Orte)" } }
   ],
 
   // Gold-Regeln pro Land (Ebene "Gold-Regeln pro Land", Karte antippen). Schlüssel = Ländercode (EU-Landesgrenzen GISCO)
@@ -303,6 +307,107 @@ var APP_CONFIG = {
       details: { en: "Forbidden almost everywhere: national parks, conservation parks, nature reserves; Aboriginal and exclusive native-title land only with permission. Hobby finds may be kept; selling or motorised mining needs a mining title.", de: "Fast überall verboten: Nationalparks, Conservation Parks, Naturreservate; Aboriginal Land und Native-Title-Gebiete mit exklusivem Besitz nur mit Erlaubnis. Hobby-Funde darf man behalten; Verkauf im grossen Stil oder Abbau mit Maschinen braucht einen Mining Title." },
       source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://detectormaps.com/au/fossicking-laws/"
     },
+    PH: {
+      name: { en: "Philippines", de: "Philippinen" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Small-scale mining is reserved for Filipino citizens by law; gold areas are often controlled by local groups and the military/police act against illegal mining. Recommendation: leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Kleinbergbau ist per Gesetz philippinischen Staatsbürgern vorbehalten; Goldgebiete werden oft von lokalen Gruppen kontrolliert, Polizei und Militär gehen gegen illegalen Abbau vor. Empfehlung: weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    PE: {
+      name: { en: "Peru", de: "Peru" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Gold mining only with state concessions. Huge illegal gold mining (Madre de Dios, La Rinconada) controlled by criminal gangs, mercury pollution, human trafficking, regular military raids. Dangerous – leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Goldabbau nur mit staatlicher Konzession. Riesiger illegaler Goldabbau (Madre de Dios, La Rinconada), kontrolliert von kriminellen Banden, Quecksilber, Menschenhandel, regelmässige Militäreinsätze. Gefährlich – weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    BR: {
+      name: { en: "Brazil", de: "Brasilien" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. 'Garimpo' needs a permit (PLG) for Brazilians/cooperatives; illegal garimpos in the Amazon and on indigenous land (Yanomami) are raided by police and army. Not for foreign hobby prospectors.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. «Garimpo» braucht eine Bewilligung (PLG) für Brasilianer/Kooperativen; illegale Garimpos im Amazonas und auf indigenem Land (Yanomami) werden von Polizei und Armee geräumt. Nichts für ausländische Hobby-Goldsucher." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    CO: {
+      name: { en: "Colombia", de: "Kolumbien" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Much illegal gold mining is controlled by armed groups (guerrilla, gangs) – real danger to life. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Viel illegaler Goldabbau wird von bewaffneten Gruppen (Guerilla, Banden) kontrolliert – echte Lebensgefahr. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    VE: {
+      name: { en: "Venezuela", de: "Venezuela" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. The 'Arco Minero' gold region is controlled by armed groups and the military; extreme danger. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Das Goldgebiet «Arco Minero» wird von bewaffneten Gruppen und dem Militär kontrolliert; extrem gefährlich. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    EC: {
+      name: { en: "Ecuador", de: "Ecuador" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Illegal gold mining is linked to organised crime; artisanal mining needs a state permit for locals. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Illegaler Goldabbau ist mit organisierter Kriminalität verbunden; Kleinbergbau braucht eine staatliche Bewilligung für Einheimische. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    BO: {
+      name: { en: "Bolivia", de: "Bolivien" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Gold mining is done by licensed cooperatives; much illegal mining with mercury in the Amazon. Not open to foreign hobby prospectors.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Goldabbau läuft über lizenzierte Kooperativen; viel illegaler Abbau mit Quecksilber im Amazonasgebiet. Nicht offen für ausländische Hobby-Goldsucher." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    GY: {
+      name: { en: "Guyana", de: "Guyana" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Small-scale gold mining is for Guyanese with GGMC permits; remote, risky interior. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Kleinbergbau ist für Einheimische mit Bewilligung der GGMC; abgelegenes, riskantes Hinterland. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    SR: {
+      name: { en: "Suriname", de: "Suriname" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Gold mining in the interior is largely informal/illegal (often with mercury); not open to foreign hobby prospectors.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Goldabbau im Landesinneren ist grösstenteils informell/illegal (oft mit Quecksilber); nicht offen für ausländische Hobby-Goldsucher." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    GH: {
+      name: { en: "Ghana", de: "Ghana" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Small-scale mining is reserved for Ghanaians; illegal mining ('galamsey') is fought with arrests and deportations of foreigners. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Kleinbergbau ist Ghanaern vorbehalten; illegaler Abbau («Galamsey») wird mit Verhaftungen und Ausweisung von Ausländern bekämpft. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    ML: {
+      name: { en: "Mali", de: "Mali" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Gold areas lie in conflict zones (armed groups, kidnapping risk). Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Goldgebiete liegen in Konfliktzonen (bewaffnete Gruppen, Entführungsgefahr). Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    BF: {
+      name: { en: "Burkina Faso", de: "Burkina Faso" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Artisanal gold sites are targets of armed groups; very high security risk. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Kleinbergbau-Goldplätze sind Ziel bewaffneter Gruppen; sehr hohes Sicherheitsrisiko. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    SD: {
+      name: { en: "Sudan", de: "Sudan" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. War; gold mining partly controlled by armed forces. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Krieg; Goldabbau teils von bewaffneten Kräften kontrolliert. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    CD: {
+      name: { en: "DR Congo", de: "DR Kongo" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. 'Conflict gold': mining areas controlled by militias. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. «Konfliktgold»: Abbaugebiete werden von Milizen kontrolliert. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    TZ: {
+      name: { en: "Tanzania", de: "Tansania" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Primary mining licences for small-scale mining are reserved for Tanzanian citizens. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Kleinbergbau-Lizenzen (Primary Mining Licence) sind tansanischen Staatsbürgern vorbehalten. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    ID: {
+      name: { en: "Indonesia", de: "Indonesien" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Small-scale gold mining is mostly illegal ('PETI') and is cracked down on; not open to foreigners.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Kleinbergbau auf Gold ist meist illegal («PETI») und wird verfolgt; nicht offen für Ausländer." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    PG: {
+      name: { en: "Papua New Guinea", de: "Papua-Neuguinea" }, level: "closed",
+      rule: { en: "For foreigners there is no legal way to prospect for gold as a hobby here. Alluvial mining is for customary landowners; high security risk. Leave it out.", de: "Für Ausländer gibt es hier keinen legalen Weg, als Hobby Gold zu suchen. Alluvialer Abbau ist den traditionellen Landbesitzern vorbehalten; hohes Sicherheitsrisiko. Weglassen." },
+      source: "eigene Einschätzung aus Medien- und Behördenberichten (Nov. 2026), keine Rechtsberatung"
+    },
+    ZA: {
+      name: { en: "South Africa", de: "Südafrika" }, level: "limited",
+      rule: { en: "Mining rights belong to the state; prospecting needs a permit under the mining law, and illegal mining ('zama zamas') is a serious crime problem. As a tourist only gold panning at heritage sites (Pilgrim's Rest, Barberton, Gold Reef City).", de: "Bergbaurechte gehören dem Staat; Prospektieren braucht eine Bewilligung nach Bergrecht, und illegaler Abbau («Zama Zamas») ist ein ernstes Kriminalitätsproblem. Als Tourist nur Goldwaschen an historischen Orten (Pilgrim's Rest, Barberton, Gold Reef City)." },
+      source: "eigene Einschätzung (Nov. 2026)"
+    },
+    JP: {
+      name: { en: "Japan", de: "Japan" }, level: "limited",
+      rule: { en: "No free prospecting; gold panning only at visitor mines and a few panning rivers (e.g. Usotan in Hokkaido, Toi and Sado gold mines).", de: "Kein freies Goldsuchen; Goldwaschen nur in Besucherminen und an wenigen Waschflüssen (z. B. Usotan auf Hokkaido, Goldminen Toi und Sado)." },
+      source: "eigene Einschätzung (Nov. 2026)"
+    },
+    CA: {
+      name: { en: "Canada", de: "Kanada" }, level: "limited",
+      rule: { en: "Each province has its own rules. British Columbia: hand panning without licence in 14 recreational panning reserves; claims need a Free Miner Certificate (only for residents or people allowed to work in Canada). Yukon: hand panning (pan and shovel) on vacant Crown land without claim allowed; free tourist claims at Dawson City.", de: "Jede Provinz hat eigene Regeln. British Columbia: Goldwaschen von Hand ohne Lizenz in 14 Recreational Panning Reserves; Claims brauchen ein Free Miner Certificate (nur für Einwohner oder Personen mit Arbeitserlaubnis in Kanada). Yukon: Goldwaschen von Hand (Pfanne und Schaufel) auf freiem Crown Land ohne Claim erlaubt; Gratis-Touristen-Claims bei Dawson City." },
+      details: { en: "Metal detecting counts as prospecting in BC (Free Miner only). Never on claims, private land, parks or First Nations land without permission.", de: "Metalldetektor gilt in BC als Prospektieren (nur für Free Miner). Nie auf Claims, Privatland, in Parks oder auf First-Nations-Land ohne Erlaubnis." },
+      source: "Provinz British Columbia, Yukon Government (Nov. 2026), keine Rechtsberatung"
+    },
   },
 
   // Gold-Regeln pro US-Bundesstaat (Ebene «Gold-Regeln USA», Karte antippen). Schlüssel = Name in data/us/states.json
@@ -383,6 +488,20 @@ var APP_CONFIG = {
       name: { en: "North Carolina", de: "North Carolina" }, level: "limited",
       rule: { en: "Mostly private land: ask the owner or use commercial panning sites (Reed Gold Mine, Cotton Patch …). In National Forests ask the ranger district first.", de: "Meist Privatland: Eigentümer fragen oder Bezahl-Waschplätze nutzen (Reed Gold Mine u. a.). In National Forests vorher beim Ranger District fragen." },
       source: "eigene Zusammenfassung aus BLM/USFS/Staats-Seiten (Nov. 2026), keine Rechtsberatung"
+    }
+  },
+
+  // Gold-Regeln pro kanadischer Provinz (Ebene «Gold-Regeln Kanada», Karte antippen). Schlüssel = Name in data/ca/states.json
+  caStateRules: {
+    "British Columbia": {
+      name: { en: "British Columbia", de: "British Columbia" }, level: "limited",
+      rule: { en: "Hand panning (pan and shovel only) without licence in the 14 recreational panning reserves – and elsewhere only with permission of the claim holder or landowner. No metal detector, sluice or dredge without a Free Miner Certificate (FMC: C$25/year, free from 65; only for residents or people with Canadian work permit; first application at Service BC).", de: "Goldwaschen von Hand (nur Pfanne und Schaufel) ohne Lizenz in den 14 Recreational Panning Reserves – anderswo nur mit Erlaubnis des Claim-Halters oder Landbesitzers. Kein Metalldetektor, keine Rinne, kein Bagger ohne Free Miner Certificate (FMC: C$25/Jahr, ab 65 gratis; nur für Einwohner oder mit kanadischer Arbeitserlaubnis; Erstantrag bei Service BC)." },
+      source: "Provinz British Columbia / Yukon Government (Nov. 2026), keine Rechtsberatung", link: "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning"
+    },
+    "Yukon": {
+      name: { en: "Yukon", de: "Yukon" }, level: "open",
+      rule: { en: "Recreational panning with pan and shovel is allowed on vacant government land (not staked) without significant disturbance of the creek. No sluices or dredges. Ask the Dawson Mining Recorder or the visitor centre where panning is allowed; free tourist claim (Free Claim #6) on Bonanza Creek.", de: "Hobby-Goldwaschen mit Pfanne und Schaufel ist auf freiem Staatsland (nicht abgesteckt) erlaubt, ohne den Bach stark zu stören. Keine Rinnen oder Bagger. Beim Mining Recorder in Dawson oder im Besucherzentrum fragen, wo es erlaubt ist; Gratis-Touristen-Claim (Free Claim #6) am Bonanza Creek." },
+      source: "Provinz British Columbia / Yukon Government (Nov. 2026), keine Rechtsberatung", link: "https://yukon.ca/sites/default/files/emr/emr-recreational-gold-panning-visitors-guide.pdf"
     }
   },
 
@@ -724,6 +843,117 @@ var APP_CONFIG = {
     },
     // ---------- EUROPA (EU-weit) ----------
     {
+      id: "caSpots",
+      group: "ca",
+      type: "spots",
+      name: { en: "Panning reserves & gold places (BC, Yukon)", de: "Panning Reserves & Goldorte (BC, Yukon)" },
+      // Liste ergänzen: tools/make_goldspots.py (CA_SPOTS)
+      file: "data/goldspots-ca.geojson",
+      attribution: "Panning reserves: Province of British Columbia; places: MAUSIBOX collection",
+      visible: false, offline: true,
+      kinds: {
+        free: { color: "#2ecc40", level: "open",    label: { en: "Panning without licence (pan and shovel)", de: "Waschen ohne Lizenz (Pfanne und Schaufel)" } },
+        show: { color: "#9b51e0", level: "limited", label: { en: "Museum / historic site / information", de: "Museum / historische Stätte / Auskunft" } }
+      },
+      legend: [
+        { color: "#2ecc40", text: { en: "free panning", de: "frei waschen" } },
+        { color: "#9b51e0", text: { en: "museum / info", de: "Museum / Auskunft" } }
+      ]
+    },
+    {
+      id: "caRules",
+      group: "ca",
+      type: "countryRules",
+      name: { en: "Gold rules per province (tap the map)", de: "Gold-Regeln pro Provinz (Karte antippen)" },
+      bordersUrl: "data/ca/states.json",
+      codeProp: "name", rulesKey: "caStateRules", alsoCountry: "CA",
+      visible: false, offline: true
+    },
+    {
+      id: "ykPlacer",
+      group: "ca",
+      type: "arcgisExport",
+      name: { en: "Yukon – Placer & quartz claims (zoom in)", de: "Yukon – Placer- & Quartz-Claims (hineinzoomen)" },
+      url: "https://mapservices.gov.yk.ca/arcgis/rest/services/GeoYukon/GY_Mining/MapServer",
+      show: "10,11,12,35,36,37,54",
+      attribution: "Claims: Yukon Government (GeoYukon)",
+      opacity: 0.8, visible: false, offline: false,
+      // keine Besitzernamen (meist Privatpersonen) – Halter beim Mining Recorder erfragen
+      arcIdentify: { layers: "visible:11,12,36,37,54", tolerance: 2, max: 3, title: "Claim Name",
+        fields: [ { field: "Tenure Type", label: { en: "Type", de: "Art" } }, { field: "Status", label: { en: "Status", de: "Status" } },
+                  { field: "Grant Number", label: { en: "Grant no.", de: "Grant-Nr." } }, { field: "Expiry Date", label: { en: "Expires", de: "Läuft ab" } },
+                  { field: "District", label: { en: "Mining district", de: "Bergbau-Bezirk" } } ] }
+    },
+    {
+      id: "ykMinOcc",
+      group: "ca",
+      type: "arcgisExport",
+      name: { en: "Yukon – Mineral occurrences & drill holes", de: "Yukon – Mineralvorkommen & Bohrlöcher" },
+      url: "https://mapservices.gov.yk.ca/arcgis/rest/services/GeoYukon/GY_Geological/MapServer",
+      show: "4,6",
+      attribution: "Yukon Geological Survey",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:4,6", tolerance: 6, max: 3 }
+    },
+    {
+      id: "ykGeology",
+      group: "ca",
+      type: "arcgisExport",
+      name: { en: "Yukon – Bedrock geology & faults", de: "Yukon – Gesteinsgeologie & Störungen" },
+      url: "https://mapservices.gov.yk.ca/arcgis/rest/services/GeoYukon/GY_Geological/MapServer",
+      show: "113,114",
+      attribution: "Yukon Geological Survey",
+      opacity: 0.55, visible: false, offline: false,
+      arcIdentify: { layers: "visible:113,114", tolerance: 2, max: 2 }
+    },
+    {
+      id: "bcTenure",
+      group: "ca",
+      type: "wms",
+      name: { en: "BC – Mineral & placer claims (picture only)", de: "BC – Mineral- & Placer-Claims (nur Bild)" },
+      url: "https://openmaps.gov.bc.ca/geo/pub/ows",
+      layers: "pub:WHSE_MINERAL_TENURE.MTA_ACQUIRED_TENURE_SVW",
+      attribution: "Mineral titles: Province of British Columbia",
+      opacity: 0.7, visible: false, offline: false
+    },
+    {
+      id: "bcMinfile",
+      group: "ca",
+      type: "wms",
+      name: { en: "BC – Mines & occurrences (MINFILE)", de: "BC – Minen & Vorkommen (MINFILE)" },
+      url: "https://openmaps.gov.bc.ca/geo/pub/ows",
+      layers: "pub:WHSE_MINERAL_TENURE.MINFIL_MINERAL_FILE",
+      attribution: "MINFILE: Province of British Columbia",
+      opacity: 1, visible: false, offline: false
+    },
+    {
+      id: "bcGeology",
+      group: "ca",
+      type: "wms",
+      name: { en: "BC – Bedrock geology & faults", de: "BC – Gesteinsgeologie & Störungen" },
+      url: "https://openmaps.gov.bc.ca/geo/pub/ows",
+      layers: "pub:WHSE_MINERAL_TENURE.GEOL_BEDROCK_UNIT_POLY_SVW,pub:WHSE_MINERAL_TENURE.GEOL_FAULT_LINE",
+      attribution: "Geology: BC Geological Survey",
+      opacity: 0.55, visible: false, offline: false
+    },
+    {
+      id: "worldSpots",
+      group: "world",
+      type: "spots",
+      name: { en: "Tourist gold panning (Japan, South Africa)", de: "Touristen-Goldwaschen (Japan, Südafrika)" },
+      file: "data/goldspots-world.geojson",
+      attribution: "Places: MAUSIBOX collection",
+      visible: false, offline: true,
+      kinds: {
+        site: { color: "#2f80ed", level: "open",    label: { en: "Visitor panning", de: "Goldwaschen für Besucher" } },
+        show: { color: "#9b51e0", level: "limited", label: { en: "Museum / historic site", de: "Museum / historische Stätte" } }
+      },
+      legend: [
+        { color: "#2f80ed", text: { en: "visitor panning", de: "Besucher-Goldwaschen" } },
+        { color: "#9b51e0", text: { en: "museum", de: "Museum" } }
+      ]
+    },
+    {
       id: "auSpots",
       group: "au",
       type: "spots",
@@ -1064,12 +1294,12 @@ var APP_CONFIG = {
     },
     {
       id: "euRules",
-      group: "eu",
+      group: "general",
       type: "countryRules",
-      name: { en: "Gold rules per country (tap the map)", de: "Gold-Regeln pro Land (Karte antippen)" },
+      name: { en: "Gold rules per country, worldwide (tap a country)", de: "Gold-Regeln pro Land weltweit (Land antippen)" },
       bordersUrl: "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson",
       attribution: "Borders: © EuroGeographics (GISCO)",
-      visible: false, offline: false
+      visible: true, offline: false
     },
     {
       id: "euPrecious",
@@ -1123,7 +1353,7 @@ var APP_CONFIG = {
     // ---------- DEUTSCHLAND (BGR) ----------
     {
       id: "deGeology",
-      group: "eux",
+      group: "de",
       type: "wms",
       name: { en: "🇩🇪 Geology Germany 1:250 000 (BGR, zoom in)", de: "🇩🇪 Geologie Deutschland 1:250 000 (BGR, hineinzoomen)" },
       url: "https://services.bgr.de/wms/geologie/guek250/",
@@ -1140,7 +1370,7 @@ var APP_CONFIG = {
     // ---------- SPANIEN (IGME) ----------
     {
       id: "esGold",
-      group: "eux",
+      group: "es",
       type: "arcgisPoints",
       name: { en: "🇪🇸 Gold occurrences Spain (IGME, ~880)", de: "🇪🇸 Goldvorkommen Spanien (IGME, ca. 880)" },
       url: "https://mapas.igme.es/gis/rest/services/BasesDatos/IGME_BDMIN_Indicios/MapServer/0",
@@ -1157,7 +1387,7 @@ var APP_CONFIG = {
     },
     {
       id: "esGeology",
-      group: "eux",
+      group: "es",
       type: "arcgisExport",
       name: { en: "🇪🇸 Geology Spain 1:50 000 (IGME MAGNA)", de: "🇪🇸 Geologie Spanien 1:50 000 (IGME MAGNA)" },
       url: "https://mapas.igme.es/gis/rest/services/Cartografia_Geologica/IGME_MAGNA_50/MapServer",
@@ -1168,7 +1398,7 @@ var APP_CONFIG = {
     // ---------- ÖSTERREICH (GeoSphere Austria) ----------
     {
       id: "atGold",
-      group: "eux",
+      group: "at",
       type: "arcgisPoints",
       name: { en: "🇦🇹 Gold occurrences Austria (GeoSphere IRIS, ~400)", de: "🇦🇹 Goldvorkommen Österreich (GeoSphere IRIS, ca. 400)" },
       url: "https://gis.geosphere.at/maps/rest/services/IRIS/Lagerstaetten/MapServer/0",
@@ -1186,7 +1416,7 @@ var APP_CONFIG = {
     },
     {
       id: "atDeposits",
-      group: "eux",
+      group: "at",
       type: "arcgisExport",
       name: { en: "🇦🇹 All deposits & old mines Austria (IRIS)", de: "🇦🇹 Alle Lagerstätten & alten Bergbaue Österreich (IRIS)" },
       url: "https://gis.geosphere.at/maps/rest/services/IRIS/Lagerstaetten/MapServer",
@@ -1199,7 +1429,7 @@ var APP_CONFIG = {
     },
     {
       id: "atGeology",
-      group: "eux",
+      group: "at",
       type: "arcgisExport",
       name: { en: "🇦🇹 Geology & tectonics Austria 1:500 000 (GeoSphere)", de: "🇦🇹 Geologie & Tektonik Österreich 1:500 000 (GeoSphere)" },
       url: "https://gis.geosphere.at/maps/rest/services/geologie/karte_500/MapServer",

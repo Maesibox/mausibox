@@ -500,7 +500,7 @@ var App = (function () {
           var a = f.properties || {}, c = f.geometry.coordinates, k = (cfg.kinds || {})[a.kind] || {};
           var m = L.circleMarker([c[1], c[0]], { radius: 9, color: "#000", weight: 2, fillColor: k.color || "#ffd700", fillOpacity: 1, bubblingMouseEvents: false });
           m.bindPopup(function () {
-            var rule = (C.countryRules || {})[a.country], stRule = a.state && (C[{ US: "usStateRules", AU: "auStateRules" }[a.country]] || {})[a.state];
+            var rule = (C.countryRules || {})[a.country], stRule = a.state && (C[{ US: "usStateRules", AU: "auStateRules", CA: "caStateRules" }[a.country]] || {})[a.state];
             return "<div class='pop'><div class='pop-sec' style='border-left:4px solid " + esc(k.color || "#ffd700") + ";padding-left:8px'><h3>" + esc(a.name) + "</h3>" +
               "<div class='pop-sub'>" + esc(tr(cfg.name)) + (a.river && a.river !== "–" ? " · " + esc(a.river) : "") + "</div>" +
               "<p class='verdict " + esc(k.level || "limited") + "'>" + esc(tr(k.label)) + "</p>" +
@@ -968,7 +968,7 @@ var App = (function () {
 
   function onMapClick(e) {
     var lat = e.latlng.lat, lon = e.latlng.lng;
-    var parts = [];
+    var parts = [], shownRules = [];
     C.overlays.forEach(function (o) {
       if (!overlayState[o.id]) return;
       var hits = (hitFeatures[o.id] || []).filter(function (f) { return f === e.forceHit || hit(f, lon, lat); });
@@ -981,7 +981,8 @@ var App = (function () {
         var land = o._countries.filter(function (f) { return hit(f, lon, lat); })[0];
         var code = land && (o.codeProp ? land.properties[o.codeProp] : (land.properties.CNTR_ID || land.properties.ISO3_CODE));
         var found = [o.alsoCountry && (C.countryRules || {})[o.alsoCountry], code && (C[o.rulesKey || "countryRules"] || {})[code]];
-        found.filter(Boolean).forEach(function (rule) { parts.push(rulePopupHtml(rule)); });
+        // gleiche Regel nur einmal (Land kommt z. B. bei «weltweit» und bei «pro Bundesstaat» vor)
+        found.filter(function (r) { return r && shownRules.indexOf(r) < 0; }).forEach(function (rule) { shownRules.push(rule); parts.push(rulePopupHtml(rule)); });
       }
     });
 
@@ -1133,16 +1134,23 @@ var App = (function () {
       rows[g] = rows[g] || [];
       rows[g].push(o);
     });
-    groups.forEach(function (g) {
-      var list = rows[g.id] || [];
-      if (!list.length) return;
-      var on = list.filter(function (o) { return overlayState[o.id]; }).length;
+    // Gruppen können Untergruppen haben (parent), z. B. Europa → Schweiz, Österreich …
+    function childGroups(id) { return groups.filter(function (g) { return (g.parent || null) === id; }); }
+    function allLayers(g) {
+      return childGroups(g.id).reduce(function (all, c) { return all.concat(allLayers(c)); }, (rows[g.id] || []).slice());
+    }
+    function groupHtml(g) {
+      var all = allLayers(g);
+      if (!all.length) return "";
+      var on = all.filter(function (o) { return overlayState[o.id]; }).length;
       var isOpen = openGroups[g.id] != null ? openGroups[g.id] : !!g.open;
-      html += "<details class='layer-group' data-group='" + esc(g.id) + "'" + (isOpen ? " open" : "") + "><summary>" + esc(tr(g.name)) +
+      var h = "<details class='layer-group" + (g.parent ? " sub" : "") + "' data-group='" + esc(g.id) + "'" + (isOpen ? " open" : "") + "><summary>" + esc(tr(g.name)) +
         " <small>" + (on ? on + " " + esc(t("layerGroupActive")) : "") + "</small></summary>";
-      list.forEach(function (o) { html += overlayRowHtml(o); });
-      html += "</details>";
-    });
+      (rows[g.id] || []).forEach(function (o) { h += overlayRowHtml(o); });
+      childGroups(g.id).forEach(function (c) { h += groupHtml(c); });
+      return h + "</details>";
+    }
+    childGroups(null).forEach(function (g) { html += groupHtml(g); });
     function overlayRowHtml(o) {
       var html = "";
       html += "<div class='opt-row'><label class='opt'><input type='checkbox' value='" + esc(o.id) + "'" + (overlayState[o.id] ? " checked" : "") + "> " +

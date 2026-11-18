@@ -263,4 +263,6 @@ body.has-chat-news .menu .badge-chat::after, body.has-blm-news .menu .badge-blm:
 /* Ebenen-Gruppen (Allgemein, USA, Neuseeland, Schweiz) */
 .layer-group { border: 1px solid rgba(0,0,0,.12); border-radius: 8px; margin: 6px 0; padding: 2px 8px; }
 .layer-group > summary { font-weight: 700; padding: 8px 0; cursor: pointer; }
+.layer-group.sub { margin: 6px 0 6px 4px; background: rgba(0,0,0,.03); }
+.layer-group.sub > summary { font-weight: 600; font-size: 14px; }
 .layer-group > summary small { font-weight: 400; color: #2e7d32; margin-left: 6px; }

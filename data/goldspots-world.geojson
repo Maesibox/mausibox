@@ -1,0 +1,149 @@
+{
+"type": "FeatureCollection",
+"features": [
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+138.787,
+34.914
+]
+},
+"properties": {
+"name": "Toi Kinzan (Izu)",
+"country": "JP",
+"river": "–",
+"kind": "site",
+"de": "Alte Goldmine mit Museum und Goldwasch-Halle für Besucher.",
+"en": "Old gold mine with museum and panning hall for visitors.",
+"find_de": "Goldwaschen für Besucher, oft mit garantiertem Fund.",
+"find_en": "Gold panning for visitors, often with a guaranteed find.",
+"permit_de": "Nur in Besucherminen und ausgewiesenen Waschplätzen; freies Goldsuchen gibt es in Japan nicht.",
+"permit_en": "Only at visitor mines and designated panning spots; free prospecting does not exist in Japan.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+138.258,
+38.043
+]
+},
+"properties": {
+"name": "Sado Kinzan (Sado-Insel)",
+"country": "JP",
+"river": "–",
+"kind": "site",
+"de": "UNESCO-Welterbe-Goldmine mit Goldwasch-Erlebnis.",
+"en": "UNESCO World Heritage gold mine with panning experience.",
+"find_de": "Goldwaschen für Besucher, oft mit garantiertem Fund.",
+"find_en": "Gold panning for visitors, often with a guaranteed find.",
+"permit_de": "Nur in Besucherminen und ausgewiesenen Waschplätzen; freies Goldsuchen gibt es in Japan nicht.",
+"permit_en": "Only at visitor mines and designated panning spots; free prospecting does not exist in Japan.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+142.29,
+44.97
+]
+},
+"properties": {
+"name": "Usotan – Goldwasch-Fluss (Nakatombetsu, Hokkaido)",
+"country": "JP",
+"river": "Usotan",
+"kind": "site",
+"de": "Bekannter Goldwasch-Ort auf Hokkaido mit Waschplatz am Fluss; im Sommer Goldwasch-Meisterschaft. Lage ungefähr.",
+"en": "Known panning place in Hokkaido with a river panning area; panning championship in summer. Approximate location.",
+"find_de": "Goldwaschen für Besucher, oft mit garantiertem Fund.",
+"find_en": "Gold panning for visitors, often with a guaranteed find.",
+"permit_de": "Nur in Besucherminen und ausgewiesenen Waschplätzen; freies Goldsuchen gibt es in Japan nicht.",
+"permit_en": "Only at visitor mines and designated panning spots; free prospecting does not exist in Japan.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+30.757,
+-24.908
+]
+},
+"properties": {
+"name": "Pilgrim's Rest",
+"country": "ZA",
+"river": "Blyde",
+"kind": "site",
+"de": "Historische Goldgräberstadt (1873) mit Goldwasch-Vorführungen.",
+"en": "Historic gold-rush town (1873) with panning demonstrations.",
+"find_de": "Historische Goldfelder – nur Besucher-Goldwaschen.",
+"find_en": "Historic goldfields – visitor panning only.",
+"permit_de": "Nur Besucher-Goldwaschen; Prospektieren braucht eine Bewilligung nach Bergrecht.",
+"permit_en": "Visitor panning only; prospecting needs a permit under mining law.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+31.053,
+-25.787
+]
+},
+"properties": {
+"name": "Barberton",
+"country": "ZA",
+"river": "–",
+"kind": "show",
+"de": "Historisches Goldfeld mit Museen und Geo-Trail.",
+"en": "Historic goldfield with museums and geo trail.",
+"find_de": "Historische Goldfelder – nur Besucher-Goldwaschen.",
+"find_en": "Historic goldfields – visitor panning only.",
+"permit_de": "Nur Besucher-Goldwaschen; Prospektieren braucht eine Bewilligung nach Bergrecht.",
+"permit_en": "Visitor panning only; prospecting needs a permit under mining law.",
+"permit_link": null,
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+28.013,
+-26.236
+]
+},
+"properties": {
+"name": "Gold Reef City (Johannesburg)",
+"country": "ZA",
+"river": "–",
+"kind": "site",
+"de": "Freizeitpark auf einer alten Goldmine, mit Goldwaschen und Untertage-Tour.",
+"en": "Theme park on an old gold mine, with panning and underground tour.",
+"find_de": "Historische Goldfelder – nur Besucher-Goldwaschen.",
+"find_en": "Historic goldfields – visitor panning only.",
+"permit_de": "Nur Besucher-Goldwaschen; Prospektieren braucht eine Bewilligung nach Bergrecht.",
+"permit_en": "Visitor panning only; prospecting needs a permit under mining law.",
+"permit_link": null,
+"link": null
+}
+}
+]
+}

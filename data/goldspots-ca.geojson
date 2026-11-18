@@ -1,0 +1,480 @@
+{
+"type": "FeatureCollection",
+"features": [
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-118.1285,
+49.9079
+]
+},
+"properties": {
+"name": "Barnes Creek Panning Reserve",
+"country": "CA",
+"river": "Barnes Creek",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet am Barnes Creek (Monashee).",
+"en": "Official recreational panning reserve on Barnes Creek.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-121.932,
+50.6809
+]
+},
+"properties": {
+"name": "Cayoosh Creek Panning Reserve",
+"country": "CA",
+"river": "Cayoosh Creek",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet bei Lillooet.",
+"en": "Official recreational panning reserve near Lillooet.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-116.4524,
+49.0995
+]
+},
+"properties": {
+"name": "Erickson Panning Reserve",
+"country": "CA",
+"river": "Goat River",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet bei Creston.",
+"en": "Official recreational panning reserve near Creston.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-118.557,
+51.6723
+]
+},
+"properties": {
+"name": "Goldstream River Panning Reserve",
+"country": "CA",
+"river": "Goldstream River",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet nördlich von Revelstoke (nicht der Park bei Victoria).",
+"en": "Official recreational panning reserve north of Revelstoke (not the park near Victoria).",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-121.4464,
+49.39
+]
+},
+"properties": {
+"name": "Hope Panning Reserve",
+"country": "CA",
+"river": "Fraser River",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet am Fraser bei Hope (31 ha).",
+"en": "Official recreational panning reserve on the Fraser at Hope (31 ha).",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-125.4238,
+49.1313
+]
+},
+"properties": {
+"name": "Kennedy River Panning Reserve",
+"country": "CA",
+"river": "Kennedy River",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet auf Vancouver Island.",
+"en": "Official recreational panning reserve on Vancouver Island.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-118.4812,
+50.0795
+]
+},
+"properties": {
+"name": "Kettle River Panning Reserve",
+"country": "CA",
+"river": "Kettle River",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet am Kettle River.",
+"en": "Official recreational panning reserve on the Kettle River.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-121.6186,
+50.2793
+]
+},
+"properties": {
+"name": "Lytton Panning Reserve (Site 1)",
+"country": "CA",
+"river": "Fraser River",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet am Fraser bei Lytton.",
+"en": "Official recreational panning reserve on the Fraser at Lytton.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-121.586,
+50.2337
+]
+},
+"properties": {
+"name": "Lytton Panning Reserve (Site 2)",
+"country": "CA",
+"river": "Fraser River",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet am Fraser bei Lytton.",
+"en": "Official recreational panning reserve on the Fraser at Lytton.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-120.5038,
+49.4597
+]
+},
+"properties": {
+"name": "Princeton Panning Reserve",
+"country": "CA",
+"river": "Similkameen / Tulameen",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet bei Princeton (Similkameen-Gold).",
+"en": "Official recreational panning reserve near Princeton.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-122.4933,
+52.9794
+]
+},
+"properties": {
+"name": "Quesnel-Fraser River Junction Panning Reserve",
+"country": "CA",
+"river": "Fraser / Quesnel",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet am Zusammenfluss bei Quesnel (Cariboo).",
+"en": "Official recreational panning reserve at the Quesnel junction (Cariboo).",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-133.6225,
+59.5802
+]
+},
+"properties": {
+"name": "Spruce Creek Panning Reserve (Atlin)",
+"country": "CA",
+"river": "Spruce Creek",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet im Goldfeld von Atlin, ganz im Norden von BC.",
+"en": "Official recreational panning reserve in the Atlin goldfield, far northern BC.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-115.6168,
+49.6104
+]
+},
+"properties": {
+"name": "Wild Horse River Panning Reserve",
+"country": "CA",
+"river": "Wild Horse River",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet bei Fort Steele (Kootenay-Goldrausch 1864).",
+"en": "Official recreational panning reserve near Fort Steele.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-121.4276,
+49.5613
+]
+},
+"properties": {
+"name": "Yale Town Panning Reserve",
+"country": "CA",
+"river": "Fraser River",
+"kind": "free",
+"de": "Offizielles Hobby-Waschgebiet am Fraser bei Yale (Fraser-Goldrausch 1858).",
+"en": "Official recreational panning reserve on the Fraser at Yale.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "BC Recreational Panning Reserve: ohne Lizenz erlaubt, nur Pfanne und Schaufel – kein Metalldetektor, keine Rinne. Grenzen und GPS-Datei auf der Seite der Provinz.",
+"permit_en": "BC recreational panning reserve: allowed without licence, pan and shovel only – no metal detector, no sluice. Boundaries and GPS file on the province's page.",
+"permit_link": "https://www2.gov.bc.ca/gov/content/industry/mineral-exploration-mining/mineral-titles/recreational-hand-panning",
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-121.515,
+53.07
+]
+},
+"properties": {
+"name": "Barkerville Historic Town",
+"country": "CA",
+"river": "Williams Creek",
+"kind": "show",
+"de": "Goldgräberstadt des Cariboo-Goldrauschs als Museum, mit Goldwaschen für Besucher.",
+"en": "Cariboo gold rush town as a museum, with panning for visitors.",
+"find_de": "Feines Flittergold und kleine Nuggets im Kies – an Innenkurven und auf Kiesbänken.",
+"find_en": "Fine flake gold and small nuggets in the gravel – on inside bends and gravel bars.",
+"permit_de": "Museum / historische Stätte – Goldwaschen nur im Angebot vor Ort.",
+"permit_en": "Museum / historic site – panning only as offered on site.",
+"permit_link": null,
+"link": null,
+"state": "British Columbia"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-139.32,
+63.93
+]
+},
+"properties": {
+"name": "Free Claim #6 (Bonanza Creek)",
+"country": "CA",
+"river": "Bonanza Creek",
+"kind": "free",
+"de": "Gratis-Touristen-Claim der Klondike Visitors Association – Pfanne und Schaufel, im Sommer. Lage ungefähr, Wegbeschreibung im Besucherzentrum.",
+"en": "Free tourist claim of the Klondike Visitors Association – pan and shovel, in summer. Approximate location; directions at the visitor centre.",
+"find_de": "Klondike-Gold: Flitter und Nuggets, berühmt seit 1896.",
+"find_en": "Klondike gold: flakes and nuggets, famous since 1896.",
+"permit_de": "Yukon: Hobby-Goldwaschen mit Pfanne und Schaufel auf freiem Staatsland ohne Claim erlaubt. Vorher beim Mining Recorder in Dawson (Front Street) oder im Besucherzentrum fragen, wo es erlaubt ist – fast alles am Klondike ist geclaimt.",
+"permit_en": "Yukon: hobby panning with pan and shovel allowed on vacant government land without claim. Ask the Dawson Mining Recorder or the visitor centre first where it is allowed – almost everything on the Klondike is claimed.",
+"permit_link": "https://yukon.ca/sites/default/files/emr/emr-recreational-gold-panning-visitors-guide.pdf",
+"link": null,
+"state": "Yukon"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-139.315,
+63.948
+]
+},
+"properties": {
+"name": "Discovery Claim (Bonanza Creek)",
+"country": "CA",
+"river": "Bonanza Creek",
+"kind": "show",
+"de": "Hier begann 1896 der Klondike-Goldrausch (Parks Canada).",
+"en": "Where the Klondike gold rush began in 1896 (Parks Canada).",
+"find_de": "Klondike-Gold: Flitter und Nuggets, berühmt seit 1896.",
+"find_en": "Klondike gold: flakes and nuggets, famous since 1896.",
+"permit_de": "Museum / historische Stätte – Goldwaschen nur im Angebot vor Ort.",
+"permit_en": "Museum / historic site – panning only as offered on site.",
+"permit_link": null,
+"link": null,
+"state": "Yukon"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-139.335,
+63.97
+]
+},
+"properties": {
+"name": "Dredge No. 4",
+"country": "CA",
+"river": "Bonanza Creek",
+"kind": "show",
+"de": "Riesiger historischer Goldbagger (Parks Canada).",
+"en": "Huge historic gold dredge (Parks Canada).",
+"find_de": "Klondike-Gold: Flitter und Nuggets, berühmt seit 1896.",
+"find_en": "Klondike gold: flakes and nuggets, famous since 1896.",
+"permit_de": "Museum / historische Stätte – Goldwaschen nur im Angebot vor Ort.",
+"permit_en": "Museum / historic site – panning only as offered on site.",
+"permit_link": null,
+"link": null,
+"state": "Yukon"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-139.43,
+64.06
+]
+},
+"properties": {
+"name": "Dawson City – Mining Recorder & Besucherzentrum",
+"country": "CA",
+"river": "Klondike",
+"kind": "show",
+"de": "Hier erfährt man, wo man frei waschen darf; Touren und Bezahl-Claims in der Umgebung.",
+"en": "Find out here where free panning is allowed; tours and fee claims nearby.",
+"find_de": "Klondike-Gold: Flitter und Nuggets, berühmt seit 1896.",
+"find_en": "Klondike gold: flakes and nuggets, famous since 1896.",
+"permit_de": "Yukon: Hobby-Goldwaschen mit Pfanne und Schaufel auf freiem Staatsland ohne Claim erlaubt. Vorher beim Mining Recorder in Dawson (Front Street) oder im Besucherzentrum fragen, wo es erlaubt ist – fast alles am Klondike ist geclaimt.",
+"permit_en": "Yukon: hobby panning with pan and shovel allowed on vacant government land without claim. Ask the Dawson Mining Recorder or the visitor centre first where it is allowed – almost everything on the Klondike is claimed.",
+"permit_link": "https://yukon.ca/sites/default/files/emr/emr-recreational-gold-panning-visitors-guide.pdf",
+"link": null,
+"state": "Yukon"
+}
+}
+]
+}
