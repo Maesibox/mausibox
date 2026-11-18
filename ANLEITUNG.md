@@ -51,6 +51,12 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 47 (Lizenzen für den Verkauf)
+- **Esri-Satellit entfernt** (keine kommerzielle Nutzung ohne ArcGIS-Lizenz). Standard ist jetzt der USGS-Satellit.
+- **NZ – Aktive Störungen entfernt** (GNS erlaubt keine kommerzielle Nutzung).
+- **Ländergrenzen** für „Gold-Regeln pro Land“ jetzt von Natural Earth (gemeinfrei) statt GISCO/EuroGeographics.
+- **Noch offen:** OSM-Strassenkarte vor dem Verkauf auf einen Kachel-Anbieter mit kommerzieller Lizenz umstellen (Hinweis in `config.js`).
+
 ## Neu in Version 31
 - **Bekannte Goldwaschplätze (Europa):** 39 Orte in DE, AT, CH, IT, ES, FR – farbig nach Art (geduldet, Bewilligung, offizieller Platz, Schaubergwerk, nicht graben). Liste ergänzen in `tools/make_goldspots.py`.
 - Genauere Regeln für Österreich (je Bundesland, Kärnten Bewilligung), Italien (Piemont: Anmeldung, max. 5 g/Tag) und Spanien.

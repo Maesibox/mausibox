@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 46,
+  appVersion: 47,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -58,21 +58,13 @@ var APP_CONFIG = {
   // ----------------------------------------------------------
   basemaps: [
     {
-      id: "esri-sat",
-      name: { en: "Satellite (Esri, online only)", de: "Satellit (Esri, nur online)" },
-      url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-      attribution: "Imagery © Esri, Maxar, Earthstar Geographics",
-      maxNativeZoom: 19,
-      offline: false,
-      default: true
-    },
-    {
       id: "usgs-sat",
       name: { en: "Satellite (USGS, offline OK)", de: "Satellit (USGS, offline-fähig)" },
       url: "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}",
       attribution: "USGS The National Map",
       maxNativeZoom: 16,
-      offline: true
+      offline: true,
+      default: true
     },
     {
       id: "usgs-topo",
@@ -107,6 +99,8 @@ var APP_CONFIG = {
       offline: true
     },
     {
+      // ACHTUNG vor dem Verkauf: tile.openstreetmap.org ist für verbreitete (kommerzielle) Apps nicht erlaubt.
+      // Durch einen Kachel-Anbieter mit kommerzieller Lizenz ersetzen (url + attribution hier ändern).
       id: "osm",
       name: { en: "Street map (OSM, online only)", de: "Strassenkarte (OSM, nur online)" },
       url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -822,17 +816,6 @@ var APP_CONFIG = {
       opacity: 0.7, visible: false, offline: false
     },
     {
-      id: "nzFaults",
-      group: "nz",
-      type: "arcgisExport",
-      name: { en: "NZ – Active faults (GNS)", de: "NZ – Aktive Störungen (GNS)" },
-      url: "https://gis.gns.cri.nz/server/rest/services/Active_Faults/WebNZActiveFaultsDatasets/MapServer",
-      show: "0,6",
-      attribution: "GNS Science – NZ Active Faults Database",
-      opacity: 1, visible: false, offline: false,
-      arcIdentify: { layers: "visible:0,6", tolerance: 6, max: 2 }
-    },
-    {
       id: "nzGeology",
       group: "nz",
       type: "arcgisExport",
@@ -1298,8 +1281,9 @@ var APP_CONFIG = {
       group: "general",
       type: "countryRules",
       name: { en: "Gold rules per country, worldwide (tap a country)", de: "Gold-Regeln pro Land weltweit (Land antippen)" },
-      bordersUrl: "https://gisco-services.ec.europa.eu/distribution/v2/countries/geojson/CNTR_RG_60M_2020_4326.geojson",
-      attribution: "Borders: © EuroGeographics (GISCO)",
+      bordersUrl: "https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_admin_0_countries.geojson",
+      codeProp: "ISO_A2_EH",   // Natural Earth (gemeinfrei); GB wird in app.js zu UK
+      attribution: "Borders: Natural Earth (public domain)",
       visible: true, offline: false
     },
     {
