@@ -903,6 +903,69 @@ var App = (function () {
           "<p class='hint'>" + esc(t("landHint")) + "</p></div>";
   }
 
+  // ---------- Suche: Ort, Stadt, Land oder Koordinaten ----------
+
+  var searchMarker = null;
+  function flyToResult(r) {
+    closeSheet();
+    toast(t("flyingTo") + " " + r.name.split(",")[0]);
+    if (searchMarker) map.removeLayer(searchMarker);
+    searchMarker = L.circleMarker([r.lat, r.lon], { radius: 9, color: "#fff", weight: 3, fillColor: "#e02020", fillOpacity: 1 })
+      .bindPopup("<div class='pop'><h3>" + esc(r.name.split(",")[0]) + "</h3><div class='pop-sub'>" + esc(r.name) + "</div>" +
+        "<div class='coords'>" + esc(formatCoord(r.lat, r.lon)) + "</div>" + navLink(r.lat, r.lon) + "</div>", { maxWidth: 280 }).addTo(map);
+    if (r.bbox) map.flyToBounds(r.bbox, { maxZoom: 14, duration: 1.5 });
+    else map.flyTo([r.lat, r.lon], r.zoom || 15, { duration: 1.5 });
+  }
+
+  function openSearch() {
+    var body = el("<div class='search'><form class='search-form'><input type='search' enterkeyhint='search' autocomplete='off' placeholder='" +
+      esc(t("searchPlaceholder")) + "'><button class='primary'>" + esc(t("searchGo")) + "</button></form>" +
+      "<div class='plist search-results'></div><p class='hint'>" + esc(t("searchHint")) + "</p></div>");
+    var form = body.querySelector("form"), input = form.querySelector("input"), list = body.querySelector(".search-results");
+    var results = [];
+    function show(items, note) {
+      results = items;
+      list.innerHTML = items.map(function (r, i) {
+        return "<button class='item' data-i='" + i + "'><span class='item-text'><b>" + esc(r.name.split(",")[0]) + "</b><small>" +
+          esc(r.sub || r.name.split(",").slice(1).join(",").trim()) + "</small></span></button>";
+      }).join("") + (note ? "<p class='hint'>" + esc(note) + "</p>" : "");
+    }
+    list.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-i]");
+      if (b) flyToResult(results[+b.dataset.i]);
+    });
+    form.onsubmit = function (e) {
+      e.preventDefault();
+      var q = input.value.trim();
+      if (!q) return;
+      input.blur();
+      // Koordinaten? Ohne W/E bei positiver Länge beide Möglichkeiten zeigen (USA = West, Australien/Europa = Ost)
+      var c = Coords.parse(q);
+      if (c) {
+        var items = [{ name: formatCoord(c.lat, c.lon), sub: c.assumedWest ? t("searchWest") : t("coordinates"), lat: c.lat, lon: c.lon, zoom: 15 }];
+        if (c.assumedWest) items.push({ name: formatCoord(c.lat, -c.lon), sub: t("searchEast"), lat: c.lat, lon: -c.lon, zoom: 15 });
+        if (items.length === 1) { flyToResult(items[0]); return; }
+        show(items);
+        return;
+      }
+      if (!navigator.onLine) { show([], t("offlineNow")); return; }
+      show([], t("loading"));
+      // Ortsnamen über OpenStreetMap (Nominatim) – nur auf Knopfdruck, nicht bei jedem Buchstaben
+      fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=8&accept-language=" + lang + "&q=" + encodeURIComponent(q))
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          show(d.map(function (x) {
+            var bb = x.boundingbox && x.boundingbox.map(Number);
+            return { name: x.display_name, lat: +x.lat, lon: +x.lon,
+              bbox: bb && (bb[1] - bb[0] > 0.01 || bb[3] - bb[2] > 0.01) ? [[bb[0], bb[2]], [bb[1], bb[3]]] : null };
+          }), d.length ? "" : t("searchNone"));
+        })
+        .catch(function () { show([], t("loadError")); });
+    };
+    openSheet("🔍 " + t("search"), body);
+    setTimeout(function () { input.focus(); }, 50);
+  }
+
   function onMapClick(e) {
     var lat = e.latlng.lat, lon = e.latlng.lng;
     var parts = [];
@@ -1288,7 +1351,7 @@ var App = (function () {
   function init() {
     document.title = C.clubName;
     updateTitle();
-    ["layers", "gps", "addPoint", "track", "parking", "points", "menu"].forEach(function (k) {
+    ["layers", "search", "gps", "addPoint", "track", "parking", "points", "menu"].forEach(function (k) {
       var b = document.querySelector("[data-label='" + k + "']");
       if (b) { b.title = t(k); b.setAttribute("aria-label", t(k)); }
     });
@@ -1335,6 +1398,7 @@ var App = (function () {
     setupLongPress();
 
     document.getElementById("btn-layers").onclick = openLayersPanel;
+    document.getElementById("btn-search").onclick = openSearch;
     document.getElementById("btn-gps").onclick = function () { startGps(true); };
     document.getElementById("btn-add").onclick = function () { Points.openEditor(null, null); };
     document.getElementById("btn-list").onclick = function () { Points.openList(); };

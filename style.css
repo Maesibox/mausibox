@@ -19,6 +19,12 @@ html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
 .offline-badge { display: none; margin-left: 8px; background: var(--danger); color: #fff; padding: 0 6px; border-radius: 4px; font-size: 11px; }
 body.is-offline .offline-badge { display: inline-block; }
 
+#btn-search { position: absolute; left: 8px; top: calc(40px + var(--safe-t)); z-index: 900; width: 40px; height: 40px; border-radius: 50%;
+  border: 0; background: var(--panel); color: var(--text); box-shadow: 0 2px 6px rgba(0,0,0,.4); display: grid; place-items: center; padding: 0; cursor: pointer; }
+#btn-search svg { width: 22px; height: 22px; fill: currentColor; }
+.search-form { display: flex; gap: 8px; margin-bottom: 10px; }
+.search-form input { flex: 1; min-width: 0; font-size: 16px; }
+
 #buttons { position: absolute; right: 10px; top: calc(10px + var(--safe-t)); z-index: 900; display: flex; flex-direction: column; gap: 10px; }
 #buttons button { width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--panel); color: var(--text);
   box-shadow: 0 2px 6px rgba(0,0,0,.4); display: grid; place-items: center; padding: 0; cursor: pointer; }

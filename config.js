@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 40,
+  appVersion: 41,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -164,7 +164,10 @@ var APP_CONFIG = {
     { id: "general", name: { en: "General", de: "Allgemein" }, open: true },
     { id: "us", name: { en: "🇺🇸 USA (BLM, USGS …)", de: "🇺🇸 USA (BLM, USGS …)" }, open: true },
     { id: "nz", name: { en: "🇳🇿 New Zealand", de: "🇳🇿 Neuseeland" } },
-    { id: "au", name: { en: "🇦🇺 Australia", de: "🇦🇺 Australien" } },
+    { id: "au", name: { en: "🇦🇺 Australia – all states", de: "🇦🇺 Australien – alle Staaten" } },
+    { id: "auwa", name: { en: "🇦🇺 Western Australia – claims, drill holes, geology", de: "🇦🇺 Western Australia – Claims, Bohrlöcher, Geologie" } },
+    { id: "auqld", name: { en: "🇦🇺 Queensland – claims, old workings, geology", de: "🇦🇺 Queensland – Claims, alte Schächte, Geologie" } },
+    { id: "ausouth", name: { en: "🇦🇺 NSW, Victoria, SA, Tasmania", de: "🇦🇺 NSW, Victoria, South Australia, Tasmanien" } },
     // Europa: zuerst alles, was überall gilt; danach nur noch, was es pro Land zusätzlich gibt
     { id: "eu", name: { en: "🇪🇺 Europe – all countries", de: "🇪🇺 Europa – alle Länder" } },
     { id: "ch", name: { en: "🇨🇭 Switzerland – details", de: "🇨🇭 Schweiz – Details" } },
@@ -387,9 +390,9 @@ var APP_CONFIG = {
   auStateRules: {
     "Western Australia": {
       name: { en: "Western Australia", de: "Western Australia" }, level: "limited",
-      rule: { en: "Miner's Right required for all prospecting incl. metal detecting (one-off, about A$30). Covers Crown land incl. pastoral leases (inform the pastoralist). On tenements only with the holder's written consent; on an exploration licence a Section 40E permit (hand tools). Reserves closed. Check the 'WA tenements' layer before you go.", de: "Miner's Right für jede Suche nötig, auch mit dem Metalldetektor (einmalig, ca. A$30). Gilt auf Crown Land inkl. Pastoral Leases (Pastoralisten informieren). Auf Tenements nur mit schriftlicher Erlaubnis des Halters; auf einer Exploration Licence mit Section-40E-Permit (Handwerkzeug). Reserven gesperrt. Vorher die Ebene «WA – Tenements» prüfen." },
+      rule: { en: "Miner's Right required for all prospecting incl. metal detecting – apply online (about A$30). Covers Crown land incl. pastoral leases (inform the pastoralist). On tenements only with the holder's written consent; on an exploration licence a Section 40E permit (hand tools). Reserves closed. Check the 'WA tenements' layer before you go.", de: "Miner's Right für jede Suche nötig, auch mit dem Metalldetektor – online beantragen (ca. A$30 ≈ CHF 16). Gilt auf Crown Land inkl. Pastoral Leases (Pastoralisten informieren). Auf Tenements nur mit schriftlicher Erlaubnis des Halters; auf einer Exploration Licence mit Section-40E-Permit (Handwerkzeug). Reserven gesperrt. Vorher die Ebene «WA – Tenements» prüfen." },
       details: { en: "Miner's Right and 40E permit: Department of Mines (DEMIRS), online. Tours and hire in Kalgoorlie, Leonora, Coolgardie and Perth – see layer 'Hire & guided tours'.", de: "Miner's Right und 40E-Permit: Bergbaubehörde (DEMIRS), online. Touren und Verleih in Kalgoorlie, Leonora, Coolgardie und Perth – siehe Ebene «Verleih & geführte Touren»." },
-      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/miners-rights"
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://www.wa.gov.au/service/natural-resources/mineral-resources/getting-miners-right"
     },
     "Victoria": {
       name: { en: "Victoria", de: "Victoria" }, level: "limited",
@@ -418,8 +421,8 @@ var APP_CONFIG = {
     },
     "Tasmania": {
       name: { en: "Tasmania", de: "Tasmania" }, level: "limited",
-      rule: { en: "No licence inside the declared fossicking areas; elsewhere a prospecting licence from Mineral Resources Tasmania.", de: "In den ausgewiesenen Fossicking Areas ohne Lizenz; anderswo Prospecting Licence von Mineral Resources Tasmania." },
-      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://detectormaps.com/au/fossicking-laws/"
+      rule: { en: "No licence inside the 11 declared fossicking areas (all of them gem areas); for gold elsewhere a prospecting licence from Mineral Resources Tasmania.", de: "In den ausgewiesenen Fossicking Areas ohne Lizenz; anderswo Prospecting Licence von Mineral Resources Tasmania." },
+      source: "Behörden WA/QLD/NSW und detectormaps.com (Nov. 2026), keine Rechtsberatung", link: "https://www.mrt.tas.gov.au/prospecting_and_fossicking/fossicking_areas"
     },
     "Australian Capital Territory": {
       name: { en: "Australian Capital Territory", de: "Australian Capital Territory" }, level: "closed",
@@ -732,12 +735,14 @@ var APP_CONFIG = {
       kinds: {
         crown:   { color: "#2ecc40", level: "open",    label: { en: "Crown land with state licence – check tenements", de: "Crown Land mit Lizenz des Staats – Tenements prüfen" } },
         fossick: { color: "#2f80ed", level: "open",    label: { en: "Declared fossicking area", de: "Ausgewiesene Fossicking Area" } },
+        licence: { color: "#ff9800", level: "limited", label: { en: "Prospecting licence needed", de: "Prospecting Licence nötig" } },
         show:    { color: "#9b51e0", level: "limited", label: { en: "Museum / historic site", de: "Museum / historische Stätte" } },
         closed:  { color: "#e02020", level: "closed",  label: { en: "Prospecting not allowed", de: "Suchen nicht erlaubt" } }
       },
       legend: [
         { color: "#2ecc40", text: { en: "Crown land + licence", de: "Crown Land + Lizenz" } },
         { color: "#2f80ed", text: { en: "fossicking area", de: "Fossicking Area" } },
+        { color: "#ff9800", text: { en: "licence needed", de: "Lizenz nötig" } },
         { color: "#9b51e0", text: { en: "museum", de: "Museum" } },
         { color: "#e02020", text: { en: "closed", de: "gesperrt" } }
       ]
@@ -771,7 +776,7 @@ var APP_CONFIG = {
     },
     {
       id: "auTenements",
-      group: "au",
+      group: "auwa",
       type: "arcgisExport",
       name: { en: "WA – Tenements (claims, live & pending, DEMIRS)", de: "WA – Tenements (Claims, aktiv & beantragt, DEMIRS)" },
       url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Industry_and_Mining/MapServer",
@@ -785,7 +790,7 @@ var APP_CONFIG = {
     },
     {
       id: "auTenDead",
-      group: "au",
+      group: "auwa",
       type: "arcgisExport",
       name: { en: "WA – Dead tenements (ground may be open again – check live ones)", de: "WA – Erloschene Tenements (evtl. wieder frei – aktive prüfen)" },
       url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Industry_and_Mining/MapServer",
@@ -798,7 +803,7 @@ var APP_CONFIG = {
     },
     {
       id: "auMinedex",
-      group: "au",
+      group: "auwa",
       type: "arcgisExport",
       name: { en: "WA – Mines & deposits (MINEDEX)", de: "WA – Minen & Lagerstätten (MINEDEX)" },
       url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Industry_and_Mining/MapServer",
@@ -811,7 +816,7 @@ var APP_CONFIG = {
     },
     {
       id: "auDrill",
-      group: "au",
+      group: "auwa",
       type: "arcgisExport",
       name: { en: "WA – Drill holes & old exploration (WAMEX, zoom in)", de: "WA – Bohrlöcher & alte Exploration (WAMEX, hineinzoomen)" },
       url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Industry_and_Mining/MapServer",
@@ -828,7 +833,7 @@ var APP_CONFIG = {
     },
     {
       id: "auGeology",
-      group: "au",
+      group: "auwa",
       type: "arcgisExport",
       name: { en: "WA – Bedrock geology 1:500k / 1:100k (GSWA)", de: "WA – Gesteinsgeologie 1:500 000 / 1:100 000 (GSWA)" },
       url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Geology_and_Soils_Map/MapServer",
@@ -841,7 +846,7 @@ var APP_CONFIG = {
     },
     {
       id: "auFaults",
-      group: "au",
+      group: "auwa",
       type: "arcgisExport",
       name: { en: "WA – Faults & linear structures (GSWA)", de: "WA – Störungen & Strukturlinien (GSWA)" },
       url: "https://services.slip.wa.gov.au/public/rest/services/SLIP_Public_Services/Geology_and_Soils_Map/MapServer",
@@ -878,6 +883,158 @@ var APP_CONFIG = {
         { id: "1vd", layers: "geophys:magmap_v7_2019_1VD", name: { en: "First vertical derivative – shows structures and greenstone lines", de: "1. Ableitung – zeigt Strukturen und Grünsteinzüge" } },
         { id: "rtp", layers: "geophys:magmap_v7_2019_RTP", name: { en: "Reduced to pole", de: "Polreduziert" } }
       ]
+    },
+    {
+      id: "qldTenements",
+      group: "auqld",
+      type: "arcgisExport",
+      name: { en: "QLD – Claims, mining leases & exploration permits", de: "QLD – Claims, Mining Leases & Explorationsgebiete" },
+      url: "https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Economy/MinesPermitsCurrent/MapServer",
+      show: "31,38,1",
+      attribution: "Resource authorities: State of Queensland",
+      opacity: 0.8, visible: false, offline: false,
+      arcIdentify: { layers: "visible:31,38,1", tolerance: 2, max: 3, title: "Permit number",
+        fields: [ { field: "Permit type", label: { en: "Type", de: "Art" } }, { field: "Permit status", label: { en: "Status", de: "Status" } },
+                  { field: "Authorised holder name", label: { en: "Holder", de: "Halter" } }, { field: "Expiry date", label: { en: "Expires", de: "Läuft ab" } } ] }
+    },
+    {
+      id: "qldMines",
+      group: "auqld",
+      type: "arcgisExport",
+      name: { en: "QLD – Mines, old workings & mineral occurrences (MINOCC)", de: "QLD – Minen, alte Abbaue & Vorkommen (MINOCC)" },
+      url: "https://spatial-gis.information.qld.gov.au/arcgis/rest/services/GeoscientificInformation/MiningResources/MapServer",
+      show: "14,15,16,17",
+      attribution: "MINOCC: State of Queensland",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:14,15,16,17", tolerance: 8, max: 3, title: "Occurrence name",
+        fields: [ { field: "Main commodity", label: { en: "Commodity", de: "Rohstoff" } }, { field: "Mine status", label: { en: "Status", de: "Status" } },
+                  { field: "Work extent", label: { en: "Workings", de: "Abbau" } }, { field: "site locality", label: { en: "Location", de: "Lage" } } ] }
+    },
+    {
+      id: "qldShafts",
+      group: "auqld",
+      type: "arcgisExport",
+      name: { en: "QLD – Old shafts, pits & shallow workings (abandoned mines)", de: "QLD – Alte Schächte, Gruben & Schürfstellen (verlassene Minen)" },
+      url: "https://spatial-gis.information.qld.gov.au/arcgis/rest/services/GeoscientificInformation/AbandonedMines/MapServer",
+      show: "45,65,75,85,105,110",
+      attribution: "Abandoned mines: State of Queensland",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:45,65,75,85,105,110", tolerance: 6, max: 3, title: "Mine Name",
+        fields: [ { field: "Type", label: { en: "Type", de: "Art" } }, { field: "Commodity", label: { en: "Commodity", de: "Rohstoff" } },
+                  { field: "Remediation Status", label: { en: "Made safe", de: "Gesichert" } } ] }
+    },
+    {
+      id: "qldDrill",
+      group: "auqld",
+      type: "arcgisExport",
+      name: { en: "QLD – Mineral drill holes", de: "QLD – Mineral-Bohrlöcher" },
+      url: "https://spatial-gis.information.qld.gov.au/arcgis/rest/services/GeoscientificInformation/Boreholes/MapServer",
+      show: "6",
+      attribution: "Boreholes: State of Queensland",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:6", tolerance: 6, max: 3, title: "Bore Name",
+        fields: [ { field: "Operator", label: { en: "Company", de: "Firma" } }, { field: "Total Depth Driller (m)", label: { en: "Depth (m)", de: "Tiefe (m)" } },
+                  { field: "Subtype", label: { en: "Type", de: "Art" } }, { field: "Data Link", label: { en: "Data", de: "Daten" } } ] }
+    },
+    {
+      id: "qldGeology",
+      group: "auqld",
+      type: "arcgisExport",
+      name: { en: "QLD – Detailed geology 1:100k", de: "QLD – Detaillierte Geologie 1:100 000" },
+      url: "https://spatial-gis.information.qld.gov.au/arcgis/rest/services/GeoscientificInformation/GeologyDetailed/MapServer",
+      show: "17",
+      attribution: "Geology: State of Queensland",
+      opacity: 0.55, visible: false, offline: false,
+      arcIdentify: { layers: "visible:17", tolerance: 0, max: 1, title: "Rock Unit Name",
+        fields: [ { field: "Lithological Summary", label: { en: "Rock", de: "Gestein" } }, { field: "Age", label: { en: "Age", de: "Alter" } },
+                  { field: "Dominant Rock", label: { en: "Main rock", de: "Hauptgestein" } } ] }
+    },
+    {
+      id: "qldFaults",
+      group: "auqld",
+      type: "arcgisExport",
+      name: { en: "QLD – Faults & shear zones", de: "QLD – Störungen & Scherzonen" },
+      url: "https://spatial-gis.information.qld.gov.au/arcgis/rest/services/GeoscientificInformation/GeologyDetailed/MapServer",
+      show: "4",
+      attribution: "Geology: State of Queensland",
+      opacity: 1, visible: false, offline: false,
+      arcIdentify: { layers: "visible:4", tolerance: 5, max: 2 }
+    },
+    {
+      id: "nswTenements",
+      group: "ausouth",
+      type: "wms",
+      name: { en: "NSW – Mining & exploration titles", de: "NSW – Bergbau- & Explorationstitel (Claims)" },
+      url: "https://gs.geoscience.nsw.gov.au/geoserver/ows",
+      layers: "mt:MineralTenement",
+      attribution: "Titles: NSW Resources (Geological Survey of NSW)",
+      opacity: 0.7, visible: false, offline: false,
+      wmsInfo: { layers: "mt:MineralTenement", max: 3, buffer: 2, title: "name",
+        fields: [ { field: "tenementType", label: { en: "Type", de: "Art" } }, { field: "status", label: { en: "Status", de: "Status" } },
+                  { field: "owner", label: { en: "Holder", de: "Halter" } }, { field: "commodity", label: { en: "Commodity", de: "Rohstoff" } },
+                  { field: "expireDate", label: { en: "Expires", de: "Läuft ab" } } ] }
+    },
+    {
+      id: "nswDrill",
+      group: "ausouth",
+      type: "wms",
+      name: { en: "NSW – Drill holes", de: "NSW – Bohrlöcher" },
+      url: "https://gs.geoscience.nsw.gov.au/geoserver/ows",
+      layers: "gsmlp:BoreholeView",
+      attribution: "Boreholes: Geological Survey of NSW",
+      opacity: 1, visible: false, offline: false
+    },
+    {
+      id: "vicTenements",
+      group: "ausouth",
+      type: "wms",
+      name: { en: "Victoria – Mineral tenements (picture only, no tap info)", de: "Victoria – Tenements/Claims (nur Bild, Antippen ohne Angaben)" },
+      url: "https://geology.data.vic.gov.au/nvcl/ows",
+      layers: "mt:MineralTenement",
+      attribution: "Tenements: Geological Survey of Victoria",
+      opacity: 0.7, visible: false, offline: false
+    },
+    {
+      id: "vicMinOcc",
+      group: "ausouth",
+      type: "wms",
+      name: { en: "Victoria – Mineral occurrences & drill holes", de: "Victoria – Vorkommen & Bohrlöcher" },
+      url: "https://geology.data.vic.gov.au/nvcl/ows",
+      layers: "mo:MinOccView,gsmlp:BoreholeView",
+      attribution: "Geological Survey of Victoria",
+      opacity: 1, visible: false, offline: false
+    },
+    {
+      id: "saTenements",
+      group: "ausouth",
+      type: "wms",
+      name: { en: "SA – Mineral claims, leases & exploration licences", de: "SA – Mineral Claims, Leases & Explorationslizenzen" },
+      url: "https://services.sarig.sa.gov.au/vector/wms",
+      layers: "mineral_tenements:mineral_and_or_opal_exploration_licence,mineral_tenements:mineral_leases,mineral_tenements:mineral_claims,mineral_tenements:private_mines",
+      attribution: "SARIG: Government of South Australia",
+      opacity: 0.7, visible: false, offline: false
+    },
+    {
+      id: "saGold",
+      group: "ausouth",
+      type: "wms",
+      name: { en: "SA – Gold mines & occurrences, old diggings", de: "SA – Gold-Minen & -Vorkommen, alte Schürfstellen" },
+      url: "https://services.sarig.sa.gov.au/vector/wms",
+      layers: "mines_and_mineral_deposits:all_diggings,mines_and_mineral_deposits:gold",
+      attribution: "SARIG: Government of South Australia",
+      opacity: 1, visible: false, offline: false
+    },
+    {
+      id: "tasGeology",
+      group: "ausouth",
+      type: "arcgisExport",
+      name: { en: "Tasmania – Geology 1:250k / 1:25k", de: "Tasmanien – Geologie 1:250 000 / 1:25 000" },
+      url: "https://services.thelist.tas.gov.au/arcgis/rest/services/Public/GeologicalAndSoils/MapServer",
+      show: "14,13,16,15",
+      attribution: "Geology: Mineral Resources Tasmania (theLIST)",
+      opacity: 0.55, visible: false, offline: false,
+      arcIdentify: { layers: "visible:14,16", tolerance: 0, max: 1, title: "DESCRIPTION",
+        fields: [ { field: "PERIOD", label: { en: "Period", de: "Zeitalter" } }, { field: "REGION", label: { en: "Region", de: "Region" } } ] }
     },
     {
       id: "euSpots",
@@ -1371,7 +1528,7 @@ var APP_CONFIG = {
   // ----------------------------------------------------------
   text: {
     en: {
-      layers: "Layers", basemap: "Base map", overlays: "Layers",
+      layers: "Layers", basemap: "Base map", overlays: "Layers", search: "Search", searchPlaceholder: "Place, town, country or coordinates", searchGo: "Search", searchHint: "Examples: Kalgoorlie · Napf · Switzerland · -30.75, 121.47 · 34°48'N 114°24'W · 11S 736512 3854320", searchNone: "Nothing found.", searchWest: "West (e.g. USA)", searchEast: "East (e.g. Australia, Europe)", flyingTo: "Flying to", coordinates: "Coordinates",
       gps: "My location", addPoint: "Add point", points: "My points", menu: "Menu",
       zoomInFor: "Zoom in to see", zoomInMore: "Zoom in closer to see this layer", dataDate: "Data as of", updating: "New version – loading…", goldRules: "Gold rules", spotFind: "What you find", spotPermit: "Permit / where to ask", spotPermitLink: "Permit: form / office", spotLocalLink: "Local contact (museum / panning site)", spotHint: "Approximate location (town / river section). Ask locally before panning.", clubJoin: "Website / join", serviceHint: "Location = town; exact address on the website.", clubHint: "Location = club seat (town), not the claims. Fees and claims change – check the club website.", loading: "Loading…", loadError: "Could not load",
       gpsWaiting: "Waiting for GPS…", gpsError: "GPS not available", accuracy: "accuracy",
@@ -1484,7 +1641,7 @@ var APP_CONFIG = {
       dirs: "N,NE,E,SE,S,SW,W,NW"
     },
     de: {
-      layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen",
+      layers: "Ebenen", basemap: "Grundkarte", overlays: "Ebenen", search: "Suchen", searchPlaceholder: "Ort, Stadt, Land oder Koordinaten", searchGo: "Suchen", searchHint: "Beispiele: Kalgoorlie · Napf · Schweiz · -30.75, 121.47 · 34°48'N 114°24'W · 11S 736512 3854320", searchNone: "Nichts gefunden.", searchWest: "West (z. B. USA)", searchEast: "Ost (z. B. Australien, Europa)", flyingTo: "Fliege nach", coordinates: "Koordinaten",
       gps: "Mein Standort", addPoint: "Punkt setzen", points: "Meine Punkte", menu: "Menü",
       zoomInFor: "Hineinzoomen für", zoomInMore: "Näher hineinzoomen, um diese Ebene zu sehen", dataDate: "Datenstand", updating: "Neue Version – wird geladen…", goldRules: "Gold-Regeln", spotFind: "Was man findet", spotPermit: "Bewilligung / wo fragen", spotPermitLink: "Bewilligung: Formular / Stelle", spotLocalLink: "Anlaufstelle vor Ort (Museum / Waschplatz)", spotHint: "Ungefähre Lage (Ort / Flussabschnitt). Vor dem Waschen vor Ort nachfragen.", clubJoin: "Website / Mitglied werden", serviceHint: "Lage = Ort; genaue Adresse auf der Website.", clubHint: "Lage = Sitz des Clubs (Ort), nicht die Claims. Beiträge und Claims ändern sich – auf der Club-Website nachsehen.", loading: "Lade…", loadError: "Laden fehlgeschlagen",
       gpsWaiting: "Warte auf GPS…", gpsError: "GPS nicht verfügbar", accuracy: "Genauigkeit",
