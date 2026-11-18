@@ -980,7 +980,7 @@ var App = (function () {
         // Länder (EU-Grenzen, Schlüssel = Ländercode) oder z. B. US-Bundesstaaten (rulesKey, codeProp = Name)
         var land = o._countries.filter(function (f) { return hit(f, lon, lat); })[0];
         var code = land && (o.codeProp ? land.properties[o.codeProp] : (land.properties.CNTR_ID || land.properties.ISO3_CODE));
-        var found = [o.alsoCountry && (C.countryRules || {})[o.alsoCountry], code && (C[o.rulesKey || "countryRules"] || {})[code]];
+        var found = [land && o.alsoCountry && (C.countryRules || {})[o.alsoCountry], code && (C[o.rulesKey || "countryRules"] || {})[code]];
         // gleiche Regel nur einmal (Land kommt z. B. bei «weltweit» und bei «pro Bundesstaat» vor)
         found.filter(function (r) { return r && shownRules.indexOf(r) < 0; }).forEach(function (rule) { shownRules.push(rule); parts.push(rulePopupHtml(rule)); });
       }
