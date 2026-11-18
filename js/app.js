@@ -687,7 +687,7 @@ var App = (function () {
   };
 
   function row(label, value) {
-    if (value == null || String(value).trim() === "") return "";
+    if (value == null || String(value).trim() === "" || value === "Null") return "";
     return "<tr><th>" + esc(label) + "</th><td>" + esc(value) + "</td></tr>";
   }
 
@@ -794,7 +794,7 @@ var App = (function () {
     var ai = cfg.arcIdentify, skip = /^(OBJECTID|Shape|SHAPE.*|FID|EAST_|NORTH_|.*_NZTM|ACN|RL_DEM.*|Literature references)$/i;
     return results.slice(0, ai.max || 3).map(function (res) {
       var a = res.attributes || {};
-      var title = (ai.title && a[ai.title]) || a.Name || a.NAME || a.name || res.layerName;
+      var title = [ai.title && a[ai.title], a.Name, a.NAME, a.name].filter(function (v) { return v && v !== "Null"; })[0] || res.layerName;
       var rows = ai.fields ? ai.fields.map(function (fd) { return row(tr(fd.label), a[fd.field]); }).join("")
         : Object.keys(a).filter(function (k) { return !skip.test(k) && a[k] !== "" && a[k] !== "Null" && a[k] != null && k !== ai.title; })
           .slice(0, 8).map(function (k) { return row(k, a[k]); }).join("");
@@ -963,7 +963,7 @@ var App = (function () {
         .catch(function () { show([], t("loadError")); });
     };
     openSheet("🔍 " + t("search"), body);
-    setTimeout(function () { input.focus(); }, 50);
+    setTimeout(function () { input.focus(); }, 350);
   }
 
   function onMapClick(e) {
