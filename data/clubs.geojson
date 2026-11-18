@@ -633,6 +633,196 @@
 "geometry": {
 "type": "Point",
 "coordinates": [
+121.31,
+-28.895
+]
+},
+"properties": {
+"name": "Little Ripper Gold Inc.",
+"country": "AU",
+"river": "Leonora / Kalgoorlie / Meekatharra, WA",
+"kind": "claims",
+"de": "Gemeinnütziger Club mit eigenen Prospecting-Leases bei Leonora, Kalgoorlie und Meekatharra – Mitglieder dürfen dort legal campen und detektieren. Miner's Right trotzdem nötig.",
+"en": "Not-for-profit club with its own prospecting leases near Leonora, Kalgoorlie and Meekatharra – members may camp and detect there legally. Miner's Right still required.",
+"join": "https://www.littlerippergoldinc.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+115.86,
+-31.95
+]
+},
+"properties": {
+"name": "APLA – Amalgamated Prospectors & Leaseholders WA",
+"country": "AU",
+"river": "Perth, WA (ganz WA)",
+"kind": "national",
+"de": "Verband der Goldsucher in WA: Haftpflichtversicherung, Buschcamps und Ausflüge mit erfahrenen Prospectors, setzt sich für den Landzugang ein. Fast alle WA-Prospectors sind Mitglied.",
+"en": "WA prospectors' association: liability insurance, bush camps and trips with experienced prospectors, lobbies for land access.",
+"join": "https://www.apla.com.au/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+121.475,
+-30.755
+]
+},
+"properties": {
+"name": "APLA Goldfields Branch",
+"country": "AU",
+"river": "Kalgoorlie, WA",
+"kind": "club",
+"de": "Regionalgruppe in Kalgoorlie; Treffen im Tower Hotel, Besucher willkommen.",
+"en": "Regional branch in Kalgoorlie; meetings at the Tower Hotel, visitors welcome.",
+"join": "https://www.apla.com.au/goldfields-branch/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+144.28,
+-36.76
+]
+},
+"properties": {
+"name": "PMAV – Prospectors and Miners Association of Victoria",
+"country": "AU",
+"river": "Bendigo, VIC (8 Regionalgruppen)",
+"kind": "national",
+"de": "Landesverband in Victoria mit Gruppen in Ballarat, Bendigo, Melbourne, Gippsland u. a.; setzt sich für den Zugang zu Goldfeldern ein.",
+"en": "Victorian state association with branches in Ballarat, Bendigo, Melbourne, Gippsland and more; lobbies for goldfield access.",
+"join": "https://pmav.org.au/branches/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+145.18,
+-37.92
+]
+},
+"properties": {
+"name": "Victorian Seekers Club",
+"country": "AU",
+"river": "Mulgrave (Melbourne), VIC",
+"kind": "club",
+"de": "Camps im Goldenen Dreieck; vor dem Beitritt zwei Ausflüge oder Treffen mitmachen.",
+"en": "Camps in the Golden Triangle; attend two outings or meetings before joining.",
+"join": "https://www.victorianseekersclub.org.au/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+145.35,
+-37.76
+]
+},
+"properties": {
+"name": "Victorian Fossickers Club",
+"country": "AU",
+"river": "Lilydale, VIC",
+"kind": "club",
+"de": "Detektieren, Goldwaschen, Rinnen; Gäste dürfen ein Treffen und ein Camp mitmachen.",
+"en": "Detecting, panning, sluicing; guests may join one meeting and one camp.",
+"join": "https://www.victorianfossickersclub.org.au/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+153.03,
+-27.47
+]
+},
+"properties": {
+"name": "Queensland Prospectors and Fossickers Association",
+"country": "AU",
+"river": "Queensland",
+"kind": "national",
+"de": "Landesverband der Goldsucher in Queensland.",
+"en": "Queensland state association of prospectors and fossickers.",
+"join": "https://www.qpfa.org.au/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+146.82,
+-19.26
+]
+},
+"properties": {
+"name": "Townsville Metal Detecting Club",
+"country": "AU",
+"river": "Townsville, QLD",
+"kind": "claims",
+"de": "Monatliche Goldfeld-Ausflüge in der Trockenzeit auf Stationen mit Erlaubnis; auf Club-Ausflügen gilt die Fossicking Licence des Clubs.",
+"en": "Monthly goldfield trips in the dry season on stations with permission; the club's fossicking licence covers club trips.",
+"join": "http://www.townsvillemetaldetectingclub.com/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+150.51,
+-23.38
+]
+},
+"properties": {
+"name": "CQ Detectorists",
+"country": "AU",
+"river": "Rockhampton, QLD",
+"kind": "club",
+"de": "Club in Zentral-Queensland mit Gruppen in Rockhampton, Gladstone, Mackay und Bundaberg.",
+"en": "Central Queensland club with groups in Rockhampton, Gladstone, Mackay and Bundaberg.",
+"join": "https://cqdetectorists.com.au/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+151.0,
+-33.81
+]
+},
+"properties": {
+"name": "Prospectors Home Club",
+"country": "AU",
+"river": "Parramatta (Sydney), NSW",
+"kind": "club",
+"de": "Seit 1981, jeden Monat ein Ausflug in Goldgebiete; über 250 Mitglieder.",
+"en": "Since 1981, a trip to gold areas every month; over 250 members.",
+"join": "https://prospectorshomeclubinc.org.au/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
 7.99,
 47.12
 ]
