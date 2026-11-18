@@ -576,6 +576,63 @@
 "geometry": {
 "type": "Point",
 "coordinates": [
+-113.49,
+53.55
+]
+},
+"properties": {
+"name": "Alberta Gold Prospectors Association",
+"country": "CA",
+"river": "Edmonton, AB",
+"kind": "club",
+"de": "Grösster Hobby-Goldsucher-Verein Westkanadas; organisiert Ausflüge und Wettbewerbe, auch in BC. Ausflüge, Kurse und Treffen; ob der Club eigene Claims hat, bei der Anmeldung fragen.",
+"en": "Western Canada's largest hobby prospecting club; outings and competitions, also in BC. Outings, classes and meetings; ask whether the club holds its own claims.",
+"join": "https://agpa.ca/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-139.432,
+64.061
+]
+},
+"properties": {
+"name": "Klondike Visitors Association",
+"country": "CA",
+"river": "Dawson City, YT",
+"kind": "claims",
+"de": "Betreibt den Gratis-Touristen-Claim Free Claim #6 am Bonanza Creek.",
+"en": "Runs the free tourist claim Free Claim #6 on Bonanza Creek.",
+"join": "https://dawsoncity.ca/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-135.05,
+60.72
+]
+},
+"properties": {
+"name": "Klondike Placer Miners' Association",
+"country": "CA",
+"river": "Whitehorse, YT",
+"kind": "club",
+"de": "Verband der Placer-Minen im Yukon – Infos zu Regeln und Kontakten, keine Hobby-Claims.",
+"en": "Association of Yukon placer miners – rules and contacts, no hobby claims.",
+"join": "https://www.kpma.ca/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
 7.99,
 47.12
 ]

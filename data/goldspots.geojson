@@ -1311,7 +1311,7 @@
 "country": "UK",
 "river": "Kildonan Burn",
 "kind": "site",
-"de": "Ort des schottischen Goldrauschs von 1869. Tageskarte des Suisgill Estate nötig (ca. £15, vorher Bedingungen klären).",
+"de": "Ort des schottischen Goldrauschs von 1869 (Baile an Òr). Lizenz des Suisgill Estate nötig (in Helmsdale erhältlich, ca. £15); höchstens zwei Wochen pro Jahr, keine Rinnen.",
 "en": "Site of the 1869 Scottish gold rush. Suisgill Estate day permit needed (about £15, check terms).",
 "find_de": "Flitter und kleine Nuggets – schottisches Gold ist oft recht grob.",
 "find_en": "Flakes and small nuggets – Scottish gold is often fairly coarse.",
@@ -1342,6 +1342,78 @@
 "permit_de": "Gold gehört in Grossbritannien der Krone; Crown Estate Scotland gibt keine Hobby-Lizenzen. Man braucht die Erlaubnis des Grundbesitzers bzw. eine lokale Tageskarte (Wanlockhead, Kildonan, Tyndrum). Lachs-Laichzeiten beachten. Wales: Natural Resources Wales erlaubt Goldwaschen auf seinem Land nicht.",
 "permit_en": "In Britain gold belongs to the Crown; Crown Estate Scotland issues no hobby licences. You need the landowner's permission or a local day permit (Wanlockhead, Kildonan, Tyndrum). Respect salmon spawning seasons. Wales: Natural Resources Wales does not allow panning on its land.",
 "permit_link": "https://ukgoldprospector.co.uk/news/gold-panning-laws-uk.html",
+"link": null
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-3.8,
+55.38
+]
+},
+"properties": {
+"name": "Mennock Water (Leadhills)",
+"country": "UK",
+"river": "Mennock Water",
+"kind": "permit",
+"de": "Goldwaschen mit Lizenz des Buccleuch Estate, erhältlich im Museum of Lead Mining in Wanlockhead.",
+"en": "Panning with a Buccleuch Estate licence from the Museum of Lead Mining in Wanlockhead.",
+"find_de": "Flitter und kleine Nuggets – schottisches Gold ist oft recht grob.",
+"find_en": "Flakes and small nuggets – Scottish gold is often fairly coarse.",
+"permit_de": "Gold gehört in Grossbritannien der Krone; Crown Estate Scotland gibt keine Hobby-Lizenzen. Man braucht die Erlaubnis des Grundbesitzers bzw. eine lokale Tageskarte (Wanlockhead, Kildonan, Tyndrum). Lachs-Laichzeiten beachten. Wales: Natural Resources Wales erlaubt Goldwaschen auf seinem Land nicht.",
+"permit_en": "In Britain gold belongs to the Crown; Crown Estate Scotland issues no hobby licences. You need the landowner's permission or a local day permit (Wanlockhead, Kildonan, Tyndrum). Respect salmon spawning seasons. Wales: Natural Resources Wales does not allow panning on its land.",
+"permit_link": "https://ukgoldprospector.co.uk/news/gold-panning-laws-uk.html",
+"link": "https://www.leadminingmuseum.co.uk/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-3.65,
+58.115
+]
+},
+"properties": {
+"name": "Timespan Museum (Helmsdale)",
+"country": "UK",
+"river": "–",
+"kind": "site",
+"de": "Hier gibt es die Lizenz für den Kildonan Burn und Goldwasch-Ausrüstung zum Mieten. Regeln des Suisgill Estate: nur Hobby, höchstens zwei Wochen pro Jahr, keine Rinnen.",
+"en": "Licence for the Kildonan Burn and panning kit hire. Suisgill Estate rules: hobby only, max. two weeks per year, no sluices.",
+"find_de": "Flitter und kleine Nuggets – schottisches Gold ist oft recht grob.",
+"find_en": "Flakes and small nuggets – Scottish gold is often fairly coarse.",
+"permit_de": "Gold gehört in Grossbritannien der Krone; Crown Estate Scotland gibt keine Hobby-Lizenzen. Man braucht die Erlaubnis des Grundbesitzers bzw. eine lokale Tageskarte (Wanlockhead, Kildonan, Tyndrum). Lachs-Laichzeiten beachten. Wales: Natural Resources Wales erlaubt Goldwaschen auf seinem Land nicht.",
+"permit_en": "In Britain gold belongs to the Crown; Crown Estate Scotland issues no hobby licences. You need the landowner's permission or a local day permit (Wanlockhead, Kildonan, Tyndrum). Respect salmon spawning seasons. Wales: Natural Resources Wales does not allow panning on its land.",
+"permit_link": "https://ukgoldprospector.co.uk/news/gold-panning-laws-uk.html",
+"link": "https://www.timespan.org.uk/"
+}
+},
+{
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [
+-3.89,
+52.8
+]
+},
+"properties": {
+"name": "Dolgellau-Goldgürtel / Afon Wen (Wales)",
+"country": "UK",
+"river": "Afon Wen / Mawddach",
+"kind": "closed",
+"de": "Bekanntes walisisches Goldgebiet (Clogau, Gwynfynydd) – Hobby-Goldwaschen ist hier nicht erlaubt.",
+"en": "Known Welsh gold area (Clogau, Gwynfynydd) – hobby panning is not allowed here.",
+"find_de": "Nur ansehen: römische Goldmine mit Führungen.",
+"find_en": "Look only: Roman gold mine with tours.",
+"permit_de": "Wales: Die Crown Estate erlaubt Goldwaschen als Hobby im Dolgellau-Goldgürtel nicht; es gab bereits Gerichtsfälle mit Bussen über 3000 Pfund.",
+"permit_en": "Wales: the Crown Estate does not allow hobby panning in the Dolgellau gold belt; there have been prosecutions with fines over £3000.",
+"permit_link": null,
 "link": null
 }
 },
@@ -1862,14 +1934,14 @@
 "name": "Karasjohka bei Karasjok",
 "country": "NO",
 "river": "Karasjohka",
-"kind": "unclear",
+"kind": "permit",
 "de": "Erster Seifengold-Fund Nordnorwegens (1866); Gold in den Flüssen des Tana-Systems. Der Anárjohka-Nationalpark ist tabu.",
 "en": "First placer gold find in northern Norway (1866); gold in the Tana river system. Anárjohka National Park is off limits.",
 "find_de": "Flitter und kleine Körner – 1866 erster Goldfund Nordnorwegens bei Karasjok.",
 "find_en": "Flakes and small grains – first gold find of northern Norway near Karasjok in 1866.",
-"permit_de": "Regeln für dieses Land habe ich nicht verlässlich gefunden – bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug.",
-"permit_en": "I could not find reliable rules for this country – please ask locally (municipality, landowner, fishing authority). Avoid protected areas, hand tools only.",
-"permit_link": null,
+"permit_de": "Norwegen: Alluviales Gold gehört dem Grundeigentümer – dessen Erlaubnis ist nötig. Bis 500 m³ Material mit Handwerkzeug ist keine Meldung nach dem Mineralgesetz nötig; mit Pumpen oder Maschinen schon. In Finnmark (FeFo-Land) braucht es eine Erlaubnis der Finnmarkseiendommen; Einheimische haben Vorrang. Gemeinde wegen Bauvorschriften fragen.",
+"permit_en": "Norway: alluvial gold belongs to the landowner – their permission is needed. Up to 500 m³ with hand tools needs no notification under the Minerals Act; with pumps or machines it does. In Finnmark (FeFo land) a permit from Finnmarkseiendommen is needed; locals have priority. Ask the municipality about planning rules.",
+"permit_link": "https://www.dirmin.no/faq",
 "link": null
 }
 }

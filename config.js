@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 44,
+  appVersion: 45,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -223,8 +223,8 @@ var APP_CONFIG = {
     },
     UK: {
       name: { en: "United Kingdom", de: "Grossbritannien" }, level: "limited",
-      rule: { en: "Gold belongs to the Crown; there is no national hobby licence. You need the landowner's permission or a local permit (Wanlockhead: Museum of Lead Mining; Kildonan: Suisgill Estate; Tyndrum: Strathfillan Community Development Trust). Wales: no panning on Natural Resources Wales land.",
-              de: "Gold gehört der Krone; eine landesweite Hobby-Lizenz gibt es nicht. Man braucht die Erlaubnis des Grundbesitzers oder eine lokale Lizenz (Wanlockhead: Museum of Lead Mining; Kildonan: Suisgill Estate; Tyndrum: Strathfillan Community Development Trust). Wales: auf Land von Natural Resources Wales kein Goldwaschen." },
+      rule: { en: "Gold belongs to the Crown; there is no national hobby licence. You need the landowner's permission or a local permit (Wanlockhead: Museum of Lead Mining; Kildonan: Suisgill Estate; Tyndrum: Strathfillan Community Development Trust). Wales: no panning on Natural Resources Wales land; the Crown Estate does not allow hobby panning in the Dolgellau gold belt (prosecutions with fines over £3000).",
+              de: "Gold gehört der Krone; eine landesweite Hobby-Lizenz gibt es nicht. Man braucht die Erlaubnis des Grundbesitzers oder eine lokale Lizenz (Wanlockhead: Museum of Lead Mining; Kildonan: Suisgill Estate; Tyndrum: Strathfillan Community Development Trust). Wales: auf Land von Natural Resources Wales kein Goldwaschen; im Dolgellau-Goldgürtel erlaubt die Crown Estate kein Hobby-Goldwaschen (Gerichtsfälle mit Bussen über 3000 Pfund)." },
       details: { en: "Respect salmon spawning seasons and SSSI protected sites. Hand tools only.", de: "Lachs-Laichzeiten und Schutzgebiete (SSSI) beachten. Nur Handwerkzeug." },
       source: "ukgoldprospector.co.uk (2026), nicht amtlich", link: "https://ukgoldprospector.co.uk/news/gold-panning-laws-uk.html"
     },
@@ -292,8 +292,9 @@ var APP_CONFIG = {
     },
     NO: {
       name: { en: "Norway", de: "Norwegen" }, level: "limited",
-      rule: { en: "Rules not checked – please ask locally (municipality, landowner, fishing authority) before panning. Avoid protected areas; hand tools only.", de: "Regeln nicht geprüft – vor dem Waschen bitte selbst vor Ort informieren (Gemeinde, Grundeigentümer, Fischerei-Aufsicht). Schutzgebiete meiden, nur Handwerkzeug." },
-      source: "noch nicht recherchiert (Nov. 2026)"
+      rule: { en: "Alluvial gold belongs to the landowner: you need their permission. Hand panning up to 500 m³ needs no notification under the Minerals Act; pumps or machines do. Finnmark (FeFo land): permit from Finnmarkseiendommen, locals have priority.", de: "Alluviales Gold gehört dem Grundeigentümer: dessen Erlaubnis ist nötig. Goldwaschen von Hand bis 500 m³ braucht keine Meldung nach dem Mineralgesetz; Pumpen oder Maschinen schon. Finnmark (FeFo-Land): Erlaubnis der Finnmarkseiendommen, Einheimische haben Vorrang." },
+      details: { en: "The right of public access (allemannsretten) alone does not allow gold panning. Gold in bedrock belongs to the state.", de: "Das Jedermannsrecht (Allemannsretten) allein erlaubt das Goldwaschen nicht. Gold im festen Fels gehört dem Staat." },
+      source: "Direktoratet for mineralforvaltning (DMF), Finnmarkseiendommen (Nov. 2026)", link: "https://www.dirmin.no/faq"
     },
     US: {
       name: { en: "USA (federal land)", de: "USA (Bundesland)" }, level: "open",
