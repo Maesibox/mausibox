@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 47,
+  appVersion: 48,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -1770,7 +1770,7 @@ var APP_CONFIG = {
       tooMany: "Too many tiles – zoom in or lower the zoom level.",
       areas: "Downloaded areas", showOnMap: "Show", deleteOffline: "Delete all offline data",
       storageUsed: "Storage used", areaName: "Area name",
-      language: "Language", about: "About & data sources",
+      language: "Language", about: "About & data sources", legal: "Legal notice, privacy, terms",
       saved: "Saved", offlineNow: "Offline – showing saved data",
       persistHint: "Tip: make a full backup now and then. If the browser data is cleared, local points are lost.",
 
@@ -1883,7 +1883,7 @@ var APP_CONFIG = {
       tooMany: "Zu viele Kacheln – näher hineinzoomen oder Zoomstufe senken.",
       areas: "Heruntergeladene Gebiete", showOnMap: "Zeigen", deleteOffline: "Alle Offline-Daten löschen",
       storageUsed: "Belegter Speicher", areaName: "Name des Gebiets",
-      language: "Sprache", about: "Über die App & Datenquellen",
+      language: "Sprache", about: "Über die App & Datenquellen", legal: "Impressum, Datenschutz, AGB",
       saved: "Gespeichert", offlineNow: "Offline – zeige gespeicherte Daten",
       persistHint: "Tipp: ab und zu eine vollständige Sicherung machen. Wenn die Browserdaten gelöscht werden, sind lokale Punkte weg.",
 

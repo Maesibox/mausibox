@@ -10,7 +10,7 @@ var APP_CACHE = "gc-app-v" + APP_CONFIG.appVersion;
 var TILE_CACHE = "gc-tiles";
 
 var APP_FILES = [
-  "./", "index.html", "style.css", "config.js", "manifest.webmanifest",
+  "./", "index.html", "legal.html", "style.css", "config.js", "manifest.webmanifest",
   "js/storage.js", "js/app.js", "js/points.js", "js/exportimport.js", "js/offline.js",
   "js/auth.js", "js/admin.js", "js/coords.js", "js/claims.js", "js/tracks.js", "js/parking.js", "js/help.js", "js/sync.js", "js/blmwatch.js", "js/chat.js",
   "lib/leaflet.js", "lib/leaflet.css", "lib/supabase.js", "lib/qrcode.js",

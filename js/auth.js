@@ -175,6 +175,7 @@ var Auth = (function () {
         "<button class='primary wide'>" + esc(t("setPassword")) + "</button></form>";
     }
     html += "<div class='gate-lang'><a href='#' data-lang='en'>English</a> · <a href='#' data-lang='de'>Deutsch</a></div>";
+    html += "<div class='gate-lang'><a href='legal.html' target='_blank'>" + esc(t("legal")) + "</a></div>";
     box.innerHTML = html;
 
     box.onclick = function (e) {

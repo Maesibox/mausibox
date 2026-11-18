@@ -51,6 +51,10 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 48
+- **Impressum, Datenschutz, AGB** in `legal.html` (Entwurf). Link im Menü und auf der Anmeldeseite.
+  Vor dem Verkauf alle Stellen in [eckigen Klammern] ausfüllen und prüfen lassen.
+
 ## Neu in Version 47 (Lizenzen für den Verkauf)
 - **Esri-Satellit entfernt** (keine kommerzielle Nutzung ohne ArcGIS-Lizenz). Standard ist jetzt der USGS-Satellit.
 - **NZ – Aktive Störungen entfernt** (GNS erlaubt keine kommerzielle Nutzung).

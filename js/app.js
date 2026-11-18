@@ -1302,6 +1302,7 @@ var App = (function () {
         "<button data-lang='en'" + (lang === "en" ? " class='on'" : "") + ">English</button>" +
         "<button data-lang='de'" + (lang === "de" ? " class='on'" : "") + ">Deutsch</button></div>" +
       "<button data-a='about'>" + esc(t("about")) + "</button>" +
+      "<button data-a='legal'>§ " + esc(t("legal")) + "</button>" +
       "</div>");
     body.addEventListener("click", function (e) {
       var b = e.target.closest("button");
@@ -1314,6 +1315,7 @@ var App = (function () {
       if (b.dataset.a === "export") ExportImport.openPanel();
       if (b.dataset.a === "offline") Offline.openPanel();
       if (b.dataset.a === "about") openAbout();
+      if (b.dataset.a === "legal") window.open("legal.html", "_blank");
       if (b.dataset.a === "account") Auth.openAccount();
       if (b.dataset.a === "claims") Claims.openList();
       if (b.dataset.a === "blmchanges") BlmWatch.open();
