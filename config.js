@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 49,
+  appVersion: 50,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -1216,9 +1216,10 @@ var APP_CONFIG = {
       id: "vicMinOcc",
       group: "ausouth",
       type: "wms",
-      name: { en: "Victoria – Mineral occurrences & drill holes", de: "Victoria – Vorkommen & Bohrlöcher" },
+      name: { en: "Victoria – Mineral occurrences", de: "Victoria – Mineralvorkommen" },
       url: "https://geology.data.vic.gov.au/nvcl/ows",
-      layers: "mo:MinOccView,gsmlp:BoreholeView",
+      // Bohrlöcher (gsmlp:BoreholeView) weggelassen: der Server braucht dafür ~50 s pro Kachel
+      layers: "mo:MinOccView",
       attribution: "Geological Survey of Victoria",
       opacity: 1, visible: false, offline: false
     },
