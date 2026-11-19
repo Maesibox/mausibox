@@ -32,6 +32,10 @@ var APP_CONFIG = {
   },
 
   clubName: "MAUSIBOX App",
+
+  // Impressum/Datenschutz/AGB (legal.html) im Menü und auf der Anmeldeseite zeigen?
+  // Erst auf true stellen, wenn alle [Platzhalter] in legal.html ausgefüllt sind.
+  showLegal: false,
   // Farbe pro Club (Club-Claims und Club-Dateien). Clubs ohne Eintrag bekommen eine Farbe aus clubPalette.
   clubColors: { "Havasu Gold Seekers": "#00c8e0", "AMRA": "#3d5afe", "GPAA": "#2ecc40", "49ers": "#ffd600" },
   clubPalette: ["#00bfa5", "#ff6d00", "#aa00ff", "#c6ff00", "#ff1744", "#795548"],

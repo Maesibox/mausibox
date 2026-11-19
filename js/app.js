@@ -1306,7 +1306,7 @@ var App = (function () {
         "<button data-lang='en'" + (lang === "en" ? " class='on'" : "") + ">English</button>" +
         "<button data-lang='de'" + (lang === "de" ? " class='on'" : "") + ">Deutsch</button></div>" +
       "<button data-a='about'>" + esc(t("about")) + "</button>" +
-      "<button data-a='legal'>§ " + esc(t("legal")) + "</button>" +
+      (C.showLegal ? "<button data-a='legal'>§ " + esc(t("legal")) + "</button>" : "") +
       "</div>");
     body.addEventListener("click", function (e) {
       var b = e.target.closest("button");
