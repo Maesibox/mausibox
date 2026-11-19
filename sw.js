@@ -16,7 +16,7 @@ var APP_FILES = [
   "lib/leaflet.js", "lib/leaflet.css", "lib/supabase.js", "lib/qrcode.js",
   "lib/images/marker-icon.png", "lib/images/marker-icon-2x.png", "lib/images/marker-shadow.png",
   "lib/images/layers.png", "lib/images/layers-2x.png",
-  "icons/icon-192.png", "icons/icon-512.png"
+  "icons/icon-192.png", "icons/icon-512.png", "icons/favicon.png", "icons/apple-touch-icon.png"
 ].concat(
   APP_CONFIG.overlays.filter(function (o) { return o.type === "file"; })
     .reduce(function (all, o) { return all.concat(o.files || []); }, [])
