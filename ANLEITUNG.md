@@ -251,3 +251,12 @@ Jeder Punkt hat schon die Felder `publish` (veröffentlichen), `author` und `syn
 eindeutige ID und eine „weiche“ Löschung. In `config.js` unter `features` lässt sich der
 Schalter „veröffentlichen“ später einschalten; dazu kommt dann ein kleiner Server für die
 gemeinsame Ebene „Club-Punkte“.
+
+## Version 52 – Esri-Karten statt OpenStreetMap
+
+- Neue Grundkarten: **Satellit weltweit (Esri)** mit Ortsnamen (Standard) und **Outdoor-Karte weltweit (Esri)**.
+- Die OpenStreetMap-Strassenkarte ist entfernt (für verkaufte Apps nicht erlaubt).
+- Der Esri-Schlüssel steht in `config.js` unter `esriApiKey`. Er gilt nur für maesibox.github.io und nuggetcompass.com und nur für Grundkarten.
+- **Läuft ab am 18.11.2027.** Vorher im Esri-Konto (location.arcgis.com, Element „Nugget Compass Karten") einen neuen Schlüssel erzeugen und in `config.js` ersetzen.
+- Kosten: 2 Mio. Kacheln pro Monat gratis. „Pay-as-you-go" ist ausgeschaltet, also entstehen keine Kosten; bei Überschreitung zeigt Esri einfach keine Kacheln mehr bis zum Monatsende.
+- Esri-Karten werden nicht offline gespeichert (Bedingungen). Offline weiterhin: USGS, swisstopo, basemap.at.

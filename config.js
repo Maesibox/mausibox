@@ -15,7 +15,12 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 51,
+  appVersion: 52,
+
+  // Esri ArcGIS Location Platform (Konto nuggetcompass), nur Grundkarten erlaubt,
+  // nur gueltig auf maesibox.github.io und nuggetcompass.com. Laeuft ab am 18.11.2027,
+  // dann im Esri-Konto unter "Nugget Compass Karten" einen neuen Schluessel erzeugen.
+  esriApiKey: "AAPTaQiDmPsoNgaSqHy4zh8X_zw..DL0AYV9QtHWum-ZtE5F9vSM4jsrZ3N93CcUBgLRwiGjcWyYO1qhvuEuwO5QmlOtVJrK43gLxwzLsMNAH6GwHEeO4jwT2pdZSUMYrKCqh6pv9zKJZiSw4HuebcV5S8nTP8BigMRVPSw-QRHlhj0Fp12uOpHnY9kys7rByVWDZxmgB0O_a9Skhkn1AeF6NWDx539kZmPuuAOeRPp3KLTAg00-80n5Eiffxd7TlJhN4Tk-vxS6jN3jagg9uEUHoMg..AT1_PPuJxVv1",
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -62,13 +67,34 @@ var APP_CONFIG = {
   // ----------------------------------------------------------
   basemaps: [
     {
+      // Esri (ArcGIS Location Platform, Konto nuggetcompass): kommerziell erlaubt, Schlüssel = esriApiKey oben.
+      // Nicht offline speichern (Esri-Bedingungen), darum offline: false.
+      id: "esri-sat",
+      name: { en: "Satellite worldwide (Esri)", de: "Satellit weltweit (Esri)" },
+      url: "https://ibasemaps-api.arcgis.com/arcgis/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?token={key}",
+      labelsUrl: "https://static-map-tiles-api.arcgis.com/arcgis/rest/services/static-basemap-tiles-service/v1/arcgis/imagery/labels/static/tile/{z}/{y}/{x}?token={key}",
+      labelsTileSize: 512,
+      attribution: "Powered by Esri | Esri, Maxar, Earthstar Geographics, and the GIS User Community",
+      maxNativeZoom: 19,
+      offline: false,
+      default: true
+    },
+    {
+      id: "esri-outdoor",
+      name: { en: "Outdoor map worldwide (Esri)", de: "Outdoor-Karte weltweit (Esri)" },
+      url: "https://static-map-tiles-api.arcgis.com/arcgis/rest/services/static-basemap-tiles-service/v1/arcgis/outdoor/static/tile/{z}/{y}/{x}?token={key}",
+      tileSize: 512,
+      attribution: "Powered by Esri | Esri, TomTom, Garmin, FAO, NOAA, USGS, © OpenStreetMap contributors, and the GIS User Community",
+      maxNativeZoom: 19,
+      offline: false
+    },
+    {
       id: "usgs-sat",
       name: { en: "Satellite (USGS, offline OK)", de: "Satellit (USGS, offline-fähig)" },
       url: "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}",
       attribution: "USGS The National Map",
       maxNativeZoom: 16,
-      offline: true,
-      default: true
+      offline: true
     },
     {
       id: "usgs-topo",
@@ -101,16 +127,6 @@ var APP_CONFIG = {
       attribution: "© basemap.at",
       maxNativeZoom: 19,
       offline: true
-    },
-    {
-      // ACHTUNG vor dem Verkauf: tile.openstreetmap.org ist für verbreitete (kommerzielle) Apps nicht erlaubt.
-      // Durch einen Kachel-Anbieter mit kommerzieller Lizenz ersetzen (url + attribution hier ändern).
-      id: "osm",
-      name: { en: "Street map (OSM, online only)", de: "Strassenkarte (OSM, nur online)" },
-      url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-      attribution: "© OpenStreetMap contributors",
-      maxNativeZoom: 19,
-      offline: false
     }
   ],
 

@@ -392,8 +392,10 @@ var App = (function () {
     document.getElementById("app-title").textContent = C.clubName + (club ? " · " + club.name : "");
   }
 
+  function keyUrl(u) { return u.replace("{key}", encodeURIComponent(C.esriApiKey || "")); }
   function makeTileLayer(cfg, extra) {
-    return L.tileLayer(cfg.url, Object.assign({
+    var big = cfg.tileSize === 512 ? { tileSize: 512, zoomOffset: -1 } : {};
+    return L.tileLayer(keyUrl(cfg.url), Object.assign(big, {
       attribution: cfg.attribution,
       maxNativeZoom: cfg.maxNativeZoom || 18,
       maxZoom: 20,
@@ -1071,7 +1073,13 @@ var App = (function () {
   function setBase(id) {
     var cfg = C.basemaps.filter(function (b) { return b.id === id; })[0] || C.basemaps[0];
     if (currentBase) map.removeLayer(currentBase);
-    if (!baseLayers[cfg.id]) baseLayers[cfg.id] = makeTileLayer(cfg, { zIndex: 1 });
+    if (!baseLayers[cfg.id]) {
+      var base = makeTileLayer(cfg, { zIndex: 1 });
+      // optionale Beschriftung (Orte, Strassen, Grenzen) über dem Satellitenbild
+      baseLayers[cfg.id] = cfg.labelsUrl
+        ? L.layerGroup([base, makeTileLayer({ url: cfg.labelsUrl, tileSize: cfg.labelsTileSize, maxNativeZoom: cfg.maxNativeZoom }, { zIndex: 2 })])
+        : base;
+    }
     currentBase = baseLayers[cfg.id];
     currentBase.addTo(map);
     setPref("base", cfg.id);
