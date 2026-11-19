@@ -15,7 +15,7 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 48,
+  appVersion: 49,
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims
@@ -1585,6 +1585,40 @@ var APP_CONFIG = {
       ]
     },
     {
+      id: "clubPages",
+      group: "general",
+      type: "clubPages",
+      name: { en: "Club pages for guests (clubs in the app)", de: "Club-Seiten für Gäste (Clubs in der App)" },
+      color: "#ffd600",
+      attribution: "Club pages: the clubs themselves",
+      visible: true, offline: false
+    },
+    {
+      id: "experiences",
+      group: "general",
+      type: "spots",
+      name: { en: "Experiences: panning sites, show mines, tours, courses, hire", de: "Erlebnisse: Waschplätze, Schaubergwerke, Touren, Kurse, Verleih" },
+      // Liste ergänzen: tools/make_experiences.py (EXTRA), danach das Skript laufen lassen
+      file: "data/experiences.geojson",
+      hint: "experienceHint",
+      attribution: "Experiences: MAUSIBOX collection",
+      visible: false, offline: true,
+      kinds: {
+        site:   { color: "#2f80ed", level: "open",    label: { en: "Official panning site / guided panning", de: "Offizieller Waschplatz / geführtes Waschen" } },
+        mine:   { color: "#9b51e0", level: "open",    label: { en: "Show mine / gold museum", de: "Schaubergwerk / Goldmuseum" } },
+        tour:   { color: "#00bfa5", level: "open",    label: { en: "Guided tour / trip", de: "Geführte Tour / Ausflug" } },
+        course: { color: "#ffd600", level: "open",    label: { en: "Course / workshop", de: "Kurs / Workshop" } },
+        hire:   { color: "#ff9800", level: "open",    label: { en: "Detector hire / prospecting shop", de: "Detektor-Verleih / Prospecting-Laden" } }
+      },
+      legend: [
+        { color: "#2f80ed", text: { en: "panning site", de: "Waschplatz" } },
+        { color: "#9b51e0", text: { en: "show mine", de: "Schaubergwerk" } },
+        { color: "#00bfa5", text: { en: "tour", de: "Tour" } },
+        { color: "#ffd600", text: { en: "course", de: "Kurs" } },
+        { color: "#ff9800", text: { en: "hire / shop", de: "Verleih / Laden" } }
+      ]
+    },
+    {
       id: "myclaims",
       group: "general",
       type: "userClaims",
@@ -1770,7 +1804,7 @@ var APP_CONFIG = {
       tooMany: "Too many tiles – zoom in or lower the zoom level.",
       areas: "Downloaded areas", showOnMap: "Show", deleteOffline: "Delete all offline data",
       storageUsed: "Storage used", areaName: "Area name",
-      language: "Language", about: "About & data sources", legal: "Legal notice, privacy, terms",
+      language: "Language", about: "About & data sources", legal: "Legal notice, privacy, terms", cpLayer: "Club pages for guests", cpGuests: "Guests welcome", cpPrice: "Guest prices", cpCamping: "Camping / power / water", cpEvents: "Meetings, outings, courses", cpRules: "Rules on the claims", cpBring: "What to bring", cpLanguages: "Languages", cpContact: "Contact", cpAsk: "Ask to join as a guest", cpHint: "Location = club area, not the claims. The club decides on guest requests.", cpNeedAccount: "You need an account to send a guest request. With an account the club knows who is asking.", cpFrom: "From", cpTo: "To", cpPeople: "Number of people", cpPersons: "people", cpMessage: "Message to the club", cpMessageHint: "Who you are, your experience, what you would like to do …", cpSend: "Send request", cpSent: "Request sent – the club will answer here.", cpMine: "My guest requests", cpNoMine: "No guest requests yet.", cpReply: "Reply", cpWithdraw: "Withdraw", cpStatus_open: "open", cpStatus_accepted: "accepted", cpStatus_declined: "declined", cpEdit: "Guest page", cpInbox: "Guest requests", cpNoInbox: "No guest requests yet.", cpAccept: "Accept", cpDecline: "Decline", cpDelete: "Delete request", cpEditorHint: "This page is visible to everyone in the app once published. Do not enter exact claim locations.", cpPublished: "Published (visible on the map)", cpDescription: "About the club", cpPlace: "Town / region", cpCountry: "Country code (e.g. US, CH, AU)", cpLocation: "Map position", cpLocationHere: "Use map centre", cpNeedLocation: "Please set the map position first (move the map to the club area, then tap 'Use map centre').", travel: "Travel cheat sheet", travelIntro: "Pick a country: rules, permits, experiences, gold places and clubs on one page.", travelOpen: "Hobby prospecting possible", travelLimited: "Possible with permit / restrictions", travelClosed: "Not possible or not advisable", travelExperiences: "Experiences (panning sites, show mines, tours, hire)", travelSpots: "Gold places", travelClubs: "Clubs", travelStates: "Rules per state / province", travelCantons: "Rules per canton", travelNoExperiences: "No experiences entered yet for this country.", travelNoSpots: "No gold places entered yet for this country.", travelNoClubs: "No clubs entered yet for this country.", travelShow: "Show on map", travelWebsite: "Website", travelAll: "All countries", experienceHint: "Location = town / site. Opening times and prices: see website.",
       saved: "Saved", offlineNow: "Offline – showing saved data",
       persistHint: "Tip: make a full backup now and then. If the browser data is cleared, local points are lost.",
 
@@ -1883,7 +1917,7 @@ var APP_CONFIG = {
       tooMany: "Zu viele Kacheln – näher hineinzoomen oder Zoomstufe senken.",
       areas: "Heruntergeladene Gebiete", showOnMap: "Zeigen", deleteOffline: "Alle Offline-Daten löschen",
       storageUsed: "Belegter Speicher", areaName: "Name des Gebiets",
-      language: "Sprache", about: "Über die App & Datenquellen", legal: "Impressum, Datenschutz, AGB",
+      language: "Sprache", about: "Über die App & Datenquellen", legal: "Impressum, Datenschutz, AGB", cpLayer: "Club-Seiten für Gäste", cpGuests: "Gäste willkommen", cpPrice: "Preise für Gäste", cpCamping: "Camping / Strom / Wasser", cpEvents: "Treffen, Ausflüge, Kurse", cpRules: "Regeln auf den Claims", cpBring: "Was mitbringen", cpLanguages: "Sprachen", cpContact: "Kontakt", cpAsk: "Als Gast anfragen", cpHint: "Lage = Gebiet des Clubs, nicht die Claims. Über Gast-Anfragen entscheidet der Club.", cpNeedAccount: "Für eine Gast-Anfrage brauchst du ein Konto. So weiss der Club, wer anfragt.", cpFrom: "Von", cpTo: "Bis", cpPeople: "Anzahl Personen", cpPersons: "Personen", cpMessage: "Nachricht an den Club", cpMessageHint: "Wer du bist, deine Erfahrung, was du gerne machen möchtest …", cpSend: "Anfrage senden", cpSent: "Anfrage gesendet – der Club antwortet hier in der App.", cpMine: "Meine Gast-Anfragen", cpNoMine: "Noch keine Gast-Anfragen.", cpReply: "Antwort", cpWithdraw: "Zurückziehen", cpStatus_open: "offen", cpStatus_accepted: "angenommen", cpStatus_declined: "abgelehnt", cpEdit: "Gäste-Seite", cpInbox: "Gast-Anfragen", cpNoInbox: "Noch keine Gast-Anfragen.", cpAccept: "Annehmen", cpDecline: "Ablehnen", cpDelete: "Anfrage löschen", cpEditorHint: "Diese Seite sehen nach dem Veröffentlichen alle in der App. Keine genauen Claim-Standorte eintragen.", cpPublished: "Veröffentlicht (auf der Karte sichtbar)", cpDescription: "Über den Club", cpPlace: "Ort / Region", cpCountry: "Ländercode (z. B. US, CH, AU)", cpLocation: "Position auf der Karte", cpLocationHere: "Kartenmitte übernehmen", cpNeedLocation: "Bitte zuerst die Position setzen (Karte zum Club-Gebiet schieben, dann „Kartenmitte übernehmen“).", travel: "Reise-Spickzettel", travelIntro: "Land wählen: Regeln, Bewilligungen, Erlebnisse, Goldplätze und Clubs auf einer Seite.", travelOpen: "Hobby-Goldsuche möglich", travelLimited: "Möglich mit Bewilligung / Einschränkungen", travelClosed: "Nicht möglich oder nicht ratsam", travelExperiences: "Erlebnisse (Waschplätze, Schaubergwerke, Touren, Verleih)", travelSpots: "Goldplätze", travelClubs: "Clubs", travelStates: "Regeln pro Bundesstaat / Provinz", travelCantons: "Regeln pro Kanton", travelNoExperiences: "Für dieses Land sind noch keine Erlebnisse eingetragen.", travelNoSpots: "Für dieses Land sind noch keine Goldplätze eingetragen.", travelNoClubs: "Für dieses Land sind noch keine Clubs eingetragen.", travelShow: "Auf Karte zeigen", travelWebsite: "Website", travelAll: "Alle Länder", experienceHint: "Lage = Ort / Anlage. Öffnungszeiten und Preise: siehe Website.",
       saved: "Gespeichert", offlineNow: "Offline – zeige gespeicherte Daten",
       persistHint: "Tipp: ab und zu eine vollständige Sicherung machen. Wenn die Browserdaten gelöscht werden, sind lokale Punkte weg.",
 

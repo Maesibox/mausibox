@@ -65,6 +65,8 @@ var Admin = (function () {
       (club ? "<section><h4>" + esc(t("club")) + "</h4>" +
         "<form class='row clubform'><input name='name' value='" + esc(club.name) + "'><button>" + esc(t("save")) + "</button></form>" +
         "<button data-a='start'>📍 " + esc(t("startHere")) + "</button>" +
+        " <button data-a='cppage'>🏕 " + esc(t("cpEdit")) + "</button>" +
+        " <button data-a='cpinbox'>📨 " + esc(t("cpInbox")) + "</button>" +
         (su ? " <button class='danger' data-a='delclub'>" + esc(t("deleteClub")) + "</button>" : "") + "</section>" : "") +
       "<section class='codes'><h4>" + esc(t("codes")) + "</h4><div class='list'>" + esc(t("loading")) + "</div>" + codeForm(club) + "</section>" +
       (club ? "<section class='members'><h4>" + esc(t("members")) + "</h4><div class='list'>" + esc(t("loading")) + "</div>" +
@@ -116,6 +118,8 @@ var Admin = (function () {
           .then(check).then(function () { App.toast(t("startSaved")); }).catch(fail);
       }
       if (a === "users") loadUsers(body.querySelector(".users .list"));
+      if (a === "cppage") ClubPages.openEditor(club, render);
+      if (a === "cpinbox") ClubPages.openInbox(club, render);
     });
 
     App.openSheet(t("admin"), body);

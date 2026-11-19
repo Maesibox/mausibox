@@ -266,3 +266,12 @@ body.has-chat-news .menu .badge-chat::after, body.has-blm-news .menu .badge-blm:
 .layer-group.sub { margin: 6px 0 6px 4px; background: rgba(0,0,0,.03); }
 .layer-group.sub > summary { font-weight: 600; font-size: 14px; }
 .layer-group > summary small { font-weight: 400; color: #2e7d32; margin-left: 6px; }
+
+/* Reise-Spickzettel */
+.travel h3 { font-size: 15px; margin: 14px 0 6px; }
+.travel-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+.travel-grid button { padding: 6px 10px; font-size: 14px; }
+.travel details { margin: 4px 0; }
+.travel summary { cursor: pointer; padding: 4px 0; }
+.travel .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 1px solid #000; margin-right: 6px; vertical-align: middle; }
+.travel .row .btn-like { text-decoration: none; padding: 6px 10px; }

@@ -51,6 +51,17 @@ Menü → **Claims & Pfosten** → **＋ Neuer Claim**, oder im Popup eines rote
 - **Club-Umschalter** im Ebenen-Fenster; in der Verwaltung bestehende Konten einem Club zuteilen.
 - **Hilfe** im Menü.
 
+## Neu in Version 49 (Reisen, Erlebnisse, Club-Seiten)
+- **Reise-Spickzettel** (Menü → 🧭): pro Land die Gold-Regeln, Regeln pro Bundesstaat/Kanton, Erlebnisse, Goldplätze, Clubs und Club-Seiten.
+  Auch aus jedem Länder- und Goldplatz-Popup erreichbar.
+- **Erlebnisse** (Ebene unter „Allgemein“): offizielle Waschplätze, Schaubergwerke, Touren, Kurse, Verleih – weltweit.
+  Neue Einträge in `tools/make_experiences.py` (Liste `EXTRA`), danach `python3 tools/make_experiences.py`.
+  Das Skript übernimmt automatisch alle passenden Orte aus den Goldplatz-Dateien – nach Änderungen an `make_goldspots.py` erneut laufen lassen.
+- **Club-Seiten für Gäste:** Club-Admins: Verwaltung → Club → „🏕 Gäste-Seite“ ausfüllen, Position setzen, veröffentlichen.
+  Gäste tippen auf der Karte auf „Als Gast anfragen“ (nur mit Konto). Antworten: Verwaltung → „📨 Gast-Anfragen“.
+  Eigene Anfragen: Konto → „Meine Gast-Anfragen“.
+  **Einmalig nötig:** `server/v49-clubpages.sql` im Supabase SQL Editor ausführen.
+
 ## Neu in Version 48
 - **Impressum, Datenschutz, AGB** in `legal.html` (Entwurf). Link im Menü und auf der Anmeldeseite.
   Vor dem Verkauf alle Stellen in [eckigen Klammern] ausfüllen und prüfen lassen.

@@ -515,6 +515,7 @@ var App = (function () {
               (stRule ? "<details><summary>" + esc(t("goldRules")) + " · " + esc(tr(stRule.name)) + "</summary><p class='note-text'>" + esc(tr(stRule.rule)) + "</p>" +
                 (stRule.details ? "<p class='note-text'>" + esc(tr(stRule.details)) + "</p>" : "") +
                 (stRule.link ? "<a href='" + esc(stRule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") + "</details>" : "") +
+              (window.Travel ? Travel.linkHtml(a.country) : "") +
               navLink(c[1], c[0]) + "<p class='hint'>" + esc(t(cfg.hint || "spotHint")) + "</p></div></div>";
           }, { maxWidth: 300 });
           sg.addLayer(m);
@@ -565,6 +566,7 @@ var App = (function () {
         crossOrigin: true, zIndex: 9, opacity: savedOpacity[cfg.id] != null ? savedOpacity[cfg.id] : cfg.opacity });
     }
     if (cfg.type === "userClaims") return Claims.layer;
+    if (cfg.type === "clubPages") return ClubPages.layer(cfg);
 
     if (cfg.type === "blmClaims") {
       hitFeatures[cfg.id] = [];
@@ -900,6 +902,7 @@ var App = (function () {
           (rule.details ? "<p class='note-text'>" + esc(tr(rule.details)) + "</p>" : "") +
           (rule.source ? "<div class='src'>" + esc(t("rulesSource")) + ": " + esc(rule.source) + "</div>" : "") +
           (rule.link ? "<a href='" + esc(rule.link) + "' target='_blank' rel='noopener'>" + esc(t("moreInfo").replace(/\s*\(.*\)/, "")) + " ↗</a>" : "") +
+          (window.Travel ? Travel.linkHtml(Travel.codeOfRule(rule)) : "") +
           "<p class='hint'>" + esc(t("landHint")) + "</p></div>";
   }
 
@@ -1294,6 +1297,7 @@ var App = (function () {
       "<button data-a='claims'>▣ " + esc(t("claims")) + "</button>" +
       (Auth.enabled() && Auth.account ? "<button data-a='blmchanges' class='badge-blm'>🔔 " + esc(t("blmChanges")) + "</button>" : "") +
       (Auth.enabled() && Auth.account && Auth.account.clubs.length ? "<button data-a='chat' class='badge-chat'>💬 " + esc(t("chat")) + "</button>" : "") +
+      "<button data-a='travel'>🧭 " + esc(t("travel")) + "</button>" +
       "<button data-a='parking'>🅿 " + esc(t("parking")) + "</button>" +
       "<button data-a='export'>⇅ " + esc(t("exportImport")) + "</button>" +
       "<button data-a='offline'>⬇ " + esc(t("offline")) + "</button>" +
@@ -1315,6 +1319,7 @@ var App = (function () {
       if (b.dataset.a === "export") ExportImport.openPanel();
       if (b.dataset.a === "offline") Offline.openPanel();
       if (b.dataset.a === "about") openAbout();
+      if (b.dataset.a === "travel") Travel.openList();
       if (b.dataset.a === "legal") window.open("legal.html", "_blank");
       if (b.dataset.a === "account") Auth.openAccount();
       if (b.dataset.a === "claims") Claims.openList();
@@ -1487,7 +1492,7 @@ var App = (function () {
     get map() { return map; }, get gps() { return gps.last; }, get lang() { return lang; },
     startGps: startGps, distance: distance, direction: direction, formatDistance: formatDistance,
     activeClub: activeClub, clubVisible: clubVisible, setActiveClub: setActiveClub, clubSelectHtml: clubSelectHtml,
-    clubFiles: function () { return clubFiles; },
+    clubFiles: function () { return clubFiles; }, cachedFetch: cachedFetch,
     tileRange: tileRange, cellsFor: cellsFor, fetchCell: fetchCell,
     TILE_CACHE: TILE_CACHE, DATA_CACHE: DATA_CACHE, CELL_Z: CELL_Z
   };

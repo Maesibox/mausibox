@@ -304,6 +304,7 @@ var Auth = (function () {
       "<h4>" + esc(t("myClubs")) + "</h4><ul>" + clubs + "</ul>" +
       "<form class='row redeem'><input name='code' placeholder='" + esc(t("inviteCode")) + "' autocapitalize='characters' required>" +
         "<button>" + esc(t("redeem")) + "</button></form>" +
+      "<button data-a='myreq'>📨 " + esc(t("cpMine")) + "</button>" +
       (isAdmin ? "<button data-a='admin' class='primary'>" + esc(t("admin")) + "</button>" : "") +
       "<button data-a='logout'>" + esc(t("logout")) + "</button></div>");
     body.querySelector(".redeem").onsubmit = function (e) {
@@ -315,6 +316,7 @@ var Auth = (function () {
       if (!b) return;
       if (b.dataset.a === "logout") logout();
       if (b.dataset.a === "admin") Admin.open();
+      if (b.dataset.a === "myreq") ClubPages.openMine();
     });
     App.openSheet(t("account"), body);
   }
