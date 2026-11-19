@@ -260,3 +260,9 @@ gemeinsame Ebene „Club-Punkte“.
 - **Läuft ab am 18.11.2027.** Vorher im Esri-Konto (location.arcgis.com, Element „Nugget Compass Karten") einen neuen Schlüssel erzeugen und in `config.js` ersetzen.
 - Kosten: 2 Mio. Kacheln pro Monat gratis. „Pay-as-you-go" ist ausgeschaltet, also entstehen keine Kosten; bei Überschreitung zeigt Esri einfach keine Kacheln mehr bis zum Monatsende.
 - Esri-Karten werden nicht offline gespeichert (Bedingungen). Offline weiterhin: USGS, swisstopo, basemap.at.
+
+## Version 53 – Ortssuche über Esri, Blickrichtung
+
+- Die Ortssuche (🔍) läuft jetzt über Esri statt OpenStreetMap/Nominatim. 20'000 Suchen pro Monat gratis.
+- Der Esri-Schlüssel darf jetzt Grundkarten **und** Ortssuche. Achtung: Ändert man im Esri-Konto Berechtigungen oder Referrer, wird der Schlüssel ungültig. Dann „API-Schlüssel generieren“ und den neuen Schlüssel in `config.js` bei `esriApiKey` eintragen.
+- Blickrichtung: Nach Tipp auf den GPS-Knopf zeigt ein blauer Lichtkegel am eigenen Punkt, wohin das Telefon zeigt (iPhone fragt einmal nach Erlaubnis für „Bewegung und Ausrichtung“). Die Karte bleibt nach Norden ausgerichtet.

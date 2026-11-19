@@ -15,12 +15,12 @@
 var APP_CONFIG = {
 
   // Erhöhen, wenn du eine neue Version veröffentlichst (zwingt Handys, neu zu laden)
-  appVersion: 52,
+  appVersion: 53,
 
-  // Esri ArcGIS Location Platform (Konto nuggetcompass), nur Grundkarten erlaubt,
+  // Esri ArcGIS Location Platform (Konto nuggetcompass), nur Grundkarten + Ortssuche erlaubt,
   // nur gueltig auf maesibox.github.io und nuggetcompass.com. Laeuft ab am 18.11.2027,
   // dann im Esri-Konto unter "Nugget Compass Karten" einen neuen Schluessel erzeugen.
-  esriApiKey: "AAPTaQiDmPsoNgaSqHy4zh8X_zw..DL0AYV9QtHWum-ZtE5F9vSM4jsrZ3N93CcUBgLRwiGjcWyYO1qhvuEuwO5QmlOtVJrK43gLxwzLsMNAH6GwHEeO4jwT2pdZSUMYrKCqh6pv9zKJZiSw4HuebcV5S8nTP8BigMRVPSw-QRHlhj0Fp12uOpHnY9kys7rByVWDZxmgB0O_a9Skhkn1AeF6NWDx539kZmPuuAOeRPp3KLTAg00-80n5Eiffxd7TlJhN4Tk-vxS6jN3jagg9uEUHoMg..AT1_PPuJxVv1",
+  esriApiKey: "AAPTaEGLrFcekjGqBri-fEIRQPg..tPz3yP34HMaKNXu935FP0iW8lHBd-FTLHpJnowOhtO6AQKFC2rgc2vYMAS2mvuzJJpvB24nJX0VxYeEft5H6DTZ8WfjUF1klgLZQSx5r8iOBfiJtEMjAzz7wQvh-FDUraRLRSKMHHxTABXdpfIAJHblEC7k_lHtdmuZrh2FNKdRlvLc0kclddrqAdoHfaB2scQ8x3XFLpvChjhlh5rHoAzC5heqm_m9LZmxcRCSI30JwwVVnW-C7rZBcGnKXgA..AT1_PPuJxVv1",
 
   // ----------------------------------------------------------
   //  SERVER (Supabase) für Login, Einladungscodes und Club-Claims

@@ -955,15 +955,24 @@ var App = (function () {
       }
       if (!navigator.onLine) { show([], t("offlineNow")); return; }
       show([], t("loading"));
-      // Ortsnamen über OpenStreetMap (Nominatim) – nur auf Knopfdruck, nicht bei jedem Buchstaben
-      fetch("https://nominatim.openstreetmap.org/search?format=jsonv2&limit=8&accept-language=" + lang + "&q=" + encodeURIComponent(q))
+      // Ortsnamen über Esri (Geokodierung, nicht gespeichert) – nur auf Knopfdruck, nicht bei jedem Buchstaben
+      fetch("https://geocode-api.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&maxLocations=8" +
+        "&outFields=Match_addr,Type,Region,Country&langCode=" + lang + "&singleLine=" + encodeURIComponent(q) +
+        "&token=" + encodeURIComponent(C.esriApiKey || ""))
         .then(function (r) { return r.json(); })
         .then(function (d) {
-          show(d.map(function (x) {
-            var bb = x.boundingbox && x.boundingbox.map(Number);
-            return { name: x.display_name, lat: +x.lat, lon: +x.lon,
-              bbox: bb && (bb[1] - bb[0] > 0.01 || bb[3] - bb[2] > 0.01) ? [[bb[0], bb[2]], [bb[1], bb[3]]] : null };
-          }), d.length ? "" : t("searchNone"));
+          if (d.error) throw d.error;
+          var seen = {};
+          var list = (d.candidates || []).filter(function (x) {
+            var k = x.address + "|" + x.location.x.toFixed(2) + "|" + x.location.y.toFixed(2);
+            if (seen[k]) return false; seen[k] = true; return true;
+          }).map(function (x) {
+            var e = x.extent, a = x.attributes || {};
+            return { name: x.address, sub: [a.Type, a.Region !== x.address ? a.Region : "", a.Country].filter(Boolean).join(" · "),
+              lat: x.location.y, lon: x.location.x,
+              bbox: e && (e.ymax - e.ymin > 0.01 || e.xmax - e.xmin > 0.01) ? [[e.ymin, e.xmin], [e.ymax, e.xmax]] : null };
+          });
+          show(list, list.length ? "" : t("searchNone"));
         })
         .catch(function () { show([], t("loadError")); });
     };
@@ -1267,6 +1276,7 @@ var App = (function () {
     if (!navigator.geolocation) { toast(t("gpsError")); return; }
     gps.follow = !!centerOnFix;
     if (gps.last && centerOnFix) map.setView([gps.last.lat, gps.last.lon], Math.max(map.getZoom(), 15));
+    startCompass();
     if (gps.watch !== null) return;
     setStatus(t("gpsWaiting"));
     document.getElementById("btn-gps").classList.add("active");
@@ -1281,6 +1291,7 @@ var App = (function () {
         gps.marker.setLatLng(ll);
         gps.circle.setLatLng(ll).setRadius(c.accuracy);
       }
+      drawHeading();
       if (gps.follow) { map.setView(ll, Math.max(map.getZoom(), 15)); gps.follow = false; }
       setStatus("GPS " + formatCoord(c.latitude, c.longitude) + "  ±" + Math.round(c.accuracy) + " m" +
         (c.altitude != null ? "  ↑" + Math.round(c.altitude * 3.28084) + " ft" : ""));
@@ -1290,6 +1301,46 @@ var App = (function () {
       navigator.geolocation.clearWatch(gps.watch);
       gps.watch = null;
     }, { enableHighAccuracy: true, maximumAge: 5000, timeout: 30000 });
+  }
+
+  // ---------- Blickrichtung (Kompass des Telefons) ----------
+  // Zeigt einen Lichtkegel am GPS-Punkt in die Richtung, in die das Telefon zeigt. Norden bleibt oben.
+  var compass = { on: false, heading: null, marker: null };
+
+  function startCompass() {
+    if (compass.on || !window.DeviceOrientationEvent) return;
+    var listen = function () {
+      compass.on = true;
+      var evt = ("ondeviceorientationabsolute" in window) ? "deviceorientationabsolute" : "deviceorientation";
+      window.addEventListener(evt, onOrientation, true);
+    };
+    // iPhone: Erlaubnis nötig, muss direkt aus einem Fingertipp kommen (GPS-Knopf)
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      DeviceOrientationEvent.requestPermission().then(function (s) { if (s === "granted") listen(); }).catch(function () {});
+    } else listen();
+  }
+
+  function onOrientation(e) {
+    var h = null;
+    if (e.webkitCompassHeading != null) h = e.webkitCompassHeading;          // iPhone: 0 = Norden, im Uhrzeigersinn
+    else if ((e.absolute || e.type === "deviceorientationabsolute") && e.alpha != null) h = 360 - e.alpha;   // Android
+    if (h == null || isNaN(h)) return;
+    var screenAngle = (screen.orientation && screen.orientation.angle) || window.orientation || 0;
+    compass.heading = (h + screenAngle + 360) % 360;
+    drawHeading();
+  }
+
+  function drawHeading() {
+    if (!gps.last || compass.heading == null) return;
+    var ll = [gps.last.lat, gps.last.lon];
+    if (!compass.marker) {
+      compass.marker = L.marker(ll, {
+        icon: L.divIcon({ className: "heading-cone", html: "<div class='cone'></div>", iconSize: [120, 120], iconAnchor: [60, 60] }),
+        interactive: false, keyboard: false, pane: "shadowPane"
+      }).addTo(map);
+    } else compass.marker.setLatLng(ll);
+    var elx = compass.marker.getElement();
+    if (elx && elx.firstChild) elx.firstChild.style.transform = "rotate(" + Math.round(compass.heading) + "deg)";
   }
 
   function setStatus(text) { document.getElementById("status").textContent = text; }

@@ -277,3 +277,11 @@ body.has-chat-news .menu .badge-chat::after, body.has-blm-news .menu .badge-blm:
 .travel .row .btn-like { text-decoration: none; padding: 6px 10px; }
 .gate-box .guest-btn { margin-top: 16px; }
 .gate-box .hint { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+
+/* Blickrichtung am GPS-Punkt */
+.heading-cone { pointer-events: none; }
+.heading-cone .cone {
+  width: 120px; height: 120px; transform-origin: 50% 50%; transition: transform .15s linear;
+  background: radial-gradient(circle at 50% 50%, rgba(47,128,237,.65) 0, rgba(47,128,237,.35) 35%, rgba(47,128,237,0) 70%);
+  clip-path: polygon(50% 50%, 22% 0, 78% 0);
+}
