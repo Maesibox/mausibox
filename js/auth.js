@@ -7,6 +7,7 @@ var Auth = (function () {
   var client = null;
   var account = null;        // { id, username, is_superadmin, clubs: [{id, name, role, …}] }
   var ACCOUNT_KEY = "account";
+  var GUEST_KEY = "guestMode";
 
   function enabled() {
     return !!(C.server && C.server.supabaseUrl && C.server.supabaseAnonKey);
@@ -65,6 +66,8 @@ var Auth = (function () {
         if (!session) {
           // Kein Netz, aber früher angemeldet: weiterarbeiten
           if (cached && (res.error || !navigator.onLine)) { account = cached; App.toast(App.t("offlineLogin")); resolve(account); return; }
+          // Gratis-Nutzung ohne Konto (früher „Ohne Konto weiter“ gewählt)
+          if (!invite && App.pref(GUEST_KEY, false)) { resolve(null); return; }
           showGate(invite ? "register" : "login", invite, resolve);
           return;
         }
@@ -147,7 +150,9 @@ var Auth = (function () {
         "<p class='msg'></p>" +
         "<button class='primary wide'>" + esc(t("login")) + "</button></form>" +
         "<div class='gate-links'><a href='#' data-go='register'>" + esc(t("haveCode")) + "</a>" +
-        "<a href='#' data-go='forgot'>" + esc(t("forgot")) + "</a></div>";
+        "<a href='#' data-go='forgot'>" + esc(t("forgot")) + "</a></div>" +
+        "<button type='button' class='wide guest-btn' data-guest='1'>" + esc(t("guestContinue")) + "</button>" +
+        "<p class='hint'>" + esc(t("guestHint")) + "</p>";
     } else if (mode === "register") {
       html += "<form data-f='register'>" +
         "<label>" + esc(t("inviteCode")) + "<input name='code' value='" + esc(invite || "") + "' autocapitalize='characters' autocomplete='off' required></label>" +
@@ -179,6 +184,12 @@ var Auth = (function () {
     box.innerHTML = html;
 
     box.onclick = function (e) {
+      if (e.target.closest("[data-guest]")) {
+        App.setPref(GUEST_KEY, true);
+        gate.classList.remove("open");
+        if (gateResolve) { var r = gateResolve; gateResolve = null; r(null); } else location.reload();
+        return;
+      }
       var a = e.target.closest("a");
       if (!a) return;
       e.preventDefault();
@@ -283,6 +294,7 @@ var Auth = (function () {
   function finish(acc) {
     if (!acc) return;
     if (acc.disabled) { alert(App.t("accountDisabled")); logout(); return; }
+    App.setPref(GUEST_KEY, false);
     document.getElementById("gate").classList.remove("open");
     var invite = inviteFromUrl();
     if (invite) clearInviteFromUrl();
@@ -321,8 +333,11 @@ var Auth = (function () {
     App.openSheet(t("account"), body);
   }
 
+  // Aus dem Menü: Gast möchte sich anmelden oder registrieren
+  function openLogin() { showGate("login", null, null); }
+
   return {
-    enabled: enabled, init: init, clubFiles: clubFiles, openAccount: openAccount, appUrl: appUrl,
+    enabled: enabled, init: init, openLogin: openLogin, clubFiles: clubFiles, openAccount: openAccount, appUrl: appUrl,
     get client() { return client; }, get account() { return account; },
     reloadAccount: loadAccount
   };

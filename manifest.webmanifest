@@ -1,6 +1,6 @@
 {
-  "name": "MAUSIBOX App",
-  "short_name": "MAUSIBOX",
+  "name": "Nugget Compass",
+  "short_name": "Nugget Compass",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

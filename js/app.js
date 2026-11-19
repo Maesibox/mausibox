@@ -1292,6 +1292,7 @@ var App = (function () {
     var body = el(
       "<div class='menu'>" +
       (Auth.enabled() && Auth.account ? "<button data-a='account'>👤 " + esc(Auth.account.username) + "</button>" : "") +
+      (Auth.enabled() && !Auth.account ? "<button data-a='login' class='primary'>👤 " + esc(t("guestLogin")) + "</button>" : "") +
       "<button data-a='points'>📍 " + esc(t("points")) + "</button>" +
       "<button data-a='tracks'>〰 " + esc(t("tracks")) + "</button>" +
       "<button data-a='claims'>▣ " + esc(t("claims")) + "</button>" +
@@ -1322,6 +1323,7 @@ var App = (function () {
       if (b.dataset.a === "travel") Travel.openList();
       if (b.dataset.a === "legal") window.open("legal.html", "_blank");
       if (b.dataset.a === "account") Auth.openAccount();
+      if (b.dataset.a === "login") Auth.openLogin();
       if (b.dataset.a === "claims") Claims.openList();
       if (b.dataset.a === "blmchanges") BlmWatch.open();
       if (b.dataset.a === "chat") Chat.open();

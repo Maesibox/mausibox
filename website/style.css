@@ -1,0 +1,46 @@
+:root {
+  --bg: #15130f; --panel: #1f1c16; --line: #3a342a; --text: #f1ead9; --muted: #b8ad98;
+  --gold: #ffcc33; --gold2: #e0a800; --teal: #00c8e0;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+a { color: var(--teal); }
+.wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+header.top { border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { font-weight: 800; font-size: 20px; color: var(--text); text-decoration: none; letter-spacing: .02em; }
+.logo span { color: var(--gold); }
+nav a { color: var(--muted); text-decoration: none; margin-left: 18px; font-size: 15px; }
+nav a:hover { color: var(--text); }
+.btn { display: inline-block; background: var(--gold); color: #1a1405; font-weight: 700; padding: 12px 22px; border-radius: 10px; text-decoration: none; }
+.btn:hover { background: var(--gold2); }
+.btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+.hero { padding: 72px 0 56px; }
+.hero h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.1; margin: 0 0 18px; max-width: 16ch; }
+.hero h1 em { color: var(--gold); font-style: normal; }
+.hero p.lead { font-size: 20px; color: var(--muted); max-width: 46ch; margin: 0 0 28px; }
+.hero .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+section { padding: 48px 0; border-top: 1px solid var(--line); }
+section h2 { font-size: 30px; margin: 0 0 8px; }
+section p.sub { color: var(--muted); margin: 0 0 28px; max-width: 60ch; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.card h3 { margin: 0 0 6px; font-size: 18px; }
+.card p { margin: 0; color: var(--muted); font-size: 15px; }
+.card .ico { font-size: 26px; margin-bottom: 6px; }
+.prices .card { display: flex; flex-direction: column; }
+.prices .price { font-size: 36px; font-weight: 800; color: var(--gold); margin: 8px 0 2px; }
+.prices .per { color: var(--muted); font-size: 14px; margin-bottom: 14px; }
+.prices ul { padding-left: 20px; margin: 0 0 18px; color: var(--text); font-size: 15px; flex: 1; }
+.prices .card.featured { border-color: var(--gold); }
+.note { color: var(--muted); font-size: 14px; margin-top: 18px; }
+footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+footer a { color: var(--muted); margin-right: 16px; }
+.legal { padding: 40px 0 60px; max-width: 760px; }
+.legal h1 { font-size: 32px; margin: 0 0 4px; }
+.legal h2 { font-size: 20px; margin: 30px 0 6px; color: var(--gold); }
+.legal p, .legal li { color: var(--text); font-size: 16px; }
+.legal .meta { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+@media (max-width: 640px) { nav a.hide-sm { display: none; } .hero { padding: 48px 0 40px; } }
