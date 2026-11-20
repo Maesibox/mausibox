@@ -33,6 +33,8 @@ jobs:
           if [ -z "$SFTP_USER" ] || [ -z "$SFTP_PASS" ]; then echo "Secrets fehlen – nichts hochgeladen"; exit 1; fi
           lftp -u "$SFTP_USER,$SFTP_PASS" -p 5544 sftp://lx67.hoststar.hosting -e "
             set sftp:auto-confirm yes;
+            set sftp:connect-program \"ssh -a -x -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa\";
+            set net:timeout 30;
             set net:max-retries 3;
             mirror -R --delete --verbose --parallel=4 \
               --exclude-glob .git/ --exclude-glob .github/ --exclude-glob .claude/ \
