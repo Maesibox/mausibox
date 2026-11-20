@@ -266,3 +266,17 @@ gemeinsame Ebene „Club-Punkte“.
 - Die Ortssuche (🔍) läuft jetzt über Esri statt OpenStreetMap/Nominatim. 20'000 Suchen pro Monat gratis.
 - Der Esri-Schlüssel darf jetzt Grundkarten **und** Ortssuche. Achtung: Ändert man im Esri-Konto Berechtigungen oder Referrer, wird der Schlüssel ungültig. Dann „API-Schlüssel generieren“ und den neuen Schlüssel in `config.js` bei `esriApiKey` eintragen.
 - Blickrichtung: Nach Tipp auf den GPS-Knopf zeigt ein blauer Lichtkegel am eigenen Punkt, wohin das Telefon zeigt (iPhone fragt einmal nach Erlaubnis für „Bewegung und Ausrichtung“). Die Karte bleibt nach Norden ausgerichtet.
+
+## Umzug zu Hoststar (ab November 2026)
+
+- Website: nuggetcompass.com, App: app.nuggetcompass.com (beide auf dem Hoststar-Hosting, Server lx67.hoststar.hosting).
+- Hochladen passiert automatisch mit `.github/workflows/deploy-hoststar.yml` bei jedem Push (und nach dem NZ-Daten-Job). Die App kommt nach `app.nuggetcompass.com/public_html`, der Ordner `website/` nach `nuggetcompass.com/public_html`.
+- Dafür braucht GitHub zwei Secrets (Settings → Secrets and variables → Actions): `HOSTSTAR_SFTP_USER` und `HOSTSTAR_SFTP_PASSWORD` (FTP-Zugang aus dem Hoststar My Panel). Wird das FTP-Passwort geändert, hier ebenfalls ändern.
+- Kontrolle: GitHub → Actions → „Zu Hoststar hochladen“ (grüner Haken = hochgeladen).
+
+## Umzug zu Hoststar (ab November 2026)
+
+- Website: nuggetcompass.com, App: app.nuggetcompass.com (beide auf dem Hoststar-Hosting, Server lx67.hoststar.hosting).
+- Hochladen passiert automatisch mit `.github/workflows/deploy-hoststar.yml` bei jedem Push (und nach dem NZ-Daten-Job). Die App kommt nach `app.nuggetcompass.com/public_html`, der Ordner `website/` nach `nuggetcompass.com/public_html`.
+- Dafür braucht GitHub zwei Secrets (Settings → Secrets and variables → Actions): `HOSTSTAR_SFTP_USER` und `HOSTSTAR_SFTP_PASSWORD` (FTP-Zugang aus dem Hoststar My Panel). Wird das FTP-Passwort geändert, hier ebenfalls ändern.
+- Kontrolle: GitHub → Actions → „Zu Hoststar hochladen“ (grüner Haken = hochgeladen).
