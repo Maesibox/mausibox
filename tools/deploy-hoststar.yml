@@ -1,0 +1,46 @@
+# Lädt App und Website automatisch zu Hoststar hoch (SFTP).
+#  - App      → app.nuggetcompass.com
+#  - Website  → nuggetcompass.com (Ordner website/)
+# Läuft bei jedem Push auf main, nach dem täglichen NZ-Daten-Job und auf Knopfdruck (GitHub → Actions).
+# Zugangsdaten stehen NICHT im Code, sondern in GitHub → Settings → Secrets and variables → Actions:
+#   HOSTSTAR_SFTP_USER      (FTP-Benutzer, z. B. maesibox.ch)
+#   HOSTSTAR_SFTP_PASSWORD  (FTP-Passwort dieses Benutzers)
+name: Zu Hoststar hochladen
+on:
+  push:
+    branches: [main]
+  workflow_run:
+    workflows: ["NZ-Daten aktualisieren"]
+    types: [completed]
+  workflow_dispatch: {}
+concurrency:
+  group: hoststar-deploy
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: lftp installieren
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+      - name: Hochladen
+        env:
+          SFTP_USER: ${{ secrets.HOSTSTAR_SFTP_USER }}
+          SFTP_PASS: ${{ secrets.HOSTSTAR_SFTP_PASSWORD }}
+        run: |
+          if [ -z "$SFTP_USER" ] || [ -z "$SFTP_PASS" ]; then echo "Secrets fehlen – nichts hochgeladen"; exit 1; fi
+          lftp -u "$SFTP_USER,$SFTP_PASS" -p 5544 sftp://lx67.hoststar.hosting -e "
+            set sftp:auto-confirm yes;
+            set sftp:connect-program \"ssh -a -x -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa\";
+            set net:timeout 30;
+            set net:max-retries 3;
+            mirror -R --delete --verbose --parallel=4 \
+              --exclude-glob .git/ --exclude-glob .github/ --exclude-glob .claude/ \
+              --exclude-glob website/ --exclude-glob tools/ --exclude-glob server/ \
+              --exclude-glob brand/ --exclude-glob private/ --exclude-glob .well-known/ \
+              --exclude-glob '*.md' --exclude-glob '*.py' --exclude-glob .DS_Store --exclude-glob .gitignore \
+              ./ app.nuggetcompass.com/public_html/;
+            mirror -R --delete --verbose --exclude-glob .well-known/ website/ nuggetcompass.com/public_html/;
+            quit"
